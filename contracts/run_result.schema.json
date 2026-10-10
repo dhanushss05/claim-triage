@@ -1,0 +1,267 @@
+{
+  "$defs": {
+    "Citation": {
+      "properties": {
+        "clause_id": {
+          "title": "Clause Id",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "quote": {
+          "title": "Quote",
+          "type": "string"
+        },
+        "doc_id": {
+          "default": "",
+          "title": "Doc Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "clause_id",
+        "label",
+        "quote"
+      ],
+      "title": "Citation",
+      "type": "object"
+    },
+    "Entitlement": {
+      "properties": {
+        "compensation_inr": {
+          "default": 0.0,
+          "title": "Compensation Inr",
+          "type": "number"
+        },
+        "computation": {
+          "default": "",
+          "title": "Computation",
+          "type": "string"
+        },
+        "refund_due": {
+          "default": false,
+          "title": "Refund Due",
+          "type": "boolean"
+        },
+        "facilities": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Facilities",
+          "type": "array"
+        },
+        "downgrade_refund_inr": {
+          "default": 0.0,
+          "title": "Downgrade Refund Inr",
+          "type": "number"
+        }
+      },
+      "title": "Entitlement",
+      "type": "object"
+    },
+    "Escalation": {
+      "properties": {
+        "required": {
+          "default": false,
+          "title": "Required",
+          "type": "boolean"
+        },
+        "reasons": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "path": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Path",
+          "type": "array"
+        }
+      },
+      "title": "Escalation",
+      "type": "object"
+    },
+    "Route": {
+      "enum": [
+        "pay_as_computed",
+        "request_further_evidence",
+        "decline",
+        "escalate_to_human"
+      ],
+      "title": "Route",
+      "type": "string"
+    },
+    "Verification": {
+      "properties": {
+        "passed": {
+          "default": false,
+          "title": "Passed",
+          "type": "boolean"
+        },
+        "attempts": {
+          "default": 0,
+          "title": "Attempts",
+          "type": "integer"
+        },
+        "checks": {
+          "default": [],
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Checks",
+          "type": "array"
+        }
+      },
+      "title": "Verification",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "run_id": {
+      "title": "Run Id",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "completed",
+        "escalated",
+        "failed"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "route": {
+      "$ref": "#/$defs/Route"
+    },
+    "disruption_category": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Disruption Category"
+    },
+    "entitlement": {
+      "$ref": "#/$defs/Entitlement",
+      "default": {
+        "compensation_inr": 0.0,
+        "computation": "",
+        "refund_due": false,
+        "facilities": [],
+        "downgrade_refund_inr": 0.0
+      }
+    },
+    "citations": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Citation"
+      },
+      "title": "Citations",
+      "type": "array"
+    },
+    "justification": {
+      "default": "",
+      "title": "Justification",
+      "type": "string"
+    },
+    "missing_evidence": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Evidence",
+      "type": "array"
+    },
+    "escalation": {
+      "$ref": "#/$defs/Escalation",
+      "default": {
+        "required": false,
+        "reasons": [],
+        "path": []
+      }
+    },
+    "verification": {
+      "$ref": "#/$defs/Verification",
+      "default": {
+        "passed": false,
+        "attempts": 0,
+        "checks": []
+      }
+    },
+    "guardrail_flags": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Guardrail Flags",
+      "type": "array"
+    },
+    "degraded": {
+      "default": false,
+      "title": "Degraded",
+      "type": "boolean"
+    },
+    "confidence": {
+      "default": "low",
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ],
+      "title": "Confidence",
+      "type": "string"
+    },
+    "basis": {
+      "default": "",
+      "title": "Basis",
+      "type": "string"
+    },
+    "prompt_versions": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "default": {},
+      "title": "Prompt Versions",
+      "type": "object"
+    },
+    "cost": {
+      "additionalProperties": true,
+      "default": {},
+      "title": "Cost",
+      "type": "object"
+    },
+    "timings_ms": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "default": {},
+      "title": "Timings Ms",
+      "type": "object"
+    },
+    "disclaimer": {
+      "default": "This is an entitlement recommendation, not a payment authorisation. A customer relations officer decides.",
+      "title": "Disclaimer",
+      "type": "string"
+    }
+  },
+  "required": [
+    "run_id",
+    "status",
+    "route"
+  ],
+  "title": "RunResult",
+  "type": "object"
+}

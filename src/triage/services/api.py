@@ -53,7 +53,7 @@ def _client_id(request: Request) -> str:
 
 def _versions_tag() -> str:
     tags = [load_prompt(s.prompts_dir, p, s.prompt_version(p)).tag for p in ("extraction", "planner", "determination")]
-    return "|".join(tags) + f"|planner={s.planner_mode}|det={s.determination_mode}"
+    return "|".join(tags) + f"|planner={s.planner_mode}|det={s.determination_mode}|model={s.llm_model}"
 
 
 @app.get("/health")
@@ -121,7 +121,8 @@ async def submit(request: Request):
         await store.mark_recent(run_id)
         await store.append_event(run_id, {"type": "submitted", "agent": "api", "client_id": client,
                                           "trace_id": trace_id, "client_reference": claim.client_reference})
-        cached = await store.cache_get(key) if key else None
+        bypass = request.headers.get("X-Cache-Bypass", "").lower() in ("1", "true", "yes")
+        cached = await store.cache_get(key) if key and not bypass else None
         if cached:
             RUN_CACHE.labels("hit").inc()
             result = dict(cached["result"], run_id=run_id, cached_from=cached["source_run"])
@@ -132,7 +133,18 @@ async def submit(request: Request):
             await store.inflight_decr(client)
             CLAIMS_ACCEPTED.inc()
             return _accepted(run_id, result["status"], cached=True)
-        if key:
+        if key and not bypass:
+            # single-flight: an identical claim already running becomes the leader; this run waits for its result
+            leader = await r.set(f"runcache:inflight:{key}", run_id, nx=True, ex=int(s.run_deadline_s) + 30)
+            if not leader:
+                leader_id = await r.get(f"runcache:inflight:{key}")
+                if leader_id and leader_id != run_id:
+                    RUN_CACHE.labels("coalesced").inc()
+                    await store.set_fields(run_id, status="coalesced", leader_run=leader_id)
+                    await store.append_event(run_id, {"type": "coalesced", "agent": "api", "leader_run": leader_id})
+                    await store.inflight_decr(client)
+                    CLAIMS_ACCEPTED.inc()
+                    return _accepted(run_id, "coalesced", cached=True)
             RUN_CACHE.labels("miss").inc()
         await enqueue(r, STREAM_INTAKE, run_id, {"run_id": run_id}, carrier_from_current())
     CLAIMS_ACCEPTED.inc()
@@ -149,6 +161,18 @@ async def get_run(run_id: str):
     run = await store.get_run(run_id)
     if not run:
         return JSONResponse({"error": "not_found"}, status_code=404)
+    if run["status"] == "coalesced":
+        leader = await store.get_run(run.get("leader_run", ""))
+        if leader and leader.get("status") in ("completed", "escalated", "failed"):
+            result = dict(leader["result"], run_id=run_id, cached_from=run["leader_run"])
+            result["cost"] = {"total": {"prompt_tokens": 0, "completion_tokens": 0, "cost_usd": 0.0, "calls": 0},
+                              "by_step": {}, "note": "coalesced with an identical in-flight claim"}
+            await store.set_fields(run_id, status=result["status"], result=result, finished_at=time.time())
+            run = await store.get_run(run_id)
+        elif not leader:
+            run["status"] = "failed"
+            run["result"] = {"run_id": run_id, "status": "failed", "route": "escalate_to_human",
+                             "escalation": {"required": True, "reasons": ["leader run expired"]}}
     out = {"run_id": run_id, "status": run["status"], "submitted_at": run["submitted_at"],
            "updated_at": run.get("updated_at")}
     if run["status"] in ("completed", "escalated", "failed"):

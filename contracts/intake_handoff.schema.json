@@ -1,0 +1,86 @@
+{
+  "description": "Contract between intake agent (producer) and entitlement agent (consumer).",
+  "properties": {
+    "run_id": {
+      "title": "Run Id",
+      "type": "string"
+    },
+    "category": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Category"
+    },
+    "category_confidence": {
+      "title": "Category Confidence",
+      "type": "number"
+    },
+    "facts": {
+      "additionalProperties": true,
+      "title": "Facts",
+      "type": "object"
+    },
+    "fact_sources": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Fact Sources",
+      "type": "object"
+    },
+    "conflicts": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Conflicts",
+      "type": "array"
+    },
+    "guardrail_flags": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Guardrail Flags",
+      "type": "array"
+    },
+    "narrative_for_model": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Narrative For Model"
+    },
+    "prompt_versions": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Prompt Versions",
+      "type": "object"
+    },
+    "degraded": {
+      "default": false,
+      "title": "Degraded",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "run_id",
+    "category",
+    "category_confidence",
+    "facts",
+    "fact_sources",
+    "conflicts",
+    "guardrail_flags",
+    "narrative_for_model",
+    "prompt_versions"
+  ],
+  "title": "IntakeHandoff",
+  "type": "object"
+}

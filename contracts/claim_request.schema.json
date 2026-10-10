@@ -1,0 +1,553 @@
+{
+  "$defs": {
+    "AlternateFlight": {
+      "additionalProperties": false,
+      "properties": {
+        "offered": {
+          "title": "Offered",
+          "type": "boolean"
+        },
+        "accepted": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Accepted"
+        },
+        "scheduled_departure": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Scheduled Departure"
+        }
+      },
+      "required": [
+        "offered"
+      ],
+      "title": "AlternateFlight",
+      "type": "object"
+    },
+    "Booking": {
+      "additionalProperties": false,
+      "properties": {
+        "pnr": {
+          "pattern": "^[A-Z0-9]{6}$",
+          "title": "Pnr",
+          "type": "string"
+        },
+        "booked_class": {
+          "$ref": "#/$defs/CabinClass",
+          "default": "economy"
+        },
+        "basic_fare_inr": {
+          "anyOf": [
+            {
+              "maximum": 1000000,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Basic Fare Inr"
+        },
+        "fuel_charge_inr": {
+          "anyOf": [
+            {
+              "maximum": 200000,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fuel Charge Inr"
+        },
+        "total_ticket_cost_inr": {
+          "anyOf": [
+            {
+              "maximum": 2000000,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Sector ticket cost including taxes",
+          "title": "Total Ticket Cost Inr"
+        },
+        "payment_mode": {
+          "anyOf": [
+            {
+              "enum": [
+                "card",
+                "cash",
+                "upi",
+                "agent",
+                "other"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Payment Mode"
+        }
+      },
+      "required": [
+        "pnr"
+      ],
+      "title": "Booking",
+      "type": "object"
+    },
+    "CabinClass": {
+      "enum": [
+        "economy",
+        "premium_economy",
+        "business",
+        "first"
+      ],
+      "title": "CabinClass",
+      "type": "string"
+    },
+    "Disruption": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DisruptionType"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Optional; the intake agent classifies it"
+        },
+        "notified_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Notified At"
+        },
+        "notice_minutes_before_departure": {
+          "anyOf": [
+            {
+              "maximum": 525600,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Notice Minutes Before Departure"
+        },
+        "informed_at_airport": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Informed At Airport"
+        },
+        "actual_departure": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Actual Departure"
+        },
+        "delay_minutes": {
+          "anyOf": [
+            {
+              "maximum": 10080,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Delay Minutes"
+        },
+        "alternate_flight": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AlternateFlight"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "refund_requested": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Refund Requested"
+        },
+        "airline_stated_cause": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Airline Stated Cause"
+        },
+        "passenger_disputes_cause": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Passenger Disputes Cause"
+        },
+        "presented_for_checkin_on_time": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Presented For Checkin On Time"
+        },
+        "volunteered": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Volunteered"
+        },
+        "flown_class": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CabinClass"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "downgrade_requested_by_passenger": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Downgrade Requested By Passenger"
+        },
+        "baggage_claim": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "True if the claim is about baggage",
+          "title": "Baggage Claim"
+        }
+      },
+      "title": "Disruption",
+      "type": "object"
+    },
+    "DisruptionType": {
+      "enum": [
+        "denied_boarding",
+        "cancellation",
+        "delay",
+        "downgrading"
+      ],
+      "title": "DisruptionType",
+      "type": "string"
+    },
+    "Flight": {
+      "additionalProperties": false,
+      "properties": {
+        "airline_code": {
+          "pattern": "^[A-Z0-9]{2}$",
+          "title": "Airline Code",
+          "type": "string"
+        },
+        "flight_number": {
+          "pattern": "^[0-9]{1,4}[A-Z]?$",
+          "title": "Flight Number",
+          "type": "string"
+        },
+        "carrier_type": {
+          "default": "indian_scheduled",
+          "enum": [
+            "indian_scheduled",
+            "foreign"
+          ],
+          "title": "Carrier Type",
+          "type": "string"
+        },
+        "origin": {
+          "description": "IATA airport code",
+          "pattern": "^[A-Z]{3}$",
+          "title": "Origin",
+          "type": "string"
+        },
+        "destination": {
+          "pattern": "^[A-Z]{3}$",
+          "title": "Destination",
+          "type": "string"
+        },
+        "sector": {
+          "anyOf": [
+            {
+              "enum": [
+                "domestic",
+                "international"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sector"
+        },
+        "scheduled_departure": {
+          "description": "Booked scheduled departure, ISO-8601 with UTC offset",
+          "format": "date-time",
+          "title": "Scheduled Departure",
+          "type": "string"
+        },
+        "block_time_minutes": {
+          "anyOf": [
+            {
+              "maximum": 1200,
+              "minimum": 15,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Block Time Minutes"
+        },
+        "sector_distance_km": {
+          "anyOf": [
+            {
+              "maximum": 20000,
+              "minimum": 50,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sector Distance Km"
+        }
+      },
+      "required": [
+        "airline_code",
+        "flight_number",
+        "origin",
+        "destination",
+        "scheduled_departure"
+      ],
+      "title": "Flight",
+      "type": "object"
+    },
+    "Passenger": {
+      "additionalProperties": false,
+      "properties": {
+        "full_name": {
+          "maxLength": 100,
+          "minLength": 2,
+          "title": "Full Name",
+          "type": "string"
+        },
+        "email": {
+          "maxLength": 254,
+          "pattern": "^[^@\\s]+@[^@\\s]+\\.[A-Za-z]{2,}$",
+          "title": "Email",
+          "type": "string"
+        },
+        "phone": {
+          "anyOf": [
+            {
+              "pattern": "^\\+?[0-9 ]{8,16}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Phone"
+        },
+        "contact_details_provided_at_booking": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Did the passenger give a mobile number or e-mail at booking?",
+          "title": "Contact Details Provided At Booking"
+        }
+      },
+      "required": [
+        "full_name",
+        "email"
+      ],
+      "title": "Passenger",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "client_reference": {
+      "pattern": "^[A-Za-z0-9_-]{1,64}$",
+      "title": "Client Reference",
+      "type": "string"
+    },
+    "passenger": {
+      "$ref": "#/$defs/Passenger"
+    },
+    "flight": {
+      "$ref": "#/$defs/Flight"
+    },
+    "booking": {
+      "$ref": "#/$defs/Booking"
+    },
+    "disruption": {
+      "$ref": "#/$defs/Disruption"
+    },
+    "narrative": {
+      "description": "Passenger's own account (free text)",
+      "maxLength": 4000,
+      "minLength": 10,
+      "title": "Narrative",
+      "type": "string"
+    },
+    "requested_remedy": {
+      "anyOf": [
+        {
+          "enum": [
+            "compensation",
+            "refund",
+            "facilities_reimbursement",
+            "other"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Requested Remedy"
+    },
+    "callback_url": {
+      "anyOf": [
+        {
+          "pattern": "^https?://[^\\s]{3,500}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Callback Url"
+    }
+  },
+  "required": [
+    "client_reference",
+    "passenger",
+    "flight",
+    "booking",
+    "narrative"
+  ],
+  "title": "ClaimRequest",
+  "type": "object"
+}

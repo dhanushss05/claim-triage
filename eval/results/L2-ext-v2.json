@@ -4,32 +4,35 @@
     "accuracy": 1,
     "route_accuracy": 1,
     "amount_accuracy": 1,
-    "must_cite_recall": 0.9259,
+    "must_cite_recall": 1.0,
     "context_recall": 1.0,
     "groundedness": 1.0,
-    "context_relevance": 0.1602,
+    "context_relevance": 0.2314,
     "faithfulness": 1.0,
     "hallucination_rate": 0.0,
     "escalation_precision": 1.0,
     "escalation_recall": 1.0,
     "verification_pass_rate": 1,
-    "mean_steps": 11.2222,
-    "mean_tool_calls": 9.3333,
-    "mean_retrieved": 23.9259,
-    "mean_prompt_tokens": 15226.8,
-    "mean_completion_tokens": 441.7,
-    "cost_per_100_runs_usd": 0.169936,
+    "mean_steps": 11.5926,
+    "mean_tool_calls": 9.5926,
+    "mean_retrieved": 17.037,
+    "mean_prompt_tokens": 14063.5,
+    "mean_completion_tokens": 452.5,
+    "cost_per_100_runs_usd": 0.158736,
     "cost_share_by_step": {
-      "plan": 0.637,
-      "determine": 0.326,
-      "extract": 0.037
+      "plan": 0.601,
+      "determine": 0.346,
+      "extract": 0.054
     },
-    "mean_latency_ms": 29.9815,
+    "mean_latency_ms": 32.8556,
     "s01_difficult_case_correct": true,
-    "label": "smoke",
+    "label": "L2-ext-v2",
     "mode": "inprocess",
-    "overrides": [],
-    "timestamp": "2026-10-10T17:33:46Z"
+    "overrides": [
+      "PROMPT_VERSION_EXTRACTION=v2",
+      "PROMPT_VERSION_DETERMINATION=v2"
+    ],
+    "timestamp": "2026-10-10T18:13:23Z"
   },
   "rows": [
     {
@@ -48,7 +51,7 @@
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 1.0,
-      "context_relevance": 0.24,
+      "context_relevance": 0.35294117647058826,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": true,
@@ -58,31 +61,31 @@
       "steps": 13,
       "tool_calls": 11,
       "cost": {
-        "prompt_tokens": 18819,
+        "prompt_tokens": 16677,
         "completion_tokens": 485,
-        "cost_usd": 0.0020759000000000003,
+        "cost_usd": 0.0018617,
         "calls": 14
       },
-      "latency_ms": 56.4,
-      "retrieved": 25,
+      "latency_ms": 76.2,
+      "retrieved": 17,
       "cost_by_step": {
         "extract": {
           "calls": 1,
-          "prompt_tokens": 346,
+          "prompt_tokens": 583,
           "completion_tokens": 81,
-          "cost_usd": 6.7e-05
+          "cost_usd": 9.070000000000001e-05
         },
         "plan": {
           "calls": 11,
-          "prompt_tokens": 13023,
+          "prompt_tokens": 10976,
           "completion_tokens": 154,
-          "cost_usd": 0.0013639000000000001
+          "cost_usd": 0.0011592
         },
         "determine": {
           "calls": 2,
-          "prompt_tokens": 5450,
+          "prompt_tokens": 5118,
           "completion_tokens": 250,
-          "cost_usd": 0.0006450000000000001
+          "cost_usd": 0.0006118
         }
       },
       "result": {
@@ -194,21 +197,13 @@
             "CAR:3.2.2",
             "CAR:3.1.2",
             "CAR:3.3.3",
-            "CAR:3.3.4",
-            "CAR:2.1",
-            "CAR:2.3",
-            "CAR:2.6",
             "CAR:3.4.1",
+            "CAR:3.3.4",
             "CAR:3.6.1",
-            "CAR:2.5",
-            "CAR:2.4",
-            "CAR:2.2",
-            "CAR:2.11",
+            "CAR:2.1",
             "CAR:3.2.3",
-            "CAR:3.7.2",
-            "CHARTER:2.1",
+            "CAR:2.11",
             "CAR:3.4.3",
-            "CAR:3.6.2",
             "CAR:3.1.1",
             "CAR:3.1.3",
             "CHARTER:7.2",
@@ -217,19 +212,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 18819,
+            "prompt_tokens": 16677,
             "completion_tokens": 485,
-            "cost_usd": 0.0020759000000000003,
+            "cost_usd": 0.0018617,
             "calls": 14
           }
         },
         "timings_ms": {
-          "end_to_end": 56.4
+          "end_to_end": 76.2
         },
         "prompt_versions": {
-          "extraction": "extraction@v1#2a1d959f",
+          "extraction": "extraction@v2#16c0be2e",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -249,7 +244,7 @@
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 1.0,
-      "context_relevance": 0.20833333333333334,
+      "context_relevance": 0.2631578947368421,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": true,
@@ -259,31 +254,31 @@
       "steps": 14,
       "tool_calls": 12,
       "cost": {
-        "prompt_tokens": 16500,
+        "prompt_tokens": 16177,
         "completion_tokens": 471,
-        "cost_usd": 0.0018384,
+        "cost_usd": 0.0018061,
         "calls": 13
       },
-      "latency_ms": 38.3,
-      "retrieved": 24,
+      "latency_ms": 44.0,
+      "retrieved": 19,
       "cost_by_step": {
         "extract": {
           "calls": 1,
-          "prompt_tokens": 342,
+          "prompt_tokens": 578,
           "completion_tokens": 81,
-          "cost_usd": 6.66e-05
+          "cost_usd": 9.02e-05
         },
         "plan": {
           "calls": 10,
-          "prompt_tokens": 10797,
+          "prompt_tokens": 10175,
           "completion_tokens": 140,
-          "cost_usd": 0.0011357
+          "cost_usd": 0.0010735
         },
         "determine": {
           "calls": 2,
-          "prompt_tokens": 5361,
+          "prompt_tokens": 5424,
           "completion_tokens": 250,
-          "cost_usd": 0.0006361000000000001
+          "cost_usd": 0.0006424000000000001
         }
       },
       "result": {
@@ -387,42 +382,37 @@
             "CAR:3.4.1",
             "CAR:3.2.2",
             "CAR:3.3.2",
-            "CAR:2.11",
-            "CAR:3.3.4",
-            "CAR:3.4.4",
-            "CAR:3.4.3",
-            "CAR:2.1",
-            "CAR:2.3",
-            "CAR:2.7",
-            "CAR:2.2",
+            "CAR:3.3.1",
             "CAR:3.3.3",
+            "CAR:3.3.4",
             "CAR:3.6.1",
+            "CAR:2.11",
+            "CAR:3.4.4",
+            "CAR:2.1",
             "CAR:3.2.3",
-            "CAR:3.6.2",
-            "CAR:3.7.2",
-            "CHARTER:2.1",
+            "CAR:3.4.3",
             "CAR:3.1.1",
             "CAR:3.1.3",
             "CHARTER:7.2",
-            "CAR:3.3.1",
+            "CAR:2.2",
             "CAR:3.8.1"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 16500,
+            "prompt_tokens": 16177,
             "completion_tokens": 471,
-            "cost_usd": 0.0018384,
+            "cost_usd": 0.0018061,
             "calls": 13
           }
         },
         "timings_ms": {
-          "end_to_end": 38.3
+          "end_to_end": 44.0
         },
         "prompt_versions": {
-          "extraction": "extraction@v1#2a1d959f",
+          "extraction": "extraction@v2#16c0be2e",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -442,7 +432,7 @@
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 1.0,
-      "context_relevance": 0.2,
+      "context_relevance": 0.3333333333333333,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": true,
@@ -452,31 +442,31 @@
       "steps": 12,
       "tool_calls": 10,
       "cost": {
-        "prompt_tokens": 15157,
+        "prompt_tokens": 12901,
         "completion_tokens": 457,
-        "cost_usd": 0.0016985,
+        "cost_usd": 0.0014729,
         "calls": 12
       },
-      "latency_ms": 29.8,
-      "retrieved": 25,
+      "latency_ms": 30.4,
+      "retrieved": 15,
       "cost_by_step": {
         "extract": {
           "calls": 1,
-          "prompt_tokens": 330,
+          "prompt_tokens": 566,
           "completion_tokens": 81,
-          "cost_usd": 6.54e-05
+          "cost_usd": 8.9e-05
         },
         "plan": {
           "calls": 9,
-          "prompt_tokens": 9656,
+          "prompt_tokens": 7841,
           "completion_tokens": 126,
-          "cost_usd": 0.001016
+          "cost_usd": 0.0008345000000000001
         },
         "determine": {
           "calls": 2,
-          "prompt_tokens": 5171,
+          "prompt_tokens": 4494,
           "completion_tokens": 250,
-          "cost_usd": 0.0006171
+          "cost_usd": 0.0005494
         }
       },
       "result": {
@@ -578,20 +568,10 @@
             "CHARTER:3.2",
             "CAR:3.3.2",
             "CAR:3.4.1",
-            "CAR:2.11",
-            "CAR:3.3.4",
-            "CAR:3.4.4",
-            "CAR:3.4.3",
-            "CAR:2.1",
-            "CAR:2.3",
-            "CAR:2.7",
             "CAR:3.3.3",
-            "CAR:2.6",
-            "CAR:3.2.3",
-            "CAR:3.7.2",
-            "CHARTER:2.1",
+            "CAR:3.3.4",
             "CAR:3.6.1",
-            "CAR:3.6.2",
+            "CAR:3.2.3",
             "CAR:3.1.1",
             "CAR:3.1.3",
             "CHARTER:7.2",
@@ -602,19 +582,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 15157,
+            "prompt_tokens": 12901,
             "completion_tokens": 457,
-            "cost_usd": 0.0016985,
+            "cost_usd": 0.0014729,
             "calls": 12
           }
         },
         "timings_ms": {
-          "end_to_end": 29.8
+          "end_to_end": 30.4
         },
         "prompt_versions": {
-          "extraction": "extraction@v1#2a1d959f",
+          "extraction": "extraction@v2#16c0be2e",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -634,7 +614,7 @@
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 1.0,
-      "context_relevance": 0.21739130434782608,
+      "context_relevance": 0.3333333333333333,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": true,
@@ -644,31 +624,31 @@
       "steps": 11,
       "tool_calls": 9,
       "cost": {
-        "prompt_tokens": 14485,
+        "prompt_tokens": 12990,
         "completion_tokens": 457,
-        "cost_usd": 0.0016313,
+        "cost_usd": 0.0014818,
         "calls": 12
       },
-      "latency_ms": 27.9,
-      "retrieved": 23,
+      "latency_ms": 28.6,
+      "retrieved": 15,
       "cost_by_step": {
         "extract": {
           "calls": 1,
-          "prompt_tokens": 326,
+          "prompt_tokens": 563,
           "completion_tokens": 81,
-          "cost_usd": 6.500000000000001e-05
+          "cost_usd": 8.870000000000001e-05
         },
         "plan": {
           "calls": 9,
-          "prompt_tokens": 9208,
+          "prompt_tokens": 7709,
           "completion_tokens": 126,
-          "cost_usd": 0.0009712000000000001
+          "cost_usd": 0.0008213000000000001
         },
         "determine": {
           "calls": 2,
-          "prompt_tokens": 4951,
+          "prompt_tokens": 4718,
           "completion_tokens": 250,
-          "cost_usd": 0.0005951000000000001
+          "cost_usd": 0.0005718000000000001
         }
       },
       "result": {
@@ -764,18 +744,10 @@
             "CAR:1.1",
             "CAR:3.3.2",
             "CAR:3.3.3",
+            "CAR:3.4.1",
             "CAR:3.3.4",
-            "CAR:2.1",
-            "CAR:2.3",
-            "CAR:2.6",
-            "CAR:3.2.1",
-            "CAR:3.2.3",
             "CAR:3.6.1",
-            "CAR:2.5",
-            "CAR:2.4",
-            "CAR:3.7.2",
-            "CHARTER:2.1",
-            "CAR:3.6.2",
+            "CAR:3.2.3",
             "CAR:3.1.1",
             "CAR:3.1.3",
             "CHARTER:7.2",
@@ -785,19 +757,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 14485,
+            "prompt_tokens": 12990,
             "completion_tokens": 457,
-            "cost_usd": 0.0016313,
+            "cost_usd": 0.0014818,
             "calls": 12
           }
         },
         "timings_ms": {
-          "end_to_end": 27.9
+          "end_to_end": 28.6
         },
         "prompt_versions": {
-          "extraction": "extraction@v1#2a1d959f",
+          "extraction": "extraction@v2#16c0be2e",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -817,7 +789,7 @@
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 1.0,
-      "context_relevance": 0.18518518518518517,
+      "context_relevance": 0.2777777777777778,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": true,
@@ -827,31 +799,31 @@
       "steps": 13,
       "tool_calls": 11,
       "cost": {
-        "prompt_tokens": 18886,
+        "prompt_tokens": 16531,
         "completion_tokens": 485,
-        "cost_usd": 0.0020826,
+        "cost_usd": 0.0018471,
         "calls": 14
       },
-      "latency_ms": 32.6,
-      "retrieved": 27,
+      "latency_ms": 32.1,
+      "retrieved": 18,
       "cost_by_step": {
         "extract": {
           "calls": 1,
-          "prompt_tokens": 333,
+          "prompt_tokens": 569,
           "completion_tokens": 81,
-          "cost_usd": 6.57e-05
+          "cost_usd": 8.93e-05
         },
         "plan": {
           "calls": 11,
-          "prompt_tokens": 12918,
+          "prompt_tokens": 10796,
           "completion_tokens": 154,
-          "cost_usd": 0.0013534
+          "cost_usd": 0.0011412
         },
         "determine": {
           "calls": 2,
-          "prompt_tokens": 5635,
+          "prompt_tokens": 5166,
           "completion_tokens": 250,
-          "cost_usd": 0.0006635
+          "cost_usd": 0.0006166000000000001
         }
       },
       "result": {
@@ -949,22 +921,13 @@
             "CAR:3.1.2",
             "CAR:3.3.2",
             "CAR:3.3.3",
-            "CAR:3.3.4",
-            "CAR:2.1",
-            "CAR:2.3",
-            "CAR:2.6",
-            "CAR:3.2.1",
-            "CAR:3.2.3",
-            "CAR:3.6.1",
-            "CAR:2.5",
-            "CAR:2.4",
             "CAR:3.4.1",
-            "CAR:3.7.2",
-            "CHARTER:2.1",
+            "CAR:3.3.4",
+            "CAR:3.6.1",
+            "CAR:2.1",
+            "CAR:3.2.3",
             "CAR:2.11",
             "CAR:3.4.3",
-            "CAR:2.2",
-            "CAR:3.6.2",
             "CAR:3.1.1",
             "CAR:3.1.3",
             "CHARTER:7.2",
@@ -974,19 +937,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 18886,
+            "prompt_tokens": 16531,
             "completion_tokens": 485,
-            "cost_usd": 0.0020826,
+            "cost_usd": 0.0018471,
             "calls": 14
           }
         },
         "timings_ms": {
-          "end_to_end": 32.6
+          "end_to_end": 32.1
         },
         "prompt_versions": {
-          "extraction": "extraction@v1#2a1d959f",
+          "extraction": "extraction@v2#16c0be2e",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -1006,7 +969,7 @@
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 1.0,
-      "context_relevance": 0.23809523809523808,
+      "context_relevance": 0.35714285714285715,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": true,
@@ -1016,31 +979,31 @@
       "steps": 11,
       "tool_calls": 9,
       "cost": {
-        "prompt_tokens": 14603,
+        "prompt_tokens": 13228,
         "completion_tokens": 457,
-        "cost_usd": 0.0016431,
+        "cost_usd": 0.0015056,
         "calls": 12
       },
-      "latency_ms": 25.5,
-      "retrieved": 21,
+      "latency_ms": 26.3,
+      "retrieved": 14,
       "cost_by_step": {
         "extract": {
           "calls": 1,
-          "prompt_tokens": 335,
+          "prompt_tokens": 571,
           "completion_tokens": 81,
-          "cost_usd": 6.59e-05
+          "cost_usd": 8.950000000000001e-05
         },
         "plan": {
           "calls": 9,
-          "prompt_tokens": 9498,
+          "prompt_tokens": 8037,
           "completion_tokens": 126,
-          "cost_usd": 0.0010002000000000001
+          "cost_usd": 0.0008541
         },
         "determine": {
           "calls": 2,
-          "prompt_tokens": 4770,
+          "prompt_tokens": 4620,
           "completion_tokens": 250,
-          "cost_usd": 0.000577
+          "cost_usd": 0.000562
         }
       },
       "result": {
@@ -1142,38 +1105,31 @@
             "CHARTER:7.2",
             "CAR:3.3.2",
             "CAR:3.3.3",
+            "CAR:3.4.1",
             "CAR:3.3.4",
-            "CAR:2.1",
-            "CAR:2.3",
-            "CAR:2.6",
-            "CAR:3.2.1",
-            "CAR:3.2.3",
             "CAR:3.6.1",
-            "CAR:2.5",
-            "CAR:2.4",
-            "CAR:3.7.2",
-            "CHARTER:2.1",
-            "CAR:3.6.2",
+            "CAR:3.2.3",
             "CAR:3.1.1",
             "CAR:3.1.3",
-            "CAR:3.8.1"
+            "CAR:3.8.1",
+            "CHARTER:2.1"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 14603,
+            "prompt_tokens": 13228,
             "completion_tokens": 457,
-            "cost_usd": 0.0016431,
+            "cost_usd": 0.0015056,
             "calls": 12
           }
         },
         "timings_ms": {
-          "end_to_end": 25.5
+          "end_to_end": 26.3
         },
         "prompt_versions": {
-          "extraction": "extraction@v1#2a1d959f",
+          "extraction": "extraction@v2#16c0be2e",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -1193,7 +1149,7 @@
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 1.0,
-      "context_relevance": 0.17857142857142858,
+      "context_relevance": 0.2631578947368421,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": true,
@@ -1203,31 +1159,31 @@
       "steps": 12,
       "tool_calls": 10,
       "cost": {
-        "prompt_tokens": 18811,
+        "prompt_tokens": 16472,
         "completion_tokens": 471,
-        "cost_usd": 0.0020694999999999997,
+        "cost_usd": 0.0018356,
         "calls": 13
       },
-      "latency_ms": 29.8,
-      "retrieved": 28,
+      "latency_ms": 27.9,
+      "retrieved": 19,
       "cost_by_step": {
         "extract": {
           "calls": 1,
-          "prompt_tokens": 324,
+          "prompt_tokens": 560,
           "completion_tokens": 81,
-          "cost_usd": 6.48e-05
+          "cost_usd": 8.840000000000001e-05
         },
         "plan": {
           "calls": 10,
-          "prompt_tokens": 12647,
+          "prompt_tokens": 10547,
           "completion_tokens": 140,
-          "cost_usd": 0.0013207000000000002
+          "cost_usd": 0.0011106999999999998
         },
         "determine": {
           "calls": 2,
-          "prompt_tokens": 5840,
+          "prompt_tokens": 5365,
           "completion_tokens": 250,
-          "cost_usd": 0.0006840000000000001
+          "cost_usd": 0.0006365000000000001
         }
       },
       "result": {
@@ -1343,17 +1299,8 @@
             "CAR:3.4.3",
             "CAR:3.4.4",
             "CAR:3.3.1",
-            "CAR:2.6",
             "CAR:2.10",
-            "CAR:2.11",
-            "CAR:3.2.1",
             "CAR:3.2.3",
-            "CAR:2.5",
-            "CAR:2.1",
-            "CAR:2.4",
-            "CAR:2.3",
-            "CAR:3.7.2",
-            "CHARTER:2.1",
             "CAR:3.1.1",
             "CAR:3.1.3",
             "CHARTER:7.2",
@@ -1362,19 +1309,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 18811,
+            "prompt_tokens": 16472,
             "completion_tokens": 471,
-            "cost_usd": 0.0020694999999999997,
+            "cost_usd": 0.0018356,
             "calls": 13
           }
         },
         "timings_ms": {
-          "end_to_end": 29.8
+          "end_to_end": 27.9
         },
         "prompt_versions": {
-          "extraction": "extraction@v1#2a1d959f",
+          "extraction": "extraction@v2#16c0be2e",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -1394,7 +1341,7 @@
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 1.0,
-      "context_relevance": 0.2222222222222222,
+      "context_relevance": 0.4,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": true,
@@ -1404,31 +1351,31 @@
       "steps": 11,
       "tool_calls": 9,
       "cost": {
-        "prompt_tokens": 18026,
+        "prompt_tokens": 14773,
         "completion_tokens": 471,
-        "cost_usd": 0.001991,
+        "cost_usd": 0.0016657,
         "calls": 13
       },
-      "latency_ms": 40.5,
-      "retrieved": 27,
+      "latency_ms": 56.2,
+      "retrieved": 15,
       "cost_by_step": {
         "extract": {
           "calls": 1,
-          "prompt_tokens": 345,
+          "prompt_tokens": 582,
           "completion_tokens": 81,
-          "cost_usd": 6.69e-05
+          "cost_usd": 9.06e-05
         },
         "plan": {
           "calls": 10,
-          "prompt_tokens": 12093,
+          "prompt_tokens": 9538,
           "completion_tokens": 140,
-          "cost_usd": 0.0012653000000000002
+          "cost_usd": 0.0010098
         },
         "determine": {
           "calls": 2,
-          "prompt_tokens": 5588,
+          "prompt_tokens": 4653,
           "completion_tokens": 250,
-          "cost_usd": 0.0006588
+          "cost_usd": 0.0005653000000000001
         }
       },
       "result": {
@@ -1525,24 +1472,12 @@
             "CHARTER:3.2",
             "CAR:3.3.2",
             "CAR:3.4.2",
-            "CAR:2.11",
-            "CAR:3.3.4",
-            "CAR:3.4.4",
-            "CAR:3.4.3",
-            "CAR:2.1",
-            "CAR:2.2",
-            "CAR:2.7",
             "CAR:3.3.3",
-            "CAR:2.3",
-            "CAR:2.6",
+            "CAR:3.3.4",
+            "CAR:3.6.1",
             "CAR:2.10",
             "CAR:3.6.2",
-            "CAR:3.6.1",
-            "CAR:3.8.1",
-            "CAR:2.5",
             "CAR:3.2.3",
-            "CAR:3.7.2",
-            "CHARTER:2.1",
             "CAR:3.1.1",
             "CAR:3.1.3",
             "CHARTER:7.2",
@@ -1551,19 +1486,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 18026,
+            "prompt_tokens": 14773,
             "completion_tokens": 471,
-            "cost_usd": 0.001991,
+            "cost_usd": 0.0016657,
             "calls": 13
           }
         },
         "timings_ms": {
-          "end_to_end": 40.5
+          "end_to_end": 56.2
         },
         "prompt_versions": {
-          "extraction": "extraction@v1#2a1d959f",
+          "extraction": "extraction@v2#16c0be2e",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -1583,7 +1518,7 @@
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 1.0,
-      "context_relevance": 0.2727272727272727,
+      "context_relevance": 0.4,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": true,
@@ -1593,31 +1528,31 @@
       "steps": 10,
       "tool_calls": 8,
       "cost": {
-        "prompt_tokens": 14709,
+        "prompt_tokens": 13199,
         "completion_tokens": 457,
-        "cost_usd": 0.0016537000000000001,
+        "cost_usd": 0.0015027,
         "calls": 12
       },
-      "latency_ms": 27.5,
-      "retrieved": 22,
+      "latency_ms": 28.3,
+      "retrieved": 15,
       "cost_by_step": {
         "extract": {
           "calls": 1,
-          "prompt_tokens": 321,
+          "prompt_tokens": 557,
           "completion_tokens": 81,
-          "cost_usd": 6.45e-05
+          "cost_usd": 8.81e-05
         },
         "plan": {
           "calls": 9,
-          "prompt_tokens": 9758,
+          "prompt_tokens": 8336,
           "completion_tokens": 126,
-          "cost_usd": 0.0010262000000000001
+          "cost_usd": 0.000884
         },
         "determine": {
           "calls": 2,
-          "prompt_tokens": 4630,
+          "prompt_tokens": 4306,
           "completion_tokens": 250,
-          "cost_usd": 0.0005630000000000001
+          "cost_usd": 0.0005306
         }
       },
       "result": {
@@ -1715,18 +1650,11 @@
             "CAR:3.3.1",
             "CAR:3.3.2",
             "CAR:3.3.3",
+            "CAR:3.2.3",
             "CAR:3.3.4",
-            "CAR:2.1",
-            "CAR:2.3",
-            "CAR:2.6",
             "CAR:3.6.2",
             "CAR:2.10",
             "CAR:3.6.1",
-            "CAR:3.8.1",
-            "CAR:2.5",
-            "CAR:3.2.3",
-            "CAR:3.7.2",
-            "CHARTER:2.1",
             "CAR:3.1.1",
             "CAR:3.1.3",
             "CAR:3.2.2"
@@ -1734,19 +1662,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 14709,
+            "prompt_tokens": 13199,
             "completion_tokens": 457,
-            "cost_usd": 0.0016537000000000001,
+            "cost_usd": 0.0015027,
             "calls": 12
           }
         },
         "timings_ms": {
-          "end_to_end": 27.5
+          "end_to_end": 28.3
         },
         "prompt_versions": {
-          "extraction": "extraction@v1#2a1d959f",
+          "extraction": "extraction@v2#16c0be2e",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -1766,7 +1694,7 @@
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 1.0,
-      "context_relevance": 0.2,
+      "context_relevance": 0.3125,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": true,
@@ -1776,31 +1704,31 @@
       "steps": 12,
       "tool_calls": 10,
       "cost": {
-        "prompt_tokens": 16722,
+        "prompt_tokens": 14608,
         "completion_tokens": 471,
-        "cost_usd": 0.0018606,
+        "cost_usd": 0.0016492,
         "calls": 13
       },
-      "latency_ms": 29.2,
-      "retrieved": 25,
+      "latency_ms": 33.2,
+      "retrieved": 16,
       "cost_by_step": {
         "extract": {
           "calls": 1,
-          "prompt_tokens": 329,
+          "prompt_tokens": 566,
           "completion_tokens": 81,
-          "cost_usd": 6.53e-05
+          "cost_usd": 8.9e-05
         },
         "plan": {
           "calls": 10,
-          "prompt_tokens": 11128,
+          "prompt_tokens": 9223,
           "completion_tokens": 140,
-          "cost_usd": 0.0011688000000000002
+          "cost_usd": 0.0009783
         },
         "determine": {
           "calls": 2,
-          "prompt_tokens": 5265,
+          "prompt_tokens": 4819,
           "completion_tokens": 250,
-          "cost_usd": 0.0006265000000000001
+          "cost_usd": 0.0005819
         }
       },
       "result": {
@@ -1900,20 +1828,11 @@
             "CHARTER:7.1",
             "CAR:3.2.2",
             "CAR:3.3.3",
-            "CAR:3.3.4",
-            "CAR:2.1",
-            "CAR:2.3",
-            "CAR:2.6",
             "CAR:3.4.1",
+            "CAR:3.3.4",
             "CAR:3.6.1",
-            "CAR:2.5",
-            "CAR:2.4",
-            "CAR:2.2",
-            "CAR:2.11",
+            "CAR:2.1",
             "CAR:3.2.3",
-            "CAR:3.7.2",
-            "CHARTER:2.1",
-            "CAR:3.6.2",
             "CAR:3.1.1",
             "CAR:3.1.3",
             "CHARTER:7.2",
@@ -1923,19 +1842,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 16722,
+            "prompt_tokens": 14608,
             "completion_tokens": 471,
-            "cost_usd": 0.0018606,
+            "cost_usd": 0.0016492,
             "calls": 13
           }
         },
         "timings_ms": {
-          "end_to_end": 29.2
+          "end_to_end": 33.2
         },
         "prompt_versions": {
-          "extraction": "extraction@v1#2a1d959f",
+          "extraction": "extraction@v2#16c0be2e",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -1955,7 +1874,7 @@
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 1.0,
-      "context_relevance": 0.2,
+      "context_relevance": 0.29411764705882354,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": true,
@@ -1965,31 +1884,31 @@
       "steps": 10,
       "tool_calls": 8,
       "cost": {
-        "prompt_tokens": 15080,
+        "prompt_tokens": 13790,
         "completion_tokens": 457,
-        "cost_usd": 0.0016908,
+        "cost_usd": 0.0015618000000000001,
         "calls": 12
       },
-      "latency_ms": 23.9,
-      "retrieved": 25,
+      "latency_ms": 31.5,
+      "retrieved": 17,
       "cost_by_step": {
         "extract": {
           "calls": 1,
-          "prompt_tokens": 314,
+          "prompt_tokens": 550,
           "completion_tokens": 81,
-          "cost_usd": 6.38e-05
+          "cost_usd": 8.740000000000001e-05
         },
         "plan": {
           "calls": 9,
-          "prompt_tokens": 9513,
+          "prompt_tokens": 8178,
           "completion_tokens": 126,
-          "cost_usd": 0.0010017000000000001
+          "cost_usd": 0.0008682000000000001
         },
         "determine": {
           "calls": 2,
-          "prompt_tokens": 5253,
+          "prompt_tokens": 5062,
           "completion_tokens": 250,
-          "cost_usd": 0.0006253000000000001
+          "cost_usd": 0.0006062000000000001
         }
       },
       "result": {
@@ -2085,43 +2004,35 @@
             "CAR:3.3.4",
             "CAR:3.3.1",
             "CAR:3.8.1",
-            "CAR:3.2.1",
-            "CAR:3.2.3",
-            "CAR:3.6.1",
-            "CAR:2.5",
-            "CAR:2.1",
-            "CAR:2.4",
-            "CAR:2.3",
             "CAR:3.4.1",
             "CAR:3.3.3",
-            "CAR:2.2",
-            "CAR:2.6",
-            "CAR:2.11",
-            "CAR:3.7.2",
-            "CHARTER:2.1",
+            "CAR:3.6.1",
             "CAR:3.6.2",
+            "CAR:3.4.2",
+            "CAR:3.4.3",
+            "CAR:3.4.4",
+            "CAR:3.2.3",
             "CAR:3.1.1",
             "CAR:3.1.3",
             "CHARTER:7.2",
-            "CHARTER:3.2",
-            "CAR:3.4.4"
+            "CHARTER:3.2"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 15080,
+            "prompt_tokens": 13790,
             "completion_tokens": 457,
-            "cost_usd": 0.0016908,
+            "cost_usd": 0.0015618000000000001,
             "calls": 12
           }
         },
         "timings_ms": {
-          "end_to_end": 23.9
+          "end_to_end": 31.5
         },
         "prompt_versions": {
-          "extraction": "extraction@v1#2a1d959f",
+          "extraction": "extraction@v2#16c0be2e",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -2137,45 +2048,45 @@
       "correct": true,
       "compensation_inr": 10000.0,
       "downgrade_refund_inr": 0.0,
-      "must_cite_recall": 0.0,
+      "must_cite_recall": 1.0,
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 1.0,
-      "context_relevance": 0.16666666666666666,
+      "context_relevance": 0.2,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": true,
-      "verification_attempts": 1,
-      "basis": "model answer verified against retrieved provisions",
+      "verification_attempts": 2,
+      "basis": "model answer failed verification; engine position verified instead",
       "degraded": false,
-      "steps": 10,
-      "tool_calls": 9,
+      "steps": 13,
+      "tool_calls": 11,
       "cost": {
-        "prompt_tokens": 13648,
-        "completion_tokens": 346,
-        "cost_usd": 0.0015032,
-        "calls": 12
+        "prompt_tokens": 16923,
+        "completion_tokens": 485,
+        "cost_usd": 0.0018863,
+        "calls": 14
       },
-      "latency_ms": 23.9,
-      "retrieved": 24,
+      "latency_ms": 44.4,
+      "retrieved": 20,
       "cost_by_step": {
         "extract": {
           "calls": 1,
-          "prompt_tokens": 330,
+          "prompt_tokens": 566,
           "completion_tokens": 81,
-          "cost_usd": 6.54e-05
+          "cost_usd": 8.9e-05
         },
         "plan": {
-          "calls": 10,
-          "prompt_tokens": 10753,
-          "completion_tokens": 140,
-          "cost_usd": 0.0011313
+          "calls": 11,
+          "prompt_tokens": 11196,
+          "completion_tokens": 154,
+          "cost_usd": 0.0011812
         },
         "determine": {
-          "calls": 1,
-          "prompt_tokens": 2565,
-          "completion_tokens": 125,
-          "cost_usd": 0.0003065
+          "calls": 2,
+          "prompt_tokens": 5161,
+          "completion_tokens": 250,
+          "cost_usd": 0.0006161000000000001
         }
       },
       "result": {
@@ -2185,20 +2096,26 @@
         "disruption_category": "denied_boarding",
         "entitlement": {
           "compensation_inr": 10000.0,
-          "computation": "cancellation compensation for block time over two hours",
-          "refund_due": true,
+          "computation": "min(200% x INR 5,800, INR 10,000) = INR 10,000",
+          "refund_due": false,
           "facilities": [],
           "downgrade_refund_inr": 0.0
         },
         "citations": [
           {
-            "clause_id": "CAR:3.3.2",
-            "label": "DGCA CAR S3 Series M Part IV, para 3.3.2",
+            "clause_id": "CAR:3.2.2",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.2.2",
             "doc_id": "CAR",
-            "quote": "INR 10,000 or the booked one-way basic fare plus airline fuel charge, whichever is less"
+            "quote": "(b) If the alternate flight is scheduled to depart more than one hour and within 24 hours of the booked scheduled departure time, compensation equal to 200% of the booked one-way basic fare plus airline fuel charge, subject to a maximum of INR 10,000."
+          },
+          {
+            "clause_id": "CAR:3.8.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.8.1",
+            "doc_id": "CAR",
+            "quote": "A passenger who is not satisfied with the airline's response may escalate the grievance through the AirSewa portal of the Ministry of Civil Aviation."
           }
         ],
-        "justification": "The flight was cancelled, so cancellation compensation of INR 10,000 is payable under para 3.3.2.",
+        "justification": "Alternate flight 3 hours later (within 24 hours): 200% of the booked one-way basic fare plus airline fuel charge, subject to a maximum of INR 10,000: min(200% x INR 5,800, INR 10,000) = INR 10,000. [CAR:3.2.2]",
         "missing_evidence": [],
         "escalation": {
           "required": false,
@@ -2211,12 +2128,12 @@
         },
         "verification": {
           "passed": true,
-          "attempts": 1,
+          "attempts": 2,
           "checks": [
             {
               "name": "citations_resolve",
               "passed": true,
-              "detail": "1 citations resolve"
+              "detail": "2 citations resolve"
             },
             {
               "name": "quotes_in_text",
@@ -2232,22 +2149,17 @@
               "name": "route_has_basis",
               "passed": true,
               "detail": "payment cites an amount provision"
-            },
-            {
-              "name": "consistent_with_rules",
-              "passed": true,
-              "detail": "agrees"
             }
           ]
         },
         "guardrail_flags": [],
         "degraded": false,
-        "confidence": "high",
-        "basis": "model answer verified against retrieved provisions",
+        "confidence": "medium",
+        "basis": "model answer failed verification; engine position verified instead",
         "notes": [],
         "agent": {
-          "steps": 10,
-          "tool_calls": 9,
+          "steps": 13,
+          "tool_calls": 11,
           "planner_sources": [
             "guard_override",
             "guard_override",
@@ -2258,6 +2170,9 @@
             "guard_override",
             "guard_override",
             "guard_override",
+            "model",
+            "recovery",
+            "recovery",
             "model"
           ],
           "stop_reason": "",
@@ -2270,40 +2185,36 @@
             "CAR:2.8",
             "CAR:3.2.3",
             "CAR:3.6.1",
-            "CAR:2.5",
-            "CAR:2.1",
-            "CAR:2.4",
-            "CAR:2.3",
             "CHARTER:3.2",
             "CAR:3.3.2",
+            "CAR:2.1",
             "CAR:3.4.1",
             "CAR:2.11",
             "CAR:3.4.3",
-            "CAR:2.2",
             "CAR:3.3.4",
-            "CAR:3.3.3",
-            "CAR:3.6.2",
             "CAR:3.1.2",
             "CAR:3.1.1",
             "CAR:3.1.3",
-            "CHARTER:7.2"
+            "CHARTER:7.2",
+            "CAR:3.8.1",
+            "CAR:2.10"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 13648,
-            "completion_tokens": 346,
-            "cost_usd": 0.0015032,
-            "calls": 12
+            "prompt_tokens": 16923,
+            "completion_tokens": 485,
+            "cost_usd": 0.0018863,
+            "calls": 14
           }
         },
         "timings_ms": {
-          "end_to_end": 23.9
+          "end_to_end": 44.4
         },
         "prompt_versions": {
-          "extraction": "extraction@v1#2a1d959f",
+          "extraction": "extraction@v2#16c0be2e",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -2323,41 +2234,41 @@
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 1.0,
-      "context_relevance": 0.13333333333333333,
+      "context_relevance": 0.16666666666666666,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": true,
       "verification_attempts": 2,
       "basis": "model answer failed verification; engine position verified instead",
       "degraded": false,
-      "steps": 12,
-      "tool_calls": 10,
+      "steps": 13,
+      "tool_calls": 11,
       "cost": {
-        "prompt_tokens": 20285,
+        "prompt_tokens": 18841,
         "completion_tokens": 485,
-        "cost_usd": 0.0022225,
+        "cost_usd": 0.0020781,
         "calls": 14
       },
-      "latency_ms": 29.6,
-      "retrieved": 30,
+      "latency_ms": 37.1,
+      "retrieved": 24,
       "cost_by_step": {
         "extract": {
           "calls": 1,
-          "prompt_tokens": 328,
+          "prompt_tokens": 565,
           "completion_tokens": 81,
-          "cost_usd": 6.520000000000001e-05
+          "cost_usd": 8.889999999999999e-05
         },
         "plan": {
           "calls": 11,
-          "prompt_tokens": 13985,
+          "prompt_tokens": 12484,
           "completion_tokens": 154,
-          "cost_usd": 0.0014601
+          "cost_usd": 0.00131
         },
         "determine": {
           "calls": 2,
-          "prompt_tokens": 5972,
+          "prompt_tokens": 5792,
           "completion_tokens": 250,
-          "cost_usd": 0.0006972
+          "cost_usd": 0.0006792000000000001
         }
       },
       "result": {
@@ -2431,8 +2342,8 @@
           "Subject to confirmation that the passenger presented for check-in on time (para 3.1.2)."
         ],
         "agent": {
-          "steps": 12,
-          "tool_calls": 10,
+          "steps": 13,
+          "tool_calls": 11,
           "planner_sources": [
             "guard_override",
             "guard_override",
@@ -2444,6 +2355,7 @@
             "guard_override",
             "guard_override",
             "model",
+            "recovery",
             "recovery",
             "model"
           ],
@@ -2458,45 +2370,39 @@
             "CAR:3.2.1",
             "CAR:3.2.3",
             "CAR:3.6.1",
-            "CAR:2.5",
-            "CAR:2.1",
-            "CAR:2.4",
-            "CAR:2.3",
             "CAR:3.4.1",
             "CAR:3.4.2",
             "CAR:3.4.3",
             "CAR:2.11",
             "CAR:3.3.4",
-            "CAR:2.7",
             "CHARTER:3.2",
             "CAR:3.3.2",
+            "CAR:2.1",
             "CAR:3.6.2",
             "CAR:2.10",
-            "CAR:3.8.1",
-            "CAR:2.2",
-            "CAR:3.3.3",
             "CAR:3.1.1",
             "CAR:3.1.3",
             "CHARTER:7.2",
+            "CAR:3.8.1",
             "CAR:3.3.1",
             "CAR:3.1.2"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 20285,
+            "prompt_tokens": 18841,
             "completion_tokens": 485,
-            "cost_usd": 0.0022225,
+            "cost_usd": 0.0020781,
             "calls": 14
           }
         },
         "timings_ms": {
-          "end_to_end": 29.6
+          "end_to_end": 37.1
         },
         "prompt_versions": {
-          "extraction": "extraction@v1#2a1d959f",
+          "extraction": "extraction@v2#16c0be2e",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -2516,7 +2422,7 @@
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 1.0,
-      "context_relevance": 0.15384615384615385,
+      "context_relevance": 0.2,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": true,
@@ -2526,31 +2432,31 @@
       "steps": 13,
       "tool_calls": 11,
       "cost": {
-        "prompt_tokens": 18166,
+        "prompt_tokens": 16896,
         "completion_tokens": 485,
-        "cost_usd": 0.0020106,
+        "cost_usd": 0.0018836,
         "calls": 14
       },
-      "latency_ms": 31.3,
-      "retrieved": 26,
+      "latency_ms": 33.2,
+      "retrieved": 20,
       "cost_by_step": {
         "extract": {
           "calls": 1,
-          "prompt_tokens": 337,
+          "prompt_tokens": 573,
           "completion_tokens": 81,
-          "cost_usd": 6.610000000000001e-05
+          "cost_usd": 8.970000000000001e-05
         },
         "plan": {
           "calls": 11,
-          "prompt_tokens": 12460,
+          "prompt_tokens": 11112,
           "completion_tokens": 154,
-          "cost_usd": 0.0013076000000000001
+          "cost_usd": 0.0011728
         },
         "determine": {
           "calls": 2,
-          "prompt_tokens": 5369,
+          "prompt_tokens": 5211,
           "completion_tokens": 250,
-          "cost_usd": 0.0006369
+          "cost_usd": 0.0006211000000000001
         }
       },
       "result": {
@@ -2649,19 +2555,13 @@
             "CAR:3.2.2",
             "CAR:3.2.3",
             "CAR:3.6.1",
-            "CAR:2.5",
-            "CAR:2.1",
-            "CAR:2.4",
-            "CAR:2.3",
             "CHARTER:3.2",
             "CAR:3.3.2",
+            "CAR:2.1",
             "CAR:3.4.1",
             "CAR:2.11",
             "CAR:3.4.3",
-            "CAR:2.2",
             "CAR:3.3.4",
-            "CAR:3.3.3",
-            "CAR:3.6.2",
             "CAR:3.1.2",
             "CAR:3.1.1",
             "CAR:3.1.3",
@@ -2672,19 +2572,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 18166,
+            "prompt_tokens": 16896,
             "completion_tokens": 485,
-            "cost_usd": 0.0020106,
+            "cost_usd": 0.0018836,
             "calls": 14
           }
         },
         "timings_ms": {
-          "end_to_end": 31.3
+          "end_to_end": 33.2
         },
         "prompt_versions": {
-          "extraction": "extraction@v1#2a1d959f",
+          "extraction": "extraction@v2#16c0be2e",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -2704,7 +2604,7 @@
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 1.0,
-      "context_relevance": 0.15384615384615385,
+      "context_relevance": 0.2,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": true,
@@ -2714,31 +2614,31 @@
       "steps": 13,
       "tool_calls": 11,
       "cost": {
-        "prompt_tokens": 18803,
+        "prompt_tokens": 17044,
         "completion_tokens": 485,
-        "cost_usd": 0.0020743,
+        "cost_usd": 0.0018984,
         "calls": 14
       },
-      "latency_ms": 39.6,
-      "retrieved": 26,
+      "latency_ms": 32.4,
+      "retrieved": 20,
       "cost_by_step": {
         "extract": {
           "calls": 1,
-          "prompt_tokens": 327,
+          "prompt_tokens": 564,
           "completion_tokens": 81,
-          "cost_usd": 6.510000000000001e-05
+          "cost_usd": 8.880000000000002e-05
         },
         "plan": {
           "calls": 11,
-          "prompt_tokens": 13158,
+          "prompt_tokens": 11320,
           "completion_tokens": 154,
-          "cost_usd": 0.0013774
+          "cost_usd": 0.0011936000000000002
         },
         "determine": {
           "calls": 2,
-          "prompt_tokens": 5318,
+          "prompt_tokens": 5160,
           "completion_tokens": 250,
-          "cost_usd": 0.0006318000000000001
+          "cost_usd": 0.0006160000000000001
         }
       },
       "result": {
@@ -2844,21 +2744,15 @@
             "CAR:3.2.1",
             "CAR:3.2.3",
             "CAR:3.6.1",
-            "CAR:2.5",
-            "CAR:2.1",
-            "CAR:2.4",
-            "CAR:2.3",
-            "CAR:3.1.1",
-            "CAR:3.1.3",
             "CHARTER:3.2",
             "CAR:3.3.2",
+            "CAR:2.1",
             "CAR:3.4.1",
             "CAR:2.11",
             "CAR:3.4.3",
-            "CAR:2.2",
             "CAR:3.3.4",
-            "CAR:3.3.3",
-            "CAR:3.6.2",
+            "CAR:3.1.1",
+            "CAR:3.1.3",
             "CHARTER:7.2",
             "CAR:3.8.1",
             "CAR:3.7.1"
@@ -2866,19 +2760,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 18803,
+            "prompt_tokens": 17044,
             "completion_tokens": 485,
-            "cost_usd": 0.0020743,
+            "cost_usd": 0.0018984,
             "calls": 14
           }
         },
         "timings_ms": {
-          "end_to_end": 39.6
+          "end_to_end": 32.4
         },
         "prompt_versions": {
-          "extraction": "extraction@v1#2a1d959f",
+          "extraction": "extraction@v2#16c0be2e",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -2894,45 +2788,45 @@
       "correct": true,
       "compensation_inr": 10000.0,
       "downgrade_refund_inr": 0.0,
-      "must_cite_recall": 0.0,
+      "must_cite_recall": 1.0,
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 1.0,
-      "context_relevance": 0.17391304347826086,
+      "context_relevance": 0.2222222222222222,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": true,
-      "verification_attempts": 1,
-      "basis": "model answer verified against retrieved provisions",
+      "verification_attempts": 2,
+      "basis": "model answer failed verification; engine position verified instead",
       "degraded": false,
-      "steps": 10,
-      "tool_calls": 9,
+      "steps": 13,
+      "tool_calls": 11,
       "cost": {
-        "prompt_tokens": 13694,
-        "completion_tokens": 346,
-        "cost_usd": 0.0015078,
-        "calls": 12
+        "prompt_tokens": 16462,
+        "completion_tokens": 485,
+        "cost_usd": 0.0018402000000000002,
+        "calls": 14
       },
-      "latency_ms": 26.5,
-      "retrieved": 23,
+      "latency_ms": 36.7,
+      "retrieved": 18,
       "cost_by_step": {
         "extract": {
           "calls": 1,
-          "prompt_tokens": 330,
+          "prompt_tokens": 566,
           "completion_tokens": 81,
-          "cost_usd": 6.54e-05
+          "cost_usd": 8.9e-05
         },
         "plan": {
-          "calls": 10,
-          "prompt_tokens": 10849,
-          "completion_tokens": 140,
-          "cost_usd": 0.0011409
+          "calls": 11,
+          "prompt_tokens": 11084,
+          "completion_tokens": 154,
+          "cost_usd": 0.00117
         },
         "determine": {
-          "calls": 1,
-          "prompt_tokens": 2515,
-          "completion_tokens": 125,
-          "cost_usd": 0.0003015
+          "calls": 2,
+          "prompt_tokens": 4812,
+          "completion_tokens": 250,
+          "cost_usd": 0.0005812
         }
       },
       "result": {
@@ -2942,20 +2836,26 @@
         "disruption_category": "denied_boarding",
         "entitlement": {
           "compensation_inr": 10000.0,
-          "computation": "cancellation compensation for block time over two hours",
+          "computation": "min(400% x INR 2,500, INR 20,000) = INR 10,000",
           "refund_due": true,
           "facilities": [],
           "downgrade_refund_inr": 0.0
         },
         "citations": [
           {
-            "clause_id": "CAR:3.3.2",
-            "label": "DGCA CAR S3 Series M Part IV, para 3.3.2",
+            "clause_id": "CAR:3.2.2",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.2.2",
             "doc_id": "CAR",
-            "quote": "INR 10,000 or the booked one-way basic fare plus airline fuel charge, whichever is less"
+            "quote": "(d) If the passenger does not opt for the alternate flight, a full refund of the ticket and compensation equal to 400% of the booked one-way basic fare plus airline fuel charge, subject to a maximum of INR 20,000."
+          },
+          {
+            "clause_id": "CAR:3.8.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.8.1",
+            "doc_id": "CAR",
+            "quote": "A passenger who is not satisfied with the airline's response may escalate the grievance through the AirSewa portal of the Ministry of Civil Aviation."
           }
         ],
-        "justification": "The flight was cancelled, so cancellation compensation of INR 10,000 is payable under para 3.3.2.",
+        "justification": "The passenger did not opt for the alternate flight: full refund plus 400% of the booked one-way basic fare plus airline fuel charge, subject to a maximum of INR 20,000: min(400% x INR 2,500, INR 20,000) = INR 10,000. [CAR:3.2.2]",
         "missing_evidence": [],
         "escalation": {
           "required": false,
@@ -2968,12 +2868,12 @@
         },
         "verification": {
           "passed": true,
-          "attempts": 1,
+          "attempts": 2,
           "checks": [
             {
               "name": "citations_resolve",
               "passed": true,
-              "detail": "1 citations resolve"
+              "detail": "2 citations resolve"
             },
             {
               "name": "quotes_in_text",
@@ -2989,24 +2889,19 @@
               "name": "route_has_basis",
               "passed": true,
               "detail": "payment cites an amount provision"
-            },
-            {
-              "name": "consistent_with_rules",
-              "passed": true,
-              "detail": "agrees"
             }
           ]
         },
         "guardrail_flags": [],
         "degraded": false,
-        "confidence": "high",
-        "basis": "model answer verified against retrieved provisions",
+        "confidence": "medium",
+        "basis": "model answer failed verification; engine position verified instead",
         "notes": [
           "Subject to confirmation that the passenger presented for check-in on time (para 3.1.2)."
         ],
         "agent": {
-          "steps": 10,
-          "tool_calls": 9,
+          "steps": 13,
+          "tool_calls": 11,
           "planner_sources": [
             "guard_override",
             "guard_override",
@@ -3017,6 +2912,9 @@
             "guard_override",
             "guard_override",
             "guard_override",
+            "model",
+            "recovery",
+            "recovery",
             "model"
           ],
           "stop_reason": "",
@@ -3029,39 +2927,34 @@
             "CAR:2.8",
             "CAR:3.2.3",
             "CAR:3.6.1",
-            "CAR:2.5",
-            "CAR:2.1",
-            "CAR:2.4",
-            "CAR:2.3",
             "CHARTER:3.2",
             "CAR:3.3.2",
-            "CAR:3.4.1",
+            "CAR:2.1",
             "CAR:3.6.2",
             "CAR:2.10",
-            "CAR:3.8.1",
             "CAR:3.3.4",
-            "CAR:3.3.3",
             "CAR:3.1.2",
             "CAR:3.1.1",
             "CAR:3.1.3",
-            "CHARTER:7.2"
+            "CHARTER:7.2",
+            "CAR:3.8.1"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 13694,
-            "completion_tokens": 346,
-            "cost_usd": 0.0015078,
-            "calls": 12
+            "prompt_tokens": 16462,
+            "completion_tokens": 485,
+            "cost_usd": 0.0018402000000000002,
+            "calls": 14
           }
         },
         "timings_ms": {
-          "end_to_end": 26.5
+          "end_to_end": 36.7
         },
         "prompt_versions": {
-          "extraction": "extraction@v1#2a1d959f",
+          "extraction": "extraction@v2#16c0be2e",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -3081,7 +2974,7 @@
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 1.0,
-      "context_relevance": 0.13793103448275862,
+      "context_relevance": 0.18181818181818182,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": true,
@@ -3091,31 +2984,31 @@
       "steps": 13,
       "tool_calls": 11,
       "cost": {
-        "prompt_tokens": 19575,
+        "prompt_tokens": 17525,
         "completion_tokens": 485,
-        "cost_usd": 0.0021514999999999998,
+        "cost_usd": 0.0019465,
         "calls": 14
       },
-      "latency_ms": 35.2,
-      "retrieved": 29,
+      "latency_ms": 34.4,
+      "retrieved": 22,
       "cost_by_step": {
         "extract": {
           "calls": 1,
-          "prompt_tokens": 321,
+          "prompt_tokens": 558,
           "completion_tokens": 81,
-          "cost_usd": 6.45e-05
+          "cost_usd": 8.82e-05
         },
         "plan": {
           "calls": 11,
-          "prompt_tokens": 13651,
+          "prompt_tokens": 11679,
           "completion_tokens": 154,
-          "cost_usd": 0.0014267
+          "cost_usd": 0.0012295
         },
         "determine": {
           "calls": 2,
-          "prompt_tokens": 5603,
+          "prompt_tokens": 5288,
           "completion_tokens": 250,
-          "cost_usd": 0.0006603000000000001
+          "cost_usd": 0.0006288000000000001
         }
       },
       "result": {
@@ -3217,44 +3110,37 @@
             "CAR:3.2.1",
             "CAR:3.2.3",
             "CAR:3.6.1",
-            "CAR:2.5",
-            "CAR:2.1",
-            "CAR:2.4",
-            "CAR:2.3",
             "CAR:2.11",
             "CAR:3.3.2",
             "CAR:3.3.4",
             "CAR:3.4.4",
-            "CAR:3.4.2",
-            "CAR:3.4.3",
-            "CAR:2.2",
-            "CAR:2.7",
             "CHARTER:3.2",
-            "CAR:3.3.3",
-            "CAR:3.6.2",
+            "CAR:2.1",
+            "CAR:3.4.3",
             "CAR:3.1.2",
             "CAR:3.1.1",
             "CAR:3.1.3",
             "CHARTER:7.2",
             "CAR:3.8.1",
+            "CAR:3.4.2",
             "CHARTER:4.2"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 19575,
+            "prompt_tokens": 17525,
             "completion_tokens": 485,
-            "cost_usd": 0.0021514999999999998,
+            "cost_usd": 0.0019465,
             "calls": 14
           }
         },
         "timings_ms": {
-          "end_to_end": 35.2
+          "end_to_end": 34.4
         },
         "prompt_versions": {
-          "extraction": "extraction@v1#2a1d959f",
+          "extraction": "extraction@v2#16c0be2e",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -3274,7 +3160,7 @@
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 1.0,
-      "context_relevance": 0.10526315789473684,
+      "context_relevance": 0.13333333333333333,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": true,
@@ -3284,31 +3170,31 @@
       "steps": 11,
       "tool_calls": 9,
       "cost": {
-        "prompt_tokens": 12264,
+        "prompt_tokens": 11713,
         "completion_tokens": 457,
-        "cost_usd": 0.0014092,
+        "cost_usd": 0.0013541,
         "calls": 12
       },
-      "latency_ms": 28.5,
-      "retrieved": 19,
+      "latency_ms": 28.4,
+      "retrieved": 15,
       "cost_by_step": {
         "extract": {
           "calls": 1,
-          "prompt_tokens": 313,
+          "prompt_tokens": 550,
           "completion_tokens": 81,
-          "cost_usd": 6.37e-05
+          "cost_usd": 8.740000000000001e-05
         },
         "plan": {
           "calls": 9,
-          "prompt_tokens": 8362,
+          "prompt_tokens": 7489,
           "completion_tokens": 126,
-          "cost_usd": 0.0008866
+          "cost_usd": 0.0007993
         },
         "determine": {
           "calls": 2,
-          "prompt_tokens": 3589,
+          "prompt_tokens": 3674,
           "completion_tokens": 250,
-          "cost_usd": 0.00045890000000000004
+          "cost_usd": 0.00046740000000000003
         }
       },
       "result": {
@@ -3414,34 +3300,30 @@
             "CAR:2.11",
             "CAR:3.3.2",
             "CAR:3.3.4",
-            "CAR:2.1",
-            "CAR:2.2",
-            "CAR:2.7",
-            "CAR:2.3",
             "CAR:1.1",
-            "CHARTER:4.1",
             "CAR:3.1.1",
             "CAR:3.1.3",
             "CHARTER:7.2",
             "CAR:3.8.1",
+            "CHARTER:4.1",
             "CHARTER:3.2"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 12264,
+            "prompt_tokens": 11713,
             "completion_tokens": 457,
-            "cost_usd": 0.0014092,
+            "cost_usd": 0.0013541,
             "calls": 12
           }
         },
         "timings_ms": {
-          "end_to_end": 28.5
+          "end_to_end": 28.4
         },
         "prompt_versions": {
-          "extraction": "extraction@v1#2a1d959f",
+          "extraction": "extraction@v2#16c0be2e",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -3461,7 +3343,7 @@
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 1.0,
-      "context_relevance": 0.07692307692307693,
+      "context_relevance": 0.125,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": true,
@@ -3471,31 +3353,31 @@
       "steps": 11,
       "tool_calls": 9,
       "cost": {
-        "prompt_tokens": 15149,
+        "prompt_tokens": 12632,
         "completion_tokens": 457,
-        "cost_usd": 0.0016977,
+        "cost_usd": 0.001446,
         "calls": 12
       },
-      "latency_ms": 28.0,
-      "retrieved": 26,
+      "latency_ms": 25.5,
+      "retrieved": 16,
       "cost_by_step": {
         "extract": {
           "calls": 1,
-          "prompt_tokens": 311,
+          "prompt_tokens": 548,
           "completion_tokens": 81,
-          "cost_usd": 6.35e-05
+          "cost_usd": 8.72e-05
         },
         "plan": {
           "calls": 9,
-          "prompt_tokens": 9674,
+          "prompt_tokens": 7774,
           "completion_tokens": 126,
-          "cost_usd": 0.0010178000000000001
+          "cost_usd": 0.0008278000000000001
         },
         "determine": {
           "calls": 2,
-          "prompt_tokens": 5164,
+          "prompt_tokens": 4310,
           "completion_tokens": 250,
-          "cost_usd": 0.0006164
+          "cost_usd": 0.000531
         }
       },
       "result": {
@@ -3595,17 +3477,7 @@
             "CAR:3.3.4",
             "CAR:3.4.2",
             "CAR:3.4.3",
-            "CAR:2.1",
-            "CAR:2.2",
-            "CAR:2.7",
-            "CAR:3.2.1",
-            "CAR:3.2.3",
-            "CAR:3.6.1",
-            "CAR:2.5",
-            "CAR:2.4",
-            "CAR:2.3",
             "CAR:1.1",
-            "CHARTER:4.2",
             "CAR:3.1.1",
             "CAR:3.1.3",
             "CAR:3.8.1",
@@ -3615,19 +3487,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 15149,
+            "prompt_tokens": 12632,
             "completion_tokens": 457,
-            "cost_usd": 0.0016977,
+            "cost_usd": 0.001446,
             "calls": 12
           }
         },
         "timings_ms": {
-          "end_to_end": 28.0
+          "end_to_end": 25.5
         },
         "prompt_versions": {
-          "extraction": "extraction@v1#2a1d959f",
+          "extraction": "extraction@v2#16c0be2e",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -3647,7 +3519,7 @@
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 1.0,
-      "context_relevance": 0.125,
+      "context_relevance": 0.21428571428571427,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": true,
@@ -3657,31 +3529,31 @@
       "steps": 11,
       "tool_calls": 9,
       "cost": {
-        "prompt_tokens": 14643,
+        "prompt_tokens": 11801,
         "completion_tokens": 457,
-        "cost_usd": 0.0016471,
+        "cost_usd": 0.0013629,
         "calls": 12
       },
-      "latency_ms": 30.2,
-      "retrieved": 24,
+      "latency_ms": 27.4,
+      "retrieved": 14,
       "cost_by_step": {
         "extract": {
           "calls": 1,
-          "prompt_tokens": 324,
+          "prompt_tokens": 561,
           "completion_tokens": 81,
-          "cost_usd": 6.48e-05
+          "cost_usd": 8.850000000000001e-05
         },
         "plan": {
           "calls": 9,
-          "prompt_tokens": 9647,
+          "prompt_tokens": 7614,
           "completion_tokens": 126,
-          "cost_usd": 0.0010151
+          "cost_usd": 0.0008118
         },
         "determine": {
           "calls": 2,
-          "prompt_tokens": 4672,
+          "prompt_tokens": 3626,
           "completion_tokens": 250,
-          "cost_usd": 0.0005672
+          "cost_usd": 0.0004626
         }
       },
       "result": {
@@ -3795,38 +3667,28 @@
             "CAR:3.3.4",
             "CAR:3.4.4",
             "CAR:3.4.3",
-            "CAR:2.1",
-            "CAR:2.2",
-            "CAR:2.7",
-            "CAR:3.3.1",
-            "CAR:3.3.3",
-            "CAR:3.6.1",
-            "CAR:2.5",
-            "CAR:2.4",
-            "CAR:2.3",
-            "CAR:2.6",
             "CAR:1.1",
-            "CHARTER:4.1",
             "CAR:3.1.1",
             "CAR:3.1.3",
-            "CAR:3.8.1"
+            "CAR:3.8.1",
+            "CHARTER:4.1"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 14643,
+            "prompt_tokens": 11801,
             "completion_tokens": 457,
-            "cost_usd": 0.0016471,
+            "cost_usd": 0.0013629,
             "calls": 12
           }
         },
         "timings_ms": {
-          "end_to_end": 30.2
+          "end_to_end": 27.4
         },
         "prompt_versions": {
-          "extraction": "extraction@v1#2a1d959f",
+          "extraction": "extraction@v2#16c0be2e",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -3846,7 +3708,7 @@
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 1.0,
-      "context_relevance": 0.125,
+      "context_relevance": 0.14285714285714285,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": true,
@@ -3856,31 +3718,31 @@
       "steps": 11,
       "tool_calls": 9,
       "cost": {
-        "prompt_tokens": 10339,
+        "prompt_tokens": 10268,
         "completion_tokens": 443,
-        "cost_usd": 0.0012111,
+        "cost_usd": 0.001204,
         "calls": 11
       },
-      "latency_ms": 26.1,
-      "retrieved": 16,
+      "latency_ms": 28.2,
+      "retrieved": 14,
       "cost_by_step": {
         "extract": {
           "calls": 1,
-          "prompt_tokens": 322,
+          "prompt_tokens": 558,
           "completion_tokens": 81,
-          "cost_usd": 6.46e-05
+          "cost_usd": 8.82e-05
         },
         "plan": {
           "calls": 8,
-          "prompt_tokens": 6789,
+          "prompt_tokens": 6518,
           "completion_tokens": 112,
-          "cost_usd": 0.0007237000000000001
+          "cost_usd": 0.0006965999999999999
         },
         "determine": {
           "calls": 2,
-          "prompt_tokens": 3228,
+          "prompt_tokens": 3192,
           "completion_tokens": 250,
-          "cost_usd": 0.0004228
+          "cost_usd": 0.0004192
         }
       },
       "result": {
@@ -3978,10 +3840,8 @@
             "CAR:3.2.3",
             "CAR:3.5.2",
             "CHARTER:7.1",
-            "CHARTER:3.1",
             "CAR:3.1.3",
             "CAR:3.1.2",
-            "CAR:3.2.2",
             "CAR:3.1.1",
             "CAR:3.3.2",
             "CAR:3.8.1",
@@ -3990,19 +3850,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 10339,
+            "prompt_tokens": 10268,
             "completion_tokens": 443,
-            "cost_usd": 0.0012111,
+            "cost_usd": 0.001204,
             "calls": 11
           }
         },
         "timings_ms": {
-          "end_to_end": 26.1
+          "end_to_end": 28.2
         },
         "prompt_versions": {
-          "extraction": "extraction@v1#2a1d959f",
+          "extraction": "extraction@v2#16c0be2e",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -4022,7 +3882,7 @@
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 1.0,
-      "context_relevance": 0.15,
+      "context_relevance": 0.2,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": true,
@@ -4032,31 +3892,31 @@
       "steps": 11,
       "tool_calls": 9,
       "cost": {
-        "prompt_tokens": 13441,
+        "prompt_tokens": 12654,
         "completion_tokens": 457,
-        "cost_usd": 0.0015269,
+        "cost_usd": 0.0014482,
         "calls": 12
       },
-      "latency_ms": 29.7,
-      "retrieved": 20,
+      "latency_ms": 28.1,
+      "retrieved": 15,
       "cost_by_step": {
         "extract": {
           "calls": 1,
-          "prompt_tokens": 316,
+          "prompt_tokens": 552,
           "completion_tokens": 81,
-          "cost_usd": 6.400000000000001e-05
+          "cost_usd": 8.76e-05
         },
         "plan": {
           "calls": 9,
-          "prompt_tokens": 8952,
+          "prompt_tokens": 7883,
           "completion_tokens": 126,
-          "cost_usd": 0.0009455999999999999
+          "cost_usd": 0.0008387
         },
         "determine": {
           "calls": 2,
-          "prompt_tokens": 4173,
+          "prompt_tokens": 4219,
           "completion_tokens": 250,
-          "cost_usd": 0.0005173
+          "cost_usd": 0.0005219000000000001
         }
       },
       "result": {
@@ -4153,17 +4013,12 @@
             "CAR:3.2.2",
             "CAR:3.5.1",
             "CAR:3.3.3",
-            "CAR:3.2.1",
             "CAR:3.2.3",
-            "CAR:3.6.1",
-            "CAR:2.5",
-            "CAR:2.1",
-            "CAR:2.4",
-            "CAR:2.3",
             "CAR:3.5.2",
+            "CAR:3.2.1",
+            "CAR:3.6.1",
             "CHARTER:6.2",
             "CHARTER:6.1",
-            "CHARTER:3.1",
             "CAR:3.1.3",
             "CAR:3.1.2",
             "CAR:3.1.1",
@@ -4172,19 +4027,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 13441,
+            "prompt_tokens": 12654,
             "completion_tokens": 457,
-            "cost_usd": 0.0015269,
+            "cost_usd": 0.0014482,
             "calls": 12
           }
         },
         "timings_ms": {
-          "end_to_end": 29.7
+          "end_to_end": 28.1
         },
         "prompt_versions": {
-          "extraction": "extraction@v1#2a1d959f",
+          "extraction": "extraction@v2#16c0be2e",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -4204,7 +4059,7 @@
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 1.0,
-      "context_relevance": 0.23076923076923078,
+      "context_relevance": 0.375,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": true,
@@ -4214,31 +4069,31 @@
       "steps": 10,
       "tool_calls": 8,
       "cost": {
-        "prompt_tokens": 15205,
+        "prompt_tokens": 12890,
         "completion_tokens": 457,
-        "cost_usd": 0.0017033,
+        "cost_usd": 0.0014718,
         "calls": 12
       },
-      "latency_ms": 27.8,
-      "retrieved": 26,
+      "latency_ms": 23.9,
+      "retrieved": 16,
       "cost_by_step": {
         "extract": {
           "calls": 1,
-          "prompt_tokens": 325,
+          "prompt_tokens": 561,
           "completion_tokens": 81,
-          "cost_usd": 6.49e-05
+          "cost_usd": 8.850000000000001e-05
         },
         "plan": {
           "calls": 9,
-          "prompt_tokens": 9700,
+          "prompt_tokens": 7753,
           "completion_tokens": 126,
-          "cost_usd": 0.0010204
+          "cost_usd": 0.0008257
         },
         "determine": {
           "calls": 2,
-          "prompt_tokens": 5180,
+          "prompt_tokens": 4576,
           "completion_tokens": 250,
-          "cost_usd": 0.0006180000000000001
+          "cost_usd": 0.0005576000000000001
         }
       },
       "result": {
@@ -4331,17 +4186,7 @@
             "CAR:3.4.1",
             "CAR:3.3.3",
             "CAR:3.6.1",
-            "CAR:2.5",
-            "CAR:2.1",
-            "CAR:2.4",
-            "CAR:2.2",
-            "CAR:2.3",
-            "CAR:2.6",
-            "CAR:2.11",
             "CAR:3.2.3",
-            "CAR:3.7.2",
-            "CHARTER:2.1",
-            "CAR:3.6.2",
             "CAR:3.1.1",
             "CAR:3.1.3",
             "CHARTER:7.2",
@@ -4353,19 +4198,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 15205,
+            "prompt_tokens": 12890,
             "completion_tokens": 457,
-            "cost_usd": 0.0017033,
+            "cost_usd": 0.0014718,
             "calls": 12
           }
         },
         "timings_ms": {
-          "end_to_end": 27.8
+          "end_to_end": 23.9
         },
         "prompt_versions": {
-          "extraction": "extraction@v1#2a1d959f",
+          "extraction": "extraction@v2#16c0be2e",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -4385,7 +4230,7 @@
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 1.0,
-      "context_relevance": 0.05263157894736842,
+      "context_relevance": 0.07692307692307693,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": true,
@@ -4395,31 +4240,31 @@
       "steps": 8,
       "tool_calls": 6,
       "cost": {
-        "prompt_tokens": 11102,
+        "prompt_tokens": 10469,
         "completion_tokens": 429,
-        "cost_usd": 0.0012818,
+        "cost_usd": 0.0012185,
         "calls": 10
       },
-      "latency_ms": 19.8,
-      "retrieved": 19,
+      "latency_ms": 18.6,
+      "retrieved": 13,
       "cost_by_step": {
         "extract": {
           "calls": 1,
-          "prompt_tokens": 324,
+          "prompt_tokens": 560,
           "completion_tokens": 81,
-          "cost_usd": 6.48e-05
+          "cost_usd": 8.840000000000001e-05
         },
         "plan": {
           "calls": 7,
-          "prompt_tokens": 6350,
+          "prompt_tokens": 5559,
           "completion_tokens": 98,
-          "cost_usd": 0.0006741999999999999
+          "cost_usd": 0.0005951
         },
         "determine": {
           "calls": 2,
-          "prompt_tokens": 4428,
+          "prompt_tokens": 4350,
           "completion_tokens": 250,
-          "cost_usd": 0.0005428
+          "cost_usd": 0.0005350000000000001
         }
       },
       "result": {
@@ -4510,14 +4355,8 @@
             "CAR:3.2.1",
             "CAR:3.2.3",
             "CAR:3.6.1",
-            "CAR:2.5",
-            "CAR:2.1",
-            "CAR:2.4",
-            "CAR:2.3",
             "CAR:3.3.2",
             "CAR:3.3.3",
-            "CAR:3.3.4",
-            "CAR:2.6",
             "CAR:3.1.1",
             "CAR:3.1.3",
             "CHARTER:7.2"
@@ -4525,19 +4364,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 11102,
+            "prompt_tokens": 10469,
             "completion_tokens": 429,
-            "cost_usd": 0.0012818,
+            "cost_usd": 0.0012185,
             "calls": 10
           }
         },
         "timings_ms": {
-          "end_to_end": 19.8
+          "end_to_end": 18.6
         },
         "prompt_versions": {
-          "extraction": "extraction@v1#2a1d959f",
+          "extraction": "extraction@v2#16c0be2e",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -4561,25 +4400,25 @@
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": true,
-      "verification_attempts": 1,
+      "verification_attempts": 2,
       "basis": "deterministic engine verified against retrieved provisions",
       "degraded": false,
-      "steps": 6,
-      "tool_calls": 5,
+      "steps": 9,
+      "tool_calls": 7,
       "cost": {
-        "prompt_tokens": 5087,
-        "completion_tokens": 84,
-        "cost_usd": 0.0005423,
-        "calls": 6
+        "prompt_tokens": 5789,
+        "completion_tokens": 98,
+        "cost_usd": 0.0006181,
+        "calls": 7
       },
-      "latency_ms": 13.8,
-      "retrieved": 21,
+      "latency_ms": 19.6,
+      "retrieved": 17,
       "cost_by_step": {
         "plan": {
-          "calls": 6,
-          "prompt_tokens": 5087,
-          "completion_tokens": 84,
-          "cost_usd": 0.0005423000000000001
+          "calls": 7,
+          "prompt_tokens": 5789,
+          "completion_tokens": 98,
+          "cost_usd": 0.0006181
         }
       },
       "result": {
@@ -4619,7 +4458,7 @@
         },
         "verification": {
           "passed": true,
-          "attempts": 1,
+          "attempts": 2,
           "checks": [
             {
               "name": "citations_resolve",
@@ -4651,14 +4490,17 @@
         "basis": "deterministic engine verified against retrieved provisions",
         "notes": [],
         "agent": {
-          "steps": 6,
-          "tool_calls": 5,
+          "steps": 9,
+          "tool_calls": 7,
           "planner_sources": [
             "guard_override",
             "guard_override",
             "guard_override",
             "guard_override",
             "guard_override",
+            "model",
+            "recovery",
+            "recovery",
             "model"
           ],
           "stop_reason": "",
@@ -4672,36 +4514,32 @@
             "CAR:3.2.1",
             "CAR:3.2.3",
             "CAR:3.6.1",
-            "CAR:2.5",
-            "CAR:2.4",
-            "CAR:2.3",
             "CAR:3.3.1",
             "CAR:3.4.1",
             "CAR:3.3.3",
             "CAR:3.3.4",
-            "CAR:2.2",
-            "CAR:2.6",
-            "CAR:2.11",
             "CAR:3.1.1",
             "CAR:3.1.3",
-            "CHARTER:7.2"
+            "CHARTER:7.2",
+            "CAR:2.6",
+            "CHARTER:3.1"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 5087,
-            "completion_tokens": 84,
-            "cost_usd": 0.0005423,
-            "calls": 6
+            "prompt_tokens": 5789,
+            "completion_tokens": 98,
+            "cost_usd": 0.0006181,
+            "calls": 7
           }
         },
         "timings_ms": {
-          "end_to_end": 13.8
+          "end_to_end": 19.6
         },
         "prompt_versions": {
-          "extraction": "extraction@v1#2a1d959f",
+          "extraction": "extraction@v2#16c0be2e",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -4721,7 +4559,7 @@
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 1.0,
-      "context_relevance": 0.08695652173913043,
+      "context_relevance": 0.1111111111111111,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": true,
@@ -4731,31 +4569,31 @@
       "steps": 12,
       "tool_calls": 10,
       "cost": {
-        "prompt_tokens": 15732,
+        "prompt_tokens": 14726,
         "completion_tokens": 471,
-        "cost_usd": 0.0017615999999999999,
+        "cost_usd": 0.001661,
         "calls": 13
       },
-      "latency_ms": 31.1,
-      "retrieved": 23,
+      "latency_ms": 27.9,
+      "retrieved": 18,
       "cost_by_step": {
         "extract": {
           "calls": 1,
-          "prompt_tokens": 330,
+          "prompt_tokens": 567,
           "completion_tokens": 81,
-          "cost_usd": 6.54e-05
+          "cost_usd": 8.91e-05
         },
         "plan": {
           "calls": 10,
-          "prompt_tokens": 10609,
+          "prompt_tokens": 9367,
           "completion_tokens": 140,
-          "cost_usd": 0.0011169
+          "cost_usd": 0.0009927
         },
         "determine": {
           "calls": 2,
-          "prompt_tokens": 4793,
+          "prompt_tokens": 4792,
           "completion_tokens": 250,
-          "cost_usd": 0.0005793
+          "cost_usd": 0.0005792
         }
       },
       "result": {
@@ -4862,38 +4700,33 @@
             "CAR:2.11",
             "CAR:3.3.4",
             "CAR:3.4.4",
-            "CAR:2.1",
-            "CAR:2.2",
-            "CAR:2.7",
-            "CAR:2.3",
             "CAR:2.10",
             "CAR:3.6.2",
             "CAR:3.6.1",
-            "CAR:3.1.1",
             "CAR:1.1",
-            "CHARTER:4.2",
-            "CHARTER:4.1",
+            "CAR:3.1.1",
             "CAR:3.1.3",
             "CHARTER:7.2",
             "CAR:3.8.1",
+            "CHARTER:4.1",
             "CHARTER:3.2"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 15732,
+            "prompt_tokens": 14726,
             "completion_tokens": 471,
-            "cost_usd": 0.0017615999999999999,
+            "cost_usd": 0.001661,
             "calls": 13
           }
         },
         "timings_ms": {
-          "end_to_end": 31.1
+          "end_to_end": 27.9
         },
         "prompt_versions": {
-          "extraction": "extraction@v1#2a1d959f",
+          "extraction": "extraction@v2#16c0be2e",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -4913,7 +4746,7 @@
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 1.0,
-      "context_relevance": 0.09090909090909091,
+      "context_relevance": 0.1111111111111111,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": true,
@@ -4923,31 +4756,31 @@
       "steps": 12,
       "tool_calls": 10,
       "cost": {
-        "prompt_tokens": 12192,
+        "prompt_tokens": 11735,
         "completion_tokens": 443,
-        "cost_usd": 0.0013964,
+        "cost_usd": 0.0013506999999999998,
         "calls": 11
       },
-      "latency_ms": 27.0,
-      "retrieved": 22,
+      "latency_ms": 26.6,
+      "retrieved": 18,
       "cost_by_step": {
         "extract": {
           "calls": 1,
-          "prompt_tokens": 322,
+          "prompt_tokens": 559,
           "completion_tokens": 81,
-          "cost_usd": 6.46e-05
+          "cost_usd": 8.83e-05
         },
         "plan": {
           "calls": 8,
-          "prompt_tokens": 7824,
+          "prompt_tokens": 6991,
           "completion_tokens": 112,
-          "cost_usd": 0.0008272
+          "cost_usd": 0.0007439
         },
         "determine": {
           "calls": 2,
-          "prompt_tokens": 4046,
+          "prompt_tokens": 4185,
           "completion_tokens": 250,
-          "cost_usd": 0.0005046
+          "cost_usd": 0.0005185000000000001
         }
       },
       "result": {
@@ -5046,12 +4879,7 @@
             "CAR:3.2.1",
             "CAR:3.2.3",
             "CAR:3.6.1",
-            "CAR:2.5",
-            "CAR:2.1",
-            "CAR:2.4",
-            "CAR:2.3",
             "CHARTER:6.2",
-            "CHARTER:3.1",
             "CAR:3.5.2",
             "CAR:3.1.3",
             "CAR:3.1.2",
@@ -5059,24 +4887,25 @@
             "CAR:3.5.1",
             "CAR:3.3.2",
             "CAR:3.8.1",
+            "CAR:2.1",
             "CAR:3.7.1"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 12192,
+            "prompt_tokens": 11735,
             "completion_tokens": 443,
-            "cost_usd": 0.0013964,
+            "cost_usd": 0.0013506999999999998,
             "calls": 11
           }
         },
         "timings_ms": {
-          "end_to_end": 27.0
+          "end_to_end": 26.6
         },
         "prompt_versions": {
-          "extraction": "extraction@v1#2a1d959f",
+          "extraction": "extraction@v2#16c0be2e",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     }

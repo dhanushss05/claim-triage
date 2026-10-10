@@ -248,7 +248,9 @@ def _cancellation(f: dict[str, Any], p: Position) -> None:
                            "must be available as acceptable to the passenger.")
         p.route, p.refund_due = "decline", not alt_accepted
         return
-    when = "on arrival at the airport" if at_airport else f"{_hm(notice)} before departure"
+    when = f"{_hm(notice)} before departure" if notice else "on arrival at the airport"
+    if at_airport and notice:
+        when += ", at the airport"
     p.add("cx_scope_3_3_2", f"The passenger was informed {when}, less than 24 hours before departure, so the airline "
                             "shall provide either an alternate flight or compensation, in addition to a full refund.",
           "basis")

@@ -14,8 +14,11 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 FROM deps AS deps-embeddings
+# INSTALL_EMBEDDINGS=false skips torch/sentence-transformers (~1 GB) for low-resource machines or offline builds;
+# then set EMBEDDING_BACKEND=hashing in .env.
+ARG INSTALL_EMBEDDINGS=true
 COPY requirements-embeddings.txt .
-RUN pip install -r requirements-embeddings.txt
+RUN if [ "$INSTALL_EMBEDDINGS" = "true" ]; then pip install -r requirements-embeddings.txt; fi
 
 FROM deps AS app
 COPY src/ /app/src/
@@ -42,5 +45,6 @@ RUN pip install -r requirements-dev.txt
 COPY eval/ /app/eval/
 COPY loadtest/ /app/loadtest/
 COPY tests/ /app/tests/
+COPY scripts/ /app/scripts/
 RUN chown -R app /app/eval /app/loadtest
 USER app

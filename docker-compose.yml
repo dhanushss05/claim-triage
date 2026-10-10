@@ -28,6 +28,7 @@ services:
   llm-stub:
     <<: *app
     command: ["uvicorn", "triage.services.llm_stub:app", "--host", "0.0.0.0", "--port", "8000"]
+    environment: {LLM_API_KEY: ""}   # only llm-gateway receives the provider key
     healthcheck: {<<: *py-health, test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]}
 
   llm-gateway:
@@ -40,9 +41,13 @@ services:
     healthcheck: {<<: *py-health, test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]}
 
   ingest:
-    build: {context: ., target: retriever}
+    build:
+      context: .
+      target: retriever
+      args: {INSTALL_EMBEDDINGS: "${INSTALL_EMBEDDINGS:-true}"}
     image: claim-triage-retriever:latest
     env_file: .env
+    environment: {LLM_API_KEY: ""}
     command: ["python", "-m", "triage.retrieval.pipeline", "ingest"]
     volumes: [index-data:/data]
     networks: [triage]
@@ -51,6 +56,7 @@ services:
   retriever:
     image: claim-triage-retriever:latest
     env_file: .env
+    environment: {LLM_API_KEY: ""}
     command: ["uvicorn", "triage.services.retriever_app:app", "--host", "0.0.0.0", "--port", "8000"]
     volumes: [index-data:/data]
     depends_on:
@@ -62,8 +68,9 @@ services:
 
   api:
     <<: *app
-    command: ["uvicorn", "triage.services.api:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "2"]
+    command: ["uvicorn", "triage.services.api:app", "--host", "0.0.0.0", "--port", "8000"]
     ports: ["8080:8000"]
+    environment: {LLM_API_KEY: ""}
     volumes: [api-data:/data]
     depends_on:
       redis: {condition: service_healthy}
@@ -74,7 +81,7 @@ services:
   intake-agent:
     <<: *app
     command: ["python", "-m", "triage.services.workers", "intake"]
-    environment: {METRICS_PORT: "9100"}
+    environment: {METRICS_PORT: "9100", LLM_API_KEY: ""}
     depends_on:
       redis: {condition: service_healthy}
       llm-gateway: {condition: service_healthy}
@@ -83,7 +90,7 @@ services:
   agent-worker:
     <<: *app
     command: ["python", "-m", "triage.services.workers", "entitlement"]
-    environment: {METRICS_PORT: "9100"}
+    environment: {METRICS_PORT: "9100", LLM_API_KEY: ""}
     depends_on:
       redis: {condition: service_healthy}
       llm-gateway: {condition: service_healthy}
@@ -130,6 +137,7 @@ services:
     image: claim-triage-tools:latest
     env_file: .env
     profiles: [tools]
+    user: "0:0"   # writes results into the bind-mounted repo directory, whatever the host uid
     environment: {EVAL_BASE_URL: "http://api:8000"}
     volumes: ["./eval/results:/app/eval/results"]
     entrypoint: ["python", "-m", "eval.run_eval"]
@@ -141,6 +149,7 @@ services:
     build: {context: ., target: tools}
     env_file: .env
     profiles: [loadtest]
+    user: "0:0"   # writes CSVs into the bind-mounted repo directory
     command: ["locust", "-f", "/app/loadtest/locustfile.py", "--host", "http://api:8000"]
     ports: ["8089:8089"]
     volumes: ["./loadtest/results:/app/loadtest/results"]

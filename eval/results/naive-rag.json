@@ -16,21 +16,22 @@
     "mean_steps": 3,
     "mean_tool_calls": 2,
     "mean_retrieved": 5,
-    "mean_prompt_tokens": 1251.0,
+    "mean_prompt_tokens": 1524.1,
     "mean_completion_tokens": 198.4,
-    "cost_per_100_runs_usd": 0.020445,
+    "cost_per_100_runs_usd": 0.023176,
     "cost_share_by_step": {
-      "determine": 0.693,
-      "extract": 0.307
+      "determine": 0.729,
+      "extract": 0.271
     },
-    "mean_latency_ms": 9.6667,
+    "mean_latency_ms": 8.8259,
     "s01_difficult_case_correct": false,
-    "label": "chk-naive",
+    "label": "naive-rag",
     "mode": "inprocess",
     "overrides": [
-      "NAIVE_BASELINE=true"
+      "NAIVE_BASELINE=true",
+      "PROMPT_VERSION_DETERMINATION=v2"
     ],
-    "timestamp": "2026-10-10T17:34:47Z"
+    "timestamp": "2026-10-10T18:13:12Z"
   },
   "rows": [
     {
@@ -54,17 +55,17 @@
       "hallucination": 0.0,
       "verification_passed": false,
       "verification_attempts": 1,
-      "basis": "model answer verified against retrieved provisions",
+      "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
       "degraded": false,
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1544,
+        "prompt_tokens": 1828,
         "completion_tokens": 206,
-        "cost_usd": 0.0002368,
+        "cost_usd": 0.0002652,
         "calls": 2
       },
-      "latency_ms": 34.5,
+      "latency_ms": 30.9,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -75,9 +76,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1198,
+          "prompt_tokens": 1482,
           "completion_tokens": 125,
-          "cost_usd": 0.0001698
+          "cost_usd": 0.00019820000000000002
         }
       },
       "result": {
@@ -150,7 +151,7 @@
         "guardrail_flags": [],
         "degraded": false,
         "confidence": "high",
-        "basis": "model answer verified against retrieved provisions",
+        "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
         "notes": [],
         "agent": {
           "steps": 3,
@@ -172,19 +173,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1544,
+            "prompt_tokens": 1828,
             "completion_tokens": 206,
-            "cost_usd": 0.0002368,
+            "cost_usd": 0.0002652,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 34.5
+          "end_to_end": 30.9
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -209,17 +210,17 @@
       "hallucination": 0.0,
       "verification_passed": false,
       "verification_attempts": 1,
-      "basis": "model answer verified against retrieved provisions",
+      "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
       "degraded": false,
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1560,
+        "prompt_tokens": 1844,
         "completion_tokens": 206,
-        "cost_usd": 0.0002384,
+        "cost_usd": 0.0002668,
         "calls": 2
       },
-      "latency_ms": 11.1,
+      "latency_ms": 9.0,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -230,9 +231,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1218,
+          "prompt_tokens": 1502,
           "completion_tokens": 125,
-          "cost_usd": 0.0001718
+          "cost_usd": 0.00020020000000000001
         }
       },
       "result": {
@@ -305,7 +306,7 @@
         "guardrail_flags": [],
         "degraded": false,
         "confidence": "high",
-        "basis": "model answer verified against retrieved provisions",
+        "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
         "notes": [],
         "agent": {
           "steps": 3,
@@ -327,19 +328,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1560,
+            "prompt_tokens": 1844,
             "completion_tokens": 206,
-            "cost_usd": 0.0002384,
+            "cost_usd": 0.0002668,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 11.1
+          "end_to_end": 9.0
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -364,17 +365,17 @@
       "hallucination": 0.0,
       "verification_passed": false,
       "verification_attempts": 1,
-      "basis": "model answer verified against retrieved provisions",
+      "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
       "degraded": false,
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1400,
+        "prompt_tokens": 1684,
         "completion_tokens": 206,
-        "cost_usd": 0.00022239999999999998,
+        "cost_usd": 0.0002508,
         "calls": 2
       },
-      "latency_ms": 11.4,
+      "latency_ms": 8.8,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -385,9 +386,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1070,
+          "prompt_tokens": 1354,
           "completion_tokens": 125,
-          "cost_usd": 0.000157
+          "cost_usd": 0.0001854
         }
       },
       "result": {
@@ -460,7 +461,7 @@
         "guardrail_flags": [],
         "degraded": false,
         "confidence": "high",
-        "basis": "model answer verified against retrieved provisions",
+        "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
         "notes": [],
         "agent": {
           "steps": 3,
@@ -482,19 +483,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1400,
+            "prompt_tokens": 1684,
             "completion_tokens": 206,
-            "cost_usd": 0.00022239999999999998,
+            "cost_usd": 0.0002508,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 11.4
+          "end_to_end": 8.8
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -519,17 +520,17 @@
       "hallucination": 0.0,
       "verification_passed": false,
       "verification_attempts": 1,
-      "basis": "model answer verified against retrieved provisions",
+      "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
       "degraded": false,
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1497,
+        "prompt_tokens": 1780,
         "completion_tokens": 206,
-        "cost_usd": 0.0002321,
+        "cost_usd": 0.0002604,
         "calls": 2
       },
-      "latency_ms": 10.8,
+      "latency_ms": 7.4,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -540,9 +541,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1171,
+          "prompt_tokens": 1454,
           "completion_tokens": 125,
-          "cost_usd": 0.0001671
+          "cost_usd": 0.0001954
         }
       },
       "result": {
@@ -615,7 +616,7 @@
         "guardrail_flags": [],
         "degraded": false,
         "confidence": "high",
-        "basis": "model answer verified against retrieved provisions",
+        "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
         "notes": [],
         "agent": {
           "steps": 3,
@@ -637,19 +638,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1497,
+            "prompt_tokens": 1780,
             "completion_tokens": 206,
-            "cost_usd": 0.0002321,
+            "cost_usd": 0.0002604,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 10.8
+          "end_to_end": 7.4
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -674,17 +675,17 @@
       "hallucination": 0.0,
       "verification_passed": false,
       "verification_attempts": 1,
-      "basis": "model answer verified against retrieved provisions",
+      "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
       "degraded": false,
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1510,
+        "prompt_tokens": 1794,
         "completion_tokens": 206,
-        "cost_usd": 0.0002334,
+        "cost_usd": 0.00026179999999999997,
         "calls": 2
       },
-      "latency_ms": 10.5,
+      "latency_ms": 7.3,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -695,9 +696,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1177,
+          "prompt_tokens": 1461,
           "completion_tokens": 125,
-          "cost_usd": 0.0001677
+          "cost_usd": 0.0001961
         }
       },
       "result": {
@@ -770,7 +771,7 @@
         "guardrail_flags": [],
         "degraded": false,
         "confidence": "high",
-        "basis": "model answer verified against retrieved provisions",
+        "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
         "notes": [],
         "agent": {
           "steps": 3,
@@ -792,19 +793,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1510,
+            "prompt_tokens": 1794,
             "completion_tokens": 206,
-            "cost_usd": 0.0002334,
+            "cost_usd": 0.00026179999999999997,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 10.5
+          "end_to_end": 7.3
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -829,17 +830,17 @@
       "hallucination": 0.0,
       "verification_passed": false,
       "verification_attempts": 1,
-      "basis": "model answer verified against retrieved provisions",
+      "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
       "degraded": false,
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1504,
+        "prompt_tokens": 1787,
         "completion_tokens": 206,
-        "cost_usd": 0.0002328,
+        "cost_usd": 0.0002611,
         "calls": 2
       },
-      "latency_ms": 11.4,
+      "latency_ms": 7.8,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -850,9 +851,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1169,
+          "prompt_tokens": 1452,
           "completion_tokens": 125,
-          "cost_usd": 0.0001669
+          "cost_usd": 0.0001952
         }
       },
       "result": {
@@ -925,7 +926,7 @@
         "guardrail_flags": [],
         "degraded": false,
         "confidence": "high",
-        "basis": "model answer verified against retrieved provisions",
+        "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
         "notes": [],
         "agent": {
           "steps": 3,
@@ -947,19 +948,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1504,
+            "prompt_tokens": 1787,
             "completion_tokens": 206,
-            "cost_usd": 0.0002328,
+            "cost_usd": 0.0002611,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 11.4
+          "end_to_end": 7.8
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -984,17 +985,17 @@
       "hallucination": 1.0,
       "verification_passed": false,
       "verification_attempts": 1,
-      "basis": "model answer verified against retrieved provisions",
+      "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
       "degraded": false,
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1215,
+        "prompt_tokens": 1498,
         "completion_tokens": 206,
-        "cost_usd": 0.0002039,
+        "cost_usd": 0.0002322,
         "calls": 2
       },
-      "latency_ms": 10.5,
+      "latency_ms": 6.9,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -1005,9 +1006,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 891,
+          "prompt_tokens": 1174,
           "completion_tokens": 125,
-          "cost_usd": 0.0001391
+          "cost_usd": 0.0001674
         }
       },
       "result": {
@@ -1073,7 +1074,7 @@
         "guardrail_flags": [],
         "degraded": false,
         "confidence": "high",
-        "basis": "model answer verified against retrieved provisions",
+        "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
         "notes": [],
         "agent": {
           "steps": 3,
@@ -1095,19 +1096,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1215,
+            "prompt_tokens": 1498,
             "completion_tokens": 206,
-            "cost_usd": 0.0002039,
+            "cost_usd": 0.0002322,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 10.5
+          "end_to_end": 6.9
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -1132,17 +1133,17 @@
       "hallucination": 0.0,
       "verification_passed": false,
       "verification_attempts": 1,
-      "basis": "model answer verified against retrieved provisions",
+      "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
       "degraded": false,
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1455,
+        "prompt_tokens": 1738,
         "completion_tokens": 206,
-        "cost_usd": 0.0002279,
+        "cost_usd": 0.0002562,
         "calls": 2
       },
-      "latency_ms": 14.6,
+      "latency_ms": 8.0,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -1153,9 +1154,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1110,
+          "prompt_tokens": 1393,
           "completion_tokens": 125,
-          "cost_usd": 0.000161
+          "cost_usd": 0.0001893
         }
       },
       "result": {
@@ -1228,7 +1229,7 @@
         "guardrail_flags": [],
         "degraded": false,
         "confidence": "high",
-        "basis": "model answer verified against retrieved provisions",
+        "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
         "notes": [],
         "agent": {
           "steps": 3,
@@ -1250,19 +1251,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1455,
+            "prompt_tokens": 1738,
             "completion_tokens": 206,
-            "cost_usd": 0.0002279,
+            "cost_usd": 0.0002562,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 14.6
+          "end_to_end": 8.0
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -1287,17 +1288,17 @@
       "hallucination": 1.0,
       "verification_passed": false,
       "verification_attempts": 1,
-      "basis": "model answer verified against retrieved provisions",
+      "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
       "degraded": false,
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1028,
+        "prompt_tokens": 1312,
         "completion_tokens": 206,
-        "cost_usd": 0.0001852,
+        "cost_usd": 0.0002136,
         "calls": 2
       },
-      "latency_ms": 8.9,
+      "latency_ms": 7.8,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -1308,9 +1309,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 707,
+          "prompt_tokens": 991,
           "completion_tokens": 125,
-          "cost_usd": 0.0001207
+          "cost_usd": 0.0001491
         }
       },
       "result": {
@@ -1376,7 +1377,7 @@
         "guardrail_flags": [],
         "degraded": false,
         "confidence": "high",
-        "basis": "model answer verified against retrieved provisions",
+        "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
         "notes": [],
         "agent": {
           "steps": 3,
@@ -1398,19 +1399,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1028,
+            "prompt_tokens": 1312,
             "completion_tokens": 206,
-            "cost_usd": 0.0001852,
+            "cost_usd": 0.0002136,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 8.9
+          "end_to_end": 7.8
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -1435,17 +1436,17 @@
       "hallucination": 0.0,
       "verification_passed": false,
       "verification_attempts": 1,
-      "basis": "model answer verified against retrieved provisions",
+      "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
       "degraded": false,
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1464,
+        "prompt_tokens": 1748,
         "completion_tokens": 206,
-        "cost_usd": 0.00022879999999999998,
+        "cost_usd": 0.0002572,
         "calls": 2
       },
-      "latency_ms": 9.7,
+      "latency_ms": 7.8,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -1456,9 +1457,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1135,
+          "prompt_tokens": 1419,
           "completion_tokens": 125,
-          "cost_usd": 0.0001635
+          "cost_usd": 0.0001919
         }
       },
       "result": {
@@ -1531,7 +1532,7 @@
         "guardrail_flags": [],
         "degraded": false,
         "confidence": "high",
-        "basis": "model answer verified against retrieved provisions",
+        "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
         "notes": [],
         "agent": {
           "steps": 3,
@@ -1553,19 +1554,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1464,
+            "prompt_tokens": 1748,
             "completion_tokens": 206,
-            "cost_usd": 0.00022879999999999998,
+            "cost_usd": 0.0002572,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 9.7
+          "end_to_end": 7.8
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -1590,17 +1591,17 @@
       "hallucination": 0.0,
       "verification_passed": false,
       "verification_attempts": 1,
-      "basis": "model answer verified against retrieved provisions",
+      "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
       "degraded": false,
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1462,
+        "prompt_tokens": 1746,
         "completion_tokens": 206,
-        "cost_usd": 0.0002286,
+        "cost_usd": 0.000257,
         "calls": 2
       },
-      "latency_ms": 9.2,
+      "latency_ms": 7.0,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -1611,9 +1612,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1148,
+          "prompt_tokens": 1432,
           "completion_tokens": 125,
-          "cost_usd": 0.0001648
+          "cost_usd": 0.00019319999999999998
         }
       },
       "result": {
@@ -1686,7 +1687,7 @@
         "guardrail_flags": [],
         "degraded": false,
         "confidence": "high",
-        "basis": "model answer verified against retrieved provisions",
+        "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
         "notes": [],
         "agent": {
           "steps": 3,
@@ -1708,19 +1709,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1462,
+            "prompt_tokens": 1746,
             "completion_tokens": 206,
-            "cost_usd": 0.0002286,
+            "cost_usd": 0.000257,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 9.2
+          "end_to_end": 7.0
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -1745,17 +1746,17 @@
       "hallucination": 1.0,
       "verification_passed": false,
       "verification_attempts": 1,
-      "basis": "model answer verified against retrieved provisions",
+      "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
       "degraded": false,
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1203,
+        "prompt_tokens": 1486,
         "completion_tokens": 206,
-        "cost_usd": 0.0002027,
+        "cost_usd": 0.00023099999999999998,
         "calls": 2
       },
-      "latency_ms": 9.0,
+      "latency_ms": 7.5,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -1766,9 +1767,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 873,
+          "prompt_tokens": 1156,
           "completion_tokens": 125,
-          "cost_usd": 0.0001373
+          "cost_usd": 0.0001656
         }
       },
       "result": {
@@ -1834,7 +1835,7 @@
         "guardrail_flags": [],
         "degraded": false,
         "confidence": "high",
-        "basis": "model answer verified against retrieved provisions",
+        "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
         "notes": [],
         "agent": {
           "steps": 3,
@@ -1856,19 +1857,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1203,
+            "prompt_tokens": 1486,
             "completion_tokens": 206,
-            "cost_usd": 0.0002027,
+            "cost_usd": 0.00023099999999999998,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 9.0
+          "end_to_end": 7.5
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -1893,17 +1894,17 @@
       "hallucination": 1.0,
       "verification_passed": false,
       "verification_attempts": 1,
-      "basis": "model answer verified against retrieved provisions",
+      "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
       "degraded": false,
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1194,
+        "prompt_tokens": 1477,
         "completion_tokens": 206,
-        "cost_usd": 0.00020180000000000003,
+        "cost_usd": 0.0002301,
         "calls": 2
       },
-      "latency_ms": 7.8,
+      "latency_ms": 8.3,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -1914,9 +1915,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 866,
+          "prompt_tokens": 1149,
           "completion_tokens": 125,
-          "cost_usd": 0.0001366
+          "cost_usd": 0.00016490000000000002
         }
       },
       "result": {
@@ -1982,7 +1983,7 @@
         "guardrail_flags": [],
         "degraded": false,
         "confidence": "high",
-        "basis": "model answer verified against retrieved provisions",
+        "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
         "notes": [
           "Subject to confirmation that the passenger presented for check-in on time (para 3.1.2)."
         ],
@@ -2006,19 +2007,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1194,
+            "prompt_tokens": 1477,
             "completion_tokens": 206,
-            "cost_usd": 0.00020180000000000003,
+            "cost_usd": 0.0002301,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 7.8
+          "end_to_end": 8.3
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -2043,17 +2044,17 @@
       "hallucination": 1.0,
       "verification_passed": false,
       "verification_attempts": 1,
-      "basis": "model answer verified against retrieved provisions",
+      "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
       "degraded": false,
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1202,
+        "prompt_tokens": 1486,
         "completion_tokens": 206,
-        "cost_usd": 0.0002026,
+        "cost_usd": 0.00023099999999999998,
         "calls": 2
       },
-      "latency_ms": 7.4,
+      "latency_ms": 8.4,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -2064,9 +2065,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 865,
+          "prompt_tokens": 1149,
           "completion_tokens": 125,
-          "cost_usd": 0.0001365
+          "cost_usd": 0.00016490000000000002
         }
       },
       "result": {
@@ -2132,7 +2133,7 @@
         "guardrail_flags": [],
         "degraded": false,
         "confidence": "high",
-        "basis": "model answer verified against retrieved provisions",
+        "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
         "notes": [],
         "agent": {
           "steps": 3,
@@ -2154,19 +2155,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1202,
+            "prompt_tokens": 1486,
             "completion_tokens": 206,
-            "cost_usd": 0.0002026,
+            "cost_usd": 0.00023099999999999998,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 7.4
+          "end_to_end": 8.4
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -2191,17 +2192,17 @@
       "hallucination": 1.0,
       "verification_passed": false,
       "verification_attempts": 1,
-      "basis": "model answer verified against retrieved provisions",
+      "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
       "degraded": false,
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1186,
+        "prompt_tokens": 1470,
         "completion_tokens": 206,
-        "cost_usd": 0.000201,
+        "cost_usd": 0.0002294,
         "calls": 2
       },
-      "latency_ms": 7.5,
+      "latency_ms": 8.7,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -2212,9 +2213,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 859,
+          "prompt_tokens": 1143,
           "completion_tokens": 125,
-          "cost_usd": 0.0001359
+          "cost_usd": 0.0001643
         }
       },
       "result": {
@@ -2280,7 +2281,7 @@
         "guardrail_flags": [],
         "degraded": false,
         "confidence": "high",
-        "basis": "model answer verified against retrieved provisions",
+        "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
         "notes": [],
         "agent": {
           "steps": 3,
@@ -2302,19 +2303,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1186,
+            "prompt_tokens": 1470,
             "completion_tokens": 206,
-            "cost_usd": 0.000201,
+            "cost_usd": 0.0002294,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 7.5
+          "end_to_end": 8.7
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -2339,17 +2340,17 @@
       "hallucination": 1.0,
       "verification_passed": false,
       "verification_attempts": 1,
-      "basis": "model answer verified against retrieved provisions",
+      "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
       "degraded": false,
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1205,
+        "prompt_tokens": 1488,
         "completion_tokens": 206,
-        "cost_usd": 0.0002029,
+        "cost_usd": 0.00023119999999999998,
         "calls": 2
       },
-      "latency_ms": 6.7,
+      "latency_ms": 9.4,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -2360,9 +2361,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 875,
+          "prompt_tokens": 1158,
           "completion_tokens": 125,
-          "cost_usd": 0.0001375
+          "cost_usd": 0.0001658
         }
       },
       "result": {
@@ -2428,7 +2429,7 @@
         "guardrail_flags": [],
         "degraded": false,
         "confidence": "high",
-        "basis": "model answer verified against retrieved provisions",
+        "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
         "notes": [
           "Subject to confirmation that the passenger presented for check-in on time (para 3.1.2)."
         ],
@@ -2452,19 +2453,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1205,
+            "prompt_tokens": 1488,
             "completion_tokens": 206,
-            "cost_usd": 0.0002029,
+            "cost_usd": 0.00023119999999999998,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 6.7
+          "end_to_end": 9.4
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -2489,17 +2490,17 @@
       "hallucination": 1.0,
       "verification_passed": false,
       "verification_attempts": 1,
-      "basis": "model answer verified against retrieved provisions",
+      "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
       "degraded": false,
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1182,
+        "prompt_tokens": 1466,
         "completion_tokens": 206,
-        "cost_usd": 0.0002006,
+        "cost_usd": 0.00022899999999999998,
         "calls": 2
       },
-      "latency_ms": 7.4,
+      "latency_ms": 7.2,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -2510,9 +2511,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 861,
+          "prompt_tokens": 1145,
           "completion_tokens": 125,
-          "cost_usd": 0.0001361
+          "cost_usd": 0.00016450000000000001
         }
       },
       "result": {
@@ -2578,7 +2579,7 @@
         "guardrail_flags": [],
         "degraded": false,
         "confidence": "high",
-        "basis": "model answer verified against retrieved provisions",
+        "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
         "notes": [
           "Subject to confirmation that the passenger presented for check-in on time (para 3.1.2)."
         ],
@@ -2602,19 +2603,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1182,
+            "prompt_tokens": 1466,
             "completion_tokens": 206,
-            "cost_usd": 0.0002006,
+            "cost_usd": 0.00022899999999999998,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 7.4
+          "end_to_end": 7.2
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -2639,17 +2640,17 @@
       "hallucination": 0.0,
       "verification_passed": false,
       "verification_attempts": 1,
-      "basis": "model answer verified against retrieved provisions",
+      "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
       "degraded": false,
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1032,
+        "prompt_tokens": 1315,
         "completion_tokens": 206,
-        "cost_usd": 0.0001856,
+        "cost_usd": 0.0002139,
         "calls": 2
       },
-      "latency_ms": 7.7,
+      "latency_ms": 7.3,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -2660,9 +2661,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 719,
+          "prompt_tokens": 1002,
           "completion_tokens": 125,
-          "cost_usd": 0.00012190000000000001
+          "cost_usd": 0.00015020000000000002
         }
       },
       "result": {
@@ -2732,7 +2733,7 @@
         ],
         "degraded": false,
         "confidence": "high",
-        "basis": "model answer verified against retrieved provisions",
+        "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
         "notes": [],
         "agent": {
           "steps": 3,
@@ -2754,19 +2755,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1032,
+            "prompt_tokens": 1315,
             "completion_tokens": 206,
-            "cost_usd": 0.0001856,
+            "cost_usd": 0.0002139,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 7.7
+          "end_to_end": 7.3
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -2791,17 +2792,17 @@
       "hallucination": 0.0,
       "verification_passed": false,
       "verification_attempts": 1,
-      "basis": "model answer verified against retrieved provisions",
+      "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
       "degraded": false,
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1162,
+        "prompt_tokens": 1446,
         "completion_tokens": 206,
-        "cost_usd": 0.0001986,
+        "cost_usd": 0.000227,
         "calls": 2
       },
-      "latency_ms": 7.0,
+      "latency_ms": 6.7,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -2812,9 +2813,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 851,
+          "prompt_tokens": 1135,
           "completion_tokens": 125,
-          "cost_usd": 0.0001351
+          "cost_usd": 0.0001635
         }
       },
       "result": {
@@ -2884,7 +2885,7 @@
         ],
         "degraded": false,
         "confidence": "high",
-        "basis": "model answer verified against retrieved provisions",
+        "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
         "notes": [],
         "agent": {
           "steps": 3,
@@ -2906,19 +2907,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1162,
+            "prompt_tokens": 1446,
             "completion_tokens": 206,
-            "cost_usd": 0.0001986,
+            "cost_usd": 0.000227,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 7.0
+          "end_to_end": 6.7
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -2943,17 +2944,17 @@
       "hallucination": 0.0,
       "verification_passed": false,
       "verification_attempts": 1,
-      "basis": "model answer verified against retrieved provisions",
+      "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
       "degraded": false,
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1231,
+        "prompt_tokens": 1514,
         "completion_tokens": 206,
-        "cost_usd": 0.0002055,
+        "cost_usd": 0.0002338,
         "calls": 2
       },
-      "latency_ms": 7.4,
+      "latency_ms": 7.5,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -2964,9 +2965,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 907,
+          "prompt_tokens": 1190,
           "completion_tokens": 125,
-          "cost_usd": 0.0001407
+          "cost_usd": 0.00016900000000000002
         }
       },
       "result": {
@@ -3043,7 +3044,7 @@
         ],
         "degraded": false,
         "confidence": "high",
-        "basis": "model answer verified against retrieved provisions",
+        "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
         "notes": [],
         "agent": {
           "steps": 3,
@@ -3065,19 +3066,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1231,
+            "prompt_tokens": 1514,
             "completion_tokens": 206,
-            "cost_usd": 0.0002055,
+            "cost_usd": 0.0002338,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 7.4
+          "end_to_end": 7.5
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -3102,17 +3103,17 @@
       "hallucination": 1.0,
       "verification_passed": false,
       "verification_attempts": 1,
-      "basis": "model answer verified against retrieved provisions",
+      "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
       "degraded": false,
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 983,
+        "prompt_tokens": 1266,
         "completion_tokens": 206,
-        "cost_usd": 0.0001807,
+        "cost_usd": 0.000209,
         "calls": 2
       },
-      "latency_ms": 7.3,
+      "latency_ms": 7.8,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -3123,9 +3124,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 661,
+          "prompt_tokens": 944,
           "completion_tokens": 125,
-          "cost_usd": 0.0001161
+          "cost_usd": 0.0001444
         }
       },
       "result": {
@@ -3191,7 +3192,7 @@
         "guardrail_flags": [],
         "degraded": false,
         "confidence": "high",
-        "basis": "model answer verified against retrieved provisions",
+        "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
         "notes": [],
         "agent": {
           "steps": 3,
@@ -3213,19 +3214,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 983,
+            "prompt_tokens": 1266,
             "completion_tokens": 206,
-            "cost_usd": 0.0001807,
+            "cost_usd": 0.000209,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 7.3
+          "end_to_end": 7.8
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -3250,17 +3251,17 @@
       "hallucination": 1.0,
       "verification_passed": false,
       "verification_attempts": 1,
-      "basis": "model answer verified against retrieved provisions",
+      "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
       "degraded": false,
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1250,
+        "prompt_tokens": 1534,
         "completion_tokens": 206,
-        "cost_usd": 0.0002074,
+        "cost_usd": 0.00023579999999999999,
         "calls": 2
       },
-      "latency_ms": 6.2,
+      "latency_ms": 7.7,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -3271,9 +3272,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 934,
+          "prompt_tokens": 1218,
           "completion_tokens": 125,
-          "cost_usd": 0.00014340000000000002
+          "cost_usd": 0.0001718
         }
       },
       "result": {
@@ -3339,7 +3340,7 @@
         "guardrail_flags": [],
         "degraded": false,
         "confidence": "high",
-        "basis": "model answer verified against retrieved provisions",
+        "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
         "notes": [],
         "agent": {
           "steps": 3,
@@ -3361,19 +3362,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1250,
+            "prompt_tokens": 1534,
             "completion_tokens": 206,
-            "cost_usd": 0.0002074,
+            "cost_usd": 0.00023579999999999999,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 6.2
+          "end_to_end": 7.7
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -3398,17 +3399,17 @@
       "hallucination": 0.0,
       "verification_passed": false,
       "verification_attempts": 1,
-      "basis": "model answer verified against retrieved provisions",
+      "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
       "degraded": false,
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1477,
+        "prompt_tokens": 1761,
         "completion_tokens": 206,
-        "cost_usd": 0.0002301,
+        "cost_usd": 0.0002585,
         "calls": 2
       },
-      "latency_ms": 6.8,
+      "latency_ms": 7.5,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -3419,9 +3420,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1152,
+          "prompt_tokens": 1436,
           "completion_tokens": 125,
-          "cost_usd": 0.0001652
+          "cost_usd": 0.0001936
         }
       },
       "result": {
@@ -3494,7 +3495,7 @@
         "guardrail_flags": [],
         "degraded": false,
         "confidence": "high",
-        "basis": "model answer verified against retrieved provisions",
+        "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
         "notes": [],
         "agent": {
           "steps": 3,
@@ -3516,19 +3517,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1477,
+            "prompt_tokens": 1761,
             "completion_tokens": 206,
-            "cost_usd": 0.0002301,
+            "cost_usd": 0.0002585,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 6.8
+          "end_to_end": 7.5
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -3553,17 +3554,17 @@
       "hallucination": 1.0,
       "verification_passed": false,
       "verification_attempts": 1,
-      "basis": "model answer verified against retrieved provisions",
+      "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
       "degraded": false,
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1248,
+        "prompt_tokens": 1532,
         "completion_tokens": 206,
-        "cost_usd": 0.0002072,
+        "cost_usd": 0.0002356,
         "calls": 2
       },
-      "latency_ms": 8.1,
+      "latency_ms": 8.0,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -3574,9 +3575,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 924,
+          "prompt_tokens": 1208,
           "completion_tokens": 125,
-          "cost_usd": 0.00014240000000000002
+          "cost_usd": 0.0001708
         }
       },
       "result": {
@@ -3642,7 +3643,7 @@
         "guardrail_flags": [],
         "degraded": false,
         "confidence": "high",
-        "basis": "model answer verified against retrieved provisions",
+        "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
         "notes": [],
         "agent": {
           "steps": 3,
@@ -3664,19 +3665,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1248,
+            "prompt_tokens": 1532,
             "completion_tokens": 206,
-            "cost_usd": 0.0002072,
+            "cost_usd": 0.0002356,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 8.1
+          "end_to_end": 8.0
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -3701,7 +3702,7 @@
       "hallucination": 0.0,
       "verification_passed": false,
       "verification_attempts": 1,
-      "basis": "deterministic engine verified against retrieved provisions",
+      "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
       "degraded": false,
       "steps": 3,
       "tool_calls": 2,
@@ -3711,7 +3712,7 @@
         "cost_usd": 0.0,
         "calls": 0
       },
-      "latency_ms": 7.0,
+      "latency_ms": 6.1,
       "retrieved": 5,
       "cost_by_step": {},
       "result": {
@@ -3773,7 +3774,7 @@
         ],
         "degraded": false,
         "confidence": "medium",
-        "basis": "deterministic engine verified against retrieved provisions",
+        "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
         "notes": [],
         "agent": {
           "steps": 3,
@@ -3802,12 +3803,12 @@
           }
         },
         "timings_ms": {
-          "end_to_end": 7.0
+          "end_to_end": 6.1
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -3832,17 +3833,17 @@
       "hallucination": 0.0,
       "verification_passed": false,
       "verification_attempts": 1,
-      "basis": "model answer verified against retrieved provisions",
+      "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
       "degraded": false,
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1508,
+        "prompt_tokens": 1792,
         "completion_tokens": 206,
-        "cost_usd": 0.00023320000000000003,
+        "cost_usd": 0.0002616,
         "calls": 2
       },
-      "latency_ms": 7.7,
+      "latency_ms": 9.2,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -3853,9 +3854,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1178,
+          "prompt_tokens": 1462,
           "completion_tokens": 125,
-          "cost_usd": 0.0001678
+          "cost_usd": 0.0001962
         }
       },
       "result": {
@@ -3932,7 +3933,7 @@
         ],
         "degraded": false,
         "confidence": "high",
-        "basis": "model answer verified against retrieved provisions",
+        "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
         "notes": [],
         "agent": {
           "steps": 3,
@@ -3954,19 +3955,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1508,
+            "prompt_tokens": 1792,
             "completion_tokens": 206,
-            "cost_usd": 0.00023320000000000003,
+            "cost_usd": 0.0002616,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 7.7
+          "end_to_end": 9.2
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     },
@@ -3991,17 +3992,17 @@
       "hallucination": 1.0,
       "verification_passed": false,
       "verification_attempts": 1,
-      "basis": "model answer verified against retrieved provisions",
+      "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
       "degraded": false,
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1076,
+        "prompt_tokens": 1359,
         "completion_tokens": 206,
-        "cost_usd": 0.00019,
+        "cost_usd": 0.0002183,
         "calls": 2
       },
-      "latency_ms": 7.4,
+      "latency_ms": 12.3,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -4012,9 +4013,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 754,
+          "prompt_tokens": 1037,
           "completion_tokens": 125,
-          "cost_usd": 0.0001254
+          "cost_usd": 0.0001537
         }
       },
       "result": {
@@ -4080,7 +4081,7 @@
         "guardrail_flags": [],
         "degraded": false,
         "confidence": "high",
-        "basis": "model answer verified against retrieved provisions",
+        "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
         "notes": [],
         "agent": {
           "steps": 3,
@@ -4102,19 +4103,19 @@
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1076,
+            "prompt_tokens": 1359,
             "completion_tokens": 206,
-            "cost_usd": 0.00019,
+            "cost_usd": 0.0002183,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 7.4
+          "end_to_end": 12.3
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
           "planner": "planner@v1#e80cd54b",
-          "determination": "determination@v1#57d5196e"
+          "determination": "determination@v2#4a5866c0"
         }
       }
     }

@@ -1,0 +1,38 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "verdict": {
+      "enum": [
+        "satisfactory",
+        "unsatisfactory"
+      ],
+      "title": "Verdict",
+      "type": "string"
+    },
+    "reason": {
+      "maxLength": 1000,
+      "minLength": 3,
+      "title": "Reason",
+      "type": "string"
+    },
+    "reviewer": {
+      "anyOf": [
+        {
+          "maxLength": 100,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reviewer"
+    }
+  },
+  "required": [
+    "verdict",
+    "reason"
+  ],
+  "title": "Feedback",
+  "type": "object"
+}

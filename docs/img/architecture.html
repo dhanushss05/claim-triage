@@ -1,0 +1,56 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+body{margin:0;font-family:Helvetica,Arial,sans-serif;background:#fff;color:#1d2433}
+.wrap{width:1500px;padding:24px;position:relative}
+h1{font-size:22px;margin:0 0 14px}
+.zone{border:2px dashed #8a94a6;border-radius:12px;padding:14px 14px 14px;position:absolute}
+.zone>.lbl{position:absolute;top:-12px;left:14px;background:#fff;padding:0 6px;font-weight:700;font-size:13px;color:#4a5568}
+.box{position:absolute;border:2px solid #2b6cb0;background:#ebf4ff;border-radius:8px;padding:6px 8px;font-size:13px;line-height:1.3;text-align:center}
+.box b{display:block;font-size:14px}
+.agent{border-color:#2f855a;background:#e6fffa}
+.data{border-color:#b7791f;background:#fffaf0}
+.obs{border-color:#6b46c1;background:#faf5ff}
+.ext{border-color:#c53030;background:#fff5f5}
+svg{position:absolute;left:0;top:0}
+.legend{position:absolute;font-size:12px;color:#4a5568}
+</style></head><body><div class="wrap" style="height:900px">
+<h1>Claim triage: deployment architecture (Docker Compose, one network)</h1>
+<div class="zone" style="left:24px;top:70px;width:200px;height:300px"><span class="lbl">Outside the stack</span></div>
+<div class="box ext" style="left:44px;top:100px;width:160px"><b>Browser</b>web client (A8)<br>Grafana / Jaeger UIs</div>
+<div class="box ext" style="left:44px;top:200px;width:160px"><b>Client system</b>POST /v1/claims<br>optional callback_url</div>
+<div class="box ext" style="left:44px;top:290px;width:160px"><b>Model provider</b>stub (default) or<br>Gemini / OpenAI-compatible</div>
+
+<div class="zone" style="left:260px;top:70px;width:1210px;height:560px"><span class="lbl">Application tier (stateless, horizontally scalable)</span></div>
+<div class="box" style="left:290px;top:110px;width:190px"><b>api</b>FastAPI :8080<br>contracts + quarantine (D1)<br>rate limit, run cache (D7)<br>feedback, quality, trace</div>
+<div class="box agent" style="left:560px;top:110px;width:200px"><b>intake-agent</b>guardrails (L4)<br>classify + extract<br>prompt extraction@vN</div>
+<div class="box agent" style="left:850px;top:100px;width:250px"><b>agent-worker &times; N</b><br>entitlement agent (LangGraph)<br>plan &rarr; act &rarr; determine &rarr; verify<br>&rarr; recover / fallback &rarr; finalize<br><i>--scale agent-worker=3</i></div>
+<div class="box" style="left:1180px;top:110px;width:250px"><b>retriever</b>LangChain FAISS + BM25 (RRF)<br>clause graph: get_clause, find_related<br>hot-reloads index CURRENT</div>
+<div class="box" style="left:850px;top:330px;width:250px"><b>llm-gateway</b>one door to the provider<br>timeouts, retry, circuit breaker (A5)<br>token + cost accounting, budget (L5)</div>
+<div class="box" style="left:1180px;top:330px;width:250px"><b>llm-stub</b>OpenAI-compatible fixed responses<br>/admin/mode ok | error | slow<br>(load tests, outage demo)</div>
+<div class="box data" style="left:290px;top:330px;width:190px"><b>ingest</b> (job)<br>read &rarr; chunk &rarr; embed &rarr; index<br>idempotent, versioned (D2)</div>
+<div class="box" style="left:290px;top:470px;width:470px;border-style:dotted"><b>Tools container (profile "tools")</b>eval (L3, 27 scenarios) &middot; demo script &middot; pytest &middot; locust (D6)</div>
+
+<div class="zone" style="left:260px;top:660px;width:530px;height:200px"><span class="lbl">State tier (volumes)</span></div>
+<div class="box data" style="left:290px;top:700px;width:230px"><b>redis</b>used by api, agents, gateway<br>streams runs:intake, runs:entitlement<br>+ dead letters, run store, events,<br>caches, breaker, rate-limit buckets</div>
+<div class="box data" style="left:560px;top:700px;width:230px"><b>data volume</b>index/v_*/ + CURRENT<br>embedding cache, quarantine/,<br>feedback, run archive<br><i>retriever loads CURRENT</i></div>
+
+<div class="zone" style="left:850px;top:660px;width:620px;height:200px"><span class="lbl">Observability tier (D5, A6)</span></div>
+<div class="box obs" style="left:880px;top:700px;width:170px"><b>jaeger</b>OTLP traces<br>one trace per run<br>across 6 services</div>
+<div class="box obs" style="left:1075px;top:700px;width:170px"><b>prometheus</b>scrapes /metrics<br>dns_sd finds replicas</div>
+<div class="box obs" style="left:1270px;top:700px;width:170px"><b>grafana</b>provisioned dashboard<br>30 panels, SLO line</div>
+
+<svg width="1500" height="900"><defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4a5568"/></marker></defs>
+<g stroke="#4a5568" stroke-width="2" fill="none" marker-end="url(#a)">
+<line x1="228" y1="140" x2="288" y2="150"/><line x1="228" y1="230" x2="288" y2="180"/>
+<line x1="484" y1="150" x2="558" y2="150"/>
+<line x1="764" y1="150" x2="848" y2="150"/>
+<line x1="1104" y1="150" x2="1178" y2="150"/>
+<line x1="975" y1="232" x2="975" y2="328"/>
+<line x1="700" y1="200" x2="860" y2="330"/>
+<line x1="1104" y1="375" x2="1178" y2="375"/>
+<polyline points="975,416 975,452 134,452 134,380" stroke-dasharray="5,4"/>
+<polyline points="300,420 270,420 270,640 640,640 640,698"/>
+</g>
+<g font-size="11" fill="#4a5568"><text x="490" y="140">XADD runs:intake</text><text x="770" y="140">IntakeHandoff</text><text x="1108" y="140">HTTP tools</text><text x="985" y="290">/v1/chat</text><text x="720" y="270">extract</text><text x="560" y="446">to a real provider (configured in .env)</text><text x="280" y="634">ingest writes index/v_* and CURRENT</text></g>
+</svg>
+<div class="legend" style="left:24px;top:690px;width:215px">Green: agents. Blue: services.<br>Amber: state and jobs. Purple: observability.<br>Dashed boxes: deployment boundaries.<br>All app services send traces to Jaeger, expose /metrics to Prometheus, and log JSON with run_id to stdout.</div>
+</div></body></html>

@@ -353,7 +353,11 @@ def build_graph(deps: AgentDeps, settings: Settings):
             done.append("fields")
         elif item == "primary":
             done.append("primary")
-            state["primary_hits"] = [p["clause_id"] for p in result if p["clause_id"].startswith("CAR:3.")][:2] if isinstance(result, list) else []
+            section = {"denied_boarding": "CAR:3.2.", "cancellation": "CAR:3.3.", "delay": "CAR:3.4.",
+                       "downgrading": "CAR:3.5."}.get(state.get("category") or "", "CAR:3.")
+            hits = [p["clause_id"] for p in result if p["clause_id"].startswith("CAR:3.")] if isinstance(result, list) else []
+            # expand the provisions of the category's own section first, then whatever else ranked highest
+            state["primary_hits"] = (sorted(hits, key=lambda c: not c.startswith(section)))[:2]
         elif item.startswith("expand:") or name == "find_related":
             state.setdefault("expanded", []).append(args.get("clause_id"))
         elif item.startswith("derived:"):

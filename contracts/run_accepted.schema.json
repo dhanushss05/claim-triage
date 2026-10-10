@@ -1,0 +1,33 @@
+{
+  "properties": {
+    "run_id": {
+      "title": "Run Id",
+      "type": "string"
+    },
+    "status": {
+      "title": "Status",
+      "type": "string"
+    },
+    "status_url": {
+      "title": "Status Url",
+      "type": "string"
+    },
+    "trace_url": {
+      "title": "Trace Url",
+      "type": "string"
+    },
+    "cached": {
+      "default": false,
+      "title": "Cached",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "run_id",
+    "status",
+    "status_url",
+    "trace_url"
+  ],
+  "title": "RunAccepted",
+  "type": "object"
+}

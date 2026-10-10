@@ -188,6 +188,8 @@ async def entitlement_main() -> None:
                 AGENT_TASKS.labels("entitlement", "success" if result["verification"]["passed"] else "escalated_unverified").inc()
                 if run.get("cache_key") and result["status"] != "failed" and not result["degraded"]:
                     await store.cache_set(run["cache_key"], {"result": result, "source_run": run_id}, s.run_cache_ttl_s)
+                if run.get("cache_key"):
+                    await r.delete(f"runcache:inflight:{run['cache_key']}")
                 if random.random() < s.live_eval_sample_rate:
                     scores = score_run(result, final["evidence"], final["facts"])
                     for m, v in scores.items():
