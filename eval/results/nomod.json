@@ -1,0 +1,4904 @@
+{
+  "summary": {
+    "scenarios": 27,
+    "accuracy": 1,
+    "route_accuracy": 1,
+    "amount_accuracy": 1,
+    "must_cite_recall": 0.9259,
+    "context_recall": 1.0,
+    "groundedness": 1.0,
+    "context_relevance": 0.2062,
+    "faithfulness": 1.0,
+    "hallucination_rate": 0.0,
+    "escalation_precision": 1.0,
+    "escalation_recall": 1.0,
+    "verification_pass_rate": 1,
+    "mean_steps": 9.6667,
+    "mean_tool_calls": 7.7407,
+    "mean_retrieved": 18.7407,
+    "mean_prompt_tokens": 11589.3,
+    "mean_completion_tokens": 416.3,
+    "cost_per_100_runs_usd": 0.132545,
+    "cost_share_by_step": {
+      "plan": 0.586,
+      "determine": 0.367,
+      "extract": 0.047
+    },
+    "mean_latency_ms": 23.8407,
+    "s01_difficult_case_correct": true,
+    "label": "nomod",
+    "mode": "inprocess",
+    "overrides": [
+      "ENABLE_MODIFIER_SEARCH=false"
+    ],
+    "timestamp": "2026-10-10T17:33:56Z"
+  },
+  "rows": [
+    {
+      "id": "S01",
+      "title": "Section 4.1 difficult case: cancelled at airport, alternate 4h later taken",
+      "expected_route": "decline",
+      "route": "decline",
+      "route_ok": true,
+      "amount_ok": true,
+      "facilities_ok": true,
+      "escalation_reason_ok": true,
+      "correct": true,
+      "compensation_inr": 0.0,
+      "downgrade_refund_inr": 0.0,
+      "must_cite_recall": 1.0,
+      "context_recall": 1.0,
+      "supporting_passage_retrieved": true,
+      "groundedness": 1.0,
+      "context_relevance": 0.2727272727272727,
+      "faithfulness": 1.0,
+      "hallucination": 0.0,
+      "verification_passed": true,
+      "verification_attempts": 2,
+      "basis": "model answer failed verification; engine position verified instead",
+      "degraded": false,
+      "steps": 11,
+      "tool_calls": 9,
+      "cost": {
+        "prompt_tokens": 15207,
+        "completion_tokens": 457,
+        "cost_usd": 0.0017035,
+        "calls": 12
+      },
+      "latency_ms": 51.6,
+      "retrieved": 22,
+      "cost_by_step": {
+        "extract": {
+          "calls": 1,
+          "prompt_tokens": 346,
+          "completion_tokens": 81,
+          "cost_usd": 6.7e-05
+        },
+        "plan": {
+          "calls": 9,
+          "prompt_tokens": 9649,
+          "completion_tokens": 126,
+          "cost_usd": 0.0010153
+        },
+        "determine": {
+          "calls": 2,
+          "prompt_tokens": 5212,
+          "completion_tokens": 250,
+          "cost_usd": 0.0006212000000000001
+        }
+      },
+      "result": {
+        "run_id": "eval-S01",
+        "status": "completed",
+        "route": "decline",
+        "disruption_category": "cancellation",
+        "entitlement": {
+          "compensation_inr": 0.0,
+          "computation": "",
+          "refund_due": false,
+          "facilities": [
+            "meals and refreshments while waiting"
+          ],
+          "downgrade_refund_inr": 0.0
+        },
+        "citations": [
+          {
+            "clause_id": "CAR:3.3.2",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.3.2",
+            "doc_id": "CAR",
+            "quote": "Where the passenger accepts the alternate flight, no compensation under sub-paras (a) to (c) is payable."
+          },
+          {
+            "clause_id": "CAR:2.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 2.1",
+            "doc_id": "CAR",
+            "quote": "\"Alternate flight\" means a flight offered by the airline to a passenger, in place of the flight on which the passenger held a confirmed reservation, to the same destination, which is acceptable to the passenger."
+          },
+          {
+            "clause_id": "CAR:3.4.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.4.1",
+            "doc_id": "CAR",
+            "quote": "In case of delay, the airline shall provide meals and refreshments, free of charge, in relation to the waiting time, when the departure is delayed (or the passenger awaits an alternate flight) by:"
+          },
+          {
+            "clause_id": "CAR:3.8.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.8.1",
+            "doc_id": "CAR",
+            "quote": "A passenger who is not satisfied with the airline's response may escalate the grievance through the AirSewa portal of the Ministry of Civil Aviation."
+          }
+        ],
+        "justification": "The passenger was informed on arrival at the airport, less than 24 hours before departure, so the airline shall provide either an alternate flight or compensation, in addition to a full refund. [CAR:3.3.2] Where the passenger accepts the alternate flight, no compensation is payable; the passenger travelled on the alternate flight. [CAR:3.3.2] The airline shall provide facilities in accordance with para 3.4.1 to passengers awaiting the alternate flight. [CAR:3.3.2] A passenger who travels on the alternate flight is deemed to have accepted it. [CAR:2.1] Meals and refreshments are provided free of charge in relation to the waiting time: 4 hours of waiting for the alternate flight meets the 2 hours threshold in para 3.4.1. [CAR:3.4.1]",
+        "missing_evidence": [],
+        "escalation": {
+          "required": false,
+          "reasons": [],
+          "path": [
+            "Customer relations officer (reviews this recommendation)",
+            "Airline nodal officer for grievances (CAR para 3.8.1)",
+            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+          ]
+        },
+        "verification": {
+          "passed": true,
+          "attempts": 2,
+          "checks": [
+            {
+              "name": "citations_resolve",
+              "passed": true,
+              "detail": "4 citations resolve"
+            },
+            {
+              "name": "quotes_in_text",
+              "passed": true,
+              "detail": "all quotes/phrases found verbatim"
+            },
+            {
+              "name": "required_retrieved",
+              "passed": true,
+              "detail": "5 conditions/exemptions retrieved"
+            },
+            {
+              "name": "route_has_basis",
+              "passed": true,
+              "detail": "decline cites a negative condition"
+            }
+          ]
+        },
+        "guardrail_flags": [],
+        "degraded": false,
+        "confidence": "medium",
+        "basis": "model answer failed verification; engine position verified instead",
+        "notes": [],
+        "agent": {
+          "steps": 11,
+          "tool_calls": 9,
+          "planner_sources": [
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "model",
+            "recovery",
+            "recovery",
+            "model"
+          ],
+          "stop_reason": "",
+          "degraded_reasons": [],
+          "evidence": [
+            "CAR:3.3.1",
+            "CHARTER:3.2",
+            "CAR:3.3.2",
+            "CAR:3.2.2",
+            "CAR:3.1.2",
+            "CAR:2.1",
+            "CAR:3.4.1",
+            "CAR:2.11",
+            "CAR:3.4.3",
+            "CAR:2.2",
+            "CAR:2.3",
+            "CAR:3.3.4",
+            "CAR:3.3.3",
+            "CAR:3.6.1",
+            "CAR:3.2.3",
+            "CAR:3.6.2",
+            "CAR:3.7.2",
+            "CHARTER:2.1",
+            "CAR:3.1.1",
+            "CAR:3.1.3",
+            "CHARTER:7.2",
+            "CAR:3.8.1"
+          ]
+        },
+        "cost": {
+          "total": {
+            "prompt_tokens": 15207,
+            "completion_tokens": 457,
+            "cost_usd": 0.0017035,
+            "calls": 12
+          }
+        },
+        "timings_ms": {
+          "end_to_end": 51.6
+        },
+        "prompt_versions": {
+          "extraction": "extraction@v1#2a1d959f",
+          "planner": "planner@v1#e80cd54b",
+          "determination": "determination@v1#57d5196e"
+        }
+      }
+    },
+    {
+      "id": "S02",
+      "title": "Cancelled at airport, refund taken, block time 2.5h, fare below cap",
+      "expected_route": "pay_as_computed",
+      "route": "pay_as_computed",
+      "route_ok": true,
+      "amount_ok": true,
+      "facilities_ok": true,
+      "escalation_reason_ok": true,
+      "correct": true,
+      "compensation_inr": 7300.0,
+      "downgrade_refund_inr": 0.0,
+      "must_cite_recall": 1.0,
+      "context_recall": 1.0,
+      "supporting_passage_retrieved": true,
+      "groundedness": 1.0,
+      "context_relevance": 0.22727272727272727,
+      "faithfulness": 1.0,
+      "hallucination": 0.0,
+      "verification_passed": true,
+      "verification_attempts": 2,
+      "basis": "model answer failed verification; engine position verified instead",
+      "degraded": false,
+      "steps": 12,
+      "tool_calls": 10,
+      "cost": {
+        "prompt_tokens": 15170,
+        "completion_tokens": 457,
+        "cost_usd": 0.0016998,
+        "calls": 12
+      },
+      "latency_ms": 28.4,
+      "retrieved": 22,
+      "cost_by_step": {
+        "extract": {
+          "calls": 1,
+          "prompt_tokens": 342,
+          "completion_tokens": 81,
+          "cost_usd": 6.66e-05
+        },
+        "plan": {
+          "calls": 9,
+          "prompt_tokens": 9671,
+          "completion_tokens": 126,
+          "cost_usd": 0.0010175000000000002
+        },
+        "determine": {
+          "calls": 2,
+          "prompt_tokens": 5157,
+          "completion_tokens": 250,
+          "cost_usd": 0.0006157000000000001
+        }
+      },
+      "result": {
+        "run_id": "eval-S02",
+        "status": "completed",
+        "route": "pay_as_computed",
+        "disruption_category": "cancellation",
+        "entitlement": {
+          "compensation_inr": 7300.0,
+          "computation": "min(INR 10,000, basic fare + fuel charge INR 7,300) = INR 7,300",
+          "refund_due": true,
+          "facilities": [],
+          "downgrade_refund_inr": 0.0
+        },
+        "citations": [
+          {
+            "clause_id": "CAR:3.3.2",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.3.2",
+            "doc_id": "CAR",
+            "quote": "(c) INR 10,000 or the booked one-way basic fare plus airline fuel charge, whichever is less, for flights having a block time of more than two hours."
+          },
+          {
+            "clause_id": "CAR:2.2",
+            "label": "DGCA CAR S3 Series M Part IV, para 2.2",
+            "doc_id": "CAR",
+            "quote": "\"Block time\" means the total time from the moment the aircraft first moves for the purpose of taking off until the moment it finally comes to rest at the end of the flight, as published in the airline's schedule for the booked flight."
+          },
+          {
+            "clause_id": "CAR:3.8.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.8.1",
+            "doc_id": "CAR",
+            "quote": "A passenger who is not satisfied with the airline's response may escalate the grievance through the AirSewa portal of the Ministry of Civil Aviation."
+          }
+        ],
+        "justification": "The passenger was informed on arrival at the airport, less than 24 hours before departure, so the airline shall provide either an alternate flight or compensation, in addition to a full refund. [CAR:3.3.2] Block time is the published time from first movement for take-off until the aircraft comes to rest. [CAR:2.2] For a block time of 2 hours 30 minutes compensation is INR 10,000 or the booked one-way basic fare plus airline fuel charge, whichever is less: min(INR 10,000, basic fare + fuel charge INR 7,300) = INR 7,300, in addition to a full refund. [CAR:3.3.2]",
+        "missing_evidence": [],
+        "escalation": {
+          "required": false,
+          "reasons": [],
+          "path": [
+            "Customer relations officer (reviews this recommendation)",
+            "Airline nodal officer for grievances (CAR para 3.8.1)",
+            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+          ]
+        },
+        "verification": {
+          "passed": true,
+          "attempts": 2,
+          "checks": [
+            {
+              "name": "citations_resolve",
+              "passed": true,
+              "detail": "3 citations resolve"
+            },
+            {
+              "name": "quotes_in_text",
+              "passed": true,
+              "detail": "all quotes/phrases found verbatim"
+            },
+            {
+              "name": "required_retrieved",
+              "passed": true,
+              "detail": "5 conditions/exemptions retrieved"
+            },
+            {
+              "name": "route_has_basis",
+              "passed": true,
+              "detail": "payment cites an amount provision"
+            }
+          ]
+        },
+        "guardrail_flags": [],
+        "degraded": false,
+        "confidence": "medium",
+        "basis": "model answer failed verification; engine position verified instead",
+        "notes": [],
+        "agent": {
+          "steps": 12,
+          "tool_calls": 10,
+          "planner_sources": [
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "model",
+            "recovery",
+            "recovery",
+            "recovery",
+            "model"
+          ],
+          "stop_reason": "",
+          "degraded_reasons": [],
+          "evidence": [
+            "CHARTER:3.2",
+            "CAR:3.4.2",
+            "CAR:3.4.1",
+            "CAR:3.2.2",
+            "CAR:3.3.2",
+            "CAR:2.1",
+            "CAR:2.11",
+            "CAR:3.4.3",
+            "CAR:2.2",
+            "CAR:2.3",
+            "CAR:3.3.4",
+            "CAR:3.3.3",
+            "CAR:3.6.1",
+            "CAR:3.2.3",
+            "CAR:3.6.2",
+            "CAR:3.7.2",
+            "CHARTER:2.1",
+            "CAR:3.1.1",
+            "CAR:3.1.3",
+            "CHARTER:7.2",
+            "CAR:3.3.1",
+            "CAR:3.8.1"
+          ]
+        },
+        "cost": {
+          "total": {
+            "prompt_tokens": 15170,
+            "completion_tokens": 457,
+            "cost_usd": 0.0016998,
+            "calls": 12
+          }
+        },
+        "timings_ms": {
+          "end_to_end": 28.4
+        },
+        "prompt_versions": {
+          "extraction": "extraction@v1#2a1d959f",
+          "planner": "planner@v1#e80cd54b",
+          "determination": "determination@v1#57d5196e"
+        }
+      }
+    },
+    {
+      "id": "S03",
+      "title": "Cancelled 3h before by SMS, refund, short flight (block 50 min)",
+      "expected_route": "pay_as_computed",
+      "route": "pay_as_computed",
+      "route_ok": true,
+      "amount_ok": true,
+      "facilities_ok": true,
+      "escalation_reason_ok": true,
+      "correct": true,
+      "compensation_inr": 4400.0,
+      "downgrade_refund_inr": 0.0,
+      "must_cite_recall": 1.0,
+      "context_recall": 1.0,
+      "supporting_passage_retrieved": true,
+      "groundedness": 1.0,
+      "context_relevance": 0.2777777777777778,
+      "faithfulness": 1.0,
+      "hallucination": 0.0,
+      "verification_passed": true,
+      "verification_attempts": 2,
+      "basis": "model answer failed verification; engine position verified instead",
+      "degraded": false,
+      "steps": 10,
+      "tool_calls": 8,
+      "cost": {
+        "prompt_tokens": 11131,
+        "completion_tokens": 429,
+        "cost_usd": 0.0012847,
+        "calls": 10
+      },
+      "latency_ms": 23.5,
+      "retrieved": 18,
+      "cost_by_step": {
+        "extract": {
+          "calls": 1,
+          "prompt_tokens": 330,
+          "completion_tokens": 81,
+          "cost_usd": 6.54e-05
+        },
+        "plan": {
+          "calls": 7,
+          "prompt_tokens": 6452,
+          "completion_tokens": 98,
+          "cost_usd": 0.0006844000000000002
+        },
+        "determine": {
+          "calls": 2,
+          "prompt_tokens": 4349,
+          "completion_tokens": 250,
+          "cost_usd": 0.0005349
+        }
+      },
+      "result": {
+        "run_id": "eval-S03",
+        "status": "completed",
+        "route": "pay_as_computed",
+        "disruption_category": "cancellation",
+        "entitlement": {
+          "compensation_inr": 4400.0,
+          "computation": "min(INR 5,000, basic fare + fuel charge INR 4,400) = INR 4,400",
+          "refund_due": true,
+          "facilities": [],
+          "downgrade_refund_inr": 0.0
+        },
+        "citations": [
+          {
+            "clause_id": "CAR:3.3.2",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.3.2",
+            "doc_id": "CAR",
+            "quote": "(a) INR 5,000 or the booked one-way basic fare plus airline fuel charge, whichever is less, for flights having a block time of up to and including one hour;"
+          },
+          {
+            "clause_id": "CAR:2.2",
+            "label": "DGCA CAR S3 Series M Part IV, para 2.2",
+            "doc_id": "CAR",
+            "quote": "\"Block time\" means the total time from the moment the aircraft first moves for the purpose of taking off until the moment it finally comes to rest at the end of the flight, as published in the airline's schedule for the booked flight."
+          },
+          {
+            "clause_id": "CAR:3.8.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.8.1",
+            "doc_id": "CAR",
+            "quote": "A passenger who is not satisfied with the airline's response may escalate the grievance through the AirSewa portal of the Ministry of Civil Aviation."
+          }
+        ],
+        "justification": "The passenger was informed 3 hours before departure, less than 24 hours before departure, so the airline shall provide either an alternate flight or compensation, in addition to a full refund. [CAR:3.3.2] Block time is the published time from first movement for take-off until the aircraft comes to rest. [CAR:2.2] For a block time of 50 minutes compensation is INR 5,000 or the booked one-way basic fare plus airline fuel charge, whichever is less: min(INR 5,000, basic fare + fuel charge INR 4,400) = INR 4,400, in addition to a full refund. [CAR:3.3.2]",
+        "missing_evidence": [],
+        "escalation": {
+          "required": false,
+          "reasons": [],
+          "path": [
+            "Customer relations officer (reviews this recommendation)",
+            "Airline nodal officer for grievances (CAR para 3.8.1)",
+            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+          ]
+        },
+        "verification": {
+          "passed": true,
+          "attempts": 2,
+          "checks": [
+            {
+              "name": "citations_resolve",
+              "passed": true,
+              "detail": "3 citations resolve"
+            },
+            {
+              "name": "quotes_in_text",
+              "passed": true,
+              "detail": "all quotes/phrases found verbatim"
+            },
+            {
+              "name": "required_retrieved",
+              "passed": true,
+              "detail": "5 conditions/exemptions retrieved"
+            },
+            {
+              "name": "route_has_basis",
+              "passed": true,
+              "detail": "payment cites an amount provision"
+            }
+          ]
+        },
+        "guardrail_flags": [],
+        "degraded": false,
+        "confidence": "medium",
+        "basis": "model answer failed verification; engine position verified instead",
+        "notes": [],
+        "agent": {
+          "steps": 10,
+          "tool_calls": 8,
+          "planner_sources": [
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "model",
+            "recovery",
+            "recovery",
+            "recovery",
+            "model"
+          ],
+          "stop_reason": "",
+          "degraded_reasons": [],
+          "evidence": [
+            "CAR:3.4.2",
+            "CAR:3.3.1",
+            "CHARTER:3.2",
+            "CAR:3.3.2",
+            "CAR:3.4.1",
+            "CAR:3.3.4",
+            "CAR:3.3.3",
+            "CAR:3.6.1",
+            "CAR:3.2.3",
+            "CAR:3.6.2",
+            "CAR:3.7.2",
+            "CHARTER:2.1",
+            "CAR:3.1.1",
+            "CAR:3.1.3",
+            "CHARTER:7.2",
+            "CAR:2.2",
+            "CAR:3.8.1",
+            "CAR:3.2.2"
+          ]
+        },
+        "cost": {
+          "total": {
+            "prompt_tokens": 11131,
+            "completion_tokens": 429,
+            "cost_usd": 0.0012847,
+            "calls": 10
+          }
+        },
+        "timings_ms": {
+          "end_to_end": 23.5
+        },
+        "prompt_versions": {
+          "extraction": "extraction@v1#2a1d959f",
+          "planner": "planner@v1#e80cd54b",
+          "determination": "determination@v1#57d5196e"
+        }
+      }
+    },
+    {
+      "id": "S04",
+      "title": "Cancelled with 20 days notice",
+      "expected_route": "decline",
+      "route": "decline",
+      "route_ok": true,
+      "amount_ok": true,
+      "facilities_ok": true,
+      "escalation_reason_ok": true,
+      "correct": true,
+      "compensation_inr": 0.0,
+      "downgrade_refund_inr": 0.0,
+      "must_cite_recall": 1.0,
+      "context_recall": 1.0,
+      "supporting_passage_retrieved": true,
+      "groundedness": 1.0,
+      "context_relevance": 0.29411764705882354,
+      "faithfulness": 1.0,
+      "hallucination": 0.0,
+      "verification_passed": true,
+      "verification_attempts": 2,
+      "basis": "model answer failed verification; engine position verified instead",
+      "degraded": false,
+      "steps": 9,
+      "tool_calls": 7,
+      "cost": {
+        "prompt_tokens": 10804,
+        "completion_tokens": 429,
+        "cost_usd": 0.0012519999999999999,
+        "calls": 10
+      },
+      "latency_ms": 20.5,
+      "retrieved": 17,
+      "cost_by_step": {
+        "extract": {
+          "calls": 1,
+          "prompt_tokens": 326,
+          "completion_tokens": 81,
+          "cost_usd": 6.500000000000001e-05
+        },
+        "plan": {
+          "calls": 7,
+          "prompt_tokens": 6185,
+          "completion_tokens": 98,
+          "cost_usd": 0.0006577
+        },
+        "determine": {
+          "calls": 2,
+          "prompt_tokens": 4293,
+          "completion_tokens": 250,
+          "cost_usd": 0.0005293
+        }
+      },
+      "result": {
+        "run_id": "eval-S04",
+        "status": "completed",
+        "route": "decline",
+        "disruption_category": "cancellation",
+        "entitlement": {
+          "compensation_inr": 0.0,
+          "computation": "",
+          "refund_due": true,
+          "facilities": [],
+          "downgrade_refund_inr": 0.0
+        },
+        "citations": [
+          {
+            "clause_id": "CAR:3.3.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.3.1",
+            "doc_id": "CAR",
+            "quote": "No compensation is payable where the airline has complied with sub-para (a) or (b)."
+          },
+          {
+            "clause_id": "CAR:3.8.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.8.1",
+            "doc_id": "CAR",
+            "quote": "A passenger who is not satisfied with the airline's response may escalate the grievance through the AirSewa portal of the Ministry of Civil Aviation."
+          }
+        ],
+        "justification": "The passenger was informed 20 days before departure, at least two weeks ahead; the airline arranges an alternate flight or a refund, and no compensation is payable. [CAR:3.3.1]",
+        "missing_evidence": [],
+        "escalation": {
+          "required": false,
+          "reasons": [],
+          "path": [
+            "Customer relations officer (reviews this recommendation)",
+            "Airline nodal officer for grievances (CAR para 3.8.1)",
+            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+          ]
+        },
+        "verification": {
+          "passed": true,
+          "attempts": 2,
+          "checks": [
+            {
+              "name": "citations_resolve",
+              "passed": true,
+              "detail": "2 citations resolve"
+            },
+            {
+              "name": "quotes_in_text",
+              "passed": true,
+              "detail": "all quotes/phrases found verbatim"
+            },
+            {
+              "name": "required_retrieved",
+              "passed": true,
+              "detail": "5 conditions/exemptions retrieved"
+            },
+            {
+              "name": "route_has_basis",
+              "passed": true,
+              "detail": "decline cites a negative condition"
+            }
+          ]
+        },
+        "guardrail_flags": [],
+        "degraded": false,
+        "confidence": "medium",
+        "basis": "model answer failed verification; engine position verified instead",
+        "notes": [],
+        "agent": {
+          "steps": 9,
+          "tool_calls": 7,
+          "planner_sources": [
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "model",
+            "recovery",
+            "recovery",
+            "model"
+          ],
+          "stop_reason": "",
+          "degraded_reasons": [],
+          "evidence": [
+            "CHARTER:3.2",
+            "CAR:3.3.1",
+            "CAR:3.2.2",
+            "CAR:1.1",
+            "CAR:3.3.2",
+            "CAR:3.3.4",
+            "CAR:3.3.3",
+            "CAR:3.6.1",
+            "CAR:3.2.3",
+            "CAR:3.6.2",
+            "CAR:3.7.2",
+            "CHARTER:2.1",
+            "CAR:3.1.1",
+            "CAR:3.1.3",
+            "CHARTER:7.2",
+            "CAR:3.8.1",
+            "CAR:3.4.4"
+          ]
+        },
+        "cost": {
+          "total": {
+            "prompt_tokens": 10804,
+            "completion_tokens": 429,
+            "cost_usd": 0.0012519999999999999,
+            "calls": 10
+          }
+        },
+        "timings_ms": {
+          "end_to_end": 20.5
+        },
+        "prompt_versions": {
+          "extraction": "extraction@v1#2a1d959f",
+          "planner": "planner@v1#e80cd54b",
+          "determination": "determination@v1#57d5196e"
+        }
+      }
+    },
+    {
+      "id": "S05",
+      "title": "Cancelled 5 days ahead, alternate within one hour accepted",
+      "expected_route": "decline",
+      "route": "decline",
+      "route_ok": true,
+      "amount_ok": true,
+      "facilities_ok": true,
+      "escalation_reason_ok": true,
+      "correct": true,
+      "compensation_inr": 0.0,
+      "downgrade_refund_inr": 0.0,
+      "must_cite_recall": 1.0,
+      "context_recall": 1.0,
+      "supporting_passage_retrieved": true,
+      "groundedness": 1.0,
+      "context_relevance": 0.21739130434782608,
+      "faithfulness": 1.0,
+      "hallucination": 0.0,
+      "verification_passed": true,
+      "verification_attempts": 2,
+      "basis": "model answer failed verification; engine position verified instead",
+      "degraded": false,
+      "steps": 11,
+      "tool_calls": 9,
+      "cost": {
+        "prompt_tokens": 15085,
+        "completion_tokens": 457,
+        "cost_usd": 0.0016913,
+        "calls": 12
+      },
+      "latency_ms": 25.2,
+      "retrieved": 23,
+      "cost_by_step": {
+        "extract": {
+          "calls": 1,
+          "prompt_tokens": 333,
+          "completion_tokens": 81,
+          "cost_usd": 6.57e-05
+        },
+        "plan": {
+          "calls": 9,
+          "prompt_tokens": 9509,
+          "completion_tokens": 126,
+          "cost_usd": 0.0010012999999999999
+        },
+        "determine": {
+          "calls": 2,
+          "prompt_tokens": 5243,
+          "completion_tokens": 250,
+          "cost_usd": 0.0006243000000000002
+        }
+      },
+      "result": {
+        "run_id": "eval-S05",
+        "status": "completed",
+        "route": "decline",
+        "disruption_category": "cancellation",
+        "entitlement": {
+          "compensation_inr": 0.0,
+          "computation": "",
+          "refund_due": false,
+          "facilities": [],
+          "downgrade_refund_inr": 0.0
+        },
+        "citations": [
+          {
+            "clause_id": "CAR:3.3.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.3.1",
+            "doc_id": "CAR",
+            "quote": "or (b) The airline shall inform passengers less than two weeks before and up to 24 hours before the booked scheduled departure time and offer an alternate flight departing within two hours of the booked scheduled departure time, or refund the ticket, as acceptable to the passenger."
+          },
+          {
+            "clause_id": "CAR:3.8.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.8.1",
+            "doc_id": "CAR",
+            "quote": "A passenger who is not satisfied with the airline's response may escalate the grievance through the AirSewa portal of the Ministry of Civil Aviation."
+          }
+        ],
+        "justification": "The passenger was informed 5 days before departure, less than two weeks and at least 24 hours ahead; the airline offers an alternate flight departing within two hours or a refund, and no compensation is payable. [CAR:3.3.1]",
+        "missing_evidence": [],
+        "escalation": {
+          "required": false,
+          "reasons": [],
+          "path": [
+            "Customer relations officer (reviews this recommendation)",
+            "Airline nodal officer for grievances (CAR para 3.8.1)",
+            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+          ]
+        },
+        "verification": {
+          "passed": true,
+          "attempts": 2,
+          "checks": [
+            {
+              "name": "citations_resolve",
+              "passed": true,
+              "detail": "2 citations resolve"
+            },
+            {
+              "name": "quotes_in_text",
+              "passed": true,
+              "detail": "all quotes/phrases found verbatim"
+            },
+            {
+              "name": "required_retrieved",
+              "passed": true,
+              "detail": "5 conditions/exemptions retrieved"
+            },
+            {
+              "name": "route_has_basis",
+              "passed": true,
+              "detail": "decline cites a negative condition"
+            }
+          ]
+        },
+        "guardrail_flags": [],
+        "degraded": false,
+        "confidence": "medium",
+        "basis": "model answer failed verification; engine position verified instead",
+        "notes": [],
+        "agent": {
+          "steps": 11,
+          "tool_calls": 9,
+          "planner_sources": [
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "model",
+            "recovery",
+            "recovery",
+            "model"
+          ],
+          "stop_reason": "",
+          "degraded_reasons": [],
+          "evidence": [
+            "CAR:3.3.1",
+            "CHARTER:3.2",
+            "CAR:3.2.2",
+            "CAR:3.1.2",
+            "CAR:3.3.2",
+            "CAR:2.1",
+            "CAR:3.4.1",
+            "CAR:2.11",
+            "CAR:3.4.3",
+            "CAR:2.2",
+            "CAR:2.3",
+            "CAR:3.3.4",
+            "CAR:3.3.3",
+            "CAR:3.6.1",
+            "CAR:3.2.3",
+            "CAR:3.6.2",
+            "CAR:3.7.2",
+            "CHARTER:2.1",
+            "CAR:3.1.1",
+            "CAR:3.1.3",
+            "CHARTER:7.2",
+            "CAR:3.8.1",
+            "CAR:3.4.4"
+          ]
+        },
+        "cost": {
+          "total": {
+            "prompt_tokens": 15085,
+            "completion_tokens": 457,
+            "cost_usd": 0.0016913,
+            "calls": 12
+          }
+        },
+        "timings_ms": {
+          "end_to_end": 25.2
+        },
+        "prompt_versions": {
+          "extraction": "extraction@v1#2a1d959f",
+          "planner": "planner@v1#e80cd54b",
+          "determination": "determination@v1#57d5196e"
+        }
+      }
+    },
+    {
+      "id": "S06",
+      "title": "Cancelled at airport, no contact details at booking",
+      "expected_route": "decline",
+      "route": "decline",
+      "route_ok": true,
+      "amount_ok": true,
+      "facilities_ok": true,
+      "escalation_reason_ok": true,
+      "correct": true,
+      "compensation_inr": 0.0,
+      "downgrade_refund_inr": 0.0,
+      "must_cite_recall": 1.0,
+      "context_recall": 1.0,
+      "supporting_passage_retrieved": true,
+      "groundedness": 1.0,
+      "context_relevance": 0.3333333333333333,
+      "faithfulness": 1.0,
+      "hallucination": 0.0,
+      "verification_passed": true,
+      "verification_attempts": 2,
+      "basis": "model answer failed verification; engine position verified instead",
+      "degraded": false,
+      "steps": 9,
+      "tool_calls": 7,
+      "cost": {
+        "prompt_tokens": 10833,
+        "completion_tokens": 429,
+        "cost_usd": 0.0012549,
+        "calls": 10
+      },
+      "latency_ms": 23.0,
+      "retrieved": 15,
+      "cost_by_step": {
+        "extract": {
+          "calls": 1,
+          "prompt_tokens": 335,
+          "completion_tokens": 81,
+          "cost_usd": 6.59e-05
+        },
+        "plan": {
+          "calls": 7,
+          "prompt_tokens": 6384,
+          "completion_tokens": 98,
+          "cost_usd": 0.0006776000000000002
+        },
+        "determine": {
+          "calls": 2,
+          "prompt_tokens": 4114,
+          "completion_tokens": 250,
+          "cost_usd": 0.0005114
+        }
+      },
+      "result": {
+        "run_id": "eval-S06",
+        "status": "completed",
+        "route": "decline",
+        "disruption_category": "cancellation",
+        "entitlement": {
+          "compensation_inr": 0.0,
+          "computation": "",
+          "refund_due": true,
+          "facilities": [],
+          "downgrade_refund_inr": 0.0
+        },
+        "citations": [
+          {
+            "clause_id": "CAR:3.3.2",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.3.2",
+            "doc_id": "CAR",
+            "quote": "In case the airline fails to inform passengers as per para 3.3.1, or informs them less than 24 hours before the booked scheduled departure time, or the passenger is informed of the cancellation on arrival at the airport, the airline shall provide either an alternate flight or compensation, in addition to a full refund of the air ticket, as given below:"
+          },
+          {
+            "clause_id": "CAR:3.3.3",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.3.3",
+            "doc_id": "CAR",
+            "quote": "Where the passenger did not provide contact details (mobile number or e-mail address) at the time of booking, and the airline was for that reason unable to inform the passenger, the airline shall not be liable to pay compensation under para 3.3.2."
+          },
+          {
+            "clause_id": "CAR:3.8.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.8.1",
+            "doc_id": "CAR",
+            "quote": "A passenger who is not satisfied with the airline's response may escalate the grievance through the AirSewa portal of the Ministry of Civil Aviation."
+          }
+        ],
+        "justification": "The passenger was informed on arrival at the airport, less than 24 hours before departure, so the airline shall provide either an alternate flight or compensation, in addition to a full refund. [CAR:3.3.2] The passenger did not provide contact details at booking; the airline shall not be liable to pay compensation, and the refund of the ticket remains payable. [CAR:3.3.3]",
+        "missing_evidence": [],
+        "escalation": {
+          "required": false,
+          "reasons": [],
+          "path": [
+            "Customer relations officer (reviews this recommendation)",
+            "Airline nodal officer for grievances (CAR para 3.8.1)",
+            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+          ]
+        },
+        "verification": {
+          "passed": true,
+          "attempts": 2,
+          "checks": [
+            {
+              "name": "citations_resolve",
+              "passed": true,
+              "detail": "3 citations resolve"
+            },
+            {
+              "name": "quotes_in_text",
+              "passed": true,
+              "detail": "all quotes/phrases found verbatim"
+            },
+            {
+              "name": "required_retrieved",
+              "passed": true,
+              "detail": "5 conditions/exemptions retrieved"
+            },
+            {
+              "name": "route_has_basis",
+              "passed": true,
+              "detail": "decline cites a negative condition"
+            }
+          ]
+        },
+        "guardrail_flags": [],
+        "degraded": false,
+        "confidence": "medium",
+        "basis": "model answer failed verification; engine position verified instead",
+        "notes": [],
+        "agent": {
+          "steps": 9,
+          "tool_calls": 7,
+          "planner_sources": [
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "model",
+            "recovery",
+            "recovery",
+            "model"
+          ],
+          "stop_reason": "",
+          "degraded_reasons": [],
+          "evidence": [
+            "CAR:3.3.1",
+            "CHARTER:3.2",
+            "CAR:3.2.2",
+            "CHARTER:7.2",
+            "CAR:3.3.2",
+            "CAR:3.3.3",
+            "CAR:3.2.3",
+            "CAR:3.3.4",
+            "CAR:3.7.2",
+            "CHARTER:2.1",
+            "CAR:3.6.1",
+            "CAR:3.6.2",
+            "CAR:3.1.1",
+            "CAR:3.1.3",
+            "CAR:3.8.1"
+          ]
+        },
+        "cost": {
+          "total": {
+            "prompt_tokens": 10833,
+            "completion_tokens": 429,
+            "cost_usd": 0.0012549,
+            "calls": 10
+          }
+        },
+        "timings_ms": {
+          "end_to_end": 23.0
+        },
+        "prompt_versions": {
+          "extraction": "extraction@v1#2a1d959f",
+          "planner": "planner@v1#e80cd54b",
+          "determination": "determination@v1#57d5196e"
+        }
+      }
+    },
+    {
+      "id": "S07",
+      "title": "Cancelled at airport due to weather (undisputed), refund",
+      "expected_route": "decline",
+      "route": "decline",
+      "route_ok": true,
+      "amount_ok": true,
+      "facilities_ok": true,
+      "escalation_reason_ok": true,
+      "correct": true,
+      "compensation_inr": 0.0,
+      "downgrade_refund_inr": 0.0,
+      "must_cite_recall": 1.0,
+      "context_recall": 1.0,
+      "supporting_passage_retrieved": true,
+      "groundedness": 1.0,
+      "context_relevance": 0.2777777777777778,
+      "faithfulness": 1.0,
+      "hallucination": 0.0,
+      "verification_passed": true,
+      "verification_attempts": 2,
+      "basis": "model answer failed verification; engine position verified instead",
+      "degraded": false,
+      "steps": 11,
+      "tool_calls": 9,
+      "cost": {
+        "prompt_tokens": 12394,
+        "completion_tokens": 443,
+        "cost_usd": 0.0014166,
+        "calls": 11
+      },
+      "latency_ms": 25.7,
+      "retrieved": 18,
+      "cost_by_step": {
+        "extract": {
+          "calls": 1,
+          "prompt_tokens": 324,
+          "completion_tokens": 81,
+          "cost_usd": 6.48e-05
+        },
+        "plan": {
+          "calls": 8,
+          "prompt_tokens": 7852,
+          "completion_tokens": 112,
+          "cost_usd": 0.0008299999999999999
+        },
+        "determine": {
+          "calls": 2,
+          "prompt_tokens": 4218,
+          "completion_tokens": 250,
+          "cost_usd": 0.0005218
+        }
+      },
+      "result": {
+        "run_id": "eval-S07",
+        "status": "completed",
+        "route": "decline",
+        "disruption_category": "cancellation",
+        "entitlement": {
+          "compensation_inr": 0.0,
+          "computation": "",
+          "refund_due": true,
+          "facilities": [],
+          "downgrade_refund_inr": 0.0
+        },
+        "citations": [
+          {
+            "clause_id": "CAR:3.3.2",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.3.2",
+            "doc_id": "CAR",
+            "quote": "In case the airline fails to inform passengers as per para 3.3.1, or informs them less than 24 hours before the booked scheduled departure time, or the passenger is informed of the cancellation on arrival at the airport, the airline shall provide either an alternate flight or compensation, in addition to a full refund of the air ticket, as given below:"
+          },
+          {
+            "clause_id": "CAR:3.3.4",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.3.4",
+            "doc_id": "CAR",
+            "quote": "The airline shall not be liable to pay compensation under para 3.3.2 if the cancellation is caused by extraordinary circumstances as described in para 3.6."
+          },
+          {
+            "clause_id": "CAR:3.6.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.6.1",
+            "doc_id": "CAR",
+            "quote": "The airline shall not be required to pay compensation under paras 3.2.2 or 3.3.2 where the denied boarding or cancellation is caused by extraordinary circumstances beyond the control of the airline, which could not have been avoided even if all reasonable measures had been taken."
+          },
+          {
+            "clause_id": "CAR:3.8.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.8.1",
+            "doc_id": "CAR",
+            "quote": "A passenger who is not satisfied with the airline's response may escalate the grievance through the AirSewa portal of the Ministry of Civil Aviation."
+          }
+        ],
+        "justification": "The passenger was informed on arrival at the airport, less than 24 hours before departure, so the airline shall provide either an alternate flight or compensation, in addition to a full refund. [CAR:3.3.2] The airline is not liable to pay compensation where the disruption is caused by extraordinary circumstances; the stated cause is 'weather conditions - dense fog at destination'. [CAR:3.3.4] Extraordinary circumstances beyond the control of the airline include weather conditions incompatible with the operation of the flight, air traffic management decisions, strikes and security risks. [CAR:3.6.1]",
+        "missing_evidence": [],
+        "escalation": {
+          "required": false,
+          "reasons": [],
+          "path": [
+            "Customer relations officer (reviews this recommendation)",
+            "Airline nodal officer for grievances (CAR para 3.8.1)",
+            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+          ]
+        },
+        "verification": {
+          "passed": true,
+          "attempts": 2,
+          "checks": [
+            {
+              "name": "citations_resolve",
+              "passed": true,
+              "detail": "4 citations resolve"
+            },
+            {
+              "name": "quotes_in_text",
+              "passed": true,
+              "detail": "all quotes/phrases found verbatim"
+            },
+            {
+              "name": "required_retrieved",
+              "passed": true,
+              "detail": "5 conditions/exemptions retrieved"
+            },
+            {
+              "name": "route_has_basis",
+              "passed": true,
+              "detail": "decline cites a negative condition"
+            }
+          ]
+        },
+        "guardrail_flags": [],
+        "degraded": false,
+        "confidence": "medium",
+        "basis": "model answer failed verification; engine position verified instead",
+        "notes": [],
+        "agent": {
+          "steps": 11,
+          "tool_calls": 9,
+          "planner_sources": [
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "model",
+            "recovery",
+            "recovery",
+            "recovery",
+            "model"
+          ],
+          "stop_reason": "",
+          "degraded_reasons": [],
+          "evidence": [
+            "CAR:3.3.4",
+            "CAR:3.2.2",
+            "CAR:3.3.3",
+            "CHARTER:3.2",
+            "CHARTER:7.1",
+            "CAR:3.6.2",
+            "CAR:2.10",
+            "CAR:3.6.1",
+            "CAR:2.5",
+            "CAR:3.3.2",
+            "CAR:3.2.3",
+            "CAR:3.7.2",
+            "CHARTER:2.1",
+            "CAR:3.1.1",
+            "CAR:3.1.3",
+            "CHARTER:7.2",
+            "CAR:3.3.1",
+            "CAR:3.8.1"
+          ]
+        },
+        "cost": {
+          "total": {
+            "prompt_tokens": 12394,
+            "completion_tokens": 443,
+            "cost_usd": 0.0014166,
+            "calls": 11
+          }
+        },
+        "timings_ms": {
+          "end_to_end": 25.7
+        },
+        "prompt_versions": {
+          "extraction": "extraction@v1#2a1d959f",
+          "planner": "planner@v1#e80cd54b",
+          "determination": "determination@v1#57d5196e"
+        }
+      }
+    },
+    {
+      "id": "S08",
+      "title": "Weather cause disputed by passenger",
+      "expected_route": "escalate_to_human",
+      "route": "escalate_to_human",
+      "route_ok": true,
+      "amount_ok": true,
+      "facilities_ok": true,
+      "escalation_reason_ok": true,
+      "correct": true,
+      "compensation_inr": 0.0,
+      "downgrade_refund_inr": 0.0,
+      "must_cite_recall": 1.0,
+      "context_recall": 1.0,
+      "supporting_passage_retrieved": true,
+      "groundedness": 1.0,
+      "context_relevance": 0.3157894736842105,
+      "faithfulness": 1.0,
+      "hallucination": 0.0,
+      "verification_passed": true,
+      "verification_attempts": 2,
+      "basis": "model answer failed verification; engine position verified instead",
+      "degraded": false,
+      "steps": 9,
+      "tool_calls": 7,
+      "cost": {
+        "prompt_tokens": 13150,
+        "completion_tokens": 443,
+        "cost_usd": 0.0014922,
+        "calls": 11
+      },
+      "latency_ms": 24.2,
+      "retrieved": 19,
+      "cost_by_step": {
+        "extract": {
+          "calls": 1,
+          "prompt_tokens": 345,
+          "completion_tokens": 81,
+          "cost_usd": 6.69e-05
+        },
+        "plan": {
+          "calls": 8,
+          "prompt_tokens": 8169,
+          "completion_tokens": 112,
+          "cost_usd": 0.0008617000000000001
+        },
+        "determine": {
+          "calls": 2,
+          "prompt_tokens": 4636,
+          "completion_tokens": 250,
+          "cost_usd": 0.0005636
+        }
+      },
+      "result": {
+        "run_id": "eval-S08",
+        "status": "escalated",
+        "route": "escalate_to_human",
+        "disruption_category": "cancellation",
+        "entitlement": {
+          "compensation_inr": 0.0,
+          "computation": "",
+          "refund_due": false,
+          "facilities": [],
+          "downgrade_refund_inr": 0.0
+        },
+        "citations": [
+          {
+            "clause_id": "CAR:3.3.2",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.3.2",
+            "doc_id": "CAR",
+            "quote": "In case the airline fails to inform passengers as per para 3.3.1, or informs them less than 24 hours before the booked scheduled departure time, or the passenger is informed of the cancellation on arrival at the airport, the airline shall provide either an alternate flight or compensation, in addition to a full refund of the air ticket, as given below:"
+          },
+          {
+            "clause_id": "CAR:3.6.2",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.6.2",
+            "doc_id": "CAR",
+            "quote": "The burden of establishing extraordinary circumstances rests with the airline."
+          }
+        ],
+        "justification": "The passenger was informed on arrival at the airport, less than 24 hours before departure, so the airline shall provide either an alternate flight or compensation, in addition to a full refund. [CAR:3.3.2] The burden of establishing extraordinary circumstances rests with the airline; circumstances are assessed against the general test. [CAR:3.6.2]",
+        "missing_evidence": [],
+        "escalation": {
+          "required": true,
+          "reasons": [
+            "Cause attribution disputed: the airline cites 'bad weather' and the passenger disputes it. The burden of establishing extraordinary circumstances rests with the airline (para 3.6.2)."
+          ],
+          "path": [
+            "Customer relations officer (reviews this recommendation)",
+            "Airline nodal officer for grievances (CAR para 3.8.1)",
+            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+          ]
+        },
+        "verification": {
+          "passed": true,
+          "attempts": 2,
+          "checks": [
+            {
+              "name": "citations_resolve",
+              "passed": true,
+              "detail": "2 citations resolve"
+            },
+            {
+              "name": "quotes_in_text",
+              "passed": true,
+              "detail": "all quotes/phrases found verbatim"
+            },
+            {
+              "name": "required_retrieved",
+              "passed": true,
+              "detail": "5 conditions/exemptions retrieved"
+            },
+            {
+              "name": "route_has_basis",
+              "passed": true,
+              "detail": "escalation carries reasons"
+            }
+          ]
+        },
+        "guardrail_flags": [],
+        "degraded": false,
+        "confidence": "medium",
+        "basis": "model answer failed verification; engine position verified instead",
+        "notes": [],
+        "agent": {
+          "steps": 9,
+          "tool_calls": 7,
+          "planner_sources": [
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "model",
+            "recovery",
+            "model"
+          ],
+          "stop_reason": "",
+          "degraded_reasons": [],
+          "evidence": [
+            "CAR:3.4.1",
+            "CAR:3.3.1",
+            "CHARTER:3.2",
+            "CAR:3.3.2",
+            "CAR:3.4.2",
+            "CAR:3.3.4",
+            "CAR:3.3.3",
+            "CAR:3.6.1",
+            "CAR:3.2.3",
+            "CAR:3.6.2",
+            "CAR:2.10",
+            "CAR:3.8.1",
+            "CAR:2.5",
+            "CAR:3.7.2",
+            "CHARTER:2.1",
+            "CAR:3.1.1",
+            "CAR:3.1.3",
+            "CHARTER:7.2",
+            "CAR:3.2.2"
+          ]
+        },
+        "cost": {
+          "total": {
+            "prompt_tokens": 13150,
+            "completion_tokens": 443,
+            "cost_usd": 0.0014922,
+            "calls": 11
+          }
+        },
+        "timings_ms": {
+          "end_to_end": 24.2
+        },
+        "prompt_versions": {
+          "extraction": "extraction@v1#2a1d959f",
+          "planner": "planner@v1#e80cd54b",
+          "determination": "determination@v1#57d5196e"
+        }
+      }
+    },
+    {
+      "id": "S09",
+      "title": "Cause is a technical snag (not listed: general test)",
+      "expected_route": "escalate_to_human",
+      "route": "escalate_to_human",
+      "route_ok": true,
+      "amount_ok": true,
+      "facilities_ok": true,
+      "escalation_reason_ok": true,
+      "correct": true,
+      "compensation_inr": 0.0,
+      "downgrade_refund_inr": 0.0,
+      "must_cite_recall": 1.0,
+      "context_recall": 1.0,
+      "supporting_passage_retrieved": true,
+      "groundedness": 1.0,
+      "context_relevance": 0.3157894736842105,
+      "faithfulness": 1.0,
+      "hallucination": 0.0,
+      "verification_passed": true,
+      "verification_attempts": 2,
+      "basis": "model answer failed verification; engine position verified instead",
+      "degraded": false,
+      "steps": 10,
+      "tool_calls": 8,
+      "cost": {
+        "prompt_tokens": 12245,
+        "completion_tokens": 443,
+        "cost_usd": 0.0014017,
+        "calls": 11
+      },
+      "latency_ms": 23.3,
+      "retrieved": 19,
+      "cost_by_step": {
+        "extract": {
+          "calls": 1,
+          "prompt_tokens": 321,
+          "completion_tokens": 81,
+          "cost_usd": 6.45e-05
+        },
+        "plan": {
+          "calls": 8,
+          "prompt_tokens": 7878,
+          "completion_tokens": 112,
+          "cost_usd": 0.0008326000000000001
+        },
+        "determine": {
+          "calls": 2,
+          "prompt_tokens": 4046,
+          "completion_tokens": 250,
+          "cost_usd": 0.0005046
+        }
+      },
+      "result": {
+        "run_id": "eval-S09",
+        "status": "escalated",
+        "route": "escalate_to_human",
+        "disruption_category": "cancellation",
+        "entitlement": {
+          "compensation_inr": 0.0,
+          "computation": "",
+          "refund_due": false,
+          "facilities": [],
+          "downgrade_refund_inr": 0.0
+        },
+        "citations": [
+          {
+            "clause_id": "CAR:3.3.2",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.3.2",
+            "doc_id": "CAR",
+            "quote": "In case the airline fails to inform passengers as per para 3.3.1, or informs them less than 24 hours before the booked scheduled departure time, or the passenger is informed of the cancellation on arrival at the airport, the airline shall provide either an alternate flight or compensation, in addition to a full refund of the air ticket, as given below:"
+          },
+          {
+            "clause_id": "CAR:3.6.2",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.6.2",
+            "doc_id": "CAR",
+            "quote": "The burden of establishing extraordinary circumstances rests with the airline."
+          }
+        ],
+        "justification": "The passenger was informed on arrival at the airport, less than 24 hours before departure, so the airline shall provide either an alternate flight or compensation, in addition to a full refund. [CAR:3.3.2] Circumstances not listed are assessed against the general test on the facts of each case; the burden of establishing extraordinary circumstances rests with the airline. [CAR:3.6.2]",
+        "missing_evidence": [],
+        "escalation": {
+          "required": true,
+          "reasons": [
+            "Cause 'technical snag' is not clearly within the circumstances listed in para 3.6.1 and needs the general test in para 3.6.2 applied by a human."
+          ],
+          "path": [
+            "Customer relations officer (reviews this recommendation)",
+            "Airline nodal officer for grievances (CAR para 3.8.1)",
+            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+          ]
+        },
+        "verification": {
+          "passed": true,
+          "attempts": 2,
+          "checks": [
+            {
+              "name": "citations_resolve",
+              "passed": true,
+              "detail": "2 citations resolve"
+            },
+            {
+              "name": "quotes_in_text",
+              "passed": true,
+              "detail": "all quotes/phrases found verbatim"
+            },
+            {
+              "name": "required_retrieved",
+              "passed": true,
+              "detail": "5 conditions/exemptions retrieved"
+            },
+            {
+              "name": "route_has_basis",
+              "passed": true,
+              "detail": "escalation carries reasons"
+            }
+          ]
+        },
+        "guardrail_flags": [],
+        "degraded": false,
+        "confidence": "medium",
+        "basis": "model answer failed verification; engine position verified instead",
+        "notes": [],
+        "agent": {
+          "steps": 10,
+          "tool_calls": 8,
+          "planner_sources": [
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "model",
+            "recovery",
+            "recovery",
+            "model"
+          ],
+          "stop_reason": "",
+          "degraded_reasons": [],
+          "evidence": [
+            "CHARTER:7.1",
+            "CHARTER:7.2",
+            "CHARTER:5.2",
+            "CHARTER:3.2",
+            "CAR:3.3.1",
+            "CAR:3.3.4",
+            "CAR:3.3.3",
+            "CAR:3.6.1",
+            "CAR:3.2.3",
+            "CAR:3.6.2",
+            "CAR:2.10",
+            "CAR:3.8.1",
+            "CAR:2.5",
+            "CAR:3.7.2",
+            "CHARTER:2.1",
+            "CAR:3.1.1",
+            "CAR:3.1.3",
+            "CAR:3.3.2",
+            "CAR:3.2.2"
+          ]
+        },
+        "cost": {
+          "total": {
+            "prompt_tokens": 12245,
+            "completion_tokens": 443,
+            "cost_usd": 0.0014017,
+            "calls": 11
+          }
+        },
+        "timings_ms": {
+          "end_to_end": 23.3
+        },
+        "prompt_versions": {
+          "extraction": "extraction@v1#2a1d959f",
+          "planner": "planner@v1#e80cd54b",
+          "determination": "determination@v1#57d5196e"
+        }
+      }
+    },
+    {
+      "id": "S10",
+      "title": "Cancelled at airport, refund taken, no block time or fare given",
+      "expected_route": "request_further_evidence",
+      "route": "request_further_evidence",
+      "route_ok": true,
+      "amount_ok": true,
+      "facilities_ok": true,
+      "escalation_reason_ok": true,
+      "correct": true,
+      "compensation_inr": 0.0,
+      "downgrade_refund_inr": 0.0,
+      "must_cite_recall": 1.0,
+      "context_recall": 1.0,
+      "supporting_passage_retrieved": true,
+      "groundedness": 1.0,
+      "context_relevance": 0.2631578947368421,
+      "faithfulness": 1.0,
+      "hallucination": 0.0,
+      "verification_passed": true,
+      "verification_attempts": 2,
+      "basis": "model answer failed verification; engine position verified instead",
+      "degraded": false,
+      "steps": 10,
+      "tool_calls": 8,
+      "cost": {
+        "prompt_tokens": 12681,
+        "completion_tokens": 443,
+        "cost_usd": 0.0014452999999999998,
+        "calls": 11
+      },
+      "latency_ms": 23.1,
+      "retrieved": 19,
+      "cost_by_step": {
+        "extract": {
+          "calls": 1,
+          "prompt_tokens": 329,
+          "completion_tokens": 81,
+          "cost_usd": 6.53e-05
+        },
+        "plan": {
+          "calls": 8,
+          "prompt_tokens": 7677,
+          "completion_tokens": 112,
+          "cost_usd": 0.0008125000000000001
+        },
+        "determine": {
+          "calls": 2,
+          "prompt_tokens": 4675,
+          "completion_tokens": 250,
+          "cost_usd": 0.0005675000000000001
+        }
+      },
+      "result": {
+        "run_id": "eval-S10",
+        "status": "completed",
+        "route": "request_further_evidence",
+        "disruption_category": "cancellation",
+        "entitlement": {
+          "compensation_inr": 0.0,
+          "computation": "",
+          "refund_due": false,
+          "facilities": [],
+          "downgrade_refund_inr": 0.0
+        },
+        "citations": [
+          {
+            "clause_id": "CAR:3.3.2",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.3.2",
+            "doc_id": "CAR",
+            "quote": "(c) INR 10,000 or the booked one-way basic fare plus airline fuel charge, whichever is less, for flights having a block time of more than two hours."
+          },
+          {
+            "clause_id": "CAR:3.8.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.8.1",
+            "doc_id": "CAR",
+            "quote": "A passenger who is not satisfied with the airline's response may escalate the grievance through the AirSewa portal of the Ministry of Civil Aviation."
+          }
+        ],
+        "justification": "The passenger was informed on arrival at the airport, less than 24 hours before departure, so the airline shall provide either an alternate flight or compensation, in addition to a full refund. [CAR:3.3.2] Compensation is set by block time: INR 5,000, 7,500 or 10,000, or the booked one-way basic fare plus airline fuel charge, whichever is less. [CAR:3.3.2]",
+        "missing_evidence": [
+          "block time of the booked flight",
+          "booked one-way basic fare and airline fuel charge (from the ticket)"
+        ],
+        "escalation": {
+          "required": false,
+          "reasons": [],
+          "path": [
+            "Customer relations officer (reviews this recommendation)",
+            "Airline nodal officer for grievances (CAR para 3.8.1)",
+            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+          ]
+        },
+        "verification": {
+          "passed": true,
+          "attempts": 2,
+          "checks": [
+            {
+              "name": "citations_resolve",
+              "passed": true,
+              "detail": "2 citations resolve"
+            },
+            {
+              "name": "quotes_in_text",
+              "passed": true,
+              "detail": "all quotes/phrases found verbatim"
+            },
+            {
+              "name": "required_retrieved",
+              "passed": true,
+              "detail": "5 conditions/exemptions retrieved"
+            },
+            {
+              "name": "route_has_basis",
+              "passed": true,
+              "detail": "lists the evidence needed"
+            }
+          ]
+        },
+        "guardrail_flags": [],
+        "degraded": false,
+        "confidence": "medium",
+        "basis": "model answer failed verification; engine position verified instead",
+        "notes": [],
+        "agent": {
+          "steps": 10,
+          "tool_calls": 8,
+          "planner_sources": [
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "model",
+            "recovery",
+            "recovery",
+            "model"
+          ],
+          "stop_reason": "",
+          "degraded_reasons": [],
+          "evidence": [
+            "CHARTER:3.2",
+            "CAR:3.3.1",
+            "CAR:3.3.2",
+            "CHARTER:7.1",
+            "CAR:3.2.2",
+            "CAR:2.1",
+            "CAR:3.4.1",
+            "CAR:3.3.4",
+            "CAR:3.3.3",
+            "CAR:3.6.1",
+            "CAR:3.2.3",
+            "CAR:3.6.2",
+            "CAR:3.7.2",
+            "CHARTER:2.1",
+            "CAR:3.1.1",
+            "CAR:3.1.3",
+            "CHARTER:7.2",
+            "CAR:3.8.1",
+            "CAR:3.4.2"
+          ]
+        },
+        "cost": {
+          "total": {
+            "prompt_tokens": 12681,
+            "completion_tokens": 443,
+            "cost_usd": 0.0014452999999999998,
+            "calls": 11
+          }
+        },
+        "timings_ms": {
+          "end_to_end": 23.1
+        },
+        "prompt_versions": {
+          "extraction": "extraction@v1#2a1d959f",
+          "planner": "planner@v1#e80cd54b",
+          "determination": "determination@v1#57d5196e"
+        }
+      }
+    },
+    {
+      "id": "S11",
+      "title": "Cancelled, no notice information",
+      "expected_route": "request_further_evidence",
+      "route": "request_further_evidence",
+      "route_ok": true,
+      "amount_ok": true,
+      "facilities_ok": true,
+      "escalation_reason_ok": true,
+      "correct": true,
+      "compensation_inr": 0.0,
+      "downgrade_refund_inr": 0.0,
+      "must_cite_recall": 1.0,
+      "context_recall": 1.0,
+      "supporting_passage_retrieved": true,
+      "groundedness": 1.0,
+      "context_relevance": 0.3125,
+      "faithfulness": 1.0,
+      "hallucination": 0.0,
+      "verification_passed": true,
+      "verification_attempts": 2,
+      "basis": "model answer failed verification; engine position verified instead",
+      "degraded": false,
+      "steps": 8,
+      "tool_calls": 6,
+      "cost": {
+        "prompt_tokens": 10323,
+        "completion_tokens": 429,
+        "cost_usd": 0.0012039,
+        "calls": 10
+      },
+      "latency_ms": 18.8,
+      "retrieved": 16,
+      "cost_by_step": {
+        "extract": {
+          "calls": 1,
+          "prompt_tokens": 314,
+          "completion_tokens": 81,
+          "cost_usd": 6.38e-05
+        },
+        "plan": {
+          "calls": 7,
+          "prompt_tokens": 5922,
+          "completion_tokens": 98,
+          "cost_usd": 0.0006314000000000001
+        },
+        "determine": {
+          "calls": 2,
+          "prompt_tokens": 4087,
+          "completion_tokens": 250,
+          "cost_usd": 0.0005087000000000001
+        }
+      },
+      "result": {
+        "run_id": "eval-S11",
+        "status": "completed",
+        "route": "request_further_evidence",
+        "disruption_category": "cancellation",
+        "entitlement": {
+          "compensation_inr": 0.0,
+          "computation": "",
+          "refund_due": false,
+          "facilities": [],
+          "downgrade_refund_inr": 0.0
+        },
+        "citations": [
+          {
+            "clause_id": "CAR:3.3.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.3.1",
+            "doc_id": "CAR",
+            "quote": "or (b) The airline shall inform passengers less than two weeks before and up to 24 hours before the booked scheduled departure time and offer an alternate flight departing within two hours of the booked scheduled departure time, or refund the ticket, as acceptable to the passenger."
+          },
+          {
+            "clause_id": "CAR:3.8.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.8.1",
+            "doc_id": "CAR",
+            "quote": "A passenger who is not satisfied with the airline's response may escalate the grievance through the AirSewa portal of the Ministry of Civil Aviation."
+          }
+        ],
+        "justification": "The airline shall inform passengers less than two weeks or at least two weeks before the booked scheduled departure time; what is owed depends on when it informed them. [CAR:3.3.1]",
+        "missing_evidence": [
+          "when the passenger was informed of the cancellation"
+        ],
+        "escalation": {
+          "required": false,
+          "reasons": [],
+          "path": [
+            "Customer relations officer (reviews this recommendation)",
+            "Airline nodal officer for grievances (CAR para 3.8.1)",
+            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+          ]
+        },
+        "verification": {
+          "passed": true,
+          "attempts": 2,
+          "checks": [
+            {
+              "name": "citations_resolve",
+              "passed": true,
+              "detail": "2 citations resolve"
+            },
+            {
+              "name": "quotes_in_text",
+              "passed": true,
+              "detail": "all quotes/phrases found verbatim"
+            },
+            {
+              "name": "required_retrieved",
+              "passed": true,
+              "detail": "5 conditions/exemptions retrieved"
+            },
+            {
+              "name": "route_has_basis",
+              "passed": true,
+              "detail": "lists the evidence needed"
+            }
+          ]
+        },
+        "guardrail_flags": [],
+        "degraded": false,
+        "confidence": "medium",
+        "basis": "model answer failed verification; engine position verified instead",
+        "notes": [],
+        "agent": {
+          "steps": 8,
+          "tool_calls": 6,
+          "planner_sources": [
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "model",
+            "recovery",
+            "model"
+          ],
+          "stop_reason": "",
+          "degraded_reasons": [],
+          "evidence": [
+            "CAR:3.2.2",
+            "CAR:3.3.2",
+            "CAR:3.3.4",
+            "CAR:3.3.1",
+            "CAR:3.8.1",
+            "CAR:3.3.3",
+            "CAR:3.6.1",
+            "CAR:3.2.3",
+            "CAR:3.6.2",
+            "CAR:3.7.2",
+            "CHARTER:2.1",
+            "CAR:3.1.1",
+            "CAR:3.1.3",
+            "CHARTER:7.2",
+            "CHARTER:3.2",
+            "CAR:3.4.4"
+          ]
+        },
+        "cost": {
+          "total": {
+            "prompt_tokens": 10323,
+            "completion_tokens": 429,
+            "cost_usd": 0.0012039,
+            "calls": 10
+          }
+        },
+        "timings_ms": {
+          "end_to_end": 18.8
+        },
+        "prompt_versions": {
+          "extraction": "extraction@v1#2a1d959f",
+          "planner": "planner@v1#e80cd54b",
+          "determination": "determination@v1#57d5196e"
+        }
+      }
+    },
+    {
+      "id": "S12",
+      "title": "Denied boarding (overbooked), alternate 3h later, cap applies",
+      "expected_route": "pay_as_computed",
+      "route": "pay_as_computed",
+      "route_ok": true,
+      "amount_ok": true,
+      "facilities_ok": true,
+      "escalation_reason_ok": true,
+      "correct": true,
+      "compensation_inr": 10000.0,
+      "downgrade_refund_inr": 0.0,
+      "must_cite_recall": 0.0,
+      "context_recall": 1.0,
+      "supporting_passage_retrieved": true,
+      "groundedness": 1.0,
+      "context_relevance": 0.18181818181818182,
+      "faithfulness": 1.0,
+      "hallucination": 0.0,
+      "verification_passed": true,
+      "verification_attempts": 1,
+      "basis": "model answer verified against retrieved provisions",
+      "degraded": false,
+      "steps": 8,
+      "tool_calls": 7,
+      "cost": {
+        "prompt_tokens": 11104,
+        "completion_tokens": 318,
+        "cost_usd": 0.0012376,
+        "calls": 10
+      },
+      "latency_ms": 19.1,
+      "retrieved": 22,
+      "cost_by_step": {
+        "extract": {
+          "calls": 1,
+          "prompt_tokens": 330,
+          "completion_tokens": 81,
+          "cost_usd": 6.54e-05
+        },
+        "plan": {
+          "calls": 8,
+          "prompt_tokens": 8291,
+          "completion_tokens": 112,
+          "cost_usd": 0.0008738999999999999
+        },
+        "determine": {
+          "calls": 1,
+          "prompt_tokens": 2483,
+          "completion_tokens": 125,
+          "cost_usd": 0.00029830000000000004
+        }
+      },
+      "result": {
+        "run_id": "eval-S12",
+        "status": "completed",
+        "route": "pay_as_computed",
+        "disruption_category": "denied_boarding",
+        "entitlement": {
+          "compensation_inr": 10000.0,
+          "computation": "cancellation compensation for block time over two hours",
+          "refund_due": true,
+          "facilities": [],
+          "downgrade_refund_inr": 0.0
+        },
+        "citations": [
+          {
+            "clause_id": "CAR:3.3.2",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.3.2",
+            "doc_id": "CAR",
+            "quote": "INR 10,000 or the booked one-way basic fare plus airline fuel charge, whichever is less"
+          }
+        ],
+        "justification": "The flight was cancelled, so cancellation compensation of INR 10,000 is payable under para 3.3.2.",
+        "missing_evidence": [],
+        "escalation": {
+          "required": false,
+          "reasons": [],
+          "path": [
+            "Customer relations officer (reviews this recommendation)",
+            "Airline nodal officer for grievances (CAR para 3.8.1)",
+            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+          ]
+        },
+        "verification": {
+          "passed": true,
+          "attempts": 1,
+          "checks": [
+            {
+              "name": "citations_resolve",
+              "passed": true,
+              "detail": "1 citations resolve"
+            },
+            {
+              "name": "quotes_in_text",
+              "passed": true,
+              "detail": "all quotes/phrases found verbatim"
+            },
+            {
+              "name": "required_retrieved",
+              "passed": true,
+              "detail": "4 conditions/exemptions retrieved"
+            },
+            {
+              "name": "route_has_basis",
+              "passed": true,
+              "detail": "payment cites an amount provision"
+            },
+            {
+              "name": "consistent_with_rules",
+              "passed": true,
+              "detail": "agrees"
+            }
+          ]
+        },
+        "guardrail_flags": [],
+        "degraded": false,
+        "confidence": "high",
+        "basis": "model answer verified against retrieved provisions",
+        "notes": [],
+        "agent": {
+          "steps": 8,
+          "tool_calls": 7,
+          "planner_sources": [
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "model"
+          ],
+          "stop_reason": "",
+          "degraded_reasons": [],
+          "evidence": [
+            "CHARTER:5.1",
+            "CAR:3.2.1",
+            "CHARTER:5.2",
+            "CAR:3.2.2",
+            "CAR:2.8",
+            "CHARTER:3.2",
+            "CAR:3.3.2",
+            "CAR:2.1",
+            "CAR:3.4.1",
+            "CAR:2.11",
+            "CAR:3.4.3",
+            "CAR:2.2",
+            "CAR:2.3",
+            "CAR:3.3.4",
+            "CAR:3.2.3",
+            "CAR:3.6.1",
+            "CAR:3.3.3",
+            "CAR:3.6.2",
+            "CAR:3.1.2",
+            "CAR:3.1.1",
+            "CAR:3.1.3",
+            "CHARTER:7.2"
+          ]
+        },
+        "cost": {
+          "total": {
+            "prompt_tokens": 11104,
+            "completion_tokens": 318,
+            "cost_usd": 0.0012376,
+            "calls": 10
+          }
+        },
+        "timings_ms": {
+          "end_to_end": 19.1
+        },
+        "prompt_versions": {
+          "extraction": "extraction@v1#2a1d959f",
+          "planner": "planner@v1#e80cd54b",
+          "determination": "determination@v1#57d5196e"
+        }
+      }
+    },
+    {
+      "id": "S13",
+      "title": "Denied boarding, alternate within 45 minutes",
+      "expected_route": "decline",
+      "route": "decline",
+      "route_ok": true,
+      "amount_ok": true,
+      "facilities_ok": true,
+      "escalation_reason_ok": true,
+      "correct": true,
+      "compensation_inr": 0.0,
+      "downgrade_refund_inr": 0.0,
+      "must_cite_recall": 1.0,
+      "context_recall": 1.0,
+      "supporting_passage_retrieved": true,
+      "groundedness": 1.0,
+      "context_relevance": 0.14814814814814814,
+      "faithfulness": 1.0,
+      "hallucination": 0.0,
+      "verification_passed": true,
+      "verification_attempts": 2,
+      "basis": "model answer failed verification; engine position verified instead",
+      "degraded": false,
+      "steps": 11,
+      "tool_calls": 9,
+      "cost": {
+        "prompt_tokens": 16108,
+        "completion_tokens": 457,
+        "cost_usd": 0.0017936,
+        "calls": 12
+      },
+      "latency_ms": 26.9,
+      "retrieved": 27,
+      "cost_by_step": {
+        "extract": {
+          "calls": 1,
+          "prompt_tokens": 328,
+          "completion_tokens": 81,
+          "cost_usd": 6.520000000000001e-05
+        },
+        "plan": {
+          "calls": 9,
+          "prompt_tokens": 10225,
+          "completion_tokens": 126,
+          "cost_usd": 0.0010729
+        },
+        "determine": {
+          "calls": 2,
+          "prompt_tokens": 5555,
+          "completion_tokens": 250,
+          "cost_usd": 0.0006555
+        }
+      },
+      "result": {
+        "run_id": "eval-S13",
+        "status": "completed",
+        "route": "decline",
+        "disruption_category": "denied_boarding",
+        "entitlement": {
+          "compensation_inr": 0.0,
+          "computation": "",
+          "refund_due": false,
+          "facilities": [],
+          "downgrade_refund_inr": 0.0
+        },
+        "citations": [
+          {
+            "clause_id": "CAR:3.2.2",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.2.2",
+            "doc_id": "CAR",
+            "quote": "(a) No compensation shall be payable if the airline arranges an alternate flight that is scheduled to depart within one hour of the booked scheduled departure time of the original reservation."
+          },
+          {
+            "clause_id": "CAR:3.8.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.8.1",
+            "doc_id": "CAR",
+            "quote": "A passenger who is not satisfied with the airline's response may escalate the grievance through the AirSewa portal of the Ministry of Civil Aviation."
+          }
+        ],
+        "justification": "The alternate flight departed 45 minutes after the booked time; no compensation shall be payable for an alternate flight within one hour. [CAR:3.2.2]",
+        "missing_evidence": [],
+        "escalation": {
+          "required": false,
+          "reasons": [],
+          "path": [
+            "Customer relations officer (reviews this recommendation)",
+            "Airline nodal officer for grievances (CAR para 3.8.1)",
+            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+          ]
+        },
+        "verification": {
+          "passed": true,
+          "attempts": 2,
+          "checks": [
+            {
+              "name": "citations_resolve",
+              "passed": true,
+              "detail": "2 citations resolve"
+            },
+            {
+              "name": "quotes_in_text",
+              "passed": true,
+              "detail": "all quotes/phrases found verbatim"
+            },
+            {
+              "name": "required_retrieved",
+              "passed": true,
+              "detail": "4 conditions/exemptions retrieved"
+            },
+            {
+              "name": "route_has_basis",
+              "passed": true,
+              "detail": "decline cites a negative condition"
+            }
+          ]
+        },
+        "guardrail_flags": [],
+        "degraded": false,
+        "confidence": "medium",
+        "basis": "model answer failed verification; engine position verified instead",
+        "notes": [
+          "Subject to confirmation that the passenger presented for check-in on time (para 3.1.2)."
+        ],
+        "agent": {
+          "steps": 11,
+          "tool_calls": 9,
+          "planner_sources": [
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "model",
+            "recovery",
+            "recovery",
+            "model"
+          ],
+          "stop_reason": "",
+          "degraded_reasons": [],
+          "evidence": [
+            "CAR:3.2.2",
+            "CHARTER:5.1",
+            "CHARTER:5.2",
+            "CAR:2.8",
+            "CAR:3.4.4",
+            "CHARTER:3.2",
+            "CAR:3.3.2",
+            "CAR:2.1",
+            "CAR:3.4.1",
+            "CAR:2.11",
+            "CAR:3.4.3",
+            "CAR:2.2",
+            "CAR:2.3",
+            "CAR:3.3.4",
+            "CAR:3.2.3",
+            "CAR:3.6.1",
+            "CAR:3.3.3",
+            "CAR:3.6.2",
+            "CAR:2.10",
+            "CAR:3.8.1",
+            "CAR:2.5",
+            "CAR:3.1.1",
+            "CAR:3.1.3",
+            "CHARTER:7.2",
+            "CAR:3.2.1",
+            "CAR:3.3.1",
+            "CAR:3.1.2"
+          ]
+        },
+        "cost": {
+          "total": {
+            "prompt_tokens": 16108,
+            "completion_tokens": 457,
+            "cost_usd": 0.0017936,
+            "calls": 12
+          }
+        },
+        "timings_ms": {
+          "end_to_end": 26.9
+        },
+        "prompt_versions": {
+          "extraction": "extraction@v1#2a1d959f",
+          "planner": "planner@v1#e80cd54b",
+          "determination": "determination@v1#57d5196e"
+        }
+      }
+    },
+    {
+      "id": "S14",
+      "title": "Denied boarding, passenger volunteered",
+      "expected_route": "decline",
+      "route": "decline",
+      "route_ok": true,
+      "amount_ok": true,
+      "facilities_ok": true,
+      "escalation_reason_ok": true,
+      "correct": true,
+      "compensation_inr": 0.0,
+      "downgrade_refund_inr": 0.0,
+      "must_cite_recall": 1.0,
+      "context_recall": 1.0,
+      "supporting_passage_retrieved": true,
+      "groundedness": 1.0,
+      "context_relevance": 0.16666666666666666,
+      "faithfulness": 1.0,
+      "hallucination": 0.0,
+      "verification_passed": true,
+      "verification_attempts": 2,
+      "basis": "model answer failed verification; engine position verified instead",
+      "degraded": false,
+      "steps": 11,
+      "tool_calls": 9,
+      "cost": {
+        "prompt_tokens": 15468,
+        "completion_tokens": 457,
+        "cost_usd": 0.0017296,
+        "calls": 12
+      },
+      "latency_ms": 28.5,
+      "retrieved": 24,
+      "cost_by_step": {
+        "extract": {
+          "calls": 1,
+          "prompt_tokens": 337,
+          "completion_tokens": 81,
+          "cost_usd": 6.610000000000001e-05
+        },
+        "plan": {
+          "calls": 9,
+          "prompt_tokens": 9924,
+          "completion_tokens": 126,
+          "cost_usd": 0.0010428000000000002
+        },
+        "determine": {
+          "calls": 2,
+          "prompt_tokens": 5207,
+          "completion_tokens": 250,
+          "cost_usd": 0.0006207000000000001
+        }
+      },
+      "result": {
+        "run_id": "eval-S14",
+        "status": "completed",
+        "route": "decline",
+        "disruption_category": "denied_boarding",
+        "entitlement": {
+          "compensation_inr": 0.0,
+          "computation": "",
+          "refund_due": false,
+          "facilities": [],
+          "downgrade_refund_inr": 0.0
+        },
+        "citations": [
+          {
+            "clause_id": "CAR:3.2.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.2.1",
+            "doc_id": "CAR",
+            "quote": "Passengers who volunteer are not entitled to compensation under para 3.2.2."
+          },
+          {
+            "clause_id": "CAR:3.8.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.8.1",
+            "doc_id": "CAR",
+            "quote": "A passenger who is not satisfied with the airline's response may escalate the grievance through the AirSewa portal of the Ministry of Civil Aviation."
+          }
+        ],
+        "justification": "The passenger volunteered to surrender the reservation; volunteers are not entitled to compensation under para 3.2.2. [CAR:3.2.1]",
+        "missing_evidence": [],
+        "escalation": {
+          "required": false,
+          "reasons": [],
+          "path": [
+            "Customer relations officer (reviews this recommendation)",
+            "Airline nodal officer for grievances (CAR para 3.8.1)",
+            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+          ]
+        },
+        "verification": {
+          "passed": true,
+          "attempts": 2,
+          "checks": [
+            {
+              "name": "citations_resolve",
+              "passed": true,
+              "detail": "2 citations resolve"
+            },
+            {
+              "name": "quotes_in_text",
+              "passed": true,
+              "detail": "all quotes/phrases found verbatim"
+            },
+            {
+              "name": "required_retrieved",
+              "passed": true,
+              "detail": "4 conditions/exemptions retrieved"
+            },
+            {
+              "name": "route_has_basis",
+              "passed": true,
+              "detail": "decline cites a negative condition"
+            }
+          ]
+        },
+        "guardrail_flags": [],
+        "degraded": false,
+        "confidence": "medium",
+        "basis": "model answer failed verification; engine position verified instead",
+        "notes": [],
+        "agent": {
+          "steps": 11,
+          "tool_calls": 9,
+          "planner_sources": [
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "model",
+            "recovery",
+            "recovery",
+            "model"
+          ],
+          "stop_reason": "",
+          "degraded_reasons": [],
+          "evidence": [
+            "CHARTER:5.1",
+            "CHARTER:5.2",
+            "CAR:3.2.1",
+            "CAR:2.8",
+            "CAR:3.2.2",
+            "CHARTER:3.2",
+            "CAR:3.3.2",
+            "CAR:2.1",
+            "CAR:3.4.1",
+            "CAR:2.11",
+            "CAR:3.4.3",
+            "CAR:2.2",
+            "CAR:2.3",
+            "CAR:3.3.4",
+            "CAR:3.2.3",
+            "CAR:3.6.1",
+            "CAR:3.3.3",
+            "CAR:3.6.2",
+            "CAR:3.1.2",
+            "CAR:3.1.1",
+            "CAR:3.1.3",
+            "CHARTER:7.2",
+            "CAR:3.8.1",
+            "CHARTER:1.1"
+          ]
+        },
+        "cost": {
+          "total": {
+            "prompt_tokens": 15468,
+            "completion_tokens": 457,
+            "cost_usd": 0.0017296,
+            "calls": 12
+          }
+        },
+        "timings_ms": {
+          "end_to_end": 28.5
+        },
+        "prompt_versions": {
+          "extraction": "extraction@v1#2a1d959f",
+          "planner": "planner@v1#e80cd54b",
+          "determination": "determination@v1#57d5196e"
+        }
+      }
+    },
+    {
+      "id": "S15",
+      "title": "Denied boarding after arriving late for check-in",
+      "expected_route": "decline",
+      "route": "decline",
+      "route_ok": true,
+      "amount_ok": true,
+      "facilities_ok": true,
+      "escalation_reason_ok": true,
+      "correct": true,
+      "compensation_inr": 0.0,
+      "downgrade_refund_inr": 0.0,
+      "must_cite_recall": 1.0,
+      "context_recall": 1.0,
+      "supporting_passage_retrieved": true,
+      "groundedness": 1.0,
+      "context_relevance": 0.16666666666666666,
+      "faithfulness": 1.0,
+      "hallucination": 0.0,
+      "verification_passed": true,
+      "verification_attempts": 2,
+      "basis": "model answer failed verification; engine position verified instead",
+      "degraded": false,
+      "steps": 11,
+      "tool_calls": 9,
+      "cost": {
+        "prompt_tokens": 15359,
+        "completion_tokens": 457,
+        "cost_usd": 0.0017187,
+        "calls": 12
+      },
+      "latency_ms": 26.5,
+      "retrieved": 24,
+      "cost_by_step": {
+        "extract": {
+          "calls": 1,
+          "prompt_tokens": 327,
+          "completion_tokens": 81,
+          "cost_usd": 6.510000000000001e-05
+        },
+        "plan": {
+          "calls": 9,
+          "prompt_tokens": 9877,
+          "completion_tokens": 126,
+          "cost_usd": 0.0010381000000000001
+        },
+        "determine": {
+          "calls": 2,
+          "prompt_tokens": 5155,
+          "completion_tokens": 250,
+          "cost_usd": 0.0006155000000000002
+        }
+      },
+      "result": {
+        "run_id": "eval-S15",
+        "status": "completed",
+        "route": "decline",
+        "disruption_category": "denied_boarding",
+        "entitlement": {
+          "compensation_inr": 0.0,
+          "computation": "",
+          "refund_due": false,
+          "facilities": [],
+          "downgrade_refund_inr": 0.0
+        },
+        "citations": [
+          {
+            "clause_id": "CAR:3.2.3",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.2.3",
+            "doc_id": "CAR",
+            "quote": "The airline shall not be liable to pay compensation under para 3.2.2 where the passenger did not present himself for check-in as provided in para 3.1.2, or where boarding is denied on grounds of health, safety or security, or for inadequate travel documentation, or where the passenger is accommodated in the same flight in a lower class (in which case para 3.5 applies)."
+          },
+          {
+            "clause_id": "CAR:3.1.2",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.1.2",
+            "doc_id": "CAR",
+            "quote": "This CAR shall apply to passengers who have a confirmed reservation on the flight concerned and who have presented themselves for check-in as stipulated by the airline, and in any case not later than one hour before the published departure time of the flight."
+          },
+          {
+            "clause_id": "CAR:3.8.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.8.1",
+            "doc_id": "CAR",
+            "quote": "A passenger who is not satisfied with the airline's response may escalate the grievance through the AirSewa portal of the Ministry of Civil Aviation."
+          }
+        ],
+        "justification": "Passengers must present themselves for check-in not later than one hour before departure. [CAR:3.1.2] The airline shall not be liable to pay compensation where the passenger did not present himself for check-in in time. [CAR:3.2.3]",
+        "missing_evidence": [],
+        "escalation": {
+          "required": false,
+          "reasons": [],
+          "path": [
+            "Customer relations officer (reviews this recommendation)",
+            "Airline nodal officer for grievances (CAR para 3.8.1)",
+            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+          ]
+        },
+        "verification": {
+          "passed": true,
+          "attempts": 2,
+          "checks": [
+            {
+              "name": "citations_resolve",
+              "passed": true,
+              "detail": "3 citations resolve"
+            },
+            {
+              "name": "quotes_in_text",
+              "passed": true,
+              "detail": "all quotes/phrases found verbatim"
+            },
+            {
+              "name": "required_retrieved",
+              "passed": true,
+              "detail": "4 conditions/exemptions retrieved"
+            },
+            {
+              "name": "route_has_basis",
+              "passed": true,
+              "detail": "decline cites a negative condition"
+            }
+          ]
+        },
+        "guardrail_flags": [],
+        "degraded": false,
+        "confidence": "medium",
+        "basis": "model answer failed verification; engine position verified instead",
+        "notes": [],
+        "agent": {
+          "steps": 11,
+          "tool_calls": 9,
+          "planner_sources": [
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "model",
+            "recovery",
+            "recovery",
+            "model"
+          ],
+          "stop_reason": "",
+          "degraded_reasons": [],
+          "evidence": [
+            "CAR:3.2.2",
+            "CHARTER:5.2",
+            "CAR:2.8",
+            "CHARTER:5.1",
+            "CAR:3.1.2",
+            "CHARTER:3.2",
+            "CAR:3.3.2",
+            "CAR:2.1",
+            "CAR:3.4.1",
+            "CAR:2.11",
+            "CAR:3.4.3",
+            "CAR:2.2",
+            "CAR:2.3",
+            "CAR:3.3.4",
+            "CAR:3.2.3",
+            "CAR:3.6.1",
+            "CAR:3.3.3",
+            "CAR:3.6.2",
+            "CAR:3.2.1",
+            "CAR:3.1.1",
+            "CAR:3.1.3",
+            "CHARTER:7.2",
+            "CAR:3.8.1",
+            "CAR:3.7.1"
+          ]
+        },
+        "cost": {
+          "total": {
+            "prompt_tokens": 15359,
+            "completion_tokens": 457,
+            "cost_usd": 0.0017187,
+            "calls": 12
+          }
+        },
+        "timings_ms": {
+          "end_to_end": 26.5
+        },
+        "prompt_versions": {
+          "extraction": "extraction@v1#2a1d959f",
+          "planner": "planner@v1#e80cd54b",
+          "determination": "determination@v1#57d5196e"
+        }
+      }
+    },
+    {
+      "id": "S16",
+      "title": "Denied boarding, passenger declined alternate and took refund",
+      "expected_route": "pay_as_computed",
+      "route": "pay_as_computed",
+      "route_ok": true,
+      "amount_ok": true,
+      "facilities_ok": true,
+      "escalation_reason_ok": true,
+      "correct": true,
+      "compensation_inr": 10000.0,
+      "downgrade_refund_inr": 0.0,
+      "must_cite_recall": 0.0,
+      "context_recall": 1.0,
+      "supporting_passage_retrieved": true,
+      "groundedness": 1.0,
+      "context_relevance": 0.19047619047619047,
+      "faithfulness": 1.0,
+      "hallucination": 0.0,
+      "verification_passed": true,
+      "verification_attempts": 1,
+      "basis": "model answer verified against retrieved provisions",
+      "degraded": false,
+      "steps": 8,
+      "tool_calls": 7,
+      "cost": {
+        "prompt_tokens": 10960,
+        "completion_tokens": 318,
+        "cost_usd": 0.0012232,
+        "calls": 10
+      },
+      "latency_ms": 23.5,
+      "retrieved": 21,
+      "cost_by_step": {
+        "extract": {
+          "calls": 1,
+          "prompt_tokens": 330,
+          "completion_tokens": 81,
+          "cost_usd": 6.54e-05
+        },
+        "plan": {
+          "calls": 8,
+          "prompt_tokens": 8216,
+          "completion_tokens": 112,
+          "cost_usd": 0.0008664000000000001
+        },
+        "determine": {
+          "calls": 1,
+          "prompt_tokens": 2414,
+          "completion_tokens": 125,
+          "cost_usd": 0.00029140000000000004
+        }
+      },
+      "result": {
+        "run_id": "eval-S16",
+        "status": "completed",
+        "route": "pay_as_computed",
+        "disruption_category": "denied_boarding",
+        "entitlement": {
+          "compensation_inr": 10000.0,
+          "computation": "cancellation compensation for block time over two hours",
+          "refund_due": true,
+          "facilities": [],
+          "downgrade_refund_inr": 0.0
+        },
+        "citations": [
+          {
+            "clause_id": "CAR:3.3.2",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.3.2",
+            "doc_id": "CAR",
+            "quote": "INR 10,000 or the booked one-way basic fare plus airline fuel charge, whichever is less"
+          }
+        ],
+        "justification": "The flight was cancelled, so cancellation compensation of INR 10,000 is payable under para 3.3.2.",
+        "missing_evidence": [],
+        "escalation": {
+          "required": false,
+          "reasons": [],
+          "path": [
+            "Customer relations officer (reviews this recommendation)",
+            "Airline nodal officer for grievances (CAR para 3.8.1)",
+            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+          ]
+        },
+        "verification": {
+          "passed": true,
+          "attempts": 1,
+          "checks": [
+            {
+              "name": "citations_resolve",
+              "passed": true,
+              "detail": "1 citations resolve"
+            },
+            {
+              "name": "quotes_in_text",
+              "passed": true,
+              "detail": "all quotes/phrases found verbatim"
+            },
+            {
+              "name": "required_retrieved",
+              "passed": true,
+              "detail": "4 conditions/exemptions retrieved"
+            },
+            {
+              "name": "route_has_basis",
+              "passed": true,
+              "detail": "payment cites an amount provision"
+            },
+            {
+              "name": "consistent_with_rules",
+              "passed": true,
+              "detail": "agrees"
+            }
+          ]
+        },
+        "guardrail_flags": [],
+        "degraded": false,
+        "confidence": "high",
+        "basis": "model answer verified against retrieved provisions",
+        "notes": [
+          "Subject to confirmation that the passenger presented for check-in on time (para 3.1.2)."
+        ],
+        "agent": {
+          "steps": 8,
+          "tool_calls": 7,
+          "planner_sources": [
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "model"
+          ],
+          "stop_reason": "",
+          "degraded_reasons": [],
+          "evidence": [
+            "CHARTER:5.1",
+            "CAR:3.2.2",
+            "CAR:3.2.1",
+            "CHARTER:5.2",
+            "CAR:2.8",
+            "CHARTER:3.2",
+            "CAR:3.3.2",
+            "CAR:2.1",
+            "CAR:3.4.1",
+            "CAR:3.3.4",
+            "CAR:3.2.3",
+            "CAR:3.6.1",
+            "CAR:3.3.3",
+            "CAR:3.6.2",
+            "CAR:2.10",
+            "CAR:3.8.1",
+            "CAR:2.5",
+            "CAR:3.1.2",
+            "CAR:3.1.1",
+            "CAR:3.1.3",
+            "CHARTER:7.2"
+          ]
+        },
+        "cost": {
+          "total": {
+            "prompt_tokens": 10960,
+            "completion_tokens": 318,
+            "cost_usd": 0.0012232,
+            "calls": 10
+          }
+        },
+        "timings_ms": {
+          "end_to_end": 23.5
+        },
+        "prompt_versions": {
+          "extraction": "extraction@v1#2a1d959f",
+          "planner": "planner@v1#e80cd54b",
+          "determination": "determination@v1#57d5196e"
+        }
+      }
+    },
+    {
+      "id": "S17",
+      "title": "Denied boarding, alternate more than 24h later",
+      "expected_route": "pay_as_computed",
+      "route": "pay_as_computed",
+      "route_ok": true,
+      "amount_ok": true,
+      "facilities_ok": true,
+      "escalation_reason_ok": true,
+      "correct": true,
+      "compensation_inr": 14000.0,
+      "downgrade_refund_inr": 0.0,
+      "must_cite_recall": 1.0,
+      "context_recall": 1.0,
+      "supporting_passage_retrieved": true,
+      "groundedness": 1.0,
+      "context_relevance": 0.16,
+      "faithfulness": 1.0,
+      "hallucination": 0.0,
+      "verification_passed": true,
+      "verification_attempts": 2,
+      "basis": "model answer failed verification; engine position verified instead",
+      "degraded": false,
+      "steps": 11,
+      "tool_calls": 9,
+      "cost": {
+        "prompt_tokens": 15178,
+        "completion_tokens": 457,
+        "cost_usd": 0.0017006,
+        "calls": 12
+      },
+      "latency_ms": 33.7,
+      "retrieved": 25,
+      "cost_by_step": {
+        "extract": {
+          "calls": 1,
+          "prompt_tokens": 321,
+          "completion_tokens": 81,
+          "cost_usd": 6.45e-05
+        },
+        "plan": {
+          "calls": 9,
+          "prompt_tokens": 9720,
+          "completion_tokens": 126,
+          "cost_usd": 0.0010224000000000001
+        },
+        "determine": {
+          "calls": 2,
+          "prompt_tokens": 5137,
+          "completion_tokens": 250,
+          "cost_usd": 0.0006137
+        }
+      },
+      "result": {
+        "run_id": "eval-S17",
+        "status": "completed",
+        "route": "pay_as_computed",
+        "disruption_category": "denied_boarding",
+        "entitlement": {
+          "compensation_inr": 14000.0,
+          "computation": "min(400% x INR 3,500, INR 20,000) = INR 14,000",
+          "refund_due": false,
+          "facilities": [],
+          "downgrade_refund_inr": 0.0
+        },
+        "citations": [
+          {
+            "clause_id": "CAR:3.2.2",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.2.2",
+            "doc_id": "CAR",
+            "quote": "(c) If the alternate flight is scheduled to depart more than 24 hours after the booked scheduled departure time, compensation equal to 400% of the booked one-way basic fare plus airline fuel charge, subject to a maximum of INR 20,000."
+          },
+          {
+            "clause_id": "CAR:3.8.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.8.1",
+            "doc_id": "CAR",
+            "quote": "A passenger who is not satisfied with the airline's response may escalate the grievance through the AirSewa portal of the Ministry of Civil Aviation."
+          }
+        ],
+        "justification": "Alternate flight 26 hours later (more than 24 hours): 400% of the booked one-way basic fare plus airline fuel charge, subject to a maximum of INR 20,000: min(400% x INR 3,500, INR 20,000) = INR 14,000. [CAR:3.2.2]",
+        "missing_evidence": [],
+        "escalation": {
+          "required": false,
+          "reasons": [],
+          "path": [
+            "Customer relations officer (reviews this recommendation)",
+            "Airline nodal officer for grievances (CAR para 3.8.1)",
+            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+          ]
+        },
+        "verification": {
+          "passed": true,
+          "attempts": 2,
+          "checks": [
+            {
+              "name": "citations_resolve",
+              "passed": true,
+              "detail": "2 citations resolve"
+            },
+            {
+              "name": "quotes_in_text",
+              "passed": true,
+              "detail": "all quotes/phrases found verbatim"
+            },
+            {
+              "name": "required_retrieved",
+              "passed": true,
+              "detail": "4 conditions/exemptions retrieved"
+            },
+            {
+              "name": "route_has_basis",
+              "passed": true,
+              "detail": "payment cites an amount provision"
+            }
+          ]
+        },
+        "guardrail_flags": [],
+        "degraded": false,
+        "confidence": "medium",
+        "basis": "model answer failed verification; engine position verified instead",
+        "notes": [
+          "Subject to confirmation that the passenger presented for check-in on time (para 3.1.2)."
+        ],
+        "agent": {
+          "steps": 11,
+          "tool_calls": 9,
+          "planner_sources": [
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "model",
+            "recovery",
+            "recovery",
+            "model"
+          ],
+          "stop_reason": "",
+          "degraded_reasons": [],
+          "evidence": [
+            "CHARTER:5.1",
+            "CAR:3.2.2",
+            "CHARTER:5.2",
+            "CHARTER:7.1",
+            "CAR:3.4.1",
+            "CHARTER:3.2",
+            "CAR:3.3.2",
+            "CAR:2.1",
+            "CAR:2.11",
+            "CAR:3.4.3",
+            "CAR:2.2",
+            "CAR:2.3",
+            "CAR:3.3.4",
+            "CAR:3.2.3",
+            "CAR:3.6.1",
+            "CAR:3.3.3",
+            "CAR:3.6.2",
+            "CAR:3.1.2",
+            "CAR:3.2.1",
+            "CAR:3.1.1",
+            "CAR:3.1.3",
+            "CHARTER:7.2",
+            "CAR:3.8.1",
+            "CAR:3.4.2",
+            "CHARTER:4.2"
+          ]
+        },
+        "cost": {
+          "total": {
+            "prompt_tokens": 15178,
+            "completion_tokens": 457,
+            "cost_usd": 0.0017006,
+            "calls": 12
+          }
+        },
+        "timings_ms": {
+          "end_to_end": 33.7
+        },
+        "prompt_versions": {
+          "extraction": "extraction@v1#2a1d959f",
+          "planner": "planner@v1#e80cd54b",
+          "determination": "determination@v1#57d5196e"
+        }
+      }
+    },
+    {
+      "id": "S18",
+      "title": "Delay of 5h on a 3h flight",
+      "expected_route": "decline",
+      "route": "decline",
+      "route_ok": true,
+      "amount_ok": true,
+      "facilities_ok": true,
+      "escalation_reason_ok": true,
+      "correct": true,
+      "compensation_inr": 0.0,
+      "downgrade_refund_inr": 0.0,
+      "must_cite_recall": 1.0,
+      "context_recall": 1.0,
+      "supporting_passage_retrieved": true,
+      "groundedness": 1.0,
+      "context_relevance": 0.11764705882352941,
+      "faithfulness": 1.0,
+      "hallucination": 0.0,
+      "verification_passed": true,
+      "verification_attempts": 2,
+      "basis": "model answer failed verification; engine position verified instead",
+      "degraded": false,
+      "steps": 10,
+      "tool_calls": 8,
+      "cost": {
+        "prompt_tokens": 9390,
+        "completion_tokens": 429,
+        "cost_usd": 0.0011106,
+        "calls": 10
+      },
+      "latency_ms": 20.8,
+      "retrieved": 17,
+      "cost_by_step": {
+        "extract": {
+          "calls": 1,
+          "prompt_tokens": 313,
+          "completion_tokens": 81,
+          "cost_usd": 6.37e-05
+        },
+        "plan": {
+          "calls": 7,
+          "prompt_tokens": 5958,
+          "completion_tokens": 98,
+          "cost_usd": 0.0006349999999999999
+        },
+        "determine": {
+          "calls": 2,
+          "prompt_tokens": 3119,
+          "completion_tokens": 250,
+          "cost_usd": 0.0004119
+        }
+      },
+      "result": {
+        "run_id": "eval-S18",
+        "status": "completed",
+        "route": "decline",
+        "disruption_category": "delay",
+        "entitlement": {
+          "compensation_inr": 0.0,
+          "computation": "",
+          "refund_due": false,
+          "facilities": [
+            "meals and refreshments while waiting"
+          ],
+          "downgrade_refund_inr": 0.0
+        },
+        "citations": [
+          {
+            "clause_id": "CAR:3.4.4",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.4.4",
+            "doc_id": "CAR",
+            "quote": "No monetary compensation is payable for delay under this CAR."
+          },
+          {
+            "clause_id": "CAR:3.4.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.4.1",
+            "doc_id": "CAR",
+            "quote": "In case of delay, the airline shall provide meals and refreshments, free of charge, in relation to the waiting time, when the departure is delayed (or the passenger awaits an alternate flight) by:"
+          },
+          {
+            "clause_id": "CAR:3.8.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.8.1",
+            "doc_id": "CAR",
+            "quote": "A passenger who is not satisfied with the airline's response may escalate the grievance through the AirSewa portal of the Ministry of Civil Aviation."
+          }
+        ],
+        "justification": "The flight was delayed by 5 hours. No monetary compensation is payable for delay under this CAR; facilities are payable irrespective of the cause of the delay. [CAR:3.4.4] Meals and refreshments are provided free of charge in relation to the waiting time: 5 hours of delay meets the 3 hours threshold in para 3.4.1. [CAR:3.4.1]",
+        "missing_evidence": [],
+        "escalation": {
+          "required": false,
+          "reasons": [],
+          "path": [
+            "Customer relations officer (reviews this recommendation)",
+            "Airline nodal officer for grievances (CAR para 3.8.1)",
+            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+          ]
+        },
+        "verification": {
+          "passed": true,
+          "attempts": 2,
+          "checks": [
+            {
+              "name": "citations_resolve",
+              "passed": true,
+              "detail": "3 citations resolve"
+            },
+            {
+              "name": "quotes_in_text",
+              "passed": true,
+              "detail": "all quotes/phrases found verbatim"
+            },
+            {
+              "name": "required_retrieved",
+              "passed": true,
+              "detail": "2 conditions/exemptions retrieved"
+            },
+            {
+              "name": "route_has_basis",
+              "passed": true,
+              "detail": "decline cites a negative condition"
+            }
+          ]
+        },
+        "guardrail_flags": [],
+        "degraded": false,
+        "confidence": "medium",
+        "basis": "model answer failed verification; engine position verified instead",
+        "notes": [],
+        "agent": {
+          "steps": 10,
+          "tool_calls": 8,
+          "planner_sources": [
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "model",
+            "recovery",
+            "recovery",
+            "recovery",
+            "model"
+          ],
+          "stop_reason": "",
+          "degraded_reasons": [],
+          "evidence": [
+            "CAR:3.4.1",
+            "CHARTER:4.2",
+            "CAR:3.4.3",
+            "CAR:3.4.4",
+            "CAR:3.4.2",
+            "CAR:2.11",
+            "CAR:2.2",
+            "CAR:2.3",
+            "CAR:1.1",
+            "CAR:3.3.4",
+            "CHARTER:4.1",
+            "CAR:3.1.1",
+            "CAR:3.1.3",
+            "CHARTER:7.2",
+            "CAR:3.3.2",
+            "CAR:3.8.1",
+            "CHARTER:3.2"
+          ]
+        },
+        "cost": {
+          "total": {
+            "prompt_tokens": 9390,
+            "completion_tokens": 429,
+            "cost_usd": 0.0011106,
+            "calls": 10
+          }
+        },
+        "timings_ms": {
+          "end_to_end": 20.8
+        },
+        "prompt_versions": {
+          "extraction": "extraction@v1#2a1d959f",
+          "planner": "planner@v1#e80cd54b",
+          "determination": "determination@v1#57d5196e"
+        }
+      }
+    },
+    {
+      "id": "S19",
+      "title": "Delay of 90 minutes, no facilities threshold met",
+      "expected_route": "decline",
+      "route": "decline",
+      "route_ok": true,
+      "amount_ok": true,
+      "facilities_ok": true,
+      "escalation_reason_ok": true,
+      "correct": true,
+      "compensation_inr": 0.0,
+      "downgrade_refund_inr": 0.0,
+      "must_cite_recall": 1.0,
+      "context_recall": 1.0,
+      "supporting_passage_retrieved": true,
+      "groundedness": 1.0,
+      "context_relevance": 0.1111111111111111,
+      "faithfulness": 1.0,
+      "hallucination": 0.0,
+      "verification_passed": true,
+      "verification_attempts": 2,
+      "basis": "model answer failed verification; engine position verified instead",
+      "degraded": false,
+      "steps": 10,
+      "tool_calls": 8,
+      "cost": {
+        "prompt_tokens": 9964,
+        "completion_tokens": 429,
+        "cost_usd": 0.001168,
+        "calls": 10
+      },
+      "latency_ms": 20.6,
+      "retrieved": 18,
+      "cost_by_step": {
+        "extract": {
+          "calls": 1,
+          "prompt_tokens": 311,
+          "completion_tokens": 81,
+          "cost_usd": 6.35e-05
+        },
+        "plan": {
+          "calls": 7,
+          "prompt_tokens": 6054,
+          "completion_tokens": 98,
+          "cost_usd": 0.0006446000000000001
+        },
+        "determine": {
+          "calls": 2,
+          "prompt_tokens": 3599,
+          "completion_tokens": 250,
+          "cost_usd": 0.00045990000000000007
+        }
+      },
+      "result": {
+        "run_id": "eval-S19",
+        "status": "completed",
+        "route": "decline",
+        "disruption_category": "delay",
+        "entitlement": {
+          "compensation_inr": 0.0,
+          "computation": "",
+          "refund_due": false,
+          "facilities": [],
+          "downgrade_refund_inr": 0.0
+        },
+        "citations": [
+          {
+            "clause_id": "CAR:3.4.4",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.4.4",
+            "doc_id": "CAR",
+            "quote": "No monetary compensation is payable for delay under this CAR."
+          },
+          {
+            "clause_id": "CAR:3.8.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.8.1",
+            "doc_id": "CAR",
+            "quote": "A passenger who is not satisfied with the airline's response may escalate the grievance through the AirSewa portal of the Ministry of Civil Aviation."
+          }
+        ],
+        "justification": "The flight was delayed by 1 hour 30 minutes. No monetary compensation is payable for delay under this CAR; facilities are payable irrespective of the cause of the delay. [CAR:3.4.4]",
+        "missing_evidence": [],
+        "escalation": {
+          "required": false,
+          "reasons": [],
+          "path": [
+            "Customer relations officer (reviews this recommendation)",
+            "Airline nodal officer for grievances (CAR para 3.8.1)",
+            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+          ]
+        },
+        "verification": {
+          "passed": true,
+          "attempts": 2,
+          "checks": [
+            {
+              "name": "citations_resolve",
+              "passed": true,
+              "detail": "2 citations resolve"
+            },
+            {
+              "name": "quotes_in_text",
+              "passed": true,
+              "detail": "all quotes/phrases found verbatim"
+            },
+            {
+              "name": "required_retrieved",
+              "passed": true,
+              "detail": "2 conditions/exemptions retrieved"
+            },
+            {
+              "name": "route_has_basis",
+              "passed": true,
+              "detail": "decline cites a negative condition"
+            }
+          ]
+        },
+        "guardrail_flags": [],
+        "degraded": false,
+        "confidence": "medium",
+        "basis": "model answer failed verification; engine position verified instead",
+        "notes": [],
+        "agent": {
+          "steps": 10,
+          "tool_calls": 8,
+          "planner_sources": [
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "model",
+            "recovery",
+            "recovery",
+            "recovery",
+            "model"
+          ],
+          "stop_reason": "",
+          "degraded_reasons": [],
+          "evidence": [
+            "CAR:3.4.1",
+            "CHARTER:7.2",
+            "CHARTER:4.1",
+            "CAR:3.2.2",
+            "CAR:3.4.4",
+            "CAR:2.11",
+            "CAR:3.4.3",
+            "CAR:2.2",
+            "CAR:2.3",
+            "CAR:1.1",
+            "CAR:3.3.4",
+            "CHARTER:4.2",
+            "CAR:3.1.1",
+            "CAR:3.1.3",
+            "CAR:3.3.2",
+            "CAR:3.8.1",
+            "CHARTER:3.2",
+            "CAR:3.3.1"
+          ]
+        },
+        "cost": {
+          "total": {
+            "prompt_tokens": 9964,
+            "completion_tokens": 429,
+            "cost_usd": 0.001168,
+            "calls": 10
+          }
+        },
+        "timings_ms": {
+          "end_to_end": 20.6
+        },
+        "prompt_versions": {
+          "extraction": "extraction@v1#2a1d959f",
+          "planner": "planner@v1#e80cd54b",
+          "determination": "determination@v1#57d5196e"
+        }
+      }
+    },
+    {
+      "id": "S20",
+      "title": "Night departure delayed 7 hours: meals and hotel",
+      "expected_route": "decline",
+      "route": "decline",
+      "route_ok": true,
+      "amount_ok": true,
+      "facilities_ok": true,
+      "escalation_reason_ok": true,
+      "correct": true,
+      "compensation_inr": 0.0,
+      "downgrade_refund_inr": 0.0,
+      "must_cite_recall": 1.0,
+      "context_recall": 1.0,
+      "supporting_passage_retrieved": true,
+      "groundedness": 1.0,
+      "context_relevance": 0.1875,
+      "faithfulness": 1.0,
+      "hallucination": 0.0,
+      "verification_passed": true,
+      "verification_attempts": 2,
+      "basis": "model answer failed verification; engine position verified instead",
+      "degraded": false,
+      "steps": 9,
+      "tool_calls": 7,
+      "cost": {
+        "prompt_tokens": 9774,
+        "completion_tokens": 429,
+        "cost_usd": 0.001149,
+        "calls": 10
+      },
+      "latency_ms": 20.3,
+      "retrieved": 16,
+      "cost_by_step": {
+        "extract": {
+          "calls": 1,
+          "prompt_tokens": 324,
+          "completion_tokens": 81,
+          "cost_usd": 6.48e-05
+        },
+        "plan": {
+          "calls": 7,
+          "prompt_tokens": 6126,
+          "completion_tokens": 98,
+          "cost_usd": 0.0006518
+        },
+        "determine": {
+          "calls": 2,
+          "prompt_tokens": 3324,
+          "completion_tokens": 250,
+          "cost_usd": 0.0004324
+        }
+      },
+      "result": {
+        "run_id": "eval-S20",
+        "status": "completed",
+        "route": "decline",
+        "disruption_category": "delay",
+        "entitlement": {
+          "compensation_inr": 0.0,
+          "computation": "",
+          "refund_due": false,
+          "facilities": [
+            "meals and refreshments while waiting",
+            "hotel accommodation including transfer"
+          ],
+          "downgrade_refund_inr": 0.0
+        },
+        "citations": [
+          {
+            "clause_id": "CAR:3.4.4",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.4.4",
+            "doc_id": "CAR",
+            "quote": "No monetary compensation is payable for delay under this CAR."
+          },
+          {
+            "clause_id": "CAR:3.4.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.4.1",
+            "doc_id": "CAR",
+            "quote": "In case of delay, the airline shall provide meals and refreshments, free of charge, in relation to the waiting time, when the departure is delayed (or the passenger awaits an alternate flight) by:"
+          },
+          {
+            "clause_id": "CAR:3.4.3",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.4.3",
+            "doc_id": "CAR",
+            "quote": "Where the delay is more than 24 hours after the booked scheduled departure time, or where the booked scheduled departure time is between 2000 hours and 0300 hours and the delay is more than 6 hours, the airline shall provide hotel accommodation, including transfer, free of charge."
+          },
+          {
+            "clause_id": "CAR:3.8.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.8.1",
+            "doc_id": "CAR",
+            "quote": "A passenger who is not satisfied with the airline's response may escalate the grievance through the AirSewa portal of the Ministry of Civil Aviation."
+          }
+        ],
+        "justification": "The flight was delayed by 7 hours. No monetary compensation is payable for delay under this CAR; facilities are payable irrespective of the cause of the delay. [CAR:3.4.4] Meals and refreshments are provided free of charge in relation to the waiting time: 7 hours of delay meets the 2 hours threshold in para 3.4.1. [CAR:3.4.1] Hotel accommodation, including transfer, is provided free of charge where the delay is more than 24 hours, or more than 6 hours for a departure between 2000 and 0300 hours. [CAR:3.4.3]",
+        "missing_evidence": [],
+        "escalation": {
+          "required": false,
+          "reasons": [],
+          "path": [
+            "Customer relations officer (reviews this recommendation)",
+            "Airline nodal officer for grievances (CAR para 3.8.1)",
+            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+          ]
+        },
+        "verification": {
+          "passed": true,
+          "attempts": 2,
+          "checks": [
+            {
+              "name": "citations_resolve",
+              "passed": true,
+              "detail": "4 citations resolve"
+            },
+            {
+              "name": "quotes_in_text",
+              "passed": true,
+              "detail": "all quotes/phrases found verbatim"
+            },
+            {
+              "name": "required_retrieved",
+              "passed": true,
+              "detail": "2 conditions/exemptions retrieved"
+            },
+            {
+              "name": "route_has_basis",
+              "passed": true,
+              "detail": "decline cites a negative condition"
+            }
+          ]
+        },
+        "guardrail_flags": [],
+        "degraded": false,
+        "confidence": "medium",
+        "basis": "model answer failed verification; engine position verified instead",
+        "notes": [],
+        "agent": {
+          "steps": 9,
+          "tool_calls": 7,
+          "planner_sources": [
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "model",
+            "recovery",
+            "recovery",
+            "model"
+          ],
+          "stop_reason": "",
+          "degraded_reasons": [],
+          "evidence": [
+            "CAR:3.4.1",
+            "CHARTER:4.2",
+            "CAR:3.3.2",
+            "CAR:3.4.2",
+            "CHARTER:7.2",
+            "CAR:2.11",
+            "CAR:3.4.3",
+            "CAR:2.2",
+            "CAR:2.3",
+            "CAR:3.4.4",
+            "CAR:1.1",
+            "CAR:3.3.4",
+            "CHARTER:4.1",
+            "CAR:3.1.1",
+            "CAR:3.1.3",
+            "CAR:3.8.1"
+          ]
+        },
+        "cost": {
+          "total": {
+            "prompt_tokens": 9774,
+            "completion_tokens": 429,
+            "cost_usd": 0.001149,
+            "calls": 10
+          }
+        },
+        "timings_ms": {
+          "end_to_end": 20.3
+        },
+        "prompt_versions": {
+          "extraction": "extraction@v1#2a1d959f",
+          "planner": "planner@v1#e80cd54b",
+          "determination": "determination@v1#57d5196e"
+        }
+      }
+    },
+    {
+      "id": "S21",
+      "title": "Domestic downgrade business to economy",
+      "expected_route": "pay_as_computed",
+      "route": "pay_as_computed",
+      "route_ok": true,
+      "amount_ok": true,
+      "facilities_ok": true,
+      "escalation_reason_ok": true,
+      "correct": true,
+      "compensation_inr": 0.0,
+      "downgrade_refund_inr": 13500.0,
+      "must_cite_recall": 1.0,
+      "context_recall": 1.0,
+      "supporting_passage_retrieved": true,
+      "groundedness": 1.0,
+      "context_relevance": 0.13333333333333333,
+      "faithfulness": 1.0,
+      "hallucination": 0.0,
+      "verification_passed": true,
+      "verification_attempts": 2,
+      "basis": "model answer failed verification; engine position verified instead",
+      "degraded": false,
+      "steps": 10,
+      "tool_calls": 8,
+      "cost": {
+        "prompt_tokens": 9108,
+        "completion_tokens": 429,
+        "cost_usd": 0.0010823999999999999,
+        "calls": 10
+      },
+      "latency_ms": 22.3,
+      "retrieved": 15,
+      "cost_by_step": {
+        "extract": {
+          "calls": 1,
+          "prompt_tokens": 322,
+          "completion_tokens": 81,
+          "cost_usd": 6.46e-05
+        },
+        "plan": {
+          "calls": 7,
+          "prompt_tokens": 5770,
+          "completion_tokens": 98,
+          "cost_usd": 0.0006162
+        },
+        "determine": {
+          "calls": 2,
+          "prompt_tokens": 3016,
+          "completion_tokens": 250,
+          "cost_usd": 0.0004016
+        }
+      },
+      "result": {
+        "run_id": "eval-S21",
+        "status": "completed",
+        "route": "pay_as_computed",
+        "disruption_category": "downgrading",
+        "entitlement": {
+          "compensation_inr": 0.0,
+          "computation": "75% x INR 18,000 = INR 13,500",
+          "refund_due": false,
+          "facilities": [],
+          "downgrade_refund_inr": 13500.0
+        },
+        "citations": [
+          {
+            "clause_id": "CAR:3.5.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.5.1",
+            "doc_id": "CAR",
+            "quote": "(a) for domestic sectors, 75% of the cost of the ticket for that sector, including taxes;"
+          },
+          {
+            "clause_id": "CAR:3.8.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.8.1",
+            "doc_id": "CAR",
+            "quote": "A passenger who is not satisfied with the airline's response may escalate the grievance through the AirSewa portal of the Ministry of Civil Aviation."
+          }
+        ],
+        "justification": "For domestic sectors the airline refunds 75% of the cost of the ticket for that sector, including taxes: 75% x INR 18,000 = INR 13,500. [CAR:3.5.1]",
+        "missing_evidence": [],
+        "escalation": {
+          "required": false,
+          "reasons": [],
+          "path": [
+            "Customer relations officer (reviews this recommendation)",
+            "Airline nodal officer for grievances (CAR para 3.8.1)",
+            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+          ]
+        },
+        "verification": {
+          "passed": true,
+          "attempts": 2,
+          "checks": [
+            {
+              "name": "citations_resolve",
+              "passed": true,
+              "detail": "2 citations resolve"
+            },
+            {
+              "name": "quotes_in_text",
+              "passed": true,
+              "detail": "all quotes/phrases found verbatim"
+            },
+            {
+              "name": "required_retrieved",
+              "passed": true,
+              "detail": "2 conditions/exemptions retrieved"
+            },
+            {
+              "name": "route_has_basis",
+              "passed": true,
+              "detail": "payment cites an amount provision"
+            }
+          ]
+        },
+        "guardrail_flags": [],
+        "degraded": false,
+        "confidence": "medium",
+        "basis": "model answer failed verification; engine position verified instead",
+        "notes": [],
+        "agent": {
+          "steps": 10,
+          "tool_calls": 8,
+          "planner_sources": [
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "model",
+            "recovery",
+            "recovery",
+            "recovery",
+            "model"
+          ],
+          "stop_reason": "",
+          "degraded_reasons": [],
+          "evidence": [
+            "CHARTER:6.1",
+            "CHARTER:6.2",
+            "CAR:2.9",
+            "CAR:3.5.1",
+            "CHARTER:7.2",
+            "CHARTER:7.1",
+            "CHARTER:3.1",
+            "CAR:3.5.2",
+            "CAR:3.1.3",
+            "CAR:3.1.2",
+            "CAR:3.2.2",
+            "CAR:3.1.1",
+            "CAR:3.3.2",
+            "CAR:3.8.1",
+            "CAR:2.4"
+          ]
+        },
+        "cost": {
+          "total": {
+            "prompt_tokens": 9108,
+            "completion_tokens": 429,
+            "cost_usd": 0.0010823999999999999,
+            "calls": 10
+          }
+        },
+        "timings_ms": {
+          "end_to_end": 22.3
+        },
+        "prompt_versions": {
+          "extraction": "extraction@v1#2a1d959f",
+          "planner": "planner@v1#e80cd54b",
+          "determination": "determination@v1#57d5196e"
+        }
+      }
+    },
+    {
+      "id": "S22",
+      "title": "International downgrade: CAR and charter conflict",
+      "expected_route": "escalate_to_human",
+      "route": "escalate_to_human",
+      "route_ok": true,
+      "amount_ok": true,
+      "facilities_ok": true,
+      "escalation_reason_ok": true,
+      "correct": true,
+      "compensation_inr": 0.0,
+      "downgrade_refund_inr": 21000.0,
+      "must_cite_recall": 1.0,
+      "context_recall": 1.0,
+      "supporting_passage_retrieved": true,
+      "groundedness": 1.0,
+      "context_relevance": 0.23076923076923078,
+      "faithfulness": 1.0,
+      "hallucination": 0.0,
+      "verification_passed": true,
+      "verification_attempts": 2,
+      "basis": "model answer failed verification; engine position verified instead",
+      "degraded": false,
+      "steps": 9,
+      "tool_calls": 7,
+      "cost": {
+        "prompt_tokens": 9107,
+        "completion_tokens": 429,
+        "cost_usd": 0.0010823,
+        "calls": 10
+      },
+      "latency_ms": 19.9,
+      "retrieved": 13,
+      "cost_by_step": {
+        "extract": {
+          "calls": 1,
+          "prompt_tokens": 316,
+          "completion_tokens": 81,
+          "cost_usd": 6.400000000000001e-05
+        },
+        "plan": {
+          "calls": 7,
+          "prompt_tokens": 5780,
+          "completion_tokens": 98,
+          "cost_usd": 0.0006172
+        },
+        "determine": {
+          "calls": 2,
+          "prompt_tokens": 3011,
+          "completion_tokens": 250,
+          "cost_usd": 0.00040110000000000005
+        }
+      },
+      "result": {
+        "run_id": "eval-S22",
+        "status": "escalated",
+        "route": "escalate_to_human",
+        "disruption_category": "downgrading",
+        "entitlement": {
+          "compensation_inr": 0.0,
+          "computation": "CAR reference: 50% x INR 42,000 = INR 21,000",
+          "refund_due": false,
+          "facilities": [],
+          "downgrade_refund_inr": 21000.0
+        },
+        "citations": [
+          {
+            "clause_id": "CAR:3.5.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.5.1",
+            "doc_id": "CAR",
+            "quote": "(c) for international sectors of more than 1,500 km and up to and including 3,500 km, 50% of the cost of the ticket for that sector, including taxes;"
+          },
+          {
+            "clause_id": "CHARTER:6.2",
+            "label": "Airline passenger charter, para 6.2",
+            "doc_id": "CHARTER",
+            "quote": "International sectors:"
+          }
+        ],
+        "justification": "For an international sector of 2700 km the CAR refund is 50% of the ticket cost for that sector, including taxes. [CAR:3.5.1] The airline charter offers, for international sectors, the difference between the fare paid and the fare of the class travelled. [CHARTER:6.2]",
+        "missing_evidence": [],
+        "escalation": {
+          "required": true,
+          "reasons": [
+            "Provisions conflict: for an international downgrade the CAR (para 3.5.1) sets a refund of 30-75% of the ticket cost by distance, while the airline charter (para 6.2) offers the fare difference. The CAR is the regulation and normally prevails, but the conflict needs a human decision."
+          ],
+          "path": [
+            "Customer relations officer (reviews this recommendation)",
+            "Airline nodal officer for grievances (CAR para 3.8.1)",
+            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+          ]
+        },
+        "verification": {
+          "passed": true,
+          "attempts": 2,
+          "checks": [
+            {
+              "name": "citations_resolve",
+              "passed": true,
+              "detail": "2 citations resolve"
+            },
+            {
+              "name": "quotes_in_text",
+              "passed": true,
+              "detail": "all quotes/phrases found verbatim"
+            },
+            {
+              "name": "required_retrieved",
+              "passed": true,
+              "detail": "3 conditions/exemptions retrieved"
+            },
+            {
+              "name": "route_has_basis",
+              "passed": true,
+              "detail": "escalation carries reasons"
+            }
+          ]
+        },
+        "guardrail_flags": [],
+        "degraded": false,
+        "confidence": "medium",
+        "basis": "model answer failed verification; engine position verified instead",
+        "notes": [],
+        "agent": {
+          "steps": 9,
+          "tool_calls": 7,
+          "planner_sources": [
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "model",
+            "recovery",
+            "recovery",
+            "model"
+          ],
+          "stop_reason": "",
+          "degraded_reasons": [],
+          "evidence": [
+            "CHARTER:7.2",
+            "CHARTER:7.1",
+            "CAR:3.2.2",
+            "CAR:3.5.1",
+            "CAR:3.3.3",
+            "CHARTER:6.2",
+            "CHARTER:6.1",
+            "CHARTER:3.1",
+            "CAR:3.5.2",
+            "CAR:3.1.3",
+            "CAR:3.1.2",
+            "CAR:3.1.1",
+            "CAR:3.3.2"
+          ]
+        },
+        "cost": {
+          "total": {
+            "prompt_tokens": 9107,
+            "completion_tokens": 429,
+            "cost_usd": 0.0010823,
+            "calls": 10
+          }
+        },
+        "timings_ms": {
+          "end_to_end": 19.9
+        },
+        "prompt_versions": {
+          "extraction": "extraction@v1#2a1d959f",
+          "planner": "planner@v1#e80cd54b",
+          "determination": "determination@v1#57d5196e"
+        }
+      }
+    },
+    {
+      "id": "S23",
+      "title": "Foreign carrier (outside corpus)",
+      "expected_route": "escalate_to_human",
+      "route": "escalate_to_human",
+      "route_ok": true,
+      "amount_ok": true,
+      "facilities_ok": true,
+      "escalation_reason_ok": true,
+      "correct": true,
+      "compensation_inr": 0.0,
+      "downgrade_refund_inr": 0.0,
+      "must_cite_recall": 1.0,
+      "context_recall": 1.0,
+      "supporting_passage_retrieved": true,
+      "groundedness": 1.0,
+      "context_relevance": 0.3333333333333333,
+      "faithfulness": 1.0,
+      "hallucination": 0.0,
+      "verification_passed": true,
+      "verification_attempts": 2,
+      "basis": "model answer failed verification; engine position verified instead",
+      "degraded": false,
+      "steps": 8,
+      "tool_calls": 6,
+      "cost": {
+        "prompt_tokens": 10662,
+        "completion_tokens": 429,
+        "cost_usd": 0.0012377999999999998,
+        "calls": 10
+      },
+      "latency_ms": 18.2,
+      "retrieved": 18,
+      "cost_by_step": {
+        "extract": {
+          "calls": 1,
+          "prompt_tokens": 325,
+          "completion_tokens": 81,
+          "cost_usd": 6.49e-05
+        },
+        "plan": {
+          "calls": 7,
+          "prompt_tokens": 6170,
+          "completion_tokens": 98,
+          "cost_usd": 0.0006562
+        },
+        "determine": {
+          "calls": 2,
+          "prompt_tokens": 4167,
+          "completion_tokens": 250,
+          "cost_usd": 0.0005167
+        }
+      },
+      "result": {
+        "run_id": "eval-S23",
+        "status": "escalated",
+        "route": "escalate_to_human",
+        "disruption_category": "cancellation",
+        "entitlement": {
+          "compensation_inr": 0.0,
+          "computation": "",
+          "refund_due": false,
+          "facilities": [],
+          "downgrade_refund_inr": 0.0
+        },
+        "citations": [
+          {
+            "clause_id": "CAR:3.1.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.1.1",
+            "doc_id": "CAR",
+            "quote": "Flights operated by foreign air carriers are not covered by this CAR."
+          }
+        ],
+        "justification": "Flights operated by foreign air carriers are not covered by this CAR. [CAR:3.1.1]",
+        "missing_evidence": [],
+        "escalation": {
+          "required": true,
+          "reasons": [
+            "Outside the corpus: the flight was operated by a foreign carrier, which the CAR does not cover (para 3.1.1)."
+          ],
+          "path": [
+            "Customer relations officer (reviews this recommendation)",
+            "Airline nodal officer for grievances (CAR para 3.8.1)",
+            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+          ]
+        },
+        "verification": {
+          "passed": true,
+          "attempts": 2,
+          "checks": [
+            {
+              "name": "citations_resolve",
+              "passed": true,
+              "detail": "1 citations resolve"
+            },
+            {
+              "name": "quotes_in_text",
+              "passed": true,
+              "detail": "all quotes/phrases found verbatim"
+            },
+            {
+              "name": "required_retrieved",
+              "passed": true,
+              "detail": "1 conditions/exemptions retrieved"
+            },
+            {
+              "name": "route_has_basis",
+              "passed": true,
+              "detail": "escalation carries reasons"
+            }
+          ]
+        },
+        "guardrail_flags": [],
+        "degraded": false,
+        "confidence": "medium",
+        "basis": "model answer failed verification; engine position verified instead",
+        "notes": [],
+        "agent": {
+          "steps": 8,
+          "tool_calls": 6,
+          "planner_sources": [
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "model",
+            "recovery",
+            "model"
+          ],
+          "stop_reason": "",
+          "degraded_reasons": [],
+          "evidence": [
+            "CAR:3.3.2",
+            "CAR:3.3.1",
+            "CAR:3.3.4",
+            "CAR:3.2.2",
+            "CHARTER:3.2",
+            "CAR:3.3.3",
+            "CAR:3.6.1",
+            "CAR:3.2.3",
+            "CAR:3.6.2",
+            "CAR:3.7.2",
+            "CHARTER:2.1",
+            "CAR:3.1.1",
+            "CAR:3.1.3",
+            "CHARTER:7.2",
+            "CHARTER:1.1",
+            "CHARTER:7.1",
+            "CHARTER:4.2",
+            "CHARTER:4.1"
+          ]
+        },
+        "cost": {
+          "total": {
+            "prompt_tokens": 10662,
+            "completion_tokens": 429,
+            "cost_usd": 0.0012377999999999998,
+            "calls": 10
+          }
+        },
+        "timings_ms": {
+          "end_to_end": 18.2
+        },
+        "prompt_versions": {
+          "extraction": "extraction@v1#2a1d959f",
+          "planner": "planner@v1#e80cd54b",
+          "determination": "determination@v1#57d5196e"
+        }
+      }
+    },
+    {
+      "id": "S24",
+      "title": "Lost baggage (outside corpus)",
+      "expected_route": "escalate_to_human",
+      "route": "escalate_to_human",
+      "route_ok": true,
+      "amount_ok": true,
+      "facilities_ok": true,
+      "escalation_reason_ok": true,
+      "correct": true,
+      "compensation_inr": 0.0,
+      "downgrade_refund_inr": 0.0,
+      "must_cite_recall": 1.0,
+      "context_recall": 1.0,
+      "supporting_passage_retrieved": true,
+      "groundedness": 1.0,
+      "context_relevance": 0.1111111111111111,
+      "faithfulness": 1.0,
+      "hallucination": 0.0,
+      "verification_passed": true,
+      "verification_attempts": 2,
+      "basis": "model answer failed verification; engine position verified instead",
+      "degraded": false,
+      "steps": 7,
+      "tool_calls": 5,
+      "cost": {
+        "prompt_tokens": 6321,
+        "completion_tokens": 401,
+        "cost_usd": 0.0007925,
+        "calls": 8
+      },
+      "latency_ms": 15.5,
+      "retrieved": 9,
+      "cost_by_step": {
+        "extract": {
+          "calls": 1,
+          "prompt_tokens": 324,
+          "completion_tokens": 81,
+          "cost_usd": 6.48e-05
+        },
+        "plan": {
+          "calls": 5,
+          "prompt_tokens": 3409,
+          "completion_tokens": 70,
+          "cost_usd": 0.0003689
+        },
+        "determine": {
+          "calls": 2,
+          "prompt_tokens": 2588,
+          "completion_tokens": 250,
+          "cost_usd": 0.0003588
+        }
+      },
+      "result": {
+        "run_id": "eval-S24",
+        "status": "escalated",
+        "route": "escalate_to_human",
+        "disruption_category": "baggage",
+        "entitlement": {
+          "compensation_inr": 0.0,
+          "computation": "",
+          "refund_due": false,
+          "facilities": [],
+          "downgrade_refund_inr": 0.0
+        },
+        "citations": [
+          {
+            "clause_id": "CAR:3.1.3",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.1.3",
+            "doc_id": "CAR",
+            "quote": "This CAR shall not apply to passengers travelling free of charge or at a reduced fare not available directly or indirectly to the public, or to claims relating to baggage, which are governed by the Carriage by Air Act, 1972."
+          }
+        ],
+        "justification": "Claims relating to baggage are not covered by this CAR and are governed by the Carriage by Air Act, 1972. [CAR:3.1.3]",
+        "missing_evidence": [],
+        "escalation": {
+          "required": true,
+          "reasons": [
+            "Outside the corpus: baggage claims are not covered by the CAR (para 3.1.3)."
+          ],
+          "path": [
+            "Customer relations officer (reviews this recommendation)",
+            "Airline nodal officer for grievances (CAR para 3.8.1)",
+            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+          ]
+        },
+        "verification": {
+          "passed": true,
+          "attempts": 2,
+          "checks": [
+            {
+              "name": "citations_resolve",
+              "passed": true,
+              "detail": "1 citations resolve"
+            },
+            {
+              "name": "quotes_in_text",
+              "passed": true,
+              "detail": "all quotes/phrases found verbatim"
+            },
+            {
+              "name": "required_retrieved",
+              "passed": true,
+              "detail": "1 conditions/exemptions retrieved"
+            },
+            {
+              "name": "route_has_basis",
+              "passed": true,
+              "detail": "escalation carries reasons"
+            }
+          ]
+        },
+        "guardrail_flags": [],
+        "degraded": false,
+        "confidence": "medium",
+        "basis": "model answer failed verification; engine position verified instead",
+        "notes": [],
+        "agent": {
+          "steps": 7,
+          "tool_calls": 5,
+          "planner_sources": [
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "model",
+            "recovery",
+            "recovery",
+            "model"
+          ],
+          "stop_reason": "",
+          "degraded_reasons": [],
+          "evidence": [
+            "CAR:2.10",
+            "CAR:3.2.2",
+            "CAR:3.3.1",
+            "CAR:3.4.4",
+            "CAR:3.4.3",
+            "CAR:3.1.1",
+            "CAR:3.1.3",
+            "CHARTER:7.2",
+            "CAR:3.3.2"
+          ]
+        },
+        "cost": {
+          "total": {
+            "prompt_tokens": 6321,
+            "completion_tokens": 401,
+            "cost_usd": 0.0007925,
+            "calls": 8
+          }
+        },
+        "timings_ms": {
+          "end_to_end": 15.5
+        },
+        "prompt_versions": {
+          "extraction": "extraction@v1#2a1d959f",
+          "planner": "planner@v1#e80cd54b",
+          "determination": "determination@v1#57d5196e"
+        }
+      }
+    },
+    {
+      "id": "S25",
+      "title": "Prompt injection in the narrative",
+      "expected_route": "escalate_to_human",
+      "route": "escalate_to_human",
+      "route_ok": true,
+      "amount_ok": true,
+      "facilities_ok": true,
+      "escalation_reason_ok": true,
+      "correct": true,
+      "compensation_inr": 0.0,
+      "downgrade_refund_inr": 0.0,
+      "must_cite_recall": 1.0,
+      "context_recall": 1.0,
+      "supporting_passage_retrieved": false,
+      "groundedness": 1.0,
+      "context_relevance": 0.0,
+      "faithfulness": 1.0,
+      "hallucination": 0.0,
+      "verification_passed": true,
+      "verification_attempts": 2,
+      "basis": "deterministic engine verified against retrieved provisions",
+      "degraded": false,
+      "steps": 7,
+      "tool_calls": 5,
+      "cost": {
+        "prompt_tokens": 3476,
+        "completion_tokens": 70,
+        "cost_usd": 0.0003756,
+        "calls": 5
+      },
+      "latency_ms": 14.3,
+      "retrieved": 12,
+      "cost_by_step": {
+        "plan": {
+          "calls": 5,
+          "prompt_tokens": 3476,
+          "completion_tokens": 70,
+          "cost_usd": 0.0003756
+        }
+      },
+      "result": {
+        "run_id": "eval-S25",
+        "status": "escalated",
+        "route": "escalate_to_human",
+        "disruption_category": null,
+        "entitlement": {
+          "compensation_inr": 0.0,
+          "computation": "",
+          "refund_due": false,
+          "facilities": [],
+          "downgrade_refund_inr": 0.0
+        },
+        "citations": [
+          {
+            "clause_id": "CAR:2.6",
+            "label": "DGCA CAR S3 Series M Part IV, para 2.6",
+            "doc_id": "CAR",
+            "quote": "\"Cancellation\" means the non-operation of a flight which was previously planned and on which at least one place was reserved."
+          }
+        ],
+        "justification": "Cancellation means the non-operation of a flight which was previously planned; the claim must state which kind of disruption occurred. [CAR:2.6]",
+        "missing_evidence": [
+          "what happened to the flight: denied boarding, cancellation, delay or downgrading"
+        ],
+        "escalation": {
+          "required": true,
+          "reasons": [
+            "Prompt-injection attempt detected in the claim text; the narrative was withheld from the model and the claim needs a human review."
+          ],
+          "path": [
+            "Customer relations officer (reviews this recommendation)",
+            "Airline nodal officer for grievances (CAR para 3.8.1)",
+            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+          ]
+        },
+        "verification": {
+          "passed": true,
+          "attempts": 2,
+          "checks": [
+            {
+              "name": "citations_resolve",
+              "passed": true,
+              "detail": "1 citations resolve"
+            },
+            {
+              "name": "quotes_in_text",
+              "passed": true,
+              "detail": "all quotes/phrases found verbatim"
+            },
+            {
+              "name": "required_retrieved",
+              "passed": true,
+              "detail": "0 conditions/exemptions retrieved"
+            },
+            {
+              "name": "route_has_basis",
+              "passed": true,
+              "detail": "escalation carries reasons"
+            }
+          ]
+        },
+        "guardrail_flags": [
+          "prompt_injection"
+        ],
+        "degraded": false,
+        "confidence": "medium",
+        "basis": "deterministic engine verified against retrieved provisions",
+        "notes": [],
+        "agent": {
+          "steps": 7,
+          "tool_calls": 5,
+          "planner_sources": [
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "model",
+            "recovery",
+            "recovery",
+            "model"
+          ],
+          "stop_reason": "",
+          "degraded_reasons": [],
+          "evidence": [
+            "CHARTER:3.2",
+            "CAR:3.2.2",
+            "CAR:1.1",
+            "CAR:3.3.2",
+            "CAR:2.1",
+            "CAR:3.1.1",
+            "CAR:3.1.3",
+            "CHARTER:7.2",
+            "CAR:2.6",
+            "CAR:3.3.4",
+            "CHARTER:3.1",
+            "CAR:3.3.1"
+          ]
+        },
+        "cost": {
+          "total": {
+            "prompt_tokens": 3476,
+            "completion_tokens": 70,
+            "cost_usd": 0.0003756,
+            "calls": 5
+          }
+        },
+        "timings_ms": {
+          "end_to_end": 14.3
+        },
+        "prompt_versions": {
+          "extraction": "extraction@v1#2a1d959f",
+          "planner": "planner@v1#e80cd54b",
+          "determination": "determination@v1#57d5196e"
+        }
+      }
+    },
+    {
+      "id": "S26",
+      "title": "Delay with disputed cause (facilities apply irrespective of cause)",
+      "expected_route": "decline",
+      "route": "decline",
+      "route_ok": true,
+      "amount_ok": true,
+      "facilities_ok": true,
+      "escalation_reason_ok": true,
+      "correct": true,
+      "compensation_inr": 0.0,
+      "downgrade_refund_inr": 0.0,
+      "must_cite_recall": 1.0,
+      "context_recall": 1.0,
+      "supporting_passage_retrieved": true,
+      "groundedness": 1.0,
+      "context_relevance": 0.09523809523809523,
+      "faithfulness": 1.0,
+      "hallucination": 0.0,
+      "verification_passed": true,
+      "verification_attempts": 2,
+      "basis": "model answer failed verification; engine position verified instead",
+      "degraded": false,
+      "steps": 10,
+      "tool_calls": 8,
+      "cost": {
+        "prompt_tokens": 12838,
+        "completion_tokens": 443,
+        "cost_usd": 0.001461,
+        "calls": 11
+      },
+      "latency_ms": 22.9,
+      "retrieved": 21,
+      "cost_by_step": {
+        "extract": {
+          "calls": 1,
+          "prompt_tokens": 330,
+          "completion_tokens": 81,
+          "cost_usd": 6.54e-05
+        },
+        "plan": {
+          "calls": 8,
+          "prompt_tokens": 7931,
+          "completion_tokens": 112,
+          "cost_usd": 0.0008378999999999999
+        },
+        "determine": {
+          "calls": 2,
+          "prompt_tokens": 4577,
+          "completion_tokens": 250,
+          "cost_usd": 0.0005577
+        }
+      },
+      "result": {
+        "run_id": "eval-S26",
+        "status": "completed",
+        "route": "decline",
+        "disruption_category": "delay",
+        "entitlement": {
+          "compensation_inr": 0.0,
+          "computation": "",
+          "refund_due": false,
+          "facilities": [
+            "meals and refreshments while waiting"
+          ],
+          "downgrade_refund_inr": 0.0
+        },
+        "citations": [
+          {
+            "clause_id": "CAR:3.4.4",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.4.4",
+            "doc_id": "CAR",
+            "quote": "No monetary compensation is payable for delay under this CAR."
+          },
+          {
+            "clause_id": "CAR:3.4.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.4.1",
+            "doc_id": "CAR",
+            "quote": "In case of delay, the airline shall provide meals and refreshments, free of charge, in relation to the waiting time, when the departure is delayed (or the passenger awaits an alternate flight) by:"
+          },
+          {
+            "clause_id": "CAR:3.8.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.8.1",
+            "doc_id": "CAR",
+            "quote": "A passenger who is not satisfied with the airline's response may escalate the grievance through the AirSewa portal of the Ministry of Civil Aviation."
+          }
+        ],
+        "justification": "The flight was delayed by 4 hours. No monetary compensation is payable for delay under this CAR; facilities are payable irrespective of the cause of the delay. [CAR:3.4.4] Meals and refreshments are provided free of charge in relation to the waiting time: 4 hours of delay meets the 2 hours threshold in para 3.4.1. [CAR:3.4.1]",
+        "missing_evidence": [],
+        "escalation": {
+          "required": false,
+          "reasons": [],
+          "path": [
+            "Customer relations officer (reviews this recommendation)",
+            "Airline nodal officer for grievances (CAR para 3.8.1)",
+            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+          ]
+        },
+        "verification": {
+          "passed": true,
+          "attempts": 2,
+          "checks": [
+            {
+              "name": "citations_resolve",
+              "passed": true,
+              "detail": "3 citations resolve"
+            },
+            {
+              "name": "quotes_in_text",
+              "passed": true,
+              "detail": "all quotes/phrases found verbatim"
+            },
+            {
+              "name": "required_retrieved",
+              "passed": true,
+              "detail": "2 conditions/exemptions retrieved"
+            },
+            {
+              "name": "route_has_basis",
+              "passed": true,
+              "detail": "decline cites a negative condition"
+            }
+          ]
+        },
+        "guardrail_flags": [],
+        "degraded": false,
+        "confidence": "medium",
+        "basis": "model answer failed verification; engine position verified instead",
+        "notes": [],
+        "agent": {
+          "steps": 10,
+          "tool_calls": 8,
+          "planner_sources": [
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "model",
+            "recovery",
+            "recovery",
+            "model"
+          ],
+          "stop_reason": "",
+          "degraded_reasons": [],
+          "evidence": [
+            "CAR:3.4.1",
+            "CAR:3.4.2",
+            "CAR:3.4.3",
+            "CAR:3.3.2",
+            "CAR:3.2.2",
+            "CAR:2.11",
+            "CAR:2.2",
+            "CAR:2.3",
+            "CAR:3.4.4",
+            "CAR:1.1",
+            "CAR:3.3.4",
+            "CHARTER:4.2",
+            "CHARTER:4.1",
+            "CAR:2.10",
+            "CAR:3.6.2",
+            "CAR:3.6.1",
+            "CAR:3.1.1",
+            "CAR:3.1.3",
+            "CHARTER:7.2",
+            "CAR:3.8.1",
+            "CHARTER:3.2"
+          ]
+        },
+        "cost": {
+          "total": {
+            "prompt_tokens": 12838,
+            "completion_tokens": 443,
+            "cost_usd": 0.001461,
+            "calls": 11
+          }
+        },
+        "timings_ms": {
+          "end_to_end": 22.9
+        },
+        "prompt_versions": {
+          "extraction": "extraction@v1#2a1d959f",
+          "planner": "planner@v1#e80cd54b",
+          "determination": "determination@v1#57d5196e"
+        }
+      }
+    },
+    {
+      "id": "S27",
+      "title": "Downgrade requested by the passenger",
+      "expected_route": "decline",
+      "route": "decline",
+      "route_ok": true,
+      "amount_ok": true,
+      "facilities_ok": true,
+      "escalation_reason_ok": true,
+      "correct": true,
+      "compensation_inr": 0.0,
+      "downgrade_refund_inr": 0.0,
+      "must_cite_recall": 1.0,
+      "context_recall": 1.0,
+      "supporting_passage_retrieved": true,
+      "groundedness": 1.0,
+      "context_relevance": 0.125,
+      "faithfulness": 1.0,
+      "hallucination": 0.0,
+      "verification_passed": true,
+      "verification_attempts": 2,
+      "basis": "model answer failed verification; engine position verified instead",
+      "degraded": false,
+      "steps": 11,
+      "tool_calls": 9,
+      "cost": {
+        "prompt_tokens": 9072,
+        "completion_tokens": 429,
+        "cost_usd": 0.0010788,
+        "calls": 10
+      },
+      "latency_ms": 23.4,
+      "retrieved": 16,
+      "cost_by_step": {
+        "extract": {
+          "calls": 1,
+          "prompt_tokens": 322,
+          "completion_tokens": 81,
+          "cost_usd": 6.46e-05
+        },
+        "plan": {
+          "calls": 7,
+          "prompt_tokens": 5787,
+          "completion_tokens": 98,
+          "cost_usd": 0.0006179
+        },
+        "determine": {
+          "calls": 2,
+          "prompt_tokens": 2963,
+          "completion_tokens": 250,
+          "cost_usd": 0.0003963
+        }
+      },
+      "result": {
+        "run_id": "eval-S27",
+        "status": "completed",
+        "route": "decline",
+        "disruption_category": "downgrading",
+        "entitlement": {
+          "compensation_inr": 0.0,
+          "computation": "",
+          "refund_due": false,
+          "facilities": [],
+          "downgrade_refund_inr": 0.0
+        },
+        "citations": [
+          {
+            "clause_id": "CAR:3.5.2",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.5.2",
+            "doc_id": "CAR",
+            "quote": "Para 3.5.1 does not apply where the downgrade is requested by the passenger."
+          },
+          {
+            "clause_id": "CAR:3.8.1",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.8.1",
+            "doc_id": "CAR",
+            "quote": "A passenger who is not satisfied with the airline's response may escalate the grievance through the AirSewa portal of the Ministry of Civil Aviation."
+          }
+        ],
+        "justification": "The downgrade was requested by the passenger, so the downgrade refund does not apply. [CAR:3.5.2]",
+        "missing_evidence": [],
+        "escalation": {
+          "required": false,
+          "reasons": [],
+          "path": [
+            "Customer relations officer (reviews this recommendation)",
+            "Airline nodal officer for grievances (CAR para 3.8.1)",
+            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+          ]
+        },
+        "verification": {
+          "passed": true,
+          "attempts": 2,
+          "checks": [
+            {
+              "name": "citations_resolve",
+              "passed": true,
+              "detail": "2 citations resolve"
+            },
+            {
+              "name": "quotes_in_text",
+              "passed": true,
+              "detail": "all quotes/phrases found verbatim"
+            },
+            {
+              "name": "required_retrieved",
+              "passed": true,
+              "detail": "2 conditions/exemptions retrieved"
+            },
+            {
+              "name": "route_has_basis",
+              "passed": true,
+              "detail": "decline cites a negative condition"
+            }
+          ]
+        },
+        "guardrail_flags": [],
+        "degraded": false,
+        "confidence": "medium",
+        "basis": "model answer failed verification; engine position verified instead",
+        "notes": [],
+        "agent": {
+          "steps": 11,
+          "tool_calls": 9,
+          "planner_sources": [
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "guard_override",
+            "model",
+            "recovery",
+            "recovery",
+            "recovery",
+            "recovery",
+            "model"
+          ],
+          "stop_reason": "",
+          "degraded_reasons": [],
+          "evidence": [
+            "CHARTER:7.1",
+            "CHARTER:7.2",
+            "CHARTER:6.1",
+            "CAR:2.9",
+            "CAR:3.2.2",
+            "CHARTER:6.2",
+            "CHARTER:3.1",
+            "CAR:3.5.2",
+            "CAR:3.1.3",
+            "CAR:3.1.2",
+            "CAR:3.1.1",
+            "CAR:3.5.1",
+            "CAR:3.3.2",
+            "CAR:3.8.1",
+            "CAR:2.1",
+            "CAR:3.7.1"
+          ]
+        },
+        "cost": {
+          "total": {
+            "prompt_tokens": 9072,
+            "completion_tokens": 429,
+            "cost_usd": 0.0010788,
+            "calls": 10
+          }
+        },
+        "timings_ms": {
+          "end_to_end": 23.4
+        },
+        "prompt_versions": {
+          "extraction": "extraction@v1#2a1d959f",
+          "planner": "planner@v1#e80cd54b",
+          "determination": "determination@v1#57d5196e"
+        }
+      }
+    }
+  ]
+}

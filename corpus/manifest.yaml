@@ -1,0 +1,20 @@
+# Corpus manifest. One entry per source document.
+# The ingestion pipeline (`make ingest`) reads this file; a document whose content hash and version are unchanged
+# is skipped, so re-running is idempotent.
+# To use the official CAR: download the PDF from dgca.gov.in into corpus/raw/, point `path` at it, set
+# `provenance: OFFICIAL`, and run `make ingest`.
+documents:
+  - doc_id: CAR
+    path: raw/dgca_car_s3_m_p4.md
+    title: "DGCA CAR Section 3 Series M Part IV"
+    version: "Issue I, Revision 4"
+    effective_date: "2023-02-15"
+    authority: regulation          # binding; prevails over airline documents
+    provenance: WORKING-TEXT
+  - doc_id: CHARTER
+    path: raw/airline_passenger_charter.md
+    title: "Demo Air Passenger Charter"
+    version: "2024-01"
+    effective_date: "2024-01-01"
+    authority: airline_policy
+    provenance: SYNTHETIC

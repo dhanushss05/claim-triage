@@ -1,0 +1,156 @@
+# docker compose up            -> the whole system (from a clean clone, after `cp .env.example .env`)
+# docker compose up --scale agent-worker=3
+# docker compose --profile tools run --rm eval        -> evaluation set
+# docker compose --profile loadtest up locust          -> Locust UI on :8089
+name: claim-triage
+
+x-app: &app
+  build: {context: ., target: app}
+  image: claim-triage-app:latest
+  env_file: .env
+  restart: unless-stopped
+  networks: [triage]
+
+x-py-health: &py-health
+  interval: 10s
+  timeout: 5s
+  retries: 12
+
+services:
+  redis:
+    image: redis:7.2-alpine
+    command: ["redis-server", "--appendonly", "yes", "--maxmemory", "512mb", "--maxmemory-policy", "noeviction"]
+    volumes: [redis-data:/data]
+    healthcheck: {test: ["CMD", "redis-cli", "ping"], interval: 5s, timeout: 3s, retries: 20}
+    networks: [triage]
+    restart: unless-stopped
+
+  llm-stub:
+    <<: *app
+    command: ["uvicorn", "triage.services.llm_stub:app", "--host", "0.0.0.0", "--port", "8000"]
+    healthcheck: {<<: *py-health, test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]}
+
+  llm-gateway:
+    <<: *app
+    command: ["uvicorn", "triage.services.llm_gateway:app", "--host", "0.0.0.0", "--port", "8000"]
+    environment: {SERVICE_NAME: llm-gateway}
+    depends_on:
+      redis: {condition: service_healthy}
+      llm-stub: {condition: service_healthy}
+    healthcheck: {<<: *py-health, test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]}
+
+  ingest:
+    build: {context: ., target: retriever}
+    image: claim-triage-retriever:latest
+    env_file: .env
+    command: ["python", "-m", "triage.retrieval.pipeline", "ingest"]
+    volumes: [index-data:/data]
+    networks: [triage]
+    restart: "no"
+
+  retriever:
+    image: claim-triage-retriever:latest
+    env_file: .env
+    command: ["uvicorn", "triage.services.retriever_app:app", "--host", "0.0.0.0", "--port", "8000"]
+    volumes: [index-data:/data]
+    depends_on:
+      redis: {condition: service_healthy}
+      ingest: {condition: service_completed_successfully}
+    healthcheck: {<<: *py-health, start_period: 120s, test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]}
+    networks: [triage]
+    restart: unless-stopped
+
+  api:
+    <<: *app
+    command: ["uvicorn", "triage.services.api:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "2"]
+    ports: ["8080:8000"]
+    volumes: [api-data:/data]
+    depends_on:
+      redis: {condition: service_healthy}
+      retriever: {condition: service_healthy}
+      llm-gateway: {condition: service_healthy}
+    healthcheck: {<<: *py-health, test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]}
+
+  intake-agent:
+    <<: *app
+    command: ["python", "-m", "triage.services.workers", "intake"]
+    environment: {METRICS_PORT: "9100"}
+    depends_on:
+      redis: {condition: service_healthy}
+      llm-gateway: {condition: service_healthy}
+    healthcheck: {<<: *py-health, test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:9100/metrics')"]}
+
+  agent-worker:
+    <<: *app
+    command: ["python", "-m", "triage.services.workers", "entitlement"]
+    environment: {METRICS_PORT: "9100"}
+    depends_on:
+      redis: {condition: service_healthy}
+      llm-gateway: {condition: service_healthy}
+      retriever: {condition: service_healthy}
+    healthcheck: {<<: *py-health, test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:9100/metrics')"]}
+
+  jaeger:
+    image: jaegertracing/all-in-one:1.62.0
+    environment: {COLLECTOR_OTLP_ENABLED: "true"}
+    ports: ["16686:16686"]
+    networks: [triage]
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:v2.55.1
+    command: ["--config.file=/etc/prometheus/prometheus.yml", "--storage.tsdb.retention.time=7d"]
+    volumes: ["./observability/prometheus.yml:/etc/prometheus/prometheus.yml:ro", "prom-data:/prometheus"]
+    ports: ["9090:9090"]
+    healthcheck: {test: ["CMD", "wget", "-qO-", "http://localhost:9090/-/ready"], interval: 10s, timeout: 5s, retries: 10}
+    networks: [triage]
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:11.3.1
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER:-admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-admin}
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+      GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: /var/lib/grafana/dashboards/claim-triage.json
+    volumes:
+      - ./observability/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./observability/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    ports: ["3000:3000"]
+    depends_on:
+      prometheus: {condition: service_healthy}
+    healthcheck: {test: ["CMD", "wget", "-qO-", "http://localhost:3000/api/health"], interval: 10s, timeout: 5s, retries: 10}
+    networks: [triage]
+    restart: unless-stopped
+
+  # ---- tools (not started by a plain `docker compose up`) -----------------------------------------------------
+  eval:
+    build: {context: ., target: tools}
+    image: claim-triage-tools:latest
+    env_file: .env
+    profiles: [tools]
+    environment: {EVAL_BASE_URL: "http://api:8000"}
+    volumes: ["./eval/results:/app/eval/results"]
+    entrypoint: ["python", "-m", "eval.run_eval"]
+    command: ["--mode", "api", "--label", "stack"]
+    networks: [triage]
+
+  locust:
+    image: claim-triage-tools:latest
+    build: {context: ., target: tools}
+    env_file: .env
+    profiles: [loadtest]
+    command: ["locust", "-f", "/app/loadtest/locustfile.py", "--host", "http://api:8000"]
+    ports: ["8089:8089"]
+    volumes: ["./loadtest/results:/app/loadtest/results"]
+    networks: [triage]
+
+networks:
+  triage: {}
+
+volumes:
+  redis-data: {}
+  index-data: {}
+  api-data: {}
+  prom-data: {}

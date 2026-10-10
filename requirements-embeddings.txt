@@ -1,0 +1,5 @@
+# Retriever / ingest image only: local sentence-transformers embeddings (CPU torch from the PyTorch CPU index).
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.4.1
+sentence-transformers==3.3.1
+transformers==4.46.3
