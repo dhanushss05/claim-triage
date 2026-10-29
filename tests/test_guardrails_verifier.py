@@ -44,3 +44,17 @@ def test_verifier_catches_model_disagreeing_with_provisions():
     v = verify(cand, EV, ["CAR:3.3.2"], rule, is_model_answer=True)
     assert not v["passed"]
     assert any(c["name"] == "consistent_with_rules" and not c["passed"] for c in v["checks"])
+
+
+def test_verifier_rejects_answer_that_drops_owed_facilities():
+    ev = {"CAR:3.4.1": {"text": "the airline shall provide facilities in accordance with Para 3.8.1 (a)"}}
+    cand = {"route": "decline", "compensation_inr": 0, "facilities": [],
+            "citations": [{"clause_id": "CAR:3.4.1", "quote": "shall provide facilities in accordance with Para 3.8.1 (a)"}]}
+    rule = {"route": "decline", "compensation_inr": 0, "downgrade_refund_inr": 0,
+            "facilities": ["meals and refreshments while waiting"],
+            "components": [{"clause_id": "CAR:3.4.1", "kind": "basis", "terms": []}]}
+    v = verify(cand, ev, ["CAR:3.4.1"], rule, is_model_answer=True)
+    check = next(c for c in v["checks"] if c["name"] == "consistent_with_rules")
+    assert not check["passed"] and "meal" in check["detail"]
+    cand["facilities"] = ["Meals and refreshments in relation to waiting time"]
+    assert verify(cand, ev, ["CAR:3.4.1"], rule, is_model_answer=True)["passed"]

@@ -18,7 +18,7 @@ def test_difficult_case_declines_compensation_but_owes_meals():
     assert p.route == "decline" and p.compensation_inr == 0
     assert any("meals" in x for x in p.facilities)
     cited = p.cited_clauses()
-    assert "CAR:3.3.2" in cited and "CAR:3.4.1" in cited
+    assert "CAR:3.3.2" in cited and "CAR:3.8.1" in cited  # 3.3.2 refers to the facilities in 3.8.1 (a)
 
 
 def test_cancellation_amount_whichever_is_less():
@@ -32,10 +32,17 @@ def test_disputed_cause_escalates():
     assert p.route == "escalate_to_human"
 
 
-def test_delay_cause_dispute_does_not_escalate():
+def test_delay_cause_dispute_escalates():
+    # CAR 3.4.4: facilities for a delay are not owed under extraordinary circumstances, so a disputed cause matters
     p = evaluate({"category": "delay", "delay_minutes": 240, "block_time_minutes": 100, "cause_disputed": True,
                   "airline_stated_cause": "air traffic"})
-    assert p.route == "decline"
+    assert p.route == "escalate_to_human"
+
+
+def test_delay_undisputed_weather_owes_no_facilities():
+    p = evaluate({"category": "delay", "delay_minutes": 240, "block_time_minutes": 100,
+                  "airline_stated_cause": "dense fog"})
+    assert p.route == "decline" and not p.facilities and "CAR:3.4.4" in p.cited_clauses()
 
 
 def test_foreign_carrier_outside_corpus():

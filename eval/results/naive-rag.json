@@ -2,28 +2,28 @@
   "summary": {
     "scenarios": 27,
     "accuracy": 0.1111,
-    "route_accuracy": 0.2593,
-    "amount_accuracy": 0.3704,
-    "must_cite_recall": 0.1667,
-    "context_recall": 0.6296,
+    "route_accuracy": 0.2963,
+    "amount_accuracy": 0.4074,
+    "must_cite_recall": 0.2222,
+    "context_recall": 0.5679,
     "groundedness": 0.4444,
     "context_relevance": 0.3037,
     "faithfulness": 0.5556,
     "hallucination_rate": 0.4444,
-    "escalation_precision": 0.2,
-    "escalation_recall": 0.1667,
+    "escalation_precision": 0.4,
+    "escalation_recall": 0.2857,
     "verification_pass_rate": 0,
     "mean_steps": 3,
     "mean_tool_calls": 2,
     "mean_retrieved": 5,
-    "mean_prompt_tokens": 1524.1,
-    "mean_completion_tokens": 198.4,
-    "cost_per_100_runs_usd": 0.023176,
+    "mean_prompt_tokens": 1513.2,
+    "mean_completion_tokens": 197.4,
+    "cost_per_100_runs_usd": 0.023029,
     "cost_share_by_step": {
-      "determine": 0.729,
-      "extract": 0.271
+      "determine": 0.728,
+      "extract": 0.272
     },
-    "mean_latency_ms": 8.8259,
+    "mean_latency_ms": 9.6037,
     "s01_difficult_case_correct": false,
     "label": "naive-rag",
     "mode": "inprocess",
@@ -31,7 +31,7 @@
       "NAIVE_BASELINE=true",
       "PROMPT_VERSION_DETERMINATION=v2"
     ],
-    "timestamp": "2026-10-10T18:13:12Z"
+    "timestamp": "2026-10-29T03:59:23Z"
   },
   "rows": [
     {
@@ -60,12 +60,12 @@
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1828,
-        "completion_tokens": 206,
-        "cost_usd": 0.0002652,
+        "prompt_tokens": 1869,
+        "completion_tokens": 205,
+        "cost_usd": 0.0002689,
         "calls": 2
       },
-      "latency_ms": 30.9,
+      "latency_ms": 38.6,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -76,9 +76,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1482,
-          "completion_tokens": 125,
-          "cost_usd": 0.00019820000000000002
+          "prompt_tokens": 1523,
+          "completion_tokens": 124,
+          "cost_usd": 0.00020190000000000003
         }
       },
       "result": {
@@ -98,7 +98,7 @@
             "clause_id": "CAR:3.3.2",
             "label": "DGCA CAR S3 Series M Part IV, para 3.3.2",
             "doc_id": "CAR",
-            "quote": "INR 10,000 or the booked one-way basic fare plus airline fuel charge, whichever is less"
+            "quote": "INR 10,000 or booked one-way basic fare plus airline fuel charge, whichever is less"
           }
         ],
         "justification": "The flight was cancelled, so cancellation compensation of INR 10,000 is payable under para 3.3.2.",
@@ -108,8 +108,8 @@
           "reasons": [],
           "path": [
             "Customer relations officer (reviews this recommendation)",
-            "Airline nodal officer for grievances (CAR para 3.8.1)",
-            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+            "Airline nodal officer and appellate authority for grievances (CAR para 3.10.4)",
+            "Air Sewa app or portal (CAR para 3.9.2), then any statutory body or court (para 3.9.3)"
           ]
         },
         "verification": {
@@ -129,7 +129,7 @@
             {
               "name": "required_retrieved",
               "passed": false,
-              "detail": "missing: ['CAR:3.3.3', 'CAR:3.3.4', 'CAR:3.6.1']"
+              "detail": "missing: ['CAR:3.3.3', 'CAR:3.3.4']"
             },
             {
               "name": "route_has_basis",
@@ -164,23 +164,23 @@
           "stop_reason": "",
           "degraded_reasons": [],
           "evidence": [
-            "CAR:3.3.1",
             "CHARTER:3.2",
+            "CAR:3.3.1",
             "CAR:3.3.2",
             "CAR:3.2.2",
-            "CAR:3.1.2"
+            "CAR:3.4.2"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1828,
-            "completion_tokens": 206,
-            "cost_usd": 0.0002652,
+            "prompt_tokens": 1869,
+            "completion_tokens": 205,
+            "cost_usd": 0.0002689,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 30.9
+          "end_to_end": 38.6
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
@@ -205,7 +205,7 @@
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 1.0,
-      "context_relevance": 0.2,
+      "context_relevance": 0.4,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": false,
@@ -215,12 +215,12 @@
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1844,
-        "completion_tokens": 206,
-        "cost_usd": 0.0002668,
+        "prompt_tokens": 1652,
+        "completion_tokens": 205,
+        "cost_usd": 0.0002472,
         "calls": 2
       },
-      "latency_ms": 9.0,
+      "latency_ms": 9.9,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -231,9 +231,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1502,
-          "completion_tokens": 125,
-          "cost_usd": 0.00020020000000000001
+          "prompt_tokens": 1310,
+          "completion_tokens": 124,
+          "cost_usd": 0.00018060000000000003
         }
       },
       "result": {
@@ -253,7 +253,7 @@
             "clause_id": "CAR:3.3.2",
             "label": "DGCA CAR S3 Series M Part IV, para 3.3.2",
             "doc_id": "CAR",
-            "quote": "INR 10,000 or the booked one-way basic fare plus airline fuel charge, whichever is less"
+            "quote": "INR 10,000 or booked one-way basic fare plus airline fuel charge, whichever is less"
           }
         ],
         "justification": "The flight was cancelled, so cancellation compensation of INR 10,000 is payable under para 3.3.2.",
@@ -263,8 +263,8 @@
           "reasons": [],
           "path": [
             "Customer relations officer (reviews this recommendation)",
-            "Airline nodal officer for grievances (CAR para 3.8.1)",
-            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+            "Airline nodal officer and appellate authority for grievances (CAR para 3.10.4)",
+            "Air Sewa app or portal (CAR para 3.9.2), then any statutory body or court (para 3.9.3)"
           ]
         },
         "verification": {
@@ -284,7 +284,7 @@
             {
               "name": "required_retrieved",
               "passed": false,
-              "detail": "missing: ['CAR:3.3.1', 'CAR:3.3.3', 'CAR:3.3.4', 'CAR:3.6.1']"
+              "detail": "missing: ['CAR:3.3.3', 'CAR:3.3.4']"
             },
             {
               "name": "route_has_basis",
@@ -320,22 +320,22 @@
           "degraded_reasons": [],
           "evidence": [
             "CHARTER:3.2",
+            "CAR:3.3.1",
             "CAR:3.4.2",
-            "CAR:3.4.1",
-            "CAR:3.2.2",
-            "CAR:3.3.2"
+            "CAR:3.3.2",
+            "CHARTER:3.1"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1844,
-            "completion_tokens": 206,
-            "cost_usd": 0.0002668,
+            "prompt_tokens": 1652,
+            "completion_tokens": 205,
+            "cost_usd": 0.0002472,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 9.0
+          "end_to_end": 9.9
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
@@ -370,12 +370,12 @@
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1684,
-        "completion_tokens": 206,
-        "cost_usd": 0.0002508,
+        "prompt_tokens": 1691,
+        "completion_tokens": 205,
+        "cost_usd": 0.0002511,
         "calls": 2
       },
-      "latency_ms": 8.8,
+      "latency_ms": 8.0,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -386,9 +386,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1354,
-          "completion_tokens": 125,
-          "cost_usd": 0.0001854
+          "prompt_tokens": 1361,
+          "completion_tokens": 124,
+          "cost_usd": 0.00018570000000000001
         }
       },
       "result": {
@@ -408,7 +408,7 @@
             "clause_id": "CAR:3.3.2",
             "label": "DGCA CAR S3 Series M Part IV, para 3.3.2",
             "doc_id": "CAR",
-            "quote": "INR 10,000 or the booked one-way basic fare plus airline fuel charge, whichever is less"
+            "quote": "INR 10,000 or booked one-way basic fare plus airline fuel charge, whichever is less"
           }
         ],
         "justification": "The flight was cancelled, so cancellation compensation of INR 10,000 is payable under para 3.3.2.",
@@ -418,8 +418,8 @@
           "reasons": [],
           "path": [
             "Customer relations officer (reviews this recommendation)",
-            "Airline nodal officer for grievances (CAR para 3.8.1)",
-            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+            "Airline nodal officer and appellate authority for grievances (CAR para 3.10.4)",
+            "Air Sewa app or portal (CAR para 3.9.2), then any statutory body or court (para 3.9.3)"
           ]
         },
         "verification": {
@@ -439,7 +439,7 @@
             {
               "name": "required_retrieved",
               "passed": false,
-              "detail": "missing: ['CAR:3.3.3', 'CAR:3.3.4', 'CAR:3.6.1']"
+              "detail": "missing: ['CAR:3.3.3', 'CAR:3.3.4']"
             },
             {
               "name": "route_has_basis",
@@ -474,23 +474,23 @@
           "stop_reason": "",
           "degraded_reasons": [],
           "evidence": [
-            "CAR:3.4.2",
             "CAR:3.3.1",
             "CHARTER:3.2",
-            "CAR:3.3.2",
-            "CAR:3.4.1"
+            "CAR:3.4.2",
+            "CAR:3.4.1",
+            "CAR:3.3.2"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1684,
-            "completion_tokens": 206,
-            "cost_usd": 0.0002508,
+            "prompt_tokens": 1691,
+            "completion_tokens": 205,
+            "cost_usd": 0.0002511,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 8.8
+          "end_to_end": 8.0
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
@@ -512,12 +512,12 @@
       "compensation_inr": 10000.0,
       "downgrade_refund_inr": 0.0,
       "must_cite_recall": 0.0,
-      "context_recall": 1.0,
+      "context_recall": 0.5,
       "supporting_passage_retrieved": true,
-      "groundedness": 1.0,
+      "groundedness": 0.0,
       "context_relevance": 0.4,
-      "faithfulness": 1.0,
-      "hallucination": 0.0,
+      "faithfulness": 0.0,
+      "hallucination": 1.0,
       "verification_passed": false,
       "verification_attempts": 1,
       "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
@@ -525,12 +525,12 @@
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1780,
-        "completion_tokens": 206,
-        "cost_usd": 0.0002604,
+        "prompt_tokens": 1701,
+        "completion_tokens": 205,
+        "cost_usd": 0.0002521,
         "calls": 2
       },
-      "latency_ms": 7.4,
+      "latency_ms": 7.5,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -541,9 +541,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1454,
-          "completion_tokens": 125,
-          "cost_usd": 0.0001954
+          "prompt_tokens": 1375,
+          "completion_tokens": 124,
+          "cost_usd": 0.00018710000000000002
         }
       },
       "result": {
@@ -558,14 +558,7 @@
           "facilities": [],
           "downgrade_refund_inr": 0.0
         },
-        "citations": [
-          {
-            "clause_id": "CAR:3.3.2",
-            "label": "DGCA CAR S3 Series M Part IV, para 3.3.2",
-            "doc_id": "CAR",
-            "quote": "INR 10,000 or the booked one-way basic fare plus airline fuel charge, whichever is less"
-          }
-        ],
+        "citations": [],
         "justification": "The flight was cancelled, so cancellation compensation of INR 10,000 is payable under para 3.3.2.",
         "missing_evidence": [],
         "escalation": {
@@ -573,8 +566,8 @@
           "reasons": [],
           "path": [
             "Customer relations officer (reviews this recommendation)",
-            "Airline nodal officer for grievances (CAR para 3.8.1)",
-            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+            "Airline nodal officer and appellate authority for grievances (CAR para 3.10.4)",
+            "Air Sewa app or portal (CAR para 3.9.2), then any statutory body or court (para 3.9.3)"
           ]
         },
         "verification": {
@@ -583,8 +576,8 @@
           "checks": [
             {
               "name": "citations_resolve",
-              "passed": true,
-              "detail": "1 citations resolve"
+              "passed": false,
+              "detail": "unresolved: ['CAR:3.3.2']"
             },
             {
               "name": "quotes_in_text",
@@ -594,12 +587,12 @@
             {
               "name": "required_retrieved",
               "passed": false,
-              "detail": "missing: ['CAR:3.3.3', 'CAR:3.3.4', 'CAR:3.6.1']"
+              "detail": "missing: ['CAR:3.3.2', 'CAR:3.3.3']"
             },
             {
               "name": "route_has_basis",
-              "passed": true,
-              "detail": "payment cites an amount provision"
+              "passed": false,
+              "detail": "payment without a cited amount provision"
             },
             {
               "name": "cites_decisive_provision",
@@ -631,21 +624,21 @@
           "evidence": [
             "CHARTER:3.2",
             "CAR:3.3.1",
+            "CAR:3.3.4",
             "CAR:3.2.2",
-            "CAR:1.1",
-            "CAR:3.3.2"
+            "CAR:1.4"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1780,
-            "completion_tokens": 206,
-            "cost_usd": 0.0002604,
+            "prompt_tokens": 1701,
+            "completion_tokens": 205,
+            "cost_usd": 0.0002521,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 7.4
+          "end_to_end": 7.5
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
@@ -666,11 +659,11 @@
       "correct": false,
       "compensation_inr": 10000.0,
       "downgrade_refund_inr": 0.0,
-      "must_cite_recall": 0.0,
+      "must_cite_recall": 0.5,
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 1.0,
-      "context_relevance": 0.4,
+      "context_relevance": 0.6,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": false,
@@ -680,12 +673,12 @@
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1794,
-        "completion_tokens": 206,
-        "cost_usd": 0.00026179999999999997,
+        "prompt_tokens": 1571,
+        "completion_tokens": 205,
+        "cost_usd": 0.0002391,
         "calls": 2
       },
-      "latency_ms": 7.3,
+      "latency_ms": 10.0,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -696,9 +689,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1461,
-          "completion_tokens": 125,
-          "cost_usd": 0.0001961
+          "prompt_tokens": 1238,
+          "completion_tokens": 124,
+          "cost_usd": 0.0001734
         }
       },
       "result": {
@@ -718,7 +711,7 @@
             "clause_id": "CAR:3.3.2",
             "label": "DGCA CAR S3 Series M Part IV, para 3.3.2",
             "doc_id": "CAR",
-            "quote": "INR 10,000 or the booked one-way basic fare plus airline fuel charge, whichever is less"
+            "quote": "INR 10,000 or booked one-way basic fare plus airline fuel charge, whichever is less"
           }
         ],
         "justification": "The flight was cancelled, so cancellation compensation of INR 10,000 is payable under para 3.3.2.",
@@ -728,8 +721,8 @@
           "reasons": [],
           "path": [
             "Customer relations officer (reviews this recommendation)",
-            "Airline nodal officer for grievances (CAR para 3.8.1)",
-            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+            "Airline nodal officer and appellate authority for grievances (CAR para 3.10.4)",
+            "Air Sewa app or portal (CAR para 3.9.2), then any statutory body or court (para 3.9.3)"
           ]
         },
         "verification": {
@@ -749,7 +742,7 @@
             {
               "name": "required_retrieved",
               "passed": false,
-              "detail": "missing: ['CAR:3.3.3', 'CAR:3.3.4', 'CAR:3.6.1']"
+              "detail": "missing: ['CAR:3.3.3']"
             },
             {
               "name": "route_has_basis",
@@ -786,21 +779,21 @@
           "evidence": [
             "CAR:3.3.1",
             "CHARTER:3.2",
-            "CAR:3.2.2",
-            "CAR:3.1.2",
-            "CAR:3.3.2"
+            "CAR:3.3.2",
+            "CAR:3.3.4",
+            "CHARTER:7.1"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1794,
-            "completion_tokens": 206,
-            "cost_usd": 0.00026179999999999997,
+            "prompt_tokens": 1571,
+            "completion_tokens": 205,
+            "cost_usd": 0.0002391,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 7.3
+          "end_to_end": 10.0
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
@@ -822,10 +815,10 @@
       "compensation_inr": 10000.0,
       "downgrade_refund_inr": 0.0,
       "must_cite_recall": 0.0,
-      "context_recall": 0.0,
-      "supporting_passage_retrieved": false,
+      "context_recall": 1.0,
+      "supporting_passage_retrieved": true,
       "groundedness": 1.0,
-      "context_relevance": 0.4,
+      "context_relevance": 0.6,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": false,
@@ -835,12 +828,12 @@
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1787,
-        "completion_tokens": 206,
-        "cost_usd": 0.0002611,
+        "prompt_tokens": 1717,
+        "completion_tokens": 205,
+        "cost_usd": 0.00025370000000000004,
         "calls": 2
       },
-      "latency_ms": 7.8,
+      "latency_ms": 11.2,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -851,9 +844,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1452,
-          "completion_tokens": 125,
-          "cost_usd": 0.0001952
+          "prompt_tokens": 1382,
+          "completion_tokens": 124,
+          "cost_usd": 0.0001878
         }
       },
       "result": {
@@ -873,7 +866,7 @@
             "clause_id": "CAR:3.3.2",
             "label": "DGCA CAR S3 Series M Part IV, para 3.3.2",
             "doc_id": "CAR",
-            "quote": "INR 10,000 or the booked one-way basic fare plus airline fuel charge, whichever is less"
+            "quote": "INR 10,000 or booked one-way basic fare plus airline fuel charge, whichever is less"
           }
         ],
         "justification": "The flight was cancelled, so cancellation compensation of INR 10,000 is payable under para 3.3.2.",
@@ -883,8 +876,8 @@
           "reasons": [],
           "path": [
             "Customer relations officer (reviews this recommendation)",
-            "Airline nodal officer for grievances (CAR para 3.8.1)",
-            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+            "Airline nodal officer and appellate authority for grievances (CAR para 3.10.4)",
+            "Air Sewa app or portal (CAR para 3.9.2), then any statutory body or court (para 3.9.3)"
           ]
         },
         "verification": {
@@ -904,7 +897,7 @@
             {
               "name": "required_retrieved",
               "passed": false,
-              "detail": "missing: ['CAR:3.3.3', 'CAR:3.3.4', 'CAR:3.6.1']"
+              "detail": "missing: ['CAR:3.3.4']"
             },
             {
               "name": "route_has_basis",
@@ -939,23 +932,23 @@
           "stop_reason": "",
           "degraded_reasons": [],
           "evidence": [
+            "CAR:3.3.2",
+            "CAR:3.3.3",
             "CAR:3.3.1",
-            "CHARTER:3.2",
-            "CAR:3.2.2",
-            "CHARTER:7.2",
-            "CAR:3.3.2"
+            "CAR:2.5",
+            "CHARTER:3.2"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1787,
-            "completion_tokens": 206,
-            "cost_usd": 0.0002611,
+            "prompt_tokens": 1717,
+            "completion_tokens": 205,
+            "cost_usd": 0.00025370000000000004,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 7.8
+          "end_to_end": 11.2
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
@@ -979,10 +972,10 @@
       "must_cite_recall": 0.0,
       "context_recall": 0.5,
       "supporting_passage_retrieved": false,
-      "groundedness": 0.0,
-      "context_relevance": 0.4,
-      "faithfulness": 0.0,
-      "hallucination": 1.0,
+      "groundedness": 1.0,
+      "context_relevance": 0.6,
+      "faithfulness": 1.0,
+      "hallucination": 0.0,
       "verification_passed": false,
       "verification_attempts": 1,
       "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
@@ -990,12 +983,12 @@
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1498,
-        "completion_tokens": 206,
-        "cost_usd": 0.0002322,
+        "prompt_tokens": 1578,
+        "completion_tokens": 205,
+        "cost_usd": 0.0002398,
         "calls": 2
       },
-      "latency_ms": 6.9,
+      "latency_ms": 7.6,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -1006,9 +999,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1174,
-          "completion_tokens": 125,
-          "cost_usd": 0.0001674
+          "prompt_tokens": 1254,
+          "completion_tokens": 124,
+          "cost_usd": 0.000175
         }
       },
       "result": {
@@ -1023,7 +1016,14 @@
           "facilities": [],
           "downgrade_refund_inr": 0.0
         },
-        "citations": [],
+        "citations": [
+          {
+            "clause_id": "CAR:3.3.2",
+            "label": "DGCA CAR S3 Series M Part IV, para 3.3.2",
+            "doc_id": "CAR",
+            "quote": "INR 10,000 or booked one-way basic fare plus airline fuel charge, whichever is less"
+          }
+        ],
         "justification": "The flight was cancelled, so cancellation compensation of INR 10,000 is payable under para 3.3.2.",
         "missing_evidence": [],
         "escalation": {
@@ -1031,8 +1031,8 @@
           "reasons": [],
           "path": [
             "Customer relations officer (reviews this recommendation)",
-            "Airline nodal officer for grievances (CAR para 3.8.1)",
-            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+            "Airline nodal officer and appellate authority for grievances (CAR para 3.10.4)",
+            "Air Sewa app or portal (CAR para 3.9.2), then any statutory body or court (para 3.9.3)"
           ]
         },
         "verification": {
@@ -1041,8 +1041,8 @@
           "checks": [
             {
               "name": "citations_resolve",
-              "passed": false,
-              "detail": "unresolved: ['CAR:3.3.2']"
+              "passed": true,
+              "detail": "1 citations resolve"
             },
             {
               "name": "quotes_in_text",
@@ -1052,17 +1052,17 @@
             {
               "name": "required_retrieved",
               "passed": false,
-              "detail": "missing: ['CAR:3.3.1', 'CAR:3.3.2', 'CAR:3.6.1']"
+              "detail": "missing: ['CAR:3.3.3']"
             },
             {
               "name": "route_has_basis",
-              "passed": false,
-              "detail": "payment without a cited amount provision"
+              "passed": true,
+              "detail": "payment cites an amount provision"
             },
             {
               "name": "cites_decisive_provision",
               "passed": false,
-              "detail": "answer does not cite ['CAR:3.3.4', 'CAR:3.6.1']"
+              "detail": "answer does not cite ['CAR:1.5', 'CAR:3.3.4']"
             },
             {
               "name": "consistent_with_rules",
@@ -1087,23 +1087,23 @@
           "stop_reason": "",
           "degraded_reasons": [],
           "evidence": [
-            "CAR:3.3.4",
-            "CAR:3.2.2",
-            "CAR:3.3.3",
+            "CAR:3.3.2",
             "CHARTER:3.2",
-            "CHARTER:7.1"
+            "CAR:3.3.1",
+            "CHARTER:7.1",
+            "CAR:3.3.4"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1498,
-            "completion_tokens": 206,
-            "cost_usd": 0.0002322,
+            "prompt_tokens": 1578,
+            "completion_tokens": 205,
+            "cost_usd": 0.0002398,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 6.9
+          "end_to_end": 7.6
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
@@ -1138,12 +1138,12 @@
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1738,
-        "completion_tokens": 206,
-        "cost_usd": 0.0002562,
+        "prompt_tokens": 1718,
+        "completion_tokens": 205,
+        "cost_usd": 0.0002538,
         "calls": 2
       },
-      "latency_ms": 8.0,
+      "latency_ms": 7.5,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -1154,9 +1154,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1393,
-          "completion_tokens": 125,
-          "cost_usd": 0.0001893
+          "prompt_tokens": 1373,
+          "completion_tokens": 124,
+          "cost_usd": 0.00018690000000000002
         }
       },
       "result": {
@@ -1176,7 +1176,7 @@
             "clause_id": "CAR:3.3.2",
             "label": "DGCA CAR S3 Series M Part IV, para 3.3.2",
             "doc_id": "CAR",
-            "quote": "INR 10,000 or the booked one-way basic fare plus airline fuel charge, whichever is less"
+            "quote": "INR 10,000 or booked one-way basic fare plus airline fuel charge, whichever is less"
           }
         ],
         "justification": "The flight was cancelled, so cancellation compensation of INR 10,000 is payable under para 3.3.2.",
@@ -1186,8 +1186,8 @@
           "reasons": [],
           "path": [
             "Customer relations officer (reviews this recommendation)",
-            "Airline nodal officer for grievances (CAR para 3.8.1)",
-            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+            "Airline nodal officer and appellate authority for grievances (CAR para 3.10.4)",
+            "Air Sewa app or portal (CAR para 3.9.2), then any statutory body or court (para 3.9.3)"
           ]
         },
         "verification": {
@@ -1207,7 +1207,7 @@
             {
               "name": "required_retrieved",
               "passed": false,
-              "detail": "missing: ['CAR:3.3.3', 'CAR:3.3.4', 'CAR:3.6.1']"
+              "detail": "missing: ['CAR:3.3.3', 'CAR:3.3.4']"
             },
             {
               "name": "route_has_basis",
@@ -1242,23 +1242,23 @@
           "stop_reason": "",
           "degraded_reasons": [],
           "evidence": [
-            "CAR:3.4.1",
             "CAR:3.3.1",
             "CHARTER:3.2",
             "CAR:3.3.2",
+            "CAR:3.2.3",
             "CAR:3.4.2"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1738,
-            "completion_tokens": 206,
-            "cost_usd": 0.0002562,
+            "prompt_tokens": 1718,
+            "completion_tokens": 205,
+            "cost_usd": 0.0002538,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 8.0
+          "end_to_end": 7.5
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
@@ -1293,12 +1293,12 @@
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1312,
-        "completion_tokens": 206,
-        "cost_usd": 0.0002136,
+        "prompt_tokens": 1309,
+        "completion_tokens": 205,
+        "cost_usd": 0.0002129,
         "calls": 2
       },
-      "latency_ms": 7.8,
+      "latency_ms": 7.5,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -1309,9 +1309,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 991,
-          "completion_tokens": 125,
-          "cost_usd": 0.0001491
+          "prompt_tokens": 988,
+          "completion_tokens": 124,
+          "cost_usd": 0.0001484
         }
       },
       "result": {
@@ -1334,8 +1334,8 @@
           "reasons": [],
           "path": [
             "Customer relations officer (reviews this recommendation)",
-            "Airline nodal officer for grievances (CAR para 3.8.1)",
-            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+            "Airline nodal officer and appellate authority for grievances (CAR para 3.10.4)",
+            "Air Sewa app or portal (CAR para 3.9.2), then any statutory body or court (para 3.9.3)"
           ]
         },
         "verification": {
@@ -1355,7 +1355,7 @@
             {
               "name": "required_retrieved",
               "passed": false,
-              "detail": "missing: ['CAR:3.3.2', 'CAR:3.3.3', 'CAR:3.3.4', 'CAR:3.6.1']"
+              "detail": "missing: ['CAR:3.3.2', 'CAR:3.3.3', 'CAR:3.3.4']"
             },
             {
               "name": "route_has_basis",
@@ -1392,21 +1392,21 @@
           "evidence": [
             "CHARTER:7.1",
             "CHARTER:7.2",
+            "CAR:3.3.1",
             "CHARTER:5.2",
-            "CHARTER:3.2",
-            "CAR:3.3.1"
+            "CHARTER:3.2"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1312,
-            "completion_tokens": 206,
-            "cost_usd": 0.0002136,
+            "prompt_tokens": 1309,
+            "completion_tokens": 205,
+            "cost_usd": 0.0002129,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 7.8
+          "end_to_end": 7.5
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
@@ -1431,7 +1431,7 @@
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 1.0,
-      "context_relevance": 0.4,
+      "context_relevance": 0.6,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": false,
@@ -1441,12 +1441,12 @@
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1748,
-        "completion_tokens": 206,
-        "cost_usd": 0.0002572,
+        "prompt_tokens": 1745,
+        "completion_tokens": 205,
+        "cost_usd": 0.0002565,
         "calls": 2
       },
-      "latency_ms": 7.8,
+      "latency_ms": 7.4,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -1457,9 +1457,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1419,
-          "completion_tokens": 125,
-          "cost_usd": 0.0001919
+          "prompt_tokens": 1416,
+          "completion_tokens": 124,
+          "cost_usd": 0.0001912
         }
       },
       "result": {
@@ -1479,7 +1479,7 @@
             "clause_id": "CAR:3.3.2",
             "label": "DGCA CAR S3 Series M Part IV, para 3.3.2",
             "doc_id": "CAR",
-            "quote": "INR 10,000 or the booked one-way basic fare plus airline fuel charge, whichever is less"
+            "quote": "INR 10,000 or booked one-way basic fare plus airline fuel charge, whichever is less"
           }
         ],
         "justification": "The flight was cancelled, so cancellation compensation of INR 10,000 is payable under para 3.3.2.",
@@ -1489,8 +1489,8 @@
           "reasons": [],
           "path": [
             "Customer relations officer (reviews this recommendation)",
-            "Airline nodal officer for grievances (CAR para 3.8.1)",
-            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+            "Airline nodal officer and appellate authority for grievances (CAR para 3.10.4)",
+            "Air Sewa app or portal (CAR para 3.9.2), then any statutory body or court (para 3.9.3)"
           ]
         },
         "verification": {
@@ -1510,7 +1510,7 @@
             {
               "name": "required_retrieved",
               "passed": false,
-              "detail": "missing: ['CAR:3.3.3', 'CAR:3.3.4', 'CAR:3.6.1']"
+              "detail": "missing: ['CAR:3.3.4']"
             },
             {
               "name": "route_has_basis",
@@ -1545,23 +1545,23 @@
           "stop_reason": "",
           "degraded_reasons": [],
           "evidence": [
-            "CHARTER:3.2",
             "CAR:3.3.1",
             "CAR:3.3.2",
-            "CHARTER:7.1",
-            "CAR:3.2.2"
+            "CHARTER:3.2",
+            "CAR:2.4",
+            "CAR:3.3.3"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1748,
-            "completion_tokens": 206,
-            "cost_usd": 0.0002572,
+            "prompt_tokens": 1745,
+            "completion_tokens": 205,
+            "cost_usd": 0.0002565,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 7.8
+          "end_to_end": 7.4
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
@@ -1582,7 +1582,7 @@
       "correct": false,
       "compensation_inr": 10000.0,
       "downgrade_refund_inr": 0.0,
-      "must_cite_recall": 0.0,
+      "must_cite_recall": 1.0,
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 1.0,
@@ -1596,12 +1596,12 @@
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1746,
-        "completion_tokens": 206,
-        "cost_usd": 0.000257,
+        "prompt_tokens": 1896,
+        "completion_tokens": 205,
+        "cost_usd": 0.0002716,
         "calls": 2
       },
-      "latency_ms": 7.0,
+      "latency_ms": 10.5,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -1612,9 +1612,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1432,
-          "completion_tokens": 125,
-          "cost_usd": 0.00019319999999999998
+          "prompt_tokens": 1582,
+          "completion_tokens": 124,
+          "cost_usd": 0.00020780000000000004
         }
       },
       "result": {
@@ -1634,7 +1634,7 @@
             "clause_id": "CAR:3.3.2",
             "label": "DGCA CAR S3 Series M Part IV, para 3.3.2",
             "doc_id": "CAR",
-            "quote": "INR 10,000 or the booked one-way basic fare plus airline fuel charge, whichever is less"
+            "quote": "INR 10,000 or booked one-way basic fare plus airline fuel charge, whichever is less"
           }
         ],
         "justification": "The flight was cancelled, so cancellation compensation of INR 10,000 is payable under para 3.3.2.",
@@ -1644,8 +1644,8 @@
           "reasons": [],
           "path": [
             "Customer relations officer (reviews this recommendation)",
-            "Airline nodal officer for grievances (CAR para 3.8.1)",
-            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+            "Airline nodal officer and appellate authority for grievances (CAR para 3.10.4)",
+            "Air Sewa app or portal (CAR para 3.9.2), then any statutory body or court (para 3.9.3)"
           ]
         },
         "verification": {
@@ -1665,7 +1665,7 @@
             {
               "name": "required_retrieved",
               "passed": false,
-              "detail": "missing: ['CAR:3.3.3', 'CAR:3.6.1']"
+              "detail": "missing: ['CAR:3.3.3']"
             },
             {
               "name": "route_has_basis",
@@ -1700,23 +1700,23 @@
           "stop_reason": "",
           "degraded_reasons": [],
           "evidence": [
-            "CAR:3.2.2",
-            "CAR:3.3.2",
             "CAR:3.3.4",
+            "CAR:3.3.2",
             "CAR:3.3.1",
-            "CAR:3.8.1"
+            "CAR:1.5",
+            "CAR:3.2.2"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1746,
-            "completion_tokens": 206,
-            "cost_usd": 0.000257,
+            "prompt_tokens": 1896,
+            "completion_tokens": 205,
+            "cost_usd": 0.0002716,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 7.0
+          "end_to_end": 10.5
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
@@ -1741,7 +1741,7 @@
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 0.0,
-      "context_relevance": 0.4,
+      "context_relevance": 0.2,
       "faithfulness": 0.0,
       "hallucination": 1.0,
       "verification_passed": false,
@@ -1751,12 +1751,12 @@
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1486,
-        "completion_tokens": 206,
-        "cost_usd": 0.00023099999999999998,
+        "prompt_tokens": 1500,
+        "completion_tokens": 205,
+        "cost_usd": 0.000232,
         "calls": 2
       },
-      "latency_ms": 7.5,
+      "latency_ms": 11.6,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -1767,9 +1767,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1156,
-          "completion_tokens": 125,
-          "cost_usd": 0.0001656
+          "prompt_tokens": 1170,
+          "completion_tokens": 124,
+          "cost_usd": 0.0001666
         }
       },
       "result": {
@@ -1792,8 +1792,8 @@
           "reasons": [],
           "path": [
             "Customer relations officer (reviews this recommendation)",
-            "Airline nodal officer for grievances (CAR para 3.8.1)",
-            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+            "Airline nodal officer and appellate authority for grievances (CAR para 3.10.4)",
+            "Air Sewa app or portal (CAR para 3.9.2), then any statutory body or court (para 3.9.3)"
           ]
         },
         "verification": {
@@ -1813,7 +1813,7 @@
             {
               "name": "required_retrieved",
               "passed": false,
-              "detail": "missing: ['CAR:3.2.3', 'CAR:3.6.1']"
+              "detail": "missing: ['CAR:2.6', 'CAR:3.2.1']"
             },
             {
               "name": "route_has_basis",
@@ -1849,22 +1849,22 @@
           "degraded_reasons": [],
           "evidence": [
             "CHARTER:5.1",
-            "CAR:3.2.1",
-            "CHARTER:5.2",
+            "CAR:3.2.3",
             "CAR:3.2.2",
-            "CAR:2.8"
+            "CHARTER:5.2",
+            "CAR:subject"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1486,
-            "completion_tokens": 206,
-            "cost_usd": 0.00023099999999999998,
+            "prompt_tokens": 1500,
+            "completion_tokens": 205,
+            "cost_usd": 0.000232,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 7.5
+          "end_to_end": 11.6
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
@@ -1899,12 +1899,12 @@
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1477,
-        "completion_tokens": 206,
-        "cost_usd": 0.0002301,
+        "prompt_tokens": 1597,
+        "completion_tokens": 205,
+        "cost_usd": 0.00024170000000000002,
         "calls": 2
       },
-      "latency_ms": 8.3,
+      "latency_ms": 11.2,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -1915,9 +1915,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1149,
-          "completion_tokens": 125,
-          "cost_usd": 0.00016490000000000002
+          "prompt_tokens": 1269,
+          "completion_tokens": 124,
+          "cost_usd": 0.0001765
         }
       },
       "result": {
@@ -1940,8 +1940,8 @@
           "reasons": [],
           "path": [
             "Customer relations officer (reviews this recommendation)",
-            "Airline nodal officer for grievances (CAR para 3.8.1)",
-            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+            "Airline nodal officer and appellate authority for grievances (CAR para 3.10.4)",
+            "Air Sewa app or portal (CAR para 3.9.2), then any statutory body or court (para 3.9.3)"
           ]
         },
         "verification": {
@@ -1961,7 +1961,7 @@
             {
               "name": "required_retrieved",
               "passed": false,
-              "detail": "missing: ['CAR:3.2.1', 'CAR:3.2.3', 'CAR:3.6.1']"
+              "detail": "missing: ['CAR:2.6', 'CAR:3.2.1']"
             },
             {
               "name": "route_has_basis",
@@ -1985,7 +1985,7 @@
         "confidence": "high",
         "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
         "notes": [
-          "Subject to confirmation that the passenger presented for check-in on time (para 3.1.2)."
+          "Subject to confirmation that the passenger presented for boarding within the time specified by the airline (para 2.6)."
         ],
         "agent": {
           "steps": 3,
@@ -1998,23 +1998,23 @@
           "stop_reason": "",
           "degraded_reasons": [],
           "evidence": [
-            "CAR:3.2.2",
+            "CAR:subject",
             "CHARTER:5.1",
-            "CHARTER:5.2",
-            "CAR:2.8",
-            "CAR:3.4.4"
+            "CAR:1.1",
+            "CAR:3.2.2",
+            "CAR:3.3.1"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1477,
-            "completion_tokens": 206,
-            "cost_usd": 0.0002301,
+            "prompt_tokens": 1597,
+            "completion_tokens": 205,
+            "cost_usd": 0.00024170000000000002,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 8.3
+          "end_to_end": 11.2
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
@@ -2036,10 +2036,10 @@
       "compensation_inr": 10000.0,
       "downgrade_refund_inr": 0.0,
       "must_cite_recall": 0.0,
-      "context_recall": 1.0,
+      "context_recall": 0.5,
       "supporting_passage_retrieved": true,
       "groundedness": 0.0,
-      "context_relevance": 0.4,
+      "context_relevance": 0.2,
       "faithfulness": 0.0,
       "hallucination": 1.0,
       "verification_passed": false,
@@ -2049,12 +2049,12 @@
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1486,
-        "completion_tokens": 206,
-        "cost_usd": 0.00023099999999999998,
+        "prompt_tokens": 1415,
+        "completion_tokens": 205,
+        "cost_usd": 0.0002235,
         "calls": 2
       },
-      "latency_ms": 8.4,
+      "latency_ms": 10.6,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -2065,9 +2065,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1149,
-          "completion_tokens": 125,
-          "cost_usd": 0.00016490000000000002
+          "prompt_tokens": 1078,
+          "completion_tokens": 124,
+          "cost_usd": 0.0001574
         }
       },
       "result": {
@@ -2090,8 +2090,8 @@
           "reasons": [],
           "path": [
             "Customer relations officer (reviews this recommendation)",
-            "Airline nodal officer for grievances (CAR para 3.8.1)",
-            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+            "Airline nodal officer and appellate authority for grievances (CAR para 3.10.4)",
+            "Air Sewa app or portal (CAR para 3.9.2), then any statutory body or court (para 3.9.3)"
           ]
         },
         "verification": {
@@ -2111,7 +2111,7 @@
             {
               "name": "required_retrieved",
               "passed": false,
-              "detail": "missing: ['CAR:3.2.3', 'CAR:3.6.1']"
+              "detail": "missing: ['CAR:2.6', 'CAR:3.2.2']"
             },
             {
               "name": "route_has_basis",
@@ -2121,7 +2121,7 @@
             {
               "name": "cites_decisive_provision",
               "passed": false,
-              "detail": "answer does not cite ['CAR:3.2.1']"
+              "detail": "answer does not cite ['CAR:3.2.1', 'CAR:3.2.2']"
             },
             {
               "name": "consistent_with_rules",
@@ -2147,22 +2147,22 @@
           "degraded_reasons": [],
           "evidence": [
             "CHARTER:5.1",
-            "CHARTER:5.2",
             "CAR:3.2.1",
-            "CAR:2.8",
-            "CAR:3.2.2"
+            "CAR:3.2.3",
+            "CHARTER:5.2",
+            "CAR:3.9.1"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1486,
-            "completion_tokens": 206,
-            "cost_usd": 0.00023099999999999998,
+            "prompt_tokens": 1415,
+            "completion_tokens": 205,
+            "cost_usd": 0.0002235,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 8.4
+          "end_to_end": 10.6
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
@@ -2197,12 +2197,12 @@
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1470,
-        "completion_tokens": 206,
-        "cost_usd": 0.0002294,
+        "prompt_tokens": 1498,
+        "completion_tokens": 205,
+        "cost_usd": 0.0002318,
         "calls": 2
       },
-      "latency_ms": 8.7,
+      "latency_ms": 7.6,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -2213,9 +2213,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1143,
-          "completion_tokens": 125,
-          "cost_usd": 0.0001643
+          "prompt_tokens": 1171,
+          "completion_tokens": 124,
+          "cost_usd": 0.0001667
         }
       },
       "result": {
@@ -2238,8 +2238,8 @@
           "reasons": [],
           "path": [
             "Customer relations officer (reviews this recommendation)",
-            "Airline nodal officer for grievances (CAR para 3.8.1)",
-            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+            "Airline nodal officer and appellate authority for grievances (CAR para 3.10.4)",
+            "Air Sewa app or portal (CAR para 3.9.2), then any statutory body or court (para 3.9.3)"
           ]
         },
         "verification": {
@@ -2259,7 +2259,7 @@
             {
               "name": "required_retrieved",
               "passed": false,
-              "detail": "missing: ['CAR:3.2.1', 'CAR:3.2.3', 'CAR:3.6.1']"
+              "detail": "missing: ['CAR:2.6', 'CAR:3.2.1']"
             },
             {
               "name": "route_has_basis",
@@ -2269,7 +2269,7 @@
             {
               "name": "cites_decisive_provision",
               "passed": false,
-              "detail": "answer does not cite ['CAR:3.2.3']"
+              "detail": "answer does not cite ['CAR:2.6']"
             },
             {
               "name": "consistent_with_rules",
@@ -2294,23 +2294,23 @@
           "stop_reason": "",
           "degraded_reasons": [],
           "evidence": [
-            "CAR:3.2.2",
-            "CHARTER:5.2",
-            "CAR:2.8",
+            "CAR:3.2.3",
             "CHARTER:5.1",
-            "CAR:3.1.2"
+            "CHARTER:7.1",
+            "CAR:3.2.2",
+            "CHARTER:3.2"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1470,
-            "completion_tokens": 206,
-            "cost_usd": 0.0002294,
+            "prompt_tokens": 1498,
+            "completion_tokens": 205,
+            "cost_usd": 0.0002318,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 8.7
+          "end_to_end": 7.6
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
@@ -2335,7 +2335,7 @@
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 0.0,
-      "context_relevance": 0.4,
+      "context_relevance": 0.2,
       "faithfulness": 0.0,
       "hallucination": 1.0,
       "verification_passed": false,
@@ -2345,12 +2345,12 @@
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1488,
-        "completion_tokens": 206,
-        "cost_usd": 0.00023119999999999998,
+        "prompt_tokens": 1618,
+        "completion_tokens": 205,
+        "cost_usd": 0.00024380000000000002,
         "calls": 2
       },
-      "latency_ms": 9.4,
+      "latency_ms": 6.6,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -2361,9 +2361,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1158,
-          "completion_tokens": 125,
-          "cost_usd": 0.0001658
+          "prompt_tokens": 1288,
+          "completion_tokens": 124,
+          "cost_usd": 0.00017840000000000003
         }
       },
       "result": {
@@ -2386,8 +2386,8 @@
           "reasons": [],
           "path": [
             "Customer relations officer (reviews this recommendation)",
-            "Airline nodal officer for grievances (CAR para 3.8.1)",
-            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+            "Airline nodal officer and appellate authority for grievances (CAR para 3.10.4)",
+            "Air Sewa app or portal (CAR para 3.9.2), then any statutory body or court (para 3.9.3)"
           ]
         },
         "verification": {
@@ -2407,7 +2407,7 @@
             {
               "name": "required_retrieved",
               "passed": false,
-              "detail": "missing: ['CAR:3.2.3', 'CAR:3.6.1']"
+              "detail": "missing: ['CAR:2.6', 'CAR:3.2.1']"
             },
             {
               "name": "route_has_basis",
@@ -2431,7 +2431,7 @@
         "confidence": "high",
         "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
         "notes": [
-          "Subject to confirmation that the passenger presented for check-in on time (para 3.1.2)."
+          "Subject to confirmation that the passenger presented for boarding within the time specified by the airline (para 2.6)."
         ],
         "agent": {
           "steps": 3,
@@ -2446,21 +2446,21 @@
           "evidence": [
             "CHARTER:5.1",
             "CAR:3.2.2",
-            "CAR:3.2.1",
+            "CAR:3.3.1",
             "CHARTER:5.2",
-            "CAR:2.8"
+            "CAR:3.2.3"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1488,
-            "completion_tokens": 206,
-            "cost_usd": 0.00023119999999999998,
+            "prompt_tokens": 1618,
+            "completion_tokens": 205,
+            "cost_usd": 0.00024380000000000002,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 9.4
+          "end_to_end": 6.6
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
@@ -2485,7 +2485,7 @@
       "context_recall": 1.0,
       "supporting_passage_retrieved": true,
       "groundedness": 0.0,
-      "context_relevance": 0.2,
+      "context_relevance": 0.4,
       "faithfulness": 0.0,
       "hallucination": 1.0,
       "verification_passed": false,
@@ -2495,12 +2495,12 @@
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1466,
-        "completion_tokens": 206,
-        "cost_usd": 0.00022899999999999998,
+        "prompt_tokens": 1582,
+        "completion_tokens": 205,
+        "cost_usd": 0.00024019999999999998,
         "calls": 2
       },
-      "latency_ms": 7.2,
+      "latency_ms": 7.3,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -2511,9 +2511,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1145,
-          "completion_tokens": 125,
-          "cost_usd": 0.00016450000000000001
+          "prompt_tokens": 1261,
+          "completion_tokens": 124,
+          "cost_usd": 0.00017570000000000002
         }
       },
       "result": {
@@ -2536,8 +2536,8 @@
           "reasons": [],
           "path": [
             "Customer relations officer (reviews this recommendation)",
-            "Airline nodal officer for grievances (CAR para 3.8.1)",
-            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+            "Airline nodal officer and appellate authority for grievances (CAR para 3.10.4)",
+            "Air Sewa app or portal (CAR para 3.9.2), then any statutory body or court (para 3.9.3)"
           ]
         },
         "verification": {
@@ -2557,7 +2557,7 @@
             {
               "name": "required_retrieved",
               "passed": false,
-              "detail": "missing: ['CAR:3.2.1', 'CAR:3.2.3', 'CAR:3.6.1']"
+              "detail": "missing: ['CAR:2.6']"
             },
             {
               "name": "route_has_basis",
@@ -2581,7 +2581,7 @@
         "confidence": "high",
         "basis": "naive baseline: single retrieval pass, not verified (evaluation only)",
         "notes": [
-          "Subject to confirmation that the passenger presented for check-in on time (para 3.1.2)."
+          "Subject to confirmation that the passenger presented for boarding within the time specified by the airline (para 2.6)."
         ],
         "agent": {
           "steps": 3,
@@ -2595,22 +2595,22 @@
           "degraded_reasons": [],
           "evidence": [
             "CHARTER:5.1",
+            "CAR:3.2.3",
             "CAR:3.2.2",
-            "CHARTER:5.2",
-            "CHARTER:7.1",
-            "CAR:3.4.1"
+            "CAR:3.2.1",
+            "CAR:subject"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1466,
-            "completion_tokens": 206,
-            "cost_usd": 0.00022899999999999998,
+            "prompt_tokens": 1582,
+            "completion_tokens": 205,
+            "cost_usd": 0.00024019999999999998,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 7.2
+          "end_to_end": 7.3
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
@@ -2632,10 +2632,10 @@
       "compensation_inr": 10000.0,
       "downgrade_refund_inr": 0.0,
       "must_cite_recall": 0.0,
-      "context_recall": 1.0,
+      "context_recall": 0.5,
       "supporting_passage_retrieved": true,
       "groundedness": 0.0,
-      "context_relevance": 0.4,
+      "context_relevance": 0.2,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": false,
@@ -2645,12 +2645,12 @@
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1315,
-        "completion_tokens": 206,
-        "cost_usd": 0.0002139,
+        "prompt_tokens": 1447,
+        "completion_tokens": 205,
+        "cost_usd": 0.0002267,
         "calls": 2
       },
-      "latency_ms": 7.3,
+      "latency_ms": 9.2,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -2661,9 +2661,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1002,
-          "completion_tokens": 125,
-          "cost_usd": 0.00015020000000000002
+          "prompt_tokens": 1134,
+          "completion_tokens": 124,
+          "cost_usd": 0.000163
         }
       },
       "result": {
@@ -2688,8 +2688,8 @@
           ],
           "path": [
             "Customer relations officer (reviews this recommendation)",
-            "Airline nodal officer for grievances (CAR para 3.8.1)",
-            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+            "Airline nodal officer and appellate authority for grievances (CAR para 3.10.4)",
+            "Air Sewa app or portal (CAR para 3.9.2), then any statutory body or court (para 3.9.3)"
           ]
         },
         "verification": {
@@ -2708,8 +2708,8 @@
             },
             {
               "name": "required_retrieved",
-              "passed": true,
-              "detail": "2 conditions/exemptions retrieved"
+              "passed": false,
+              "detail": "missing: ['CAR:3.4.4', 'CAR:3.8.1']"
             },
             {
               "name": "route_has_basis",
@@ -2719,7 +2719,7 @@
             {
               "name": "cites_decisive_provision",
               "passed": false,
-              "detail": "answer does not cite ['CAR:3.4.4']"
+              "detail": "answer does not cite ['CAR:3.4.1']"
             },
             {
               "name": "consistent_with_rules",
@@ -2746,23 +2746,23 @@
           "stop_reason": "",
           "degraded_reasons": [],
           "evidence": [
-            "CAR:3.4.1",
+            "CAR:3.4.2",
             "CHARTER:4.2",
-            "CAR:3.4.3",
-            "CAR:3.4.4",
-            "CAR:3.4.2"
+            "CAR:3.4.1",
+            "CAR:1.5",
+            "CAR:3.4.5"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1315,
-            "completion_tokens": 206,
-            "cost_usd": 0.0002139,
+            "prompt_tokens": 1447,
+            "completion_tokens": 205,
+            "cost_usd": 0.0002267,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 7.3
+          "end_to_end": 9.2
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
@@ -2784,10 +2784,10 @@
       "compensation_inr": 10000.0,
       "downgrade_refund_inr": 0.0,
       "must_cite_recall": 0.0,
-      "context_recall": 1.0,
-      "supporting_passage_retrieved": true,
+      "context_recall": 0.0,
+      "supporting_passage_retrieved": false,
       "groundedness": 0.0,
-      "context_relevance": 0.4,
+      "context_relevance": 0.0,
       "faithfulness": 1.0,
       "hallucination": 0.0,
       "verification_passed": false,
@@ -2797,12 +2797,12 @@
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1446,
-        "completion_tokens": 206,
-        "cost_usd": 0.000227,
+        "prompt_tokens": 1369,
+        "completion_tokens": 205,
+        "cost_usd": 0.0002189,
         "calls": 2
       },
-      "latency_ms": 6.7,
+      "latency_ms": 8.0,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -2813,9 +2813,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1135,
-          "completion_tokens": 125,
-          "cost_usd": 0.0001635
+          "prompt_tokens": 1058,
+          "completion_tokens": 124,
+          "cost_usd": 0.0001554
         }
       },
       "result": {
@@ -2840,8 +2840,8 @@
           ],
           "path": [
             "Customer relations officer (reviews this recommendation)",
-            "Airline nodal officer for grievances (CAR para 3.8.1)",
-            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+            "Airline nodal officer and appellate authority for grievances (CAR para 3.10.4)",
+            "Air Sewa app or portal (CAR para 3.9.2), then any statutory body or court (para 3.9.3)"
           ]
         },
         "verification": {
@@ -2860,8 +2860,8 @@
             },
             {
               "name": "required_retrieved",
-              "passed": true,
-              "detail": "2 conditions/exemptions retrieved"
+              "passed": false,
+              "detail": "missing: ['CAR:3.4.1', 'CAR:3.4.4', 'CAR:3.8.1']"
             },
             {
               "name": "route_has_basis",
@@ -2871,7 +2871,7 @@
             {
               "name": "cites_decisive_provision",
               "passed": false,
-              "detail": "answer does not cite ['CAR:3.4.4']"
+              "detail": "answer does not cite ['CAR:3.4.1']"
             },
             {
               "name": "consistent_with_rules",
@@ -2898,23 +2898,23 @@
           "stop_reason": "",
           "degraded_reasons": [],
           "evidence": [
-            "CAR:3.4.1",
             "CHARTER:7.2",
             "CHARTER:4.1",
-            "CAR:3.2.2",
-            "CAR:3.4.4"
+            "CAR:1.5",
+            "CAR:3.4.2",
+            "CHARTER:3.2"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1446,
-            "completion_tokens": 206,
-            "cost_usd": 0.000227,
+            "prompt_tokens": 1369,
+            "completion_tokens": 205,
+            "cost_usd": 0.0002189,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 6.7
+          "end_to_end": 8.0
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
@@ -2936,7 +2936,7 @@
       "compensation_inr": 10000.0,
       "downgrade_refund_inr": 0.0,
       "must_cite_recall": 0.0,
-      "context_recall": 0.5,
+      "context_recall": 0.3333333333333333,
       "supporting_passage_retrieved": false,
       "groundedness": 1.0,
       "context_relevance": 0.2,
@@ -2949,12 +2949,12 @@
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1514,
-        "completion_tokens": 206,
-        "cost_usd": 0.0002338,
+        "prompt_tokens": 1493,
+        "completion_tokens": 205,
+        "cost_usd": 0.0002313,
         "calls": 2
       },
-      "latency_ms": 7.5,
+      "latency_ms": 8.0,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -2965,9 +2965,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1190,
-          "completion_tokens": 125,
-          "cost_usd": 0.00016900000000000002
+          "prompt_tokens": 1169,
+          "completion_tokens": 124,
+          "cost_usd": 0.0001665
         }
       },
       "result": {
@@ -2987,7 +2987,7 @@
             "clause_id": "CAR:3.3.2",
             "label": "DGCA CAR S3 Series M Part IV, para 3.3.2",
             "doc_id": "CAR",
-            "quote": "INR 10,000 or the booked one-way basic fare plus airline fuel charge, whichever is less"
+            "quote": "INR 10,000 or booked one-way basic fare plus airline fuel charge, whichever is less"
           }
         ],
         "justification": "The flight was cancelled, so cancellation compensation of INR 10,000 is payable under para 3.3.2.",
@@ -2999,8 +2999,8 @@
           ],
           "path": [
             "Customer relations officer (reviews this recommendation)",
-            "Airline nodal officer for grievances (CAR para 3.8.1)",
-            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+            "Airline nodal officer and appellate authority for grievances (CAR para 3.10.4)",
+            "Air Sewa app or portal (CAR para 3.9.2), then any statutory body or court (para 3.9.3)"
           ]
         },
         "verification": {
@@ -3020,7 +3020,7 @@
             {
               "name": "required_retrieved",
               "passed": false,
-              "detail": "missing: ['CAR:3.4.4']"
+              "detail": "missing: ['CAR:3.4.4', 'CAR:3.8.1']"
             },
             {
               "name": "route_has_basis",
@@ -3030,7 +3030,7 @@
             {
               "name": "cites_decisive_provision",
               "passed": false,
-              "detail": "answer does not cite ['CAR:3.4.4']"
+              "detail": "answer does not cite ['CAR:3.4.1']"
             },
             {
               "name": "consistent_with_rules",
@@ -3057,23 +3057,23 @@
           "stop_reason": "",
           "degraded_reasons": [],
           "evidence": [
-            "CAR:3.4.1",
-            "CHARTER:4.2",
             "CAR:3.3.2",
-            "CAR:3.4.2",
-            "CHARTER:7.2"
+            "CAR:3.4.1",
+            "CHARTER:7.2",
+            "CHARTER:3.2",
+            "CHARTER:4.2"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1514,
-            "completion_tokens": 206,
-            "cost_usd": 0.0002338,
+            "prompt_tokens": 1493,
+            "completion_tokens": 205,
+            "cost_usd": 0.0002313,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 7.5
+          "end_to_end": 8.0
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
@@ -3108,12 +3108,12 @@
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1266,
-        "completion_tokens": 206,
-        "cost_usd": 0.000209,
+        "prompt_tokens": 1233,
+        "completion_tokens": 205,
+        "cost_usd": 0.0002053,
         "calls": 2
       },
-      "latency_ms": 7.8,
+      "latency_ms": 7.2,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -3124,9 +3124,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 944,
-          "completion_tokens": 125,
-          "cost_usd": 0.0001444
+          "prompt_tokens": 911,
+          "completion_tokens": 124,
+          "cost_usd": 0.0001407
         }
       },
       "result": {
@@ -3149,8 +3149,8 @@
           "reasons": [],
           "path": [
             "Customer relations officer (reviews this recommendation)",
-            "Airline nodal officer for grievances (CAR para 3.8.1)",
-            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+            "Airline nodal officer and appellate authority for grievances (CAR para 3.10.4)",
+            "Air Sewa app or portal (CAR para 3.9.2), then any statutory body or court (para 3.9.3)"
           ]
         },
         "verification": {
@@ -3169,8 +3169,8 @@
             },
             {
               "name": "required_retrieved",
-              "passed": false,
-              "detail": "missing: ['CAR:3.5.2']"
+              "passed": true,
+              "detail": "1 conditions/exemptions retrieved"
             },
             {
               "name": "route_has_basis",
@@ -3205,23 +3205,23 @@
           "stop_reason": "",
           "degraded_reasons": [],
           "evidence": [
+            "CAR:2.10",
+            "CAR:3.5.1",
             "CHARTER:6.1",
             "CHARTER:6.2",
-            "CAR:2.9",
-            "CAR:3.5.1",
             "CHARTER:7.2"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1266,
-            "completion_tokens": 206,
-            "cost_usd": 0.000209,
+            "prompt_tokens": 1233,
+            "completion_tokens": 205,
+            "cost_usd": 0.0002053,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 7.8
+          "end_to_end": 7.2
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
@@ -3256,12 +3256,12 @@
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1534,
-        "completion_tokens": 206,
-        "cost_usd": 0.00023579999999999999,
+        "prompt_tokens": 1390,
+        "completion_tokens": 205,
+        "cost_usd": 0.000221,
         "calls": 2
       },
-      "latency_ms": 7.7,
+      "latency_ms": 7.8,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -3272,9 +3272,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1218,
-          "completion_tokens": 125,
-          "cost_usd": 0.0001718
+          "prompt_tokens": 1074,
+          "completion_tokens": 124,
+          "cost_usd": 0.00015700000000000002
         }
       },
       "result": {
@@ -3297,8 +3297,8 @@
           "reasons": [],
           "path": [
             "Customer relations officer (reviews this recommendation)",
-            "Airline nodal officer for grievances (CAR para 3.8.1)",
-            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+            "Airline nodal officer and appellate authority for grievances (CAR para 3.10.4)",
+            "Air Sewa app or portal (CAR para 3.9.2), then any statutory body or court (para 3.9.3)"
           ]
         },
         "verification": {
@@ -3318,7 +3318,7 @@
             {
               "name": "required_retrieved",
               "passed": false,
-              "detail": "missing: ['CAR:3.5.2', 'CHARTER:6.2']"
+              "detail": "missing: ['CHARTER:6.2']"
             },
             {
               "name": "route_has_basis",
@@ -3353,23 +3353,23 @@
           "stop_reason": "",
           "degraded_reasons": [],
           "evidence": [
-            "CHARTER:7.2",
-            "CHARTER:7.1",
-            "CAR:3.2.2",
             "CAR:3.5.1",
-            "CAR:3.3.3"
+            "CAR:3.1.2",
+            "CHARTER:7.2",
+            "CAR:2.10",
+            "CAR:1.1"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1534,
-            "completion_tokens": 206,
-            "cost_usd": 0.00023579999999999999,
+            "prompt_tokens": 1390,
+            "completion_tokens": 205,
+            "cost_usd": 0.000221,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 7.7
+          "end_to_end": 7.8
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
@@ -3404,12 +3404,12 @@
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1761,
-        "completion_tokens": 206,
-        "cost_usd": 0.0002585,
+        "prompt_tokens": 1703,
+        "completion_tokens": 205,
+        "cost_usd": 0.0002523,
         "calls": 2
       },
-      "latency_ms": 7.5,
+      "latency_ms": 7.7,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -3420,9 +3420,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1436,
-          "completion_tokens": 125,
-          "cost_usd": 0.0001936
+          "prompt_tokens": 1378,
+          "completion_tokens": 124,
+          "cost_usd": 0.00018740000000000003
         }
       },
       "result": {
@@ -3442,7 +3442,7 @@
             "clause_id": "CAR:3.3.2",
             "label": "DGCA CAR S3 Series M Part IV, para 3.3.2",
             "doc_id": "CAR",
-            "quote": "INR 10,000 or the booked one-way basic fare plus airline fuel charge, whichever is less"
+            "quote": "INR 10,000 or booked one-way basic fare plus airline fuel charge, whichever is less"
           }
         ],
         "justification": "The flight was cancelled, so cancellation compensation of INR 10,000 is payable under para 3.3.2.",
@@ -3452,8 +3452,8 @@
           "reasons": [],
           "path": [
             "Customer relations officer (reviews this recommendation)",
-            "Airline nodal officer for grievances (CAR para 3.8.1)",
-            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+            "Airline nodal officer and appellate authority for grievances (CAR para 3.10.4)",
+            "Air Sewa app or portal (CAR para 3.9.2), then any statutory body or court (para 3.9.3)"
           ]
         },
         "verification": {
@@ -3473,7 +3473,7 @@
             {
               "name": "required_retrieved",
               "passed": false,
-              "detail": "missing: ['CAR:3.1.1']"
+              "detail": "missing: ['CAR:3.6.1']"
             },
             {
               "name": "route_has_basis",
@@ -3508,23 +3508,23 @@
           "stop_reason": "",
           "degraded_reasons": [],
           "evidence": [
+            "CAR:3.3.4",
             "CAR:3.3.2",
             "CAR:3.3.1",
-            "CAR:3.3.4",
-            "CAR:3.2.2",
+            "CAR:1.4",
             "CHARTER:3.2"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1761,
-            "completion_tokens": 206,
-            "cost_usd": 0.0002585,
+            "prompt_tokens": 1703,
+            "completion_tokens": 205,
+            "cost_usd": 0.0002523,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 7.5
+          "end_to_end": 7.7
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
@@ -3559,12 +3559,12 @@
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1532,
-        "completion_tokens": 206,
-        "cost_usd": 0.0002356,
+        "prompt_tokens": 1473,
+        "completion_tokens": 205,
+        "cost_usd": 0.0002293,
         "calls": 2
       },
-      "latency_ms": 8.0,
+      "latency_ms": 7.9,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -3575,9 +3575,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1208,
-          "completion_tokens": 125,
-          "cost_usd": 0.0001708
+          "prompt_tokens": 1149,
+          "completion_tokens": 124,
+          "cost_usd": 0.00016450000000000001
         }
       },
       "result": {
@@ -3600,8 +3600,8 @@
           "reasons": [],
           "path": [
             "Customer relations officer (reviews this recommendation)",
-            "Airline nodal officer for grievances (CAR para 3.8.1)",
-            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+            "Airline nodal officer and appellate authority for grievances (CAR para 3.10.4)",
+            "Air Sewa app or portal (CAR para 3.9.2), then any statutory body or court (para 3.9.3)"
           ]
         },
         "verification": {
@@ -3621,7 +3621,7 @@
             {
               "name": "required_retrieved",
               "passed": false,
-              "detail": "missing: ['CAR:3.1.3']"
+              "detail": "missing: ['CAR:subject']"
             },
             {
               "name": "route_has_basis",
@@ -3656,23 +3656,23 @@
           "stop_reason": "",
           "degraded_reasons": [],
           "evidence": [
-            "CAR:2.10",
-            "CAR:3.2.2",
+            "CAR:2.3",
+            "CAR:3.3.4",
             "CAR:3.3.1",
             "CAR:3.4.4",
-            "CAR:3.4.3"
+            "CAR:1.4"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1532,
-            "completion_tokens": 206,
-            "cost_usd": 0.0002356,
+            "prompt_tokens": 1473,
+            "completion_tokens": 205,
+            "cost_usd": 0.0002293,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 8.0
+          "end_to_end": 7.9
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
@@ -3712,7 +3712,7 @@
         "cost_usd": 0.0,
         "calls": 0
       },
-      "latency_ms": 6.1,
+      "latency_ms": 7.2,
       "retrieved": 5,
       "cost_by_step": {},
       "result": {
@@ -3728,7 +3728,7 @@
           "downgrade_refund_inr": 0.0
         },
         "citations": [],
-        "justification": "Cancellation means the non-operation of a flight which was previously planned; the claim must state which kind of disruption occurred. [CAR:2.6]",
+        "justification": "Cancellation means non-operation of a flight which was previously planned; the claim must state which kind of disruption occurred. [CAR:2.8]",
         "missing_evidence": [
           "what happened to the flight: denied boarding, cancellation, delay or downgrading"
         ],
@@ -3739,8 +3739,8 @@
           ],
           "path": [
             "Customer relations officer (reviews this recommendation)",
-            "Airline nodal officer for grievances (CAR para 3.8.1)",
-            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+            "Airline nodal officer and appellate authority for grievances (CAR para 3.10.4)",
+            "Air Sewa app or portal (CAR para 3.9.2), then any statutory body or court (para 3.9.3)"
           ]
         },
         "verification": {
@@ -3750,7 +3750,7 @@
             {
               "name": "citations_resolve",
               "passed": false,
-              "detail": "unresolved: ['CAR:2.6']"
+              "detail": "unresolved: ['CAR:2.8']"
             },
             {
               "name": "quotes_in_text",
@@ -3788,10 +3788,10 @@
           "degraded_reasons": [],
           "evidence": [
             "CHARTER:3.2",
-            "CAR:3.2.2",
             "CAR:1.1",
             "CAR:3.3.2",
-            "CAR:2.1"
+            "CAR:3.2.2",
+            "CAR:2.4"
           ]
         },
         "cost": {
@@ -3803,7 +3803,7 @@
           }
         },
         "timings_ms": {
-          "end_to_end": 6.1
+          "end_to_end": 7.2
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
@@ -3814,13 +3814,13 @@
     },
     {
       "id": "S26",
-      "title": "Delay with disputed cause (facilities apply irrespective of cause)",
-      "expected_route": "decline",
+      "title": "Delay with disputed cause (facilities depend on the cause under 3.4.4)",
+      "expected_route": "escalate_to_human",
       "route": "escalate_to_human",
-      "route_ok": false,
-      "amount_ok": false,
-      "facilities_ok": false,
-      "escalation_reason_ok": true,
+      "route_ok": true,
+      "amount_ok": true,
+      "facilities_ok": true,
+      "escalation_reason_ok": false,
       "correct": false,
       "compensation_inr": 10000.0,
       "downgrade_refund_inr": 0.0,
@@ -3838,12 +3838,12 @@
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1792,
-        "completion_tokens": 206,
-        "cost_usd": 0.0002616,
+        "prompt_tokens": 1719,
+        "completion_tokens": 205,
+        "cost_usd": 0.0002539,
         "calls": 2
       },
-      "latency_ms": 9.2,
+      "latency_ms": 7.7,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -3854,9 +3854,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1462,
-          "completion_tokens": 125,
-          "cost_usd": 0.0001962
+          "prompt_tokens": 1389,
+          "completion_tokens": 124,
+          "cost_usd": 0.00018850000000000003
         }
       },
       "result": {
@@ -3876,7 +3876,7 @@
             "clause_id": "CAR:3.3.2",
             "label": "DGCA CAR S3 Series M Part IV, para 3.3.2",
             "doc_id": "CAR",
-            "quote": "INR 10,000 or the booked one-way basic fare plus airline fuel charge, whichever is less"
+            "quote": "INR 10,000 or booked one-way basic fare plus airline fuel charge, whichever is less"
           }
         ],
         "justification": "The flight was cancelled, so cancellation compensation of INR 10,000 is payable under para 3.3.2.",
@@ -3888,8 +3888,8 @@
           ],
           "path": [
             "Customer relations officer (reviews this recommendation)",
-            "Airline nodal officer for grievances (CAR para 3.8.1)",
-            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+            "Airline nodal officer and appellate authority for grievances (CAR para 3.10.4)",
+            "Air Sewa app or portal (CAR para 3.9.2), then any statutory body or court (para 3.9.3)"
           ]
         },
         "verification": {
@@ -3909,7 +3909,7 @@
             {
               "name": "required_retrieved",
               "passed": false,
-              "detail": "missing: ['CAR:3.4.4']"
+              "detail": "missing: ['CAR:3.4.4', 'CAR:3.8.1']"
             },
             {
               "name": "route_has_basis",
@@ -3919,12 +3919,12 @@
             {
               "name": "cites_decisive_provision",
               "passed": false,
-              "detail": "answer does not cite ['CAR:3.4.4']"
+              "detail": "answer does not cite ['CAR:3.4.1']"
             },
             {
               "name": "consistent_with_rules",
               "passed": false,
-              "detail": "model route=pay_as_computed amount=10000.0; provisions give route=decline amount=0.0"
+              "detail": "model route=pay_as_computed amount=10000.0; provisions give route=escalate_to_human amount=0.0"
             }
           ]
         },
@@ -3947,22 +3947,22 @@
           "degraded_reasons": [],
           "evidence": [
             "CAR:3.4.1",
+            "CAR:1.5",
             "CAR:3.4.2",
-            "CAR:3.4.3",
             "CAR:3.3.2",
-            "CAR:3.2.2"
+            "CHARTER:4.2"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1792,
-            "completion_tokens": 206,
-            "cost_usd": 0.0002616,
+            "prompt_tokens": 1719,
+            "completion_tokens": 205,
+            "cost_usd": 0.0002539,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 9.2
+          "end_to_end": 7.7
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",
@@ -3997,12 +3997,12 @@
       "steps": 3,
       "tool_calls": 2,
       "cost": {
-        "prompt_tokens": 1359,
-        "completion_tokens": 206,
-        "cost_usd": 0.0002183,
+        "prompt_tokens": 1373,
+        "completion_tokens": 205,
+        "cost_usd": 0.0002193,
         "calls": 2
       },
-      "latency_ms": 12.3,
+      "latency_ms": 8.0,
       "retrieved": 5,
       "cost_by_step": {
         "extract": {
@@ -4013,9 +4013,9 @@
         },
         "determine": {
           "calls": 1,
-          "prompt_tokens": 1037,
-          "completion_tokens": 125,
-          "cost_usd": 0.0001537
+          "prompt_tokens": 1051,
+          "completion_tokens": 124,
+          "cost_usd": 0.00015470000000000002
         }
       },
       "result": {
@@ -4038,8 +4038,8 @@
           "reasons": [],
           "path": [
             "Customer relations officer (reviews this recommendation)",
-            "Airline nodal officer for grievances (CAR para 3.8.1)",
-            "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"
+            "Airline nodal officer and appellate authority for grievances (CAR para 3.10.4)",
+            "Air Sewa app or portal (CAR para 3.9.2), then any statutory body or court (para 3.9.3)"
           ]
         },
         "verification": {
@@ -4059,7 +4059,7 @@
             {
               "name": "required_retrieved",
               "passed": false,
-              "detail": "missing: ['CAR:3.5.1', 'CAR:3.5.2']"
+              "detail": "missing: ['CAR:3.5.1']"
             },
             {
               "name": "route_has_basis",
@@ -4069,7 +4069,7 @@
             {
               "name": "cites_decisive_provision",
               "passed": false,
-              "detail": "answer does not cite ['CAR:3.5.2']"
+              "detail": "answer does not cite ['CAR:3.5.1']"
             },
             {
               "name": "consistent_with_rules",
@@ -4096,21 +4096,21 @@
           "evidence": [
             "CHARTER:7.1",
             "CHARTER:7.2",
+            "CAR:2.10",
             "CHARTER:6.1",
-            "CAR:2.9",
             "CAR:3.2.2"
           ]
         },
         "cost": {
           "total": {
-            "prompt_tokens": 1359,
-            "completion_tokens": 206,
-            "cost_usd": 0.0002183,
+            "prompt_tokens": 1373,
+            "completion_tokens": 205,
+            "cost_usd": 0.0002193,
             "calls": 2
           }
         },
         "timings_ms": {
-          "end_to_end": 12.3
+          "end_to_end": 8.0
         },
         "prompt_versions": {
           "extraction": "extraction@v1#2a1d959f",

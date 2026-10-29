@@ -239,6 +239,9 @@ def summarise(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "cost_share_by_step": {k: round(v / sum(step_cost.values()), 3) for k, v in sorted(step_cost.items(), key=lambda kv: -kv[1])} if step_cost and sum(step_cost.values()) else {},
         "mean_latency_ms": mean("latency_ms"),
         "s01_difficult_case_correct": next((r["correct"] for r in rows if r["id"] == "S01"), None),
+        # Runs that completed without the model (breaker open, provider quota). A model comparison is only valid
+        # when this is 0 or explained (INC-16).
+        "degraded_runs": [r["id"] for r in rows if r.get("degraded")],
     }
 
 
@@ -272,6 +275,9 @@ def main() -> int:
         json.dump({"summary": summary, "rows": rows}, fh, indent=2, default=str)
     print(json.dumps(summary, indent=2))
     print(f"written {out}")
+    if summary.get("degraded_runs"):
+        print(f"WARNING: {len(summary['degraded_runs'])} runs completed without the model: "
+              f"{','.join(summary['degraded_runs'])}", file=sys.stderr)
     return 0
 
 

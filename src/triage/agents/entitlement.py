@@ -17,7 +17,8 @@ Topology of one run:
            on the phrases that failed, then re-determines with the verifier's feedback.
 * fallback after the last attempt, the engine's own position is verified on its own; if that also fails the run
            escalates. An unverified answer is never returned.
-Loop bounds: AGENT_MAX_STEPS graph steps, AGENT_MAX_TOOL_CALLS tool calls, AGENT_MAX_WALL_S seconds.
+Loop bounds: AGENT_MAX_STEPS graph steps, AGENT_MAX_TOOL_CALLS tool calls, AGENT_MAX_WALL_S seconds, plus at most
+RESERVED_LOOKUPS exact clause lookups for recovery and fallback once the research budget is spent.
 """
 from __future__ import annotations
 
@@ -41,9 +42,11 @@ from .verifier import best_sentence, verify
 
 logger = logging.getLogger(__name__)
 AGENT = "entitlement"
+# Exact clause lookups allowed beyond the research budget, for recovery and fallback only (still a hard bound).
+RESERVED_LOOKUPS = 6
 ESCALATION_PATH = ["Customer relations officer (reviews this recommendation)",
-                   "Airline nodal officer for grievances (CAR para 3.8.1)",
-                   "AirSewa portal, Ministry of Civil Aviation (passenger escalation)"]
+                   "Airline nodal officer and appellate authority for grievances (CAR para 3.10.4)",
+                   "Air Sewa app or portal (CAR para 3.9.2), then any statutory body or court (para 3.9.3)"]
 
 
 class State(TypedDict, total=False):
@@ -94,7 +97,7 @@ class FieldsArgs(BaseModel):
 
 
 TOOL_HELP = """search_corpus(query, mode='hybrid'|'bm25'|'dense', k=5, doc_id=None|'CAR'|'CHARTER'): search provisions
-get_clause(clause_id): fetch one provision by id, e.g. CAR:3.4.1
+get_clause(clause_id): fetch one provision by id, e.g. CAR:3.8.1
 find_related(clause_id): provisions that this one cites, provisions that cite it (exemptions, modifiers), siblings, and definitions of terms it uses
 get_claim_fields(fields): read validated claim fields (e.g. notice_minutes, alternate_accepted, block_time_minutes)
 finish(): stop researching and determine the entitlement"""
@@ -120,29 +123,30 @@ def derived_queries(state: State) -> list[tuple[str, dict[str, Any]]]:
     ev = " ".join(p["text"].lower() for p in state.get("evidence", {}).values())
     out: list[tuple[str, dict[str, Any]]] = []
     if "alternate flight" in ev and f.get("alternate_offered"):
-        out.append(("alternate", {"query": "passenger accepts the alternate flight no compensation facilities awaiting "
-                                           "the alternate flight meals and refreshments waiting time"}))
+        out.append(("alternate", {"query": "either provide alternate flight as acceptable to the passenger or "
+                                           "compensation facilities at the airport waiting for the alternate flight"}))
     if "extraordinary circumstances" in ev and f.get("airline_stated_cause"):
         out.append(("cause", {"query": f"extraordinary circumstances {f['airline_stated_cause']} beyond the control "
-                                       "of the airline general test burden"}))
-    if f.get("contact_details_provided") is False or ("contact details" in ev and cat == "cancellation"):
-        out.append(("contact", {"query": "passenger did not provide contact details at booking airline not liable to "
-                                         "pay compensation", "mode": "bm25"}))
+                                       "of the airline could not have been avoided reasonable measures"}))
+    if f.get("contact_details_provided") is False or ("contact information" in ev and cat == "cancellation"):
+        out.append(("contact", {"query": "no financial compensation passengers not provided adequate contact "
+                                         "information email phone at booking", "mode": "bm25"}))
     wait = f.get("alternate_delay_minutes") or f.get("delay_minutes")
-    if wait and ("para 3.4" in ev or "facilities" in ev or cat == "delay"):
-        out.append(("facilities", {"query": "meals and refreshments in relation to the waiting time block time hotel "
-                                            "accommodation"}))
+    if wait and ("para 3.8" in ev or "facilities" in ev or cat == "delay"):
+        out.append(("facilities", {"query": "passengers shall be offered free of charge meals and refreshments in "
+                                            "relation to waiting time hotel accommodation"}))
     if cat in ("cancellation", "denied_boarding"):
-        out.append(("exemptions", {"query": f"{cat.replace('_', ' ')} airline shall not be liable to pay compensation "
-                                            "extraordinary circumstances", "mode": "bm25"}))
+        out.append(("exemptions", {"query": f"{cat.replace('_', ' ')} no such compensation shall be payable not be "
+                                            "liable extraordinary circumstances", "mode": "bm25"}))
     if cat == "denied_boarding":
-        out.append(("checkin", {"query": "presented for check-in not later than one hour volunteers denied boarding"}))
+        out.append(("checkin", {"query": "denied boarding means refusal to carry presented for boarding within the "
+                                         "time specified volunteers against their will"}))
     if cat == "downgrading":
         out.append(("charter", {"query": "downgraded lower class refund international sectors", "doc_id": "CHARTER"}))
-        out.append(("dg_exempt", {"query": "downgrade requested by the passenger refund does not apply", "mode": "bm25"}))
+        out.append(("dg_exempt", {"query": "downgraded involuntarily lower class reimburse cost of ticket", "mode": "bm25"}))
     if cat == "delay":
-        out.append(("delay_comp", {"query": "no monetary compensation for delay facilities irrespective of the cause",
-                                   "mode": "bm25"}))
+        out.append(("delay_comp", {"query": "delay not be obliged to adhere to para 3.8 extra ordinary circumstances "
+                                            "facilities checked in on time", "mode": "bm25"}))
     return out
 
 
@@ -167,22 +171,28 @@ def heuristic_next(state: State, settings: Settings) -> dict[str, Any]:
             return {"tool": "search_corpus", "item": f"derived:{key}", "args": {"k": settings.derived_k, **args}}
     if "applicability" not in done:
         return {"tool": "search_corpus", "item": "applicability",
-                "args": {"query": "applicability of this CAR scheduled Indian air carriers foreign air carriers "
-                                  "baggage claims", "k": 3, "mode": "bm25"}}
+                "args": {"query": "subject facilities to passengers denied boarding cancellation delays foreign "
+                                  "carriers country of origin applicable operators", "k": 3, "mode": "bm25"}}
     return {"tool": "finish", "item": "finish", "args": {}}
 
 
 def _rules_candidate(position: dict[str, Any], evidence: dict[str, Any]) -> dict[str, Any]:
     by_clause: dict[str, list[str]] = {}
+    lead: dict[str, tuple[int, list[str]]] = {}  # the terms of the most decisive component, used to pick the quote
+    rank = {"basis": 0, "exemption": 1, "amount": 2, "condition": 3, "facility": 4, "evidence": 5, "escalation": 6}
     for comp in position["components"]:
         by_clause.setdefault(comp["clause_id"], [])
         for t in comp["terms"]:
             if t not in by_clause[comp["clause_id"]]:
                 by_clause[comp["clause_id"]].append(t)
+        r = rank.get(comp["kind"], 9)
+        if comp["clause_id"] not in lead or r < lead[comp["clause_id"]][0]:
+            lead[comp["clause_id"]] = (r, comp["terms"])
     cits = []
     for cid, terms in by_clause.items():
         p = evidence.get(cid)
-        cits.append({"clause_id": cid, "terms": terms, "quote": best_sentence(p["text"], terms) if p else ""})
+        cits.append({"clause_id": cid, "terms": terms,
+                     "quote": best_sentence(p["text"], lead[cid][1]) if p else ""})
     pos = engine.Position(category=position["category"])
     pos.components = [engine.Component(**c) for c in position["components"]]
     pos.missing_facts, pos.escalate_reasons = position["missing_facts"], position["escalate_reasons"]
@@ -283,15 +293,18 @@ def build_graph(deps: AgentDeps, settings: Settings):
         with rec.step_timer("plan"):
             stop = budget_left(state)
             source = "heuristic"
-            if stop:
+            reserve_ok = (stop in (None, "max_tool_calls", "max_steps")
+                          and state.get("tool_calls", 0) < settings.agent_max_tool_calls + RESERVED_LOOKUPS
+                          and state.get("steps", 0) < settings.agent_max_steps + 2 * RESERVED_LOOKUPS + 2)
+            if state.get("forced") and reserve_ok:
+                action = state["forced"].pop(0)
+                source = "recovery"
+            elif stop:
                 action = {"tool": "finish", "args": {}, "item": "finish"}
                 state["stop_reason"] = stop
                 source = "budget"
             elif settings.naive_baseline:
                 action = heuristic_next(state, settings)
-            elif state.get("forced"):
-                action = state["forced"].pop(0)
-                source = "recovery"
             else:
                 guard = heuristic_next(state, settings)
                 action = guard
@@ -446,7 +459,26 @@ def build_graph(deps: AgentDeps, settings: Settings):
 
     async def fallback(state: State, config) -> State:
         rec = rec_of(config)
-        if state["candidate_source"] == "model":
+        # Exact lookups of the provisions the engine's position rests on, if research ended without them. These are
+        # bounded separately (RESERVED_LOOKUPS) so a spent research budget cannot stop the verified fallback.
+        ev, pos = state["evidence"], state["position"]
+        missing = [c["clause_id"] for c in pos["components"] if c["clause_id"] not in ev]
+        missing += [c for c in pos["required_clauses"] if c not in ev]
+        for cid in list(dict.fromkeys(missing))[:RESERVED_LOOKUPS]:
+            t = time.perf_counter()
+            try:
+                p = await deps.retriever.clause(cid)
+                ok = True
+            except Exception:
+                p, ok = None, False
+            tool_metric(AGENT, "get_clause", ok)
+            state["tool_calls"] = state.get("tool_calls", 0) + 1
+            if p:
+                ev[p["clause_id"]] = p
+            await rec.event("tool_call", tool="get_clause", args={"clause_id": cid}, ok=ok, reason="fallback lookup",
+                            latency_ms=round((time.perf_counter() - t) * 1000, 1),
+                            passages=[_passage_brief(p, True)] if p else [], new_clauses=[cid] if p else [])
+        if state["candidate_source"] in ("model", "rules"):
             cand = _rules_candidate(state["position"], state["evidence"])
             v = verify(cand, state["evidence"], state["position"]["required_clauses"], None, is_model_answer=False)
             v["attempt"], v["candidate_source"] = state["attempts"] + 1, "rules_fallback"
@@ -463,6 +495,10 @@ def build_graph(deps: AgentDeps, settings: Settings):
         degraded = bool(state.get("degraded"))
         route = cand["route"]
         reasons = list(cand.get("escalate_reasons") or [])
+        if route == "escalate_to_human" and pos.get("route") == "escalate_to_human":
+            # The engine's reasons name the escalation category (cause disputed, outside the corpus, ...) in fixed
+            # wording that reviewers and metrics rely on. A model's free-text reasons follow them.
+            reasons = list(dict.fromkeys(list(pos.get("escalate_reasons") or []) + reasons))
         citations = []
         for c in cand["citations"]:
             p = state["evidence"].get(c["clause_id"])
@@ -544,8 +580,9 @@ def build_graph(deps: AgentDeps, settings: Settings):
     def after_verify(state: State) -> str:
         if state["verification"]["passed"] or settings.naive_baseline:
             return "finalize"
-        if state.get("attempts", 0) < settings.agent_max_verify_attempts and not budget_left(state):
-            return "recover"
+        if state.get("attempts", 0) < settings.agent_max_verify_attempts and \
+                budget_left(state) in (None, "max_tool_calls", "max_steps"):
+            return "recover"  # recovery's exact lookups use the reserved allowance if research spent its budget
         return "fallback"
 
     def after_fallback(state: State) -> str:

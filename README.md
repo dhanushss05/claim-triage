@@ -117,7 +117,7 @@ The stack must be running for all of these except `eval-inprocess` and `test`.
 | Command | What it does |
 |---|---|
 | `make demo` | Walks through the demo items against the live stack: valid request, end-to-end trace, malformed request, outside the corpus, self-verification, prompt injection, circuit breaker, the 4.1 case, and the cache. Run a single item with `docker compose --profile tools run --rm --entrypoint python eval scripts/demo.py breaker` (items: `valid trace malformed outside verify injection breaker difficult cache`) |
-| `make test` | pytest (26 tests) inside the tools container |
+| `make test` | pytest (28 tests) inside the tools container |
 | `make eval` | Runs the 27-scenario evaluation set through the live API and writes `eval/results/stack.json` |
 | `make eval-inprocess` | The same scenarios in one process with the stub, with no stack needed |
 | `make ingest` / `make reembed` | Re-runs the idempotent corpus pipeline, or re-embeds every chunk (for example after changing `EMBEDDING_MODEL`). The retriever hot-reloads |
@@ -148,46 +148,63 @@ UI is available with `docker compose --profile loadtest up locust`, at <http://l
 
 ## 5. Use a real model (optional, free)
 
-The model sits behind `llm-gateway`, so switching provider is a configuration change only.
+The model sits behind `llm-gateway`, so switching provider is a configuration change only. We ran the evaluation
+with Google Gemini's free tier (`gemini-3.5-flash-lite`); the results are in the report, §5.
 
 1. Get a free API key at <https://aistudio.google.com>.
-2. In `.env`, replace the four `LLM_*` lines with the Gemini block that is commented out in `.env.example`:
+2. In `.env`, replace the four `LLM_*` lines with the Gemini block that is commented out in `.env.example`, and set
+   the request pacing:
 
    ```sh
    LLM_PROVIDER=gemini
    LLM_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai
-   LLM_MODEL=gemini-2.0-flash
+   LLM_MODEL=gemini-3.5-flash-lite
    LLM_API_KEY=<your key>
+   LLM_MAX_RPM=14        # the free tier allows 15 requests per minute for this model
    ```
 
 3. Run `docker compose up -d`. Only `llm-gateway` receives the key.
 
-Any OpenAI-compatible endpoint works the same way, including OpenAI, Groq and a local Ollama.
+Any OpenAI-compatible endpoint works the same way, including OpenAI, Groq and a local Ollama. Google retires model
+ids from time to time; if the gateway log shows `404 ... no longer available`, pick a current id from the message.
 
-Free tiers are rate limited. A run makes about 12 model calls, so run the evaluation on a few scenarios first:
-`docker compose --profile tools run --rm eval --mode api --label gemini --only S01,S02,S12`.
+**Free tiers are rate limited.** A run makes about 14 model calls. Gemini's free tier for this model allows 15
+requests per minute and **500 requests per day**, so one run takes about a minute, the full 27-scenario evaluation
+takes about 30 minutes and about 390 requests, and only one full evaluation fits in a day. Try a few scenarios
+first, through the gateway:
+
+```sh
+docker compose --profile tools run --rm eval --mode inprocess --label gemini --only S01,S02,S12 \
+  --llm-url http://llm-gateway:8000
+```
+
+To compare prompt versions on the real model, run the same command twice, adding
+`--set PROMPT_VERSION_DETERMINATION=v1` and then `v2`, each with its own `--label`. On the free tier, use the same
+`--only` subset for both so the pair fits in one day's quota. Check `degraded_runs` in the summary: a run that
+completed without the model (quota, breaker) is listed there, and the eval prints a warning.
 
 If the provider fails, the circuit breaker opens and runs complete in a degraded but verified mode. See the runbook.
-Load tests should always use the stub (`LLM_PROVIDER=stub`).
+Load tests should always use the stub (`LLM_PROVIDER=stub`, `LLM_MAX_RPM=0`).
 
-## 6. The corpus, and how to use the official CAR
+## 6. The corpus
 
 `corpus/manifest.yaml` lists the documents:
 
-* `corpus/raw/dgca_car_s3_m_p4.md`: a **working-text reconstruction** of DGCA CAR Section 3 Series M Part IV,
-  Revision 4. The official PDF could not be downloaded from the build environment.
+* `corpus/raw/dgca_car_s3_m_p4_rev4.pdf`: the **official** DGCA CAR Section 3, Series M, Part IV, Issue I,
+  Revision 4 dated 25 Jan 2023 (effective 15 Feb 2023), as published on <https://www.dgca.gov.in>. It is ingested
+  from its text layer; running page headers are stripped.
 * `corpus/raw/airline_passenger_charter.md`: a **synthetic** airline charter ("Demo Air"). It deliberately conflicts
-  with the CAR on international downgrades, to exercise conflict handling.
+  with the CAR on international downgrades, to exercise conflict handling. Replace it with a real airline's charter
+  by adding a manifest entry with `authority: airline_policy`.
 
-To use the official CAR:
+To ingest a new CAR revision:
 
-1. Download the PDF from <https://www.dgca.gov.in> (Civil Aviation Requirements, Section 3, Series M, Part IV) into
-   `corpus/raw/`.
-2. In `corpus/manifest.yaml`, set the CAR entry's `path` to the PDF and set `provenance: OFFICIAL`.
-3. Run `make ingest` (only changed documents are re-processed), then `make eval` to confirm the scenarios still pass.
+1. Put the PDF in `corpus/raw/`, and update `path` and `version` in the manifest.
+2. Run `make ingest` (only changed documents are re-processed).
+3. Run `make test`. `test_rule_terms_match_the_corpus` lists any phrase in `src/triage/rules/car_rules.yaml` that the
+   new text no longer contains. Update those entries, then run `make eval` to confirm the outcomes.
 
-A PDF without a text layer is rejected with a message to OCR it first (for example with `ocrmypdf`). You can add an
-airline's real charter the same way, as a new manifest entry with `authority: airline_policy`.
+A PDF without a text layer is rejected with a message to OCR it first (for example with `ocrmypdf`).
 
 ## 7. Configuration
 
@@ -232,4 +249,5 @@ tests/                    pytest
 | `toomanyrequests` from Docker Hub | Wait, or `docker login`. The images are also on `mirror.gcr.io` |
 | Behind a corporate proxy with its own root CA | Put the certificate as `docker/certs/<name>.crt` and rebuild. It is trusted at build and run time, and `*.crt` files are git-ignored |
 | A run shows `degraded: true` | The model provider was unavailable and the fallback path answered. See runbook failure mode 1 |
+| Gateway log shows `provider_error ... 429` | The provider's per-minute quota. Set `LLM_MAX_RPM` below it (14 for Gemini free tier) and restart `llm-gateway` |
 | Everything is escalated | Probably the retriever is down. See runbook failure mode 2 |

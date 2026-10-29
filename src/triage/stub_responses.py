@@ -16,7 +16,7 @@ STUB_RESPONSES = {
         "route": "pay_as_computed", "compensation_inr": 10000, "downgrade_refund_inr": 0, "refund_due": True,
         "facilities": [], "computation": "cancellation compensation for block time over two hours",
         "citations": [{"clause_id": "CAR:3.3.2",
-                       "quote": "INR 10,000 or the booked one-way basic fare plus airline fuel charge, whichever is less"}],
+                       "quote": "INR 10,000 or booked one-way basic fare plus airline fuel charge, whichever is less"}],
         "justification": "The flight was cancelled, so cancellation compensation of INR 10,000 is payable under para 3.3.2.",
         "missing_evidence": [], "escalate_reasons": []},
 }

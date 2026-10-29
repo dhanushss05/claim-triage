@@ -1,16 +1,16 @@
 # Corpus manifest. One entry per source document.
 # The ingestion pipeline (`make ingest`) reads this file; a document whose content hash and version are unchanged
 # is skipped, so re-running is idempotent.
-# To use the official CAR: download the PDF from dgca.gov.in into corpus/raw/, point `path` at it, set
-# `provenance: OFFICIAL`, and run `make ingest`.
+# The CAR entry is the official PDF (Rev. 4, effective 15 Feb 2023). To update it, replace the file, change
+# `version`, run `make ingest`, then check src/triage/rules/car_rules.yaml still matches its wording (`make eval`).
 documents:
   - doc_id: CAR
-    path: raw/dgca_car_s3_m_p4.md
+    path: raw/dgca_car_s3_m_p4_rev4.pdf
     title: "DGCA CAR Section 3 Series M Part IV"
-    version: "Issue I, Revision 4"
+    version: "Issue I dated 6 Aug 2010, Revision 4 dated 25 Jan 2023"
     effective_date: "2023-02-15"
     authority: regulation          # binding; prevails over airline documents
-    provenance: WORKING-TEXT
+    provenance: OFFICIAL           # text layer of the PDF published on dgca.gov.in (File No. 23-15/2016-AED)
   - doc_id: CHARTER
     path: raw/airline_passenger_charter.md
     title: "Demo Air Passenger Charter"

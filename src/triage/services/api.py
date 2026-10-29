@@ -18,10 +18,13 @@ inbound connectivity; callers that can receive webhooks may pass callback_url an
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import time
-from typing import Any
+from typing import Any, Optional
+
+import httpx
 
 from fastapi import Request
 from fastapi.responses import FileResponse, JSONResponse
@@ -33,6 +36,7 @@ from ..logging_setup import run_id_var
 from ..metrics import CLAIMS_ACCEPTED, CLAIMS_REJECTED, FEEDBACK, RATE_LIMITED, RUN_CACHE
 from ..prompts import load_prompt
 from ..queue import STREAM_INTAKE, enqueue
+from ..rules.engine import RULES_PATH
 from ..store import RateLimiter, RunStore, connect, new_run_id, run_cache_key
 from ..tracing import carrier_from_current, current_trace_id, tracer
 from .http_common import make_app
@@ -51,9 +55,31 @@ def _client_id(request: Request) -> str:
     return request.headers.get("X-Client-Id") or (request.client.host if request.client else "anonymous")
 
 
-def _versions_tag() -> str:
+with open(RULES_PATH, "rb") as _fh:
+    RULES_HASH = hashlib.sha256(_fh.read()).hexdigest()[:12]
+_index_version: dict[str, Any] = {"value": None, "at": 0.0}
+
+
+async def _current_index_version() -> Optional[str]:
+    """The retriever's live index version, refreshed every 30 s. None if the retriever cannot say."""
+    if time.time() - _index_version["at"] < 30 and _index_version["value"]:
+        return _index_version["value"]
+    try:
+        async with httpx.AsyncClient(timeout=2.0) as client:
+            resp = await client.get(f"{s.retriever_url}/index/info")
+            resp.raise_for_status()
+            _index_version.update(value=str(resp.json().get("index_version") or "") or None, at=time.time())
+    except Exception:  # noqa: BLE001 - no version, no caching
+        _index_version.update(value=None, at=time.time())
+    return _index_version["value"]
+
+
+def _versions_tag(index_version: str) -> str:
+    # A cached answer is only valid for the same prompts, model, rule map and corpus. Without the index version and
+    # rules hash, re-ingesting a new CAR would keep serving old answers for the cache TTL.
     tags = [load_prompt(s.prompts_dir, p, s.prompt_version(p)).tag for p in ("extraction", "planner", "determination")]
-    return "|".join(tags) + f"|planner={s.planner_mode}|det={s.determination_mode}|model={s.llm_model}"
+    return ("|".join(tags) + f"|planner={s.planner_mode}|det={s.determination_mode}|model={s.llm_model}"
+            f"|rules={RULES_HASH}|index={index_version}")
 
 
 @app.get("/health")
@@ -114,7 +140,8 @@ async def submit(request: Request):
     data = claim.model_dump(mode="json")
     run_id = new_run_id()
     run_id_var.set(run_id)
-    key = run_cache_key(data, _versions_tag()) if s.run_cache_enabled else ""
+    index_version = await _current_index_version() if s.run_cache_enabled else None
+    key = run_cache_key(data, _versions_tag(index_version)) if index_version else ""
     with tracer().start_as_current_span("api.submit", attributes={"run_id": run_id, "client_id": client}):
         trace_id = current_trace_id()
         await store.create_run(run_id, data, client, cid or run_id, key, trace_id)

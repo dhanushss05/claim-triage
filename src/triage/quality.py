@@ -10,8 +10,9 @@ context_relevance  share of retrieved passages that are relevant. Offline: relev
                    plus the conditions/exemptions required for its category. Live (no gold): relevant = passages the
                    answer cites or that the category requires (a proxy, reported as such).
 faithfulness       share of the answer's atomic claims that the cited passages entail: the route's basis (a decline
-                   cites a negative condition; a payment cites an amount provision whose figure bounds the amount; an
-                   escalation carries reasons), each facility owed (cited text mentions it), and each quote (verbatim).
+                   cites a provision that removes or conditions compensation; a payment cites an amount provision
+                   whose figure bounds the amount; an escalation carries reasons), each facility owed (cited text
+                   mentions it), and each quote (verbatim).
 hallucination      per run, 1 if any citation does not resolve to retrieved text, any quote is not verbatim, or an
                    amount is not bounded by a cited figure; the rate is the mean over runs.
 """
@@ -20,7 +21,7 @@ from __future__ import annotations
 import re
 from typing import Any, Optional
 
-from .agents.verifier import NEGATIVE, norm, quote_in
+from .agents.verifier import has_decline_basis, norm, quote_in
 
 _STOP = set("""a an the of to and or in on for by is are be as at with from that this which shall any its it under not
 no if such than other all has have was were so you your their they he she his her we our may can will would been being
@@ -78,7 +79,7 @@ def faithfulness_claims(result: dict[str, Any], evidence: dict[str, dict]) -> li
     route = result.get("route")
     ent = result.get("entitlement", {})
     if route == "decline":
-        claims.append(("decline basis", bool(NEGATIVE.search(cited_text))))
+        claims.append(("decline basis", has_decline_basis(cited_text)))
     elif route == "pay_as_computed":
         amt = float(ent.get("compensation_inr") or 0) + float(ent.get("downgrade_refund_inr") or 0)
         figures = [float(x.replace(",", "")) for x in re.findall(r"INR\s?([\d,]+)", cited_text)]

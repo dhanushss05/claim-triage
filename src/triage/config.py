@@ -97,6 +97,15 @@ class Settings:
         return as_float("LLM_DAILY_BUDGET_USD", 5.0)
 
     @property
+    def llm_max_rpm(self) -> float:
+        """Provider requests per minute the gateway paces itself to (0 = no pacing). Set below the provider quota."""
+        return as_float("LLM_MAX_RPM", 0.0)
+
+    @property
+    def llm_rate_wait_max_s(self) -> float:
+        return as_float("LLM_RATE_WAIT_MAX_S", 15.0)
+
+    @property
     def llm_provider_timeout_s(self) -> float:
         return as_float("LLM_PROVIDER_TIMEOUT_S", 20.0)
 

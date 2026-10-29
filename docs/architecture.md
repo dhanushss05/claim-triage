@@ -48,7 +48,9 @@ box.
    listing each field error. **No run starts.**
 2. Rate limiting is a token bucket per `X-Client-Id`, implemented as a Lua script in Redis, plus a cap on the number
    of runs in flight per client. Requests over the limit get HTTP 429 with `Retry-After`.
-3. The run cache key is a hash of the normalised claim plus the prompt, index and model versions. On a hit, the API
+3. The run cache key is a hash of the normalised claim plus the prompt versions, model id, rule-map hash and the
+   retriever's live index version, so re-ingesting a new CAR or changing `car_rules.yaml` never serves an old answer.
+   If the retriever cannot report its index version, the run is not cached. On a hit, the API
    returns the cached result at once. If the same claim is already running, the request attaches to that run
    (single-flight).
 4. Otherwise a run record is created, a message goes onto `runs:intake` carrying the W3C `traceparent`, and the API
@@ -98,7 +100,9 @@ its own (degraded mode).
 
 **Loop bounds.** At most `AGENT_MAX_STEPS=14` graph steps, `AGENT_MAX_TOOL_CALLS=12` tool calls,
 `AGENT_MAX_WALL_S=90` s, and `AGENT_MAX_VERIFY_ATTEMPTS=2` verification attempts. LangGraph's recursion limit is
-100. Three consecutive tool errors stop the research phase.
+100. Three consecutive tool errors stop the research phase. Once research has spent its budget, recovery and
+fallback may still make at most 6 exact `get_clause` lookups (`RESERVED_LOOKUPS`), so a verified answer is not lost
+to a spent budget (INC-17).
 
 **Determine.** The deterministic rule engine (`rules/car_rules.yaml` and `engine.py`) evaluates the facts against the
 CAR conditions. Each decision is tied to clause ids and to the phrases that must appear in them. In `hybrid` mode the
@@ -111,13 +115,13 @@ model also drafts a position with verbatim quotes, and that draft is the candida
 | `citations_resolve` | Every cited clause was retrieved during this run |
 | `quotes_in_text` | Every quote, and every required phrase, appears verbatim in the cited passage |
 | `required_retrieved` | The conditions and exemptions that could remove the entitlement were read (F4) |
-| `route_has_basis` | A decline cites a negative condition, a payment cites an amount provision, an escalation has reasons |
+| `route_has_basis` | A decline cites a provision that removes compensation, or one that makes it conditional on something the passenger did not meet (`decline_markers` in `car_rules.yaml`); a payment cites an amount provision; an escalation has reasons |
 | `cites_decisive_provision` | A model answer cites every basis, amount and exemption clause the outcome depends on |
 | `consistent_with_rules` | A model answer agrees with the engine on route and amount |
 
 **Recover.** Recovery changes strategy rather than retrying the same thing. It looks up missing conditions with exact
 `get_clause` calls, runs lexical searches on the phrases that failed, and re-determines with the verifier's feedback
-in the prompt. **Fallback.** The engine's own position is verified independently. If that also fails, the run
+in the prompt. **Fallback.** The provisions the engine's position rests on are fetched if missing, and that position is verified independently. If that also fails, the run
 escalates. Nothing unverified is ever returned.
 
 **Output (F5 to F7).** The output has a route (`pay_as_computed`, `decline`, `request_further_evidence`,
@@ -129,23 +133,35 @@ conflict, the regulation prevails and the conflict is reported (F8).
 
 **Corpus.** There are two documents, listed in `corpus/manifest.yaml`:
 
-* `CAR`: a working-text reconstruction of DGCA CAR Section 3, Series M, Part IV. It has 35 chunks.
+* `CAR`: the official DGCA CAR Section 3, Series M, Part IV, Issue I, Revision 4 (25 Jan 2023, effective
+  15 Feb 2023), ingested from its PDF text layer (`corpus/raw/dgca_car_s3_m_p4_rev4.pdf`). It has 48 chunks: 47
+  numbered provisions plus its "Subject" line, which states the CAR's scope.
 * `CHARTER`: a synthetic airline charter (12 chunks). We added it to exercise conflicts.
 
-**Chunking: one numbered provision per chunk** (`retrieval/chunking.py`, `CHUNKER_VERSION=clause-2`).
+**PDF cleaning.** The PDF repeats a title block, issue date and revision on every page, and page breaks fall inside
+provisions. `clean_pdf_text` drops lines that recur on at least half of the pages and lines holding only a page
+number, so a provision that spans a page stays one verbatim passage. It also closes up "3.8 .1" to "3.8.1".
+
+**Chunking: one numbered provision per chunk** (`retrieval/chunking.py`, `CHUNKER_VERSION=clause-3`).
 
 * **Why not fixed windows.** In the CAR, the amounts and the condition that removes them sit in the same paragraph.
-  Para 3.3.2 lists INR 5,000/7,500/10,000 *and* says no compensation is payable once the alternate flight is
-  accepted. A 500-character window can separate the two. A retriever that finds the amounts and stops will then
+  Para 3.3.2 says the airline shall *either* provide an alternate flight acceptable to the passenger *or* pay
+  compensation plus a full refund, then lists INR 5,000/7,500/10,000, then refers to the facilities in 3.8.1 (a). A
+  500-character window can separate the amounts from the "either ... or" condition. A retriever that finds the amounts and stops will then
   state an entitlement that does not exist, which is the failure the section 4.1 case is designed to expose.
 * **Rules.**
-  * A provision keeps its sub-paras (a) to (d) and its trailing conditions together. Chunks average 309 characters
-    in the CAR, with a maximum of 1,071. Anything over 2,400 characters is split on sub-paragraph boundaries.
+  * A provision keeps its sub-paras (a) to (d) and its trailing conditions together. Chunks average 349 characters
+    in the CAR, with a maximum of 1,085. Anything over 2,400 characters is split on sub-paragraph boundaries.
+  * A line that starts with a number opens a new provision only if numbering moves forward, the number is new, and
+    the previous line does not end in "Para", "and", "with" and similar words. The official PDF wraps
+    cross-references such as "in accordance with Para / 3.8.1 (a)" onto a new line (incident INC-12).
   * The heading path ("3 REQUIREMENTS > 3.3 Cancellation") and the document title are prepended to the embedded text.
   * Cross-references ("para 3.4.1", "paras 3.4.1 to 3.4.3") are extracted into `refs_out`, and the inverse into
-    `cited_by`. That gives `find_related` a graph to walk in both directions (21 edges in the CAR).
-  * Defined terms are extracted so the definitions in section 2 can be fetched.
-* **Ablation.** Running `pipeline ingest --chunking fixed` builds fixed 800-character windows for comparison.
+    `cited_by`. That gives `find_related` a graph to walk in both directions (16 edges in the CAR). A reference to
+    a heading ("Para 3.8") points at its provisions, and self-references are dropped.
+  * Defined terms ("Cancellation means ...", "Block time is ...") in section 2 are extracted, so the definitions
+    can be fetched.
+* **Ablation.** Running `pipeline ingest --chunking fixed` builds fixed 500-character windows (50 overlap) for comparison.
 
 **Embeddings.**
 
@@ -174,9 +190,10 @@ Passenger phrasing ("they put me on a later plane") matches densely.
   throughput. The retriever exports these as `index_age_seconds`, `index_chunks`, `index_built_timestamp_seconds`
   and `ingest_throughput_chunks_per_second`.
 
-**Official CAR.** To use the official text, put the PDF in `corpus/raw/`, point the manifest at it, set
-`provenance: OFFICIAL` and run `make ingest`. A PDF without a text layer is rejected with a message to OCR it
-first.
+**Updating the CAR.** To ingest a new revision, replace the PDF in `corpus/raw/`, update `version` in the
+manifest, and run `make ingest`. Then run `make test`. `test_rule_terms_match_the_corpus` lists every phrase in
+`rules/car_rules.yaml` that the new text no longer contains, and `make eval` confirms the outcomes. A PDF without a
+text layer is rejected with a message to OCR it first.
 
 ## 5. LLM gateway and resilience (A5)
 

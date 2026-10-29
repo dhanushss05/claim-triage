@@ -50,13 +50,18 @@ gateway log shows the provider's real error, for example HTTP 429 (rate limit or
    meantime.
 2. **HTTP 401/403.** The key is wrong or was revoked. Fix `LLM_API_KEY` in `.env`, then run
    `docker compose up -d llm-gateway`. Only the gateway holds the key.
-3. **HTTP 429 or daily budget exhausted** (`llm_budget_spent_usd` ≥ `LLM_DAILY_BUDGET_USD`). Either raise the budget
-   or quota, or reduce load by lowering `WORKER_CONCURRENCY`.
-4. **Switch provider.** Change `LLM_PROVIDER`, `LLM_BASE_URL`, `LLM_MODEL` and `LLM_API_KEY` in `.env` and restart
+3. **HTTP 429 "requests per minute limit exceeded"** (the gateway log's `provider_body` names the quota). Set
+   `LLM_MAX_RPM` just below the provider's limit (14 for Gemini free tier) and restart `llm-gateway`. The gateway
+   then paces itself, and calls that would queue too long fall back instead of opening the breaker. A 429 for the
+   daily quota ("requests per day", 500 for `gemini-3.5-flash-lite` on the free tier) clears at the provider's reset
+   time (midnight Pacific time); the error body gives the exact wait. Until then runs complete in degraded mode.
+4. **Daily budget exhausted** (`llm_budget_spent_usd` ≥ `LLM_DAILY_BUDGET_USD`). Either raise the budget or reduce
+   load by lowering `WORKER_CONCURRENCY`.
+5. **Switch provider.** Change `LLM_PROVIDER`, `LLM_BASE_URL`, `LLM_MODEL` and `LLM_API_KEY` in `.env` and restart
    `llm-gateway`. Nothing else changes.
-5. **Close the breaker by hand** after a fix:
+6. **Close the breaker by hand** after a fix:
    `docker compose exec llm-gateway python -c "import httpx;print(httpx.post('http://localhost:8000/admin/breaker/reset').json())"`.
-6. **Afterwards**, find the degraded runs in the run store (`degraded: true`). You can resubmit them with the header
+7. **Afterwards**, find the degraded runs in the run store (`degraded: true`). You can resubmit them with the header
    `X-Cache-Bypass: 1` if you want a model-drafted position, but they are already verified.
 
 **Drill (verified 2026-10-10).** `make demo` item `breaker` runs this drill. It sets the stub to `error`: the breaker

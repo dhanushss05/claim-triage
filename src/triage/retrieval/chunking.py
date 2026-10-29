@@ -22,10 +22,11 @@ from dataclasses import asdict, dataclass, field
 from typing import Optional
 
 MAX_CHARS = 2400
-CHUNKER_VERSION = "clause-2"  # bump when chunking logic changes; forces re-processing
+CHUNKER_VERSION = "clause-3"  # bump when chunking logic changes; forces re-processing
 CLAUSE_RX = re.compile(r"^\s*(\d{1,2}(?:\.\d{1,2}){1,3}|\d{1,2}\.)\s+(\S.*)$")
 REF_RX = re.compile(r"\bparas?(?:graphs?)?\s+(\d+(?:\.\d+)+)(?:\s*(to|and|or|,)\s*(\d+(?:\.\d+)+))?", re.I)
-DEF_RX = re.compile(r'^"([^"]+)"\s+means', re.I)
+DEF_RX = re.compile(r'^"?([A-Za-z][A-Za-z \-]{1,40}?)"?\s+(?:means|is)\b', re.I)
+SUBJECT_RX = re.compile(r"^\s*Subject:\s*(.+?)(?=\n\s*\n|\n\s*\d{1,2}\.\s)", re.S | re.M)
 
 
 @dataclass
@@ -96,18 +97,34 @@ def parse_clauses(text: str) -> list[tuple[str, str, list[str]]]:
     """Return (number, heading_or_first_line, body_lines) per numbered block. Text before the first number is dropped."""
     blocks: list[tuple[str, str, list[str]]] = []
     current: Optional[tuple[str, str, list[str]]] = None
+    seen: set[str] = set()
+    prev = ""
     for line in text.splitlines():
         m = CLAUSE_RX.match(line)
         if m and not re.match(r"^\d{1,2}\.\d", m.group(2)):
-            if current:
-                blocks.append(current)
-            current = (m.group(1).rstrip("."), m.group(2).strip(), [])
-            continue
+            number = m.group(1).rstrip(".")
+            # A wrapped cross-reference ("... in accordance with Para\n3.8.1 (a).") looks like a clause heading.
+            # Accept a new clause only if it is not a continuation of a reference and numbering moves forward.
+            wrapped_ref = re.search(r"\b(paras?|paragraphs?|and|to|or|of|under|with|in)\s*$", prev, re.I)
+            forward = current is None or _num_key(number) > _num_key(current[0])
+            if number not in seen and forward and not wrapped_ref:
+                if current:
+                    blocks.append(current)
+                current = (number, m.group(2).strip(), [])
+                seen.add(number)
+                prev = line
+                continue
         if current is not None:
             current[2].append(line.rstrip())
+        if line.strip():
+            prev = line.strip()
     if current:
         blocks.append(current)
     return blocks
+
+
+def _num_key(number: str) -> tuple[int, ...]:
+    return tuple(int(x) for x in number.split(".") if x.isdigit())
 
 
 def _is_heading(first: str, body: list[str]) -> bool:
@@ -121,6 +138,14 @@ def chunk_document(text: str, doc_id: str, doc_title: str, doc_version: str, aut
     blocks = parse_clauses(text)
     headings: dict[str, str] = {}
     chunks: list[Chunk] = []
+    sm = SUBJECT_RX.search(text.split("\n1.", 1)[0] + "\n1. ")
+    if sm:  # the document's own statement of scope, cited when a claim falls outside it
+        subject = "Subject: " + re.sub(r"\s+", " ", sm.group(1)).strip()
+        chunk = Chunk(chunk_id=f"{doc_id}:subject", clause_id=f"{doc_id}:subject", doc_id=doc_id, number="subject",
+                      title_path="Scope", text=subject, doc_title=doc_title, doc_version=doc_version,
+                      authority=authority, provenance=provenance)
+        chunk.content_hash = hashlib.sha256(chunk.embed_text().encode()).hexdigest()
+        chunks.append(chunk)
     for number, first, body in blocks:
         if _is_heading(first, body):
             headings[number] = first.title() if first.isupper() else first
@@ -132,7 +157,8 @@ def chunk_document(text: str, doc_id: str, doc_title: str, doc_version: str, aut
         body_text = re.sub(r"[ \t]+", " ", body_text)
         body_text = re.sub(r"\n{2,}", "\n", body_text)
         parent = ".".join(parts[:-1]) if len(parts) > 1 else None
-        dm = DEF_RX.match(first)
+        in_definitions = headings.get(parts[0], "").lower().startswith("definition")
+        dm = DEF_RX.match(first) if (in_definitions or first.startswith('"')) else None
         pieces = _split_long(body_text)
         for i, piece in enumerate(pieces):
             cid = f"{doc_id}:{number}"
@@ -144,6 +170,13 @@ def chunk_document(text: str, doc_id: str, doc_title: str, doc_version: str, aut
                           defines=dm.group(1).lower() if dm else None)
             chunk.content_hash = hashlib.sha256((chunk.embed_text()).encode()).hexdigest()
             chunks.append(chunk)
+    ids = {c.clause_id for c in chunks}
+    for c in chunks:  # self-references dropped; a reference to a heading ("Para 3.8") points at its provisions
+        refs: list[str] = []
+        for r in c.refs_out:
+            targets = [r] if r in ids else sorted(i for i in ids if i.startswith(r + "."))[:3]
+            refs.extend(t for t in targets if t != c.clause_id and t not in refs)
+        c.refs_out = refs
     defined = {c.defines: c.clause_id for c in chunks if c.defines}
     for c in chunks:
         low = c.text.lower()
@@ -194,9 +227,29 @@ def read_document(path: str) -> str:
 
         reader = PdfReader(path)
         pages = [(p.extract_text() or "") for p in reader.pages]
-        text = "\n".join(pages)
-        if len(text.strip()) < 200:
+        if len("".join(pages).strip()) < 200:
             raise ValueError(f"{path} has no usable text layer; run OCR (e.g. ocrmypdf) before ingesting")
-        return text
+        return clean_pdf_text(pages)
     with open(path, encoding="utf-8") as fh:
         return fh.read()
+
+
+def clean_pdf_text(pages: list[str]) -> str:
+    """Remove running headers/footers so a provision that spans a page break stays one verbatim passage.
+
+    A line is a running header if it recurs on at least half of the pages (the CAR repeats its title block, issue
+    date and revision on every page); lines holding only a page number are dropped too. Spacing artefacts in clause
+    numbers ("3.8 .1") are closed up so cross-references resolve."""
+    from collections import Counter
+
+    seen = Counter()
+    for page in pages:
+        seen.update({ln.strip() for ln in page.splitlines() if ln.strip()})
+    running = {ln for ln, n in seen.items() if len(pages) >= 3 and n >= len(pages) / 2}
+    kept = [ln for page in pages for ln in page.splitlines()
+            if ln.strip() not in running and not re.fullmatch(r"\s*\d{1,3}\s*", ln)]
+    text = "\n".join(kept)
+    return re.sub(r"(\d)\s+\.(\d)", r"\1.\2", text)
+
+
+

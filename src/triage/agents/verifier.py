@@ -5,7 +5,7 @@ A candidate answer passes only if every check passes:
   quotes_in_text         every quote is verbatim (whitespace/case-normalised) text of the cited passage, and every
                          rule component's required phrases appear in its cited passage
   required_retrieved     the conditions and exemptions that could remove the entitlement were retrieved (F4)
-  route_has_basis        a decline cites a provision containing a negative condition; a payment cites an amount;
+  route_has_basis        a decline cites a provision that removes or conditions compensation; a payment cites an amount;
                          an escalation carries reasons
   consistent_with_rules  (model answers) route and amount agree with the deterministic engine evaluated on the same
                          facts; disagreement means the model's answer is not supported by the provisions
@@ -15,8 +15,28 @@ from __future__ import annotations
 import re
 from typing import Any, Optional
 
-NEGATIVE = re.compile(r"\b(no compensation|not be liable|not liable|not payable|not entitled|does not apply|"
-                      r"shall not apply|not covered|no monetary compensation|not required)\b", re.I)
+NEGATIVE = re.compile(r"\b(no (?:such |financial |monetary )?compensation|not be liable|not liable|not payable|"
+                      r"not entitled|does not apply|shall not apply|not covered|not required|not be obliged|"
+                      r"not have the obligation)\b", re.I)
+
+
+# Facility kinds the CAR prescribes (para 3.8.1). A model answer must not drop one the engine finds owed.
+FACILITY_KINDS = ("meal", "hotel")
+
+
+def omitted_facilities(required: list[str], offered: list[str]) -> list[str]:
+    req, off = " ".join(required).lower(), " ".join(offered).lower()
+    return [k for k in FACILITY_KINDS if k in req and k not in off]
+
+
+def has_decline_basis(cited_text: str) -> bool:
+    """A decline needs a provision that removes compensation, or one that makes it conditional on something the
+    passenger did not meet or prescribes a different remedy (corpus-specific markers in car_rules.yaml)."""
+    if NEGATIVE.search(cited_text):
+        return True
+    from ..rules.engine import rules
+    t = norm(cited_text)
+    return any(norm(m) in t for m in rules().get("decline_markers", []))
 
 
 def norm(text: str) -> str:
@@ -70,8 +90,8 @@ def verify(candidate: dict[str, Any], evidence: dict[str, dict[str, Any]], requi
     basis_ok, why = True, "ok"
     cited_text = " ".join(evidence[c["clause_id"]]["text"] for c in cits if c.get("clause_id") in evidence)
     if route == "decline":
-        basis_ok = bool(NEGATIVE.search(cited_text))
-        why = "decline cites a negative condition" if basis_ok else "decline cites no provision removing the entitlement"
+        basis_ok = has_decline_basis(cited_text)
+        why = "decline cites a provision removing or conditioning the entitlement" if basis_ok else "decline cites no provision removing the entitlement"
     elif route == "pay_as_computed":
         amt = float(candidate.get("compensation_inr") or 0) + float(candidate.get("downgrade_refund_inr") or 0)
         basis_ok = amt > 0 and bool(re.search(r"INR\s?[\d,]+|\d+%", cited_text))
@@ -96,9 +116,15 @@ def verify(candidate: dict[str, Any], evidence: dict[str, dict[str, Any]], requi
         r_route = rule_position["route"]
         r_amt = float(rule_position.get("compensation_inr") or 0) + float(rule_position.get("downgrade_refund_inr") or 0)
         m_amt = float(candidate.get("compensation_inr") or 0) + float(candidate.get("downgrade_refund_inr") or 0)
-        agree = route == r_route and abs(r_amt - m_amt) <= 1.0
-        checks.append({"name": "consistent_with_rules", "passed": agree,
-                       "detail": "agrees" if agree else f"model route={route} amount={m_amt}; provisions give route={r_route} amount={r_amt}"})
+        omitted = omitted_facilities(rule_position.get("facilities") or [], candidate.get("facilities") or [])
+        agree = route == r_route and abs(r_amt - m_amt) <= 1.0 and not omitted
+        if agree:
+            detail = "agrees"
+        elif omitted:
+            detail = f"answer omits facilities the provisions require: {omitted}"
+        else:
+            detail = f"model route={route} amount={m_amt}; provisions give route={r_route} amount={r_amt}"
+        checks.append({"name": "consistent_with_rules", "passed": agree, "detail": detail})
 
     passed = all(c["passed"] for c in checks)
     return {"passed": passed, "checks": checks, "missing_clauses": missing,

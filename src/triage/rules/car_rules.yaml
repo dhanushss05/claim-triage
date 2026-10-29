@@ -1,62 +1,84 @@
-# Map from each decision the rule engine can make to the provision that supports it.
+# Map from each decision the rule engine can make to the provision that supports it, for the official DGCA CAR
+# Section 3 Series M Part IV, Revision 4 (effective 15 Feb 2023) as ingested from its PDF text layer.
 #
 # `id` is the clause identifier produced by the chunker (<DOC>:<paragraph>). `terms` are phrases that must appear in
-# the retrieved text of that clause for the verifier to accept the citation: if the corpus is replaced (e.g. by the
-# official CAR PDF) and a paragraph moves or its wording changes, verification fails and the run escalates instead
-# of citing a provision that does not say what the system claims. Update this file after re-ingesting a new corpus.
+# the retrieved text of that clause for the verifier to accept the citation (compared after case and whitespace
+# normalisation). If the corpus is replaced and a paragraph moves or its wording changes, verification fails and the
+# run escalates instead of citing a provision that does not say what the system claims. Update this file after
+# re-ingesting a new corpus, then run `make eval`.
 clauses:
-  categories:          {id: "CAR:2.6", terms: ["Cancellation"]}
-  def_alternate:       {id: "CAR:2.1", terms: ["Alternate flight", "acceptable to the passenger"]}
-  def_block_time:      {id: "CAR:2.2", terms: ["Block time"]}
-  def_basic_fare:      {id: "CAR:2.4", terms: ["Basic fare"]}
-  applicability:       {id: "CAR:3.1.1", terms: ["foreign air carriers are not covered"]}
-  checkin:             {id: "CAR:3.1.2", terms: ["check-in", "one hour"]}
-  excluded_claims:     {id: "CAR:3.1.3", terms: ["baggage"]}
-  db_volunteers:       {id: "CAR:3.2.1", terms: ["volunteers", "not entitled to compensation"]}
-  db_within_1h:        {id: "CAR:3.2.2", terms: ["No compensation shall be payable", "within one hour"]}
-  db_within_24h:       {id: "CAR:3.2.2", terms: ["200%", "INR 10,000"]}
-  db_beyond_24h:       {id: "CAR:3.2.2", terms: ["more than 24 hours", "400%", "INR 20,000"]}
-  db_not_opted:        {id: "CAR:3.2.2", terms: ["does not opt for the alternate flight", "400%", "INR 20,000"]}
-  db_exceptions:       {id: "CAR:3.2.3", terms: ["shall not be liable", "check-in"]}
-  cx_two_weeks:        {id: "CAR:3.3.1", terms: ["at least two weeks", "No compensation is payable"]}
-  cx_under_two_weeks:  {id: "CAR:3.3.1", terms: ["less than two weeks", "within two hours", "No compensation is payable"]}
-  cx_scope_3_3_2:      {id: "CAR:3.3.2", terms: ["less than 24 hours", "either an alternate flight or compensation"]}
-  cx_cap_1h:           {id: "CAR:3.3.2", terms: ["INR 5,000", "whichever is less", "up to and including one hour"]}
-  cx_cap_2h:           {id: "CAR:3.3.2", terms: ["INR 7,500", "whichever is less", "up to and including two hours"]}
-  cx_cap_over_2h:      {id: "CAR:3.3.2", terms: ["INR 10,000", "whichever is less", "more than two hours"]}
-  cx_alt_accepted:     {id: "CAR:3.3.2", terms: ["accepts the alternate flight", "no compensation"]}
-  cx_facilities_ref:   {id: "CAR:3.3.2", terms: ["facilities in accordance with para 3.4.1"]}
-  cx_contact:          {id: "CAR:3.3.3", terms: ["contact details", "shall not be liable"]}
-  cx_extraordinary:    {id: "CAR:3.3.4", terms: ["extraordinary circumstances", "shall not be liable"]}
-  meals:               {id: "CAR:3.4.1", terms: ["meals and refreshments", "waiting time"]}
-  delay_alt_refund:    {id: "CAR:3.4.2", terms: ["more than 6 hours", "alternate flight", "refund"]}
-  hotel:               {id: "CAR:3.4.3", terms: ["hotel accommodation"]}
-  delay_no_comp:       {id: "CAR:3.4.4", terms: ["No monetary compensation is payable for delay"]}
-  dg_domestic:         {id: "CAR:3.5.1", terms: ["domestic sectors, 75%", "including taxes"]}
-  dg_intl_1500:        {id: "CAR:3.5.1", terms: ["1,500 km or less, 30%"]}
-  dg_intl_3500:        {id: "CAR:3.5.1", terms: ["3,500 km, 50%"]}
-  dg_intl_long:        {id: "CAR:3.5.1", terms: ["more than 3,500 km, 75%"]}
-  dg_requested:        {id: "CAR:3.5.2", terms: ["requested by the passenger"]}
-  ec_list:             {id: "CAR:3.6.1", terms: ["extraordinary circumstances beyond the control of the airline"]}
-  ec_general_test:     {id: "CAR:3.6.2", terms: ["burden of establishing extraordinary circumstances", "general test"]}
+  scope:               {id: "CAR:subject", terms: ["denied boarding, cancellation of flights and delays in flights"]}
+  def_cancellation:    {id: "CAR:2.8", terms: ["Cancellation means non-operation of a flight"]}
+  def_denied_boarding: {id: "CAR:2.6", terms: ["Denied Boarding means", "within the time specified by the airline"]}
+  def_block_time:      {id: "CAR:2.9", terms: ["Block time is the total time"]}
+  foreign_carriers:    {id: "CAR:3.6.1", terms: ["foreign carriers", "regulations of their country of origin"]}
+  db_volunteers:       {id: "CAR:3.2.1", terms: ["ask for volunteers", "at its own discretion"]}
+  db_against_will:     {id: "CAR:3.2.2", terms: ["against their will"]}
+  db_within_1h:        {id: "CAR:3.2.2", terms: ["shall not be liable for any compensation", "within one hour"]}
+  db_within_24h:       {id: "CAR:3.2.2", terms: ["200% of booked one -way basic fare plus airline fuel", "maximum of INR 10,000", "within the 24 hours"]}
+  db_beyond_24h:       {id: "CAR:3.2.2", terms: ["400% of booked one -way basic fare plus airline fuel", "maximum of INR 20,000", "more than 24 hours"]}
+  db_not_opted:        {id: "CAR:3.2.2", terms: ["does not opt for alternate flight", "refund of full value of ticket", "maximum of INR 20,000"]}
+  cx_two_weeks:        {id: "CAR:3.3.1", terms: ["at least two weeks before the scheduled time of departure", "alternate flight/refund as acceptable to the passenger"]}
+  cx_under_two_weeks:  {id: "CAR:3.3.1", terms: ["less than two weeks before and up to 24 hours", "offer an alternate flight or refund the ticket"]}
+  cx_scope_3_3_2:      {id: "CAR:3.3.2", terms: ["have not been informed as per the provisions contained in Para 3.3.1"]}
+  cx_either_or:        {id: "CAR:3.3.2", terms: ["either provide alternate flight as acceptable to the passenger or provide compensation in addition to the full refund"]}
+  cx_cap_1h:           {id: "CAR:3.3.2", terms: ["INR 5,000 or booked one-way basic fare plus airline fuel charge", "up to and including 01 hour"]}
+  cx_cap_2h:           {id: "CAR:3.3.2", terms: ["INR 7,500 or booked one-way basic fare plus airline fuel charge", "up to and including 02 hours"]}
+  cx_cap_over_2h:      {id: "CAR:3.3.2", terms: ["INR 10,000 or booked one-way basic fare plus airline fuel charge", "more than 02 hours"]}
+  cx_facilities_ref:   {id: "CAR:3.3.2", terms: ["facilities at the airport in accordance with Para 3.8.1 (a)", "waiting for the alternate flight"]}
+  cx_contact:          {id: "CAR:3.3.3", terms: ["No financial compensation shall be payable", "adequate contact information"]}
+  cx_extraordinary:    {id: "CAR:3.3.4", terms: ["No such compensation shall be payable", "extraordinary circumstances beyond the"]}
+  cx_refund_rules:     {id: "CAR:3.3.5", terms: ["refund of air ticket"]}
+  meals:               {id: "CAR:3.8.1", terms: ["Meals and refreshments in relation to waiting time"]}
+  hotel_facility:      {id: "CAR:3.8.1", terms: ["Hotel Accommodation when necessary"]}
+  delay_band_a:        {id: "CAR:3.4.1", terms: ["checked in on time", "2 hours or more"]}
+  delay_band_b:        {id: "CAR:3.4.1", terms: ["checked in on time", "3 hours or more"]}
+  delay_band_c:        {id: "CAR:3.4.1", terms: ["checked in on time", "4 hours or more"]}
+  delay_facilities:    {id: "CAR:3.4.1", terms: ["shall provide facilities in accordance with Para 3.8.1 (a)"]}
+  delay_alt_refund:    {id: "CAR:3.4.2", terms: ["delayed for more than 6 hrs", "alternate flight within a period of 6 hours", "full refund"]}
+  hotel:               {id: "CAR:3.4.3", terms: ["more than 24 hrs", "between 2000 and 0300 hrs", "Para 3.8.1 (b)"]}
+  delay_extraordinary: {id: "CAR:3.4.4", terms: ["shall not be obliged to adhere to Para 3.8"]}
+  dg_involuntary:      {id: "CAR:3.5.1", terms: ["downgraded involuntarily"]}
+  dg_domestic:         {id: "CAR:3.5.1", terms: ["For domestic sector:-75% of the cost of ticket including taxes"]}
+  dg_intl_1500:        {id: "CAR:3.5.1", terms: ["30% of the cost of ticket including taxes for flights of 1500 km or less"]}
+  dg_intl_3500:        {id: "CAR:3.5.1", terms: ["50% of the cost of ticket including taxes for flights between 1500 km to"]}
+  dg_intl_long:        {id: "CAR:3.5.1", terms: ["75% of the cost of ticket including taxes for flights more than 3500 km"]}
+  ec_definition:       {id: "CAR:1.4", terms: ["force majeure i.e. extraordinary circumstance(s)"]}
+  ec_list:             {id: "CAR:1.4", terms: ["political instability, natural disaster", "strikes and labour disputes"]}
+  ec_atc_weather:      {id: "CAR:1.5", terms: ["Air Traffic Control", "meteorological conditions, security risks"]}
+  ec_general_test:     {id: "CAR:1.4", terms: ["could not have been avoided even if all reasonable measures had been taken"]}
   charter_dg_intl:     {id: "CHARTER:6.2", terms: ["International sectors", "difference between the fare paid"]}
-  grievance:           {id: "CAR:3.8.1", terms: ["AirSewa"]}
+  grievance:           {id: "CAR:3.9.2", terms: ["Air Sewa"]}
+
+# A decline needs a basis in the cited text: either a provision that removes compensation (negative phrases, checked
+# by the verifier), or one that makes compensation conditional or prescribes a different remedy the passenger
+# received. These are the second kind, in this CAR's wording.
+decline_markers:
+  - "either provide alternate flight as acceptable to the passenger or provide compensation"
+  - "have not been informed as per the provisions contained in para 3.3.1"
+  - "alternate flight/refund as acceptable to the passenger"
+  - "offer an alternate flight or refund the ticket"
+  - "shall provide facilities in accordance with para 3.8.1 (a)"
+  - "downgraded involuntarily"
+  - "against their will"
+  - "within the time specified by the airline"
 
 # Clauses that must have been retrieved before a decision in a category is accepted: the conditions and exemptions
 # that could remove an entitlement (F4). The verifier checks these are in the agent's evidence.
 required_by_category:
-  cancellation: ["CAR:3.3.1", "CAR:3.3.2", "CAR:3.3.3", "CAR:3.3.4", "CAR:3.6.1"]
-  denied_boarding: ["CAR:3.2.1", "CAR:3.2.2", "CAR:3.2.3", "CAR:3.6.1"]
-  delay: ["CAR:3.4.1", "CAR:3.4.4"]
-  downgrading: ["CAR:3.5.1", "CAR:3.5.2"]
+  cancellation: ["CAR:3.3.1", "CAR:3.3.2", "CAR:3.3.3", "CAR:3.3.4"]
+  denied_boarding: ["CAR:2.6", "CAR:3.2.1", "CAR:3.2.2"]
+  delay: ["CAR:3.4.1", "CAR:3.4.4", "CAR:3.8.1"]
+  downgrading: ["CAR:3.5.1"]
 
-# Cause attribution (CAR 3.6). Listed circumstances exempt compensation unless the passenger disputes them;
-# ambiguous ones need the general test in 3.6.2 and go to a human; clearly internal ones do not exempt.
+# Cause attribution (CAR 1.4 and 1.5, applied through 3.3.4 and 3.4.4). Listed circumstances exempt unless the
+# passenger disputes them; ambiguous ones need the general test in 1.4 ("could not have been avoided even if all
+# reasonable measures had been taken") and go to a human; clearly internal ones do not exempt.
 causes:
-  listed: ["weather", "fog", "storm", "cyclone", "rain", "flood", "earthquake", "natural disaster", "air traffic",
-           "atc", "airspace", "strike", "security", "political", "riot", "civil war", "insurrection", "explosion",
-           "government", "sabotage", "volcanic"]
+  listed: ["weather", "fog", "storm", "cyclone", "rain", "flood", "earthquake", "natural disaster", "meteorological",
+           "air traffic", "atc", "airspace", "strike", "labour dispute", "security", "political", "riot",
+           "civil war", "insurrection", "explosion", "government", "force majeure"]
   ambiguous: ["technical", "snag", "maintenance", "mechanical", "bird strike", "safety", "engineering", "it outage",
-              "system failure", "medical"]
+              "system failure", "medical", "sabotage", "volcanic"]
   internal: ["crew", "staff shortage", "commercial", "operational reasons", "overbooking", "overbooked",
              "low bookings", "scheduling", "rotation", "late arrival of the incoming aircraft"]

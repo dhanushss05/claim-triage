@@ -7,13 +7,14 @@ from triage.retrieval.pipeline import ingest
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MANIFEST = os.path.join(ROOT, "corpus", "manifest.yaml")
+CAR_PDF = os.path.join(ROOT, "corpus", "raw", "dgca_car_s3_m_p4_rev4.pdf")
 
 
 def test_clause_chunking_keeps_conditions_with_amounts():
-    chunks = chunk_document(read_document(os.path.join(ROOT, "corpus/raw/dgca_car_s3_m_p4.md")), "CAR", "CAR", "r4", "regulation", "x")
+    chunks = chunk_document(read_document(CAR_PDF), "CAR", "CAR", "r4", "regulation", "x")
     c = next(c for c in chunks if c.clause_id == "CAR:3.3.2")
-    assert "INR 10,000" in c.text and "accepts the alternate flight" in c.text
-    assert "CAR:3.4.1" in c.refs_out
+    assert "INR 10,000" in c.text and "either provide alternate flight as acceptable" in c.text
+    assert "CAR:3.8.1" in c.refs_out
 
 
 def test_ingest_is_idempotent_and_incremental(tmp_path):
@@ -58,11 +59,28 @@ def test_agent_handles_difficult_case(tmp_path):
 
 
 def test_wrapped_lines_do_not_start_new_clauses():
-    chunks = chunk_document(read_document(os.path.join(ROOT, "corpus/raw/dgca_car_s3_m_p4.md")), "CAR", "CAR", "r4", "regulation", "x")
-    ids = {c.clause_id for c in chunks}
-    c341 = " ".join(c.text for c in chunks if c.clause_id == "CAR:3.4.1")
-    assert "(a) 2 hours" in c341 and "(c) 4 hours" in c341
-    assert not any(i.count(".") == 0 and i not in ("CAR:1", "CAR:2", "CAR:3") for i in ids), ids
+    # In the official PDF, "Para\n3.8.1 (a)." and "Para\n1.5 which ..." wrap onto new lines and look like headings.
+    chunks = chunk_document(read_document(CAR_PDF), "CAR", "CAR", "r4", "regulation", "x")
+    ids = [c.clause_id for c in chunks]
+    assert len(ids) == len(set(ids)), "a clause id appears twice"
+    by = {c.clause_id: c.text for c in chunks}
+    assert by["CAR:3.3.3"].rstrip().endswith("3.8.1 (a).")
+    assert "reasonable measures had" in by["CAR:3.4.4"]
+    assert "c) 4 hours or more" in by["CAR:3.4.1"]
+    assert "CIVIL AVIATION REQUIREMENTS" not in by["CAR:3.5.1"]  # running page header removed
+
+
+def test_rule_terms_match_the_corpus():
+    import yaml
+    from triage.agents.verifier import norm
+    texts: dict[str, str] = {}
+    for path, doc in ((CAR_PDF, "CAR"), (os.path.join(ROOT, "corpus/raw/airline_passenger_charter.md"), "CHARTER")):
+        for c in chunk_document(read_document(path), doc, doc, "v", "a", "p"):
+            texts[c.clause_id] = texts.get(c.clause_id, "") + " " + c.text
+    rules = yaml.safe_load(open(os.path.join(ROOT, "src/triage/rules/car_rules.yaml")))
+    missing = [(k, t) for k, v in rules["clauses"].items() for t in v["terms"]
+               if norm(t) not in norm(texts.get(v["id"], ""))]
+    assert not missing, missing
 
 
 def test_chunker_version_change_forces_rechunk(tmp_path, monkeypatch):

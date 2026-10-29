@@ -12,6 +12,7 @@
 """
 from __future__ import annotations
 
+import asyncio
 import logging
 import time
 from datetime import datetime, timezone
@@ -33,6 +34,28 @@ PROVIDER, BASE_URL, MODEL, API_KEY = s.llm_provider, s.llm_base_url.rstrip("/"),
 r = connect(s.redis_url)
 client = httpx.AsyncClient(timeout=httpx.Timeout(s.llm_provider_timeout_s))
 STATE_CODE = {"closed": 0, "half_open": 1, "open": 2}
+
+# Pacing to the provider's quota, shared by every gateway replica: each call reserves the next free slot
+# (60 / LLM_MAX_RPM seconds apart). A caller that would wait longer than LLM_RATE_WAIT_MAX_S gets 503 and the
+# agent takes its fallback path, instead of the provider answering 429 and opening the breaker.
+_PACE = r.register_script("""
+local now = tonumber(ARGV[1]); local gap = tonumber(ARGV[2]); local maxwait = tonumber(ARGV[3])
+local slot = math.max(now, tonumber(redis.call('GET', KEYS[1]) or '0'))
+if slot - now > maxwait then return tostring(-1) end
+redis.call('SET', KEYS[1], tostring(slot + gap), 'EX', 3600)
+return tostring(slot - now)
+""")
+
+
+async def pace() -> bool:
+    if s.llm_max_rpm <= 0:
+        return True
+    wait = float(await _PACE(keys=["llm:pace"], args=[time.time(), 60.0 / s.llm_max_rpm, s.llm_rate_wait_max_s]))
+    if wait < 0:
+        return False
+    if wait > 0:
+        await asyncio.sleep(wait)
+    return True
 
 
 class ChatRequest(BaseModel):
@@ -122,6 +145,9 @@ async def chat(req: ChatRequest):
     if spent >= s.llm_daily_budget_usd:
         LLM_REQUESTS.labels(PROVIDER, "budget_exhausted").inc()
         raise HTTPException(503, {"code": "budget_exhausted", "message": "daily LLM budget reached"})
+    if not await pace():
+        LLM_REQUESTS.labels(PROVIDER, "paced_out").inc()
+        raise HTTPException(503, {"code": "rate_paced", "message": "provider request rate at its configured limit"})
     body = {"model": MODEL, "messages": req.messages, "max_tokens": req.max_tokens, "temperature": 0}
     if req.json_mode:
         body["response_format"] = {"type": "json_object"}
@@ -134,12 +160,19 @@ async def chat(req: ChatRequest):
         if resp.status_code == 429 or resp.status_code >= 500:
             raise httpx.HTTPStatusError(f"provider {resp.status_code}", request=resp.request, response=resp)
         if resp.status_code >= 400:
+            logger.warning("provider_rejected", extra={"fields": {"status": resp.status_code,
+                                                              "provider_body": resp.text[:300]}})
             LLM_REQUESTS.labels(PROVIDER, "client_error").inc()
             raise HTTPException(502, {"code": "provider_rejected", "message": resp.text[:300]})
         data = resp.json()
     except HTTPException:
         raise
     except (httpx.HTTPError, ValueError) as exc:
+        detail = ""
+        if isinstance(exc, httpx.HTTPStatusError):
+            detail = exc.response.text[:300]
+        logger.warning("provider_error", extra={"fields": {"error": type(exc).__name__, "detail": str(exc)[:200],
+                                                           "provider_body": detail}})
         await breaker.failure(type(exc).__name__)
         LLM_REQUESTS.labels(PROVIDER, "error").inc()
         raise HTTPException(503, {"code": "provider_error", "message": f"{type(exc).__name__}: {str(exc)[:200]}"})

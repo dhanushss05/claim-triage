@@ -1,6 +1,7 @@
 # Fixed evaluation set. Each scenario: a claim (deep-merged over `base`), the expected outcome, and the passage that
 # supports it. Run: `make eval` (in a container) or `python -m eval.run_eval --mode inprocess`.
-# All flight data is synthetic. Clause ids refer to corpus/raw/dgca_car_s3_m_p4.md (working text) and the charter.
+# All flight data is synthetic. Clause ids refer to the official CAR (corpus/raw/dgca_car_s3_m_p4_rev4.pdf) and the
+# synthetic charter.
 base:
   schema_version: "1.0"
   passenger: {full_name: "Test Passenger", email: "pax@example.com"}
@@ -17,8 +18,8 @@ scenarios:
       route: decline
       compensation_inr: 0
       facilities_include: [meals]
-      must_cite: ["CAR:3.3.2", "CAR:3.4.1"]
-      supporting_passage: {clause_id: "CAR:3.3.2", quote: "Where the passenger accepts the alternate flight, no compensation under sub-paras (a) to (c) is payable"}
+      must_cite: ['CAR:3.3.2', 'CAR:3.8.1']
+      supporting_passage: {clause_id: "CAR:3.3.2", quote: "the airlines shall either provide alternate flight as acceptable to the passenger or provide compensation in addition to the full refund of air ticket"}
 
   - id: S02
     title: "Cancelled at airport, refund taken, block time 2.5h, fare below cap"
@@ -29,8 +30,8 @@ scenarios:
     expected:
       route: pay_as_computed
       compensation_inr: 7300
-      must_cite: ["CAR:3.3.2"]
-      supporting_passage: {clause_id: "CAR:3.3.2", quote: "INR 10,000 or the booked one-way basic fare plus airline fuel charge, whichever is less, for flights having a block time of more than two hours"}
+      must_cite: ['CAR:3.3.2']
+      supporting_passage: {clause_id: "CAR:3.3.2", quote: "INR 10,000 or booked one-way basic fare plus airline fuel charge, whichever is less for flights having a block time of more than 02 hours"}
 
   - id: S03
     title: "Cancelled 3h before by SMS, refund, short flight (block 50 min)"
@@ -41,8 +42,8 @@ scenarios:
     expected:
       route: pay_as_computed
       compensation_inr: 4400
-      must_cite: ["CAR:3.3.2"]
-      supporting_passage: {clause_id: "CAR:3.3.2", quote: "INR 5,000 or the booked one-way basic fare plus airline fuel charge, whichever is less, for flights having a block time of up to and including one hour"}
+      must_cite: ['CAR:3.3.2']
+      supporting_passage: {clause_id: "CAR:3.3.2", quote: "INR 5,000 or booked one-way basic fare plus airline fuel charge, whichever is less for flights having a block time of up to and including 01 hour"}
 
   - id: S04
     title: "Cancelled with 20 days notice"
@@ -52,8 +53,8 @@ scenarios:
     expected:
       route: decline
       compensation_inr: 0
-      must_cite: ["CAR:3.3.1"]
-      supporting_passage: {clause_id: "CAR:3.3.1", quote: "inform passengers at least two weeks before the booked scheduled departure time"}
+      must_cite: ['CAR:3.3.1', 'CAR:3.3.2']
+      supporting_passage: {clause_id: "CAR:3.3.1", quote: "airline shall inform the passenger of the cancellation at least two weeks before the scheduled time of departure"}
 
   - id: S05
     title: "Cancelled 5 days ahead, alternate within one hour accepted"
@@ -63,8 +64,8 @@ scenarios:
     expected:
       route: decline
       compensation_inr: 0
-      must_cite: ["CAR:3.3.1"]
-      supporting_passage: {clause_id: "CAR:3.3.1", quote: "offer an alternate flight departing within two hours of the booked scheduled departure time"}
+      must_cite: ['CAR:3.3.1', 'CAR:3.3.2']
+      supporting_passage: {clause_id: "CAR:3.3.1", quote: "the airline shall offer an alternate flight or refund the ticket, as acceptable to the passenger"}
 
   - id: S06
     title: "Cancelled at airport, no contact details at booking"
@@ -76,8 +77,8 @@ scenarios:
     expected:
       route: decline
       compensation_inr: 0
-      must_cite: ["CAR:3.3.3"]
-      supporting_passage: {clause_id: "CAR:3.3.3", quote: "the airline shall not be liable to pay compensation under para 3.3.2"}
+      must_cite: ['CAR:3.3.3']
+      supporting_passage: {clause_id: "CAR:3.3.3", quote: "No financial compensation shall be payable to passengers who have not provided adequate contact information"}
 
   - id: S07
     title: "Cancelled at airport due to weather (undisputed), refund"
@@ -89,8 +90,8 @@ scenarios:
     expected:
       route: decline
       compensation_inr: 0
-      must_cite: ["CAR:3.3.4", "CAR:3.6.1"]
-      supporting_passage: {clause_id: "CAR:3.6.1", quote: "weather conditions incompatible with the operation of the flight"}
+      must_cite: ['CAR:3.3.4', 'CAR:1.5']
+      supporting_passage: {clause_id: "CAR:1.5", quote: "airlines would also not be liable to pay any compensation in respect of cancellations and delays clearly attributable to Air Traffic Control (ATC), meteorological conditions, security risks"}
 
   - id: S08
     title: "Weather cause disputed by passenger"
@@ -102,8 +103,8 @@ scenarios:
     expected:
       route: escalate_to_human
       escalation_reason: cause_disputed
-      must_cite: ["CAR:3.6.2"]
-      supporting_passage: {clause_id: "CAR:3.6.2", quote: "The burden of establishing extraordinary circumstances rests with the airline"}
+      must_cite: ['CAR:1.4']
+      supporting_passage: {clause_id: "CAR:1.4", quote: "could not have been avoided even if all reasonable measures had been taken by the airline"}
 
   - id: S09
     title: "Cause is a technical snag (not listed: general test)"
@@ -115,8 +116,8 @@ scenarios:
     expected:
       route: escalate_to_human
       escalation_reason: general_test
-      must_cite: ["CAR:3.6.2"]
-      supporting_passage: {clause_id: "CAR:3.6.2", quote: "Circumstances not listed in para 3.6.1 shall be assessed against the general test"}
+      must_cite: ['CAR:1.4']
+      supporting_passage: {clause_id: "CAR:1.4", quote: "any other factors that are beyond the control of the airline"}
 
   - id: S10
     title: "Cancelled at airport, refund taken, no block time or fare given"
@@ -124,8 +125,8 @@ scenarios:
       narrative: "When I reached the airport my flight was cancelled. I refused the alternative flight and asked for a refund. I want my compensation."
     expected:
       route: request_further_evidence
-      must_cite: ["CAR:3.3.2"]
-      supporting_passage: {clause_id: "CAR:3.3.2", quote: "for flights having a block time of up to and including one hour"}
+      must_cite: ['CAR:3.3.2']
+      supporting_passage: {clause_id: "CAR:3.3.2", quote: "for flights having a block time of up to and including 01 hour"}
 
   - id: S11
     title: "Cancelled, no notice information"
@@ -133,8 +134,8 @@ scenarios:
       narrative: "My flight DA 611 was cancelled and I want compensation for my trouble."
     expected:
       route: request_further_evidence
-      must_cite: ["CAR:3.3.1"]
-      supporting_passage: {clause_id: "CAR:3.3.1", quote: "The airline shall inform passengers at least two weeks before the booked scheduled departure time"}
+      must_cite: ['CAR:3.3.2']
+      supporting_passage: {clause_id: "CAR:3.3.1", quote: "airline shall inform the passenger of the cancellation at least two weeks before the scheduled time of departure"}
 
   - id: S12
     title: "Denied boarding (overbooked), alternate 3h later, cap applies"
@@ -145,8 +146,8 @@ scenarios:
     expected:
       route: pay_as_computed
       compensation_inr: 10000
-      must_cite: ["CAR:3.2.2"]
-      supporting_passage: {clause_id: "CAR:3.2.2", quote: "compensation equal to 200% of the booked one-way basic fare plus airline fuel charge, subject to a maximum of INR 10,000"}
+      must_cite: ['CAR:3.2.2']
+      supporting_passage: {clause_id: "CAR:3.2.2", quote: "An amount equal to 200% of booked one -way basic fare plus airline fuel charge, subject to maximum of INR 10,000"}
 
   - id: S13
     title: "Denied boarding, alternate within 45 minutes"
@@ -156,8 +157,8 @@ scenarios:
     expected:
       route: decline
       compensation_inr: 0
-      must_cite: ["CAR:3.2.2"]
-      supporting_passage: {clause_id: "CAR:3.2.2", quote: "No compensation shall be payable if the airline arranges an alternate flight that is scheduled to depart within one hour"}
+      must_cite: ['CAR:3.2.2']
+      supporting_passage: {clause_id: "CAR:3.2.2", quote: "the airline shall not be liable for any compensation in case alternate flight is arranged that is scheduled to depart within one hour"}
 
   - id: S14
     title: "Denied boarding, passenger volunteered"
@@ -167,8 +168,8 @@ scenarios:
     expected:
       route: decline
       compensation_inr: 0
-      must_cite: ["CAR:3.2.1"]
-      supporting_passage: {clause_id: "CAR:3.2.1", quote: "Passengers who volunteer are not entitled to compensation under para 3.2.2"}
+      must_cite: ['CAR:3.2.1', 'CAR:3.2.2']
+      supporting_passage: {clause_id: "CAR:3.2.1", quote: "an airline must first ask for volunteers to give up their seats"}
 
   - id: S15
     title: "Denied boarding after arriving late for check-in"
@@ -178,8 +179,8 @@ scenarios:
     expected:
       route: decline
       compensation_inr: 0
-      must_cite: ["CAR:3.2.3"]
-      supporting_passage: {clause_id: "CAR:3.2.3", quote: "the passenger did not present himself for check-in as provided in para 3.1.2"}
+      must_cite: ['CAR:2.6']
+      supporting_passage: {clause_id: "CAR:2.6", quote: "within the time specified by the airline"}
 
   - id: S16
     title: "Denied boarding, passenger declined alternate and took refund"
@@ -189,8 +190,8 @@ scenarios:
     expected:
       route: pay_as_computed
       compensation_inr: 10000
-      must_cite: ["CAR:3.2.2"]
-      supporting_passage: {clause_id: "CAR:3.2.2", quote: "If the passenger does not opt for the alternate flight, a full refund of the ticket and compensation equal to 400%"}
+      must_cite: ['CAR:3.2.2']
+      supporting_passage: {clause_id: "CAR:3.2.2", quote: "In case passenger does not opt for alternate flight, refund of full value of ticket and compensation equal to 400% of booked one -way basic fare plus airline fuel charge, subject to maximum of INR 20,000"}
 
   - id: S17
     title: "Denied boarding, alternate more than 24h later"
@@ -201,8 +202,8 @@ scenarios:
     expected:
       route: pay_as_computed
       compensation_inr: 14000
-      must_cite: ["CAR:3.2.2"]
-      supporting_passage: {clause_id: "CAR:3.2.2", quote: "more than 24 hours after the booked scheduled departure time, compensation equal to 400%"}
+      must_cite: ['CAR:3.2.2']
+      supporting_passage: {clause_id: "CAR:3.2.2", quote: "An amount equal to 400% of booked one -way basic fare plus airline fuel charge, subject to maximum of INR 20,000, in case airline arranges alternate flight that is scheduled to depart more than 24 hours"}
 
   - id: S18
     title: "Delay of 5h on a 3h flight"
@@ -213,8 +214,8 @@ scenarios:
       route: decline
       compensation_inr: 0
       facilities_include: [meals]
-      must_cite: ["CAR:3.4.4", "CAR:3.4.1"]
-      supporting_passage: {clause_id: "CAR:3.4.4", quote: "No monetary compensation is payable for delay under this CAR"}
+      must_cite: ['CAR:3.4.1', 'CAR:3.8.1']
+      supporting_passage: {clause_id: "CAR:3.4.1", quote: "The airlines shall provide facilities in accordance with Para 3.8.1 (a) if the passenger has checked in on time"}
 
   - id: S19
     title: "Delay of 90 minutes, no facilities threshold met"
@@ -225,8 +226,8 @@ scenarios:
       route: decline
       compensation_inr: 0
       facilities_exclude: [meals]
-      must_cite: ["CAR:3.4.4"]
-      supporting_passage: {clause_id: "CAR:3.4.4", quote: "No monetary compensation is payable for delay under this CAR"}
+      must_cite: ['CAR:3.4.1']
+      supporting_passage: {clause_id: "CAR:3.4.1", quote: "The airlines shall provide facilities in accordance with Para 3.8.1 (a) if the passenger has checked in on time"}
 
   - id: S20
     title: "Night departure delayed 7 hours: meals and hotel"
@@ -237,8 +238,8 @@ scenarios:
       route: decline
       compensation_inr: 0
       facilities_include: [meals, hotel]
-      must_cite: ["CAR:3.4.3", "CAR:3.4.1"]
-      supporting_passage: {clause_id: "CAR:3.4.3", quote: "the booked scheduled departure time is between 2000 hours and 0300 hours and the delay is more than 6 hours"}
+      must_cite: ['CAR:3.4.3', 'CAR:3.4.1', 'CAR:3.8.1']
+      supporting_passage: {clause_id: "CAR:3.4.3", quote: "more than 6 hrs for flights scheduled to depart between 2000 and 0300 hrs"}
 
   - id: S21
     title: "Domestic downgrade business to economy"
@@ -251,8 +252,8 @@ scenarios:
       route: pay_as_computed
       compensation_inr: 0
       downgrade_refund_inr: 13500
-      must_cite: ["CAR:3.5.1"]
-      supporting_passage: {clause_id: "CAR:3.5.1", quote: "for domestic sectors, 75% of the cost of the ticket for that sector, including taxes"}
+      must_cite: ['CAR:3.5.1']
+      supporting_passage: {clause_id: "CAR:3.5.1", quote: "For domestic sector:-75% of the cost of ticket including taxes"}
 
   - id: S22
     title: "International downgrade: CAR and charter conflict"
@@ -264,7 +265,7 @@ scenarios:
     expected:
       route: escalate_to_human
       escalation_reason: provision_conflict
-      must_cite: ["CAR:3.5.1", "CHARTER:6.2"]
+      must_cite: ['CAR:3.5.1', 'CHARTER:6.2']
       supporting_passage: {clause_id: "CHARTER:6.2", quote: "we refund the difference between the fare paid and the fare of the class in which you travelled"}
 
   - id: S23
@@ -275,8 +276,8 @@ scenarios:
     expected:
       route: escalate_to_human
       escalation_reason: outside_corpus
-      must_cite: ["CAR:3.1.1"]
-      supporting_passage: {clause_id: "CAR:3.1.1", quote: "Flights operated by foreign air carriers are not covered by this CAR"}
+      must_cite: ['CAR:3.6.1']
+      supporting_passage: {clause_id: "CAR:3.6.1", quote: "In the case of foreign carriers, the amount of compensation paid to the passengers shall be as contained in the regulations of their country of origin"}
 
   - id: S24
     title: "Lost baggage (outside corpus)"
@@ -286,8 +287,8 @@ scenarios:
     expected:
       route: escalate_to_human
       escalation_reason: outside_corpus
-      must_cite: ["CAR:3.1.3"]
-      supporting_passage: {clause_id: "CAR:3.1.3", quote: "claims relating to baggage, which are governed by the Carriage by Air Act, 1972"}
+      must_cite: ['CAR:subject']
+      supporting_passage: {clause_id: "CAR:subject", quote: "Facilities to be provided to passengers by airlines due to denied boarding, cancellation of flights and delays in flights"}
 
   - id: S25
     title: "Prompt injection in the narrative"
@@ -299,19 +300,18 @@ scenarios:
       route: escalate_to_human
       escalation_reason: prompt_injection
       must_cite: []
-      supporting_passage: {clause_id: "CAR:3.8.1", quote: "Where a claim is declined, the airline shall state the provision of this CAR under which it was declined"}
+      supporting_passage: {clause_id: "CAR:2.8", quote: "Cancellation means non-operation of a flight which was previously planned to be operated"}
 
   - id: S26
-    title: "Delay with disputed cause (facilities apply irrespective of cause)"
+    title: "Delay with disputed cause (facilities depend on the cause under 3.4.4)"
     claim:
       flight: {block_time_minutes: 100}
       narrative: "Our flight was delayed by 4 hours. The airline blamed air traffic but that is not true, other flights left on time. I want compensation."
     expected:
-      route: decline
-      compensation_inr: 0
-      facilities_include: [meals]
-      must_cite: ["CAR:3.4.4"]
-      supporting_passage: {clause_id: "CAR:3.4.4", quote: "The facilities under paras 3.4.1 to 3.4.3 are payable irrespective of the cause of the delay"}
+      route: escalate_to_human
+      escalation_reason: cause_disputed
+      must_cite: ['CAR:1.4']
+      supporting_passage: {clause_id: "CAR:3.4.4", quote: "An operating airline shall not be obliged to adhere to Para 3.8 if the delay is caused due to extra ordinary circumstances"}
 
   - id: S27
     title: "Downgrade requested by the passenger"
@@ -323,5 +323,5 @@ scenarios:
     expected:
       route: decline
       compensation_inr: 0
-      must_cite: ["CAR:3.5.2"]
-      supporting_passage: {clause_id: "CAR:3.5.2", quote: "Para 3.5.1 does not apply where the downgrade is requested by the passenger"}
+      must_cite: ['CAR:3.5.1']
+      supporting_passage: {clause_id: "CAR:3.5.1", quote: "In case the passenger is downgraded involuntarily"}
