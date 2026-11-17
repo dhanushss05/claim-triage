@@ -1,5 +1,5 @@
 # Everything runs in containers; these targets are shortcuts.
-.PHONY: env up down scale ingest reembed eval eval-inprocess demo test loadtest logs ps
+.PHONY: env up down scale ingest reembed eval eval-inprocess demo test test-local loadtest logs ps
 
 env:
 	@test -f .env || cp .env.example .env
@@ -30,6 +30,10 @@ demo:
 
 test:
 	docker compose --profile tools run --rm --entrypoint python eval -m pytest -q tests
+
+# Without Docker: needs `pip install -r requirements-dev.txt` in a virtualenv first.
+test-local:
+	python -m pytest -q tests
 
 loadtest:
 	sh loadtest/run_matrix.sh w$${WORKERS:-1} "5 10 20 40" 90s
