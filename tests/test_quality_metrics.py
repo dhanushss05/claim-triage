@@ -23,3 +23,27 @@ def test_split_sentences_strips_clause_tags_and_short_fragments():
 ])
 def test_context_relevance(retrieved, relevant, want):
     assert context_relevance(retrieved, relevant) == want
+
+
+EVIDENCE = {
+    "3.3.2": {"text": "In case of cancellation the airline shall pay compensation of INR 10,000 or the booked "
+                      "one way basic fare plus airline fuel charge, whichever is less."},
+}
+
+
+def test_groundedness_supported_and_unsupported_sentences():
+    result = {"justification": "The airline shall pay compensation for the cancellation [CAR:3.3.2]. "
+                               "Passengers also receive free spa vouchers and lounge massages.",
+              "citations": [{"clause_id": "3.3.2"}]}
+    assert groundedness(result, EVIDENCE, {}) == 0.5
+
+
+def test_groundedness_uses_the_fact_sheet():
+    result = {"justification": "The flight was delayed by 180 minutes on that route.", "citations": []}
+    assert groundedness(result, {}, {"delay_minutes": 180, "route": "BLR-DEL"}) == 1.0
+
+
+def test_groundedness_ignores_uncited_evidence_and_empty_answers():
+    result = {"justification": "The airline shall pay compensation for the cancellation.", "citations": []}
+    assert groundedness(result, EVIDENCE, {}) == 0.0
+    assert groundedness({"justification": ""}, EVIDENCE, {}) == 0.0
