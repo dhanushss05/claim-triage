@@ -117,7 +117,7 @@ The stack must be running for all of these except `eval-inprocess` and `test`.
 | Command | What it does |
 |---|---|
 | `make demo` | Walks through the demo items against the live stack: valid request, end-to-end trace, malformed request, outside the corpus, self-verification, prompt injection, circuit breaker, the 4.1 case, and the cache. Run a single item with `docker compose --profile tools run --rm --entrypoint python eval scripts/demo.py breaker` (items: `valid trace malformed outside verify injection breaker difficult cache`) |
-| `make test` | pytest (28 tests) inside the tools container |
+| `make test` | pytest (53 tests) inside the tools container. `make test-local` runs the same suite on the host, after `pip install -r requirements-dev.txt` in a virtualenv |
 | `make eval` | Runs the 27-scenario evaluation set through the live API and writes `eval/results/stack.json` |
 | `make eval-inprocess` | The same scenarios in one process with the stub, with no stack needed |
 | `make ingest` / `make reembed` | Re-runs the idempotent corpus pipeline, or re-embeds every chunk (for example after changing `EMBEDDING_MODEL`). The retriever hot-reloads |
