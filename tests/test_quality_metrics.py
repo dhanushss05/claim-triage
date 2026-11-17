@@ -47,3 +47,33 @@ def test_groundedness_ignores_uncited_evidence_and_empty_answers():
     result = {"justification": "The airline shall pay compensation for the cancellation.", "citations": []}
     assert groundedness(result, EVIDENCE, {}) == 0.0
     assert groundedness({"justification": ""}, EVIDENCE, {}) == 0.0
+
+
+def _pay(amount, quote):
+    return {"route": "pay_as_computed", "entitlement": {"compensation_inr": amount, "facilities": []},
+            "citations": [{"clause_id": "3.3.2", "quote": quote}]}
+
+
+QUOTE = "the airline shall pay compensation of INR 10,000"
+
+
+def test_amount_within_cited_figure_is_faithful_and_not_hallucinated():
+    from triage.quality import faithfulness, hallucinated
+
+    r = _pay(10000, QUOTE)
+    assert faithfulness(r, EVIDENCE) == 1.0
+    assert not hallucinated(r, EVIDENCE)
+
+
+def test_amount_above_cited_figure_is_hallucinated():
+    from triage.quality import hallucinated
+
+    assert hallucinated(_pay(25000, QUOTE), EVIDENCE)
+
+
+def test_citation_outside_retrieved_evidence_or_bad_quote_is_hallucinated():
+    from triage.quality import hallucinated
+
+    assert hallucinated({**_pay(5000, QUOTE), "citations": [{"clause_id": "9.9", "quote": QUOTE}]}, EVIDENCE)
+    assert hallucinated(_pay(5000, "the airline shall pay a bonus of INR 99,999"), EVIDENCE)
+    assert hallucinated(_pay(5000, QUOTE), EVIDENCE, corpus_ids={"other"})
