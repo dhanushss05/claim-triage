@@ -32,3 +32,17 @@ def test_render_fills_missing_values_with_blank():
 def test_missing_version_raises():
     with pytest.raises(FileNotFoundError):
         load_prompt(PROMPTS, "planner", "v999")
+
+
+@pytest.mark.parametrize("prompt_id", sorted(os.listdir(PROMPTS)))
+def test_every_prompt_file_is_well_formed(prompt_id):
+    versions = available_versions(PROMPTS, prompt_id)
+    assert "v1" in versions, f"{prompt_id} has no v1"
+    for v in versions:
+        with open(os.path.join(PROMPTS, prompt_id, f"{v}.yaml"), encoding="utf-8") as fh:
+            raw = yaml.safe_load(fh)
+        assert raw.get("system", "").strip() and raw.get("user", "").strip(), f"{prompt_id}/{v} is missing text"
+        if "id" in raw:
+            assert raw["id"] == prompt_id
+        if "version" in raw:
+            assert raw["version"] == v
